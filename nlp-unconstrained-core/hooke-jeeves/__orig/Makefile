@@ -1,39 +1,52 @@
+# =============================================================================
 # nlp-unconstrained-core/hooke-jeeves/__orig/Makefile
-# =====================================================
-#  Project: nonlinear-optimization-algorithms-multilang
-#           nlp-unconstrained-core
-#           hooke-jeeves
-#           __orig
-# Platform: Win32
-# =====================================================
-# Copyright (C) 2008 Radislav (Radic) Golubtsov
+# =============================================================================
+# Nonlinear Optimization Algorithms Multilang. Version 1.0
+# =============================================================================
+# Nonlinear programming algorithms as the (un-)constrained minimization
+# problems with the focus on their numerical expression using various
+# programming languages.
+#
+# This is the Hooke and Jeeves nonlinear unconstrained minimization algorithm.
+# =============================================================================
+# Copyright (C) 2015 Radislav (Radic) Golubtsov
 
-PROJ0 = hooke
-PROJ1 = $(PROJ0)-woods
+EXEC1  = hooke
+EXEC2S = -woods
+EXEC2  = $(EXEC1)$(EXEC2S)
+DEPS1  = $(EXEC1).o
+DEPS2  = $(EXEC2).o
 
-OBJS0 = $(PROJ0).o
-OBJS1 = $(PROJ1).o
+# == Specify flags and other vars here.
+# To use gcc instead of tcc, simply comment out next line, just like this:
+# "#CC = tcc" - and GNU C Compiler will be used automatically.
+CC     = tcc
+CFLAGS = -Wall
+LDLIBS = -lm
 
-CC = gcc
-RM = del
+# == Making the first target (rosenbrock).
+$(DEPS1): %.o: %.c
 
-$(PROJ0).exe: $(OBJS0)
-	$(CC) -o $@ $<
+$(EXEC1): $(DEPS1)
 
-$(OBJS1): CFLAGS = -DWoods
-$(OBJS1): %-woods.o: %.c
-	$(CC) $(CFLAGS) -c -o $@ $<
+# == Making the second target (woods).
+$(DEPS2): CFLAGS += -DWoods -c -o
+$(DEPS2): %$(EXEC2S).o: %.c
+	$(CC) $(CFLAGS) $@ $<
 
-$(PROJ1).exe: $(OBJS1)
-	$(CC) -o $@ $<
+$(EXEC2): $(DEPS2)
 
 .PHONY: rosenbrock woods all clean
 
-rosenbrock: $(PROJ0).exe
+rosenbrock: $(EXEC1)
 
-woods: $(PROJ1).exe
+woods: $(EXEC2)
 
 all: rosenbrock woods
 
 clean:
-	$(RM) $(PROJ0).exe $(OBJS0) $(PROJ1).exe $(OBJS1)
+	$(RM) $(EXEC1) $(DEPS1) $(EXEC2) $(DEPS2)
+
+# =============================================================================
+# vim:set nu:et:ts=4:sw=4:
+# =============================================================================
