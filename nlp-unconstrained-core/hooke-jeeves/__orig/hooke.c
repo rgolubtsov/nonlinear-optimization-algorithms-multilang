@@ -1,31 +1,34 @@
 /*
  * nlp-unconstrained-core/hooke-jeeves/__orig/hooke.c
- * =====================================================
- *  Project: nonlinear-optimization-algorithms-multilang
- *           nlp-unconstrained-core
- *           hooke-jeeves
- *           __orig
- * Platform: Any
- * =====================================================
- * Copyright (C) 2008 Radislav (Radic) Golubtsov
+ * ============================================================================
+ * Nonlinear Optimization Algorithms Multilang. Version 0.1
+ * ============================================================================
+ * Nonlinear programming algorithms as the (un-)constrained minimization
+ * problems with the focus on their numerical expression using various
+ * programming languages.
+ *
+ * This is the Hooke and Jeeves nonlinear unconstrained minimization algorithm.
+ * ============================================================================
+ * Copyright (C) 2015 Radislav (Radic) Golubtsov
  */
 
-/* =========================================================================
+/*
+ * ============================================================================
    Nonlinear Optimization using the algorithm of Hooke and Jeeves
    12 February 1994 author: Mark G. Johnson
-   
+
    Find a point X where the nonlinear function f(X) has a local  minimum.  X
    is an n-vector and f(X) is a scalar. In mathematical notation f:  R^n  ->
    R^1. The objective function f() is not required  to  be  continuous.  Nor
    does f() need to be differentiable. The program does not use  or  require
    derivatives of f().
-   
+
    The software user supplies three things: a subroutine that computes f(X),
    an initial "starting guess" of the minimum point X, and  values  for  the
    algorithm convergence parameters. Then the program searches for  a  local
    minimum, beginning from the  starting  guess,  using  the  Direct  Search
    algorithm of Hooke and Jeeves.
-   
+
    This C program is adapted from the Algol pseudocode found  in  "Algorithm
    178: Direct Search" by Arthur F. Kaupe Jr., Communications  of  the  ACM,
    Vol 6. p.313 (June 1963). It includes the improvements suggested by  Bell
@@ -34,7 +37,7 @@
    recommend as highly as the one by A.  Kaupe,  is:  R.  Hooke  and  T.  A.
    Jeeves, "Direct Search Solution of Numerical and  Statistical  Problems",
    Journal of the ACM, Vol.8, April 1961, pp.212-229.
-   
+
    Calling sequence:
      int hooke(nvars, startpt, endpt, rho, epsilon, itermax)
        nvars    {an integer}           This is the number of  dimensions  in
@@ -74,20 +77,20 @@
        itermax  {an integer}           A  second,   rarely   used,   halting
                                        criterion. If the algorithm  uses  >=
                                        itermax iterations, halt.
-   
+
    The user-supplied objective function f(x,n) should return a  C  "double".
    Its arguments are x -- an array of doubles, and n -- an integer. x is the
    point at which  f(x)  should  be  evaluated,  and  n  is  the  number  of
    coordinates of x. That is, n is the number of coefficients being fitted.
-   
+
      rho, the algorithm convergence control
-   
+
    The algorithm works by taking "steps" from one estimate of a minimum,  to
    another (hopefully better) estimate. Taking big steps gets to the minimum
    more quickly, at the risk of "stepping right over"  an  excellent  point.
    The stepsize is controlled by a user supplied parameter  called  rho.  At
    each iteration, the stepsize is multiplied by rho (0 < rho < 1),  so  the
-   stepsize is successively reduced.             
+   stepsize is successively reduced.
        Small values of rho correspond to big stepsize  changes,  which  make
    the algorithm run more quickly. However, there is  a  chance  (especially
    with highly nonlinear functions) that these big changes will accidentally
@@ -99,23 +102,23 @@
        The stepsize is reduced until  it  is  equal  to  (or  smaller  than)
    epsilon. So  the  number  of  iterations  performed  by  Hooke-Jeeves  is
    determined by rho and epsilon:
-   
+
      rho ** (number_of_iterations) = epsilon
-   
+
    In general it is a good idea to set rho to an  aggressively  small  value
    like 0.5 (hoping for fast convergence). Then, if the user  suspects  that
    the reported minimum is incorrect (or perhaps not accurate  enough),  the
    program can be run again with a larger value of rho such as  0.85,  using
    the result of the first minimization as the starting guess to  begin  the
    second minimization.
-   
+
    Normal use:
      (1) Code your function f() in the C language
      (2) Install your starting guess {or read it in}
      (3) Run the program
      (4) {for the skeptical}: Use the computed minimum as the starting point
          for another run
-   
+
    Data Fitting:
      Code your function f() to be the sum  of  the  squares  of  the  errors
      (differences) between the computed values and the measured values. Then
@@ -123,13 +126,13 @@
          EXAMPLE: you have 20 datapoints (ti, yi) and you want to find A,B,C
      such that (A * t * t) + (B * exp(t)) + (C * tan(t)) fits  the  data  as
      closely as possible. Then f() is just
-   
+
      f(x) = SUM(measured_y[i] - ((A * t[i] * t[i]) +
                                  (B * exp(t[i])) +
                                  (C * tan(t[i])))) ^ 2
-   
+
      where x[] is a 3-vector consisting of {A, B, C}.
-   
+
    The author of this software is M.G. Johnson.
    Permission to use, copy, modify, and distribute  this  software  for  any
    purpose without fee is hereby granted, provided that this  entire  notice
@@ -140,7 +143,8 @@
    AUTHOR  NOR  AT&T  MAKE  ANY  REPRESENTATION  OR  WARRANTY  OF  ANY  KIND
    CONCERNING THE MERCHANTABILITY OF THIS SOFTWARE OR ITS  FITNESS  FOR  ANY
    PARTICULAR PURPOSE.
-   ========================================================================= */
+ * ============================================================================
+ */
 
 #include <math.h>
 #include <stdio.h>
@@ -428,3 +432,7 @@ int itermax; {
         printf("True answer: f(1, 1, 1, 1) = 0.\n");
     }
 #endif
+
+/* ========================================================================= */
+/* vim:set nu:et:ts=4:sw=4:                                                  */
+/* ========================================================================= */
