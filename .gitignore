@@ -6,6 +6,7 @@
 
 # Intermediates
 *.d
+*.mod
 
 # Precompiled Headers
 *.gch
