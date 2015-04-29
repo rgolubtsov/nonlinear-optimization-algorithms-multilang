@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+ * nlp-unconstrained-core/hooke-jeeves/java/hooke-jeeves/pom.xml
+ * ============================================================================
+ * Nonlinear Optimization Algorithms Multilang. Version 0.1
+ * ============================================================================
+ * Nonlinear programming algorithms as the (un-)constrained minimization
+ * problems with the focus on their numerical expression using various
+ * programming languages.
+ *
+ * This is the Hooke and Jeeves nonlinear unconstrained minimization algorithm.
+ * ============================================================================
+ * Copyright (C) 2015 Radislav (Radic) Golubtsov
+-->
+
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="
+        http://maven.apache.org/POM/4.0.0
+        http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>optimization.nonlinear.unconstrained.core</groupId>
+    <artifactId>hooke-jeeves</artifactId>
+    <version>0.1</version>
+    <packaging>jar</packaging>
+    <name>hooke-jeeves</name>
+    <description>The Hooke and Jeeves nonlinear unconstrained minimization algorithm (Java implementation).</description>
+    <url>https://github.com/rgolubtsov/nonlinear-optimization-algorithms-multilang/tree/master/nlp-unconstrained-core/hooke-jeeves/java/hooke-jeeves</url>
+    <inceptionYear>2015</inceptionYear>
+    <dependencies>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>3.8.1</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.2</version>
+                <configuration>
+                    <source>1.7</source>
+                    <target>1.7</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>
+
+<!-- ====================================================================== -->
+<!-- vim:set nu:et:ts=4:sw=4:                                               -->
+<!-- ====================================================================== -->
