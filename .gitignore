@@ -33,6 +33,7 @@
 *.hex
 hooke
 hooke-woods
+target/
 
 # Debug files
 *.dSYM/
