@@ -170,17 +170,19 @@ int funevals = 0;
     /* Rosenbrock's classic parabolic valley ("banana") function. */
     double f(x, n)
     double x[VARS];
-    int n; {
+    int    n; {
         double a;
         double b;
         double c;
 
         funevals++;
+
         a = x[0];
         b = x[1];
+
         c = 100.0 * (b - (a * a)) * (b - (a * a));
 
-        return c + ((1.0 - a) * (1.0 - a));
+        return (c + ((1.0 - a) * (1.0 - a)));
     }
 #endif
 
@@ -189,10 +191,11 @@ double best_nearby(delta, point, prevbest, nvars)
 double delta[VARS];
 double point[VARS];
 double prevbest;
-int nvars; {
+int    nvars; {
     double minf;
     double z[VARS];
     double ftmp;
+
     int i;
 
     minf = prevbest;
@@ -203,13 +206,15 @@ int nvars; {
 
     for (i = 0; i < nvars; i++) {
         z[i] = point[i] + delta[i];
+
         ftmp = f(z, nvars);
 
         if (ftmp < minf) {
             minf = ftmp;
         } else {
             delta[i] = 0.0 - delta[i];
-            z[i] = point[i] + delta[i];
+            z[i]     = point[i] + delta[i];
+
             ftmp = f(z, nvars);
 
             if (ftmp < minf) {
@@ -228,17 +233,18 @@ int nvars; {
 }
 
 int hooke(nvars, startpt, endpt, rho, epsilon, itermax)
-int nvars;
+int    nvars;
 double startpt[VARS];
 double endpt[VARS];
 double rho;
 double epsilon;
-int itermax; {
+int    itermax; {
     int i;
     int iadj;
     int iters;
     int j;
     int keep;
+
     double newx[VARS];
     double xbefore[VARS];
     double delta[VARS];
@@ -249,6 +255,7 @@ int itermax; {
 
     for (i = 0; i < nvars; i++) {
         newx[i] = xbefore[i] = startpt[i];
+
         delta[i] = fabs(startpt[i] * rho);
 
         if (delta[i] == 0.0) {
@@ -256,15 +263,18 @@ int itermax; {
         }
     }
 
-    iadj = 0;
+    iadj       = 0;
     steplength = rho;
-    iters = 0;
+    iters      = 0;
+
     fbefore = f(newx, nvars);
+
     newf = fbefore;
 
     while ((iters < itermax) && (steplength > epsilon)) {
         iters++;
         iadj++;
+
         printf("\nAfter %5d funevals, f(x) =  %.4le at\n", funevals, fbefore);
 
         for (j = 0; j < nvars; j++) {
@@ -293,12 +303,13 @@ int itermax; {
                 }
 
                 /* Now, move further in this direction. */
-                tmp = xbefore[i];
+                tmp        = xbefore[i];
                 xbefore[i] = newx[i];
-                newx[i] = newx[i] + newx[i] - tmp;
+                newx[i]    = newx[i] + newx[i] - tmp;
             }
 
             fbefore = newf;
+
             newf = best_nearby(delta, newx, fbefore, nvars);
 
             /* If the further (optimistic) move was bad.... */
@@ -346,19 +357,22 @@ int itermax; {
         int itermax;
         int jj;
         int i;
+
         double startpt[VARS];
         double rho;
         double epsilon;
         double endpt[VARS];
 
         /* Starting guess for Rosenbrock's test function. */
-        nvars = 2;
+        nvars      = 2;
         startpt[0] = -1.2;
         startpt[1] = 1.0;
-        itermax = IMAX;
-        rho = RHO_BEGIN;
-        epsilon = EPSMIN;
+        itermax    = IMAX;
+        rho        = RHO_BEGIN;
+        epsilon    = EPSMIN;
+
         jj = hooke(nvars, startpt, endpt, rho, epsilon, itermax);
+
         printf("\n\n\nHOOKE USED %d ITERATIONS, AND RETURNED\n", jj);
 
         for (i = 0; i < nvars; i++) {
@@ -379,7 +393,7 @@ int itermax; {
     /* Woods -- a la More, Garbow & Hillstrom (TOMS algorithm 566). */
     double f(x, n)
     double x[VARS];
-    int n; {
+    int    n; {
         double s1;
         double s2;
         double s3;
@@ -390,6 +404,7 @@ int itermax; {
         double t5;
 
         funevals++;
+
         s1 = x[1] - x[0] * x[0];
         s2 = 1 - x[0];
         s3 = x[1] - 1;
@@ -399,8 +414,9 @@ int itermax; {
         t4 = s3 + t3;
         t5 = s3 - t3;
 
-        return 100 * (s1 * s1) + s2 * s2 + 90 * (t1 * t1) + t2 * t2
-            + 10 * (t4 * t4) + t5 * t5 / 10.;
+        return (100 * (s1 * s1) + s2 * s2
+               + 90 * (t1 * t1) + t2 * t2
+               + 10 * (t4 * t4) + t5 * t5 / 10.);
     }
 
     main() {
@@ -408,21 +424,24 @@ int itermax; {
         int itermax;
         int jj;
         int i;
+
         double startpt[VARS];
         double rho;
         double epsilon;
         double endpt[VARS];
 
         /* Starting guess test problem "Woods". */
-        nvars = 4;
+        nvars      = 4;
         startpt[0] = -3;
         startpt[1] = -1;
         startpt[2] = -3;
         startpt[3] = -1;
-        itermax = IMAX;
-        rho = RHO_WOODS;
-        epsilon = EPSMIN;
+        itermax    = IMAX;
+        rho        = RHO_WOODS;
+        epsilon    = EPSMIN;
+
         jj = hooke(nvars, startpt, endpt, rho, epsilon, itermax);
+
         printf("\n\n\nHOOKE USED %d ITERATIONS, AND RETURNED\n", jj);
 
         for (i = 0; i < nvars; i++) {
