@@ -151,27 +151,31 @@ C     ROSENBROCK'S CLASSIC PARABOLIC VALLEY ('BANANA') FUNCTION.
           IMPLICIT NONE
 
 C         MAX NUMBER OF VARIABLES.
-          INTEGER VARS
-          PARAMETER (VARS=250)
+          INTEGER    VARS
+          PARAMETER (VARS = 250)
 
           DOUBLE PRECISION F
           DOUBLE PRECISION X(VARS)
+
           INTEGER N
 
 C         GLOBAL VARIABLES.
           INTEGER FUNEVA
-          COMMON FUNEVA
+          COMMON  FUNEVA
 
           DOUBLE PRECISION A
           DOUBLE PRECISION B
           DOUBLE PRECISION C
 
           FUNEVA = FUNEVA + 1
+
           A = X(1)
           B = X(2)
+
           C = 100.0 * (B - (A * A)) * (B - (A * A))
 
           F = C + ((1.0 - A) * (1.0 - A))
+
           RETURN
       END
 
@@ -180,18 +184,22 @@ C     GIVEN A POINT, LOOK FOR A BETTER ONE NEARBY, ONE COORD AT A TIME.
           IMPLICIT NONE
 
 C         MAX NUMBER OF VARIABLES.
-          INTEGER VARS
-          PARAMETER (VARS=250)
+          INTEGER    VARS
+          PARAMETER (VARS = 250)
 
           DOUBLE PRECISION BEST_N
           DOUBLE PRECISION DELTA(VARS)
           DOUBLE PRECISION POINT(VARS)
           DOUBLE PRECISION PREVBE
+
           INTEGER NVARS
+
           DOUBLE PRECISION MINF
           DOUBLE PRECISION Z(VARS)
           DOUBLE PRECISION FTMP
+
           INTEGER I
+
           DOUBLE PRECISION F
 
           MINF = PREVBE
@@ -202,13 +210,15 @@ C         MAX NUMBER OF VARIABLES.
 
           DO 20 I = 1, NVARS
               Z(I) = POINT(I) + DELTA(I)
+
               FTMP = F(Z, NVARS)
 
               IF (FTMP .LT. MINF) THEN
                   MINF = FTMP
               ELSE
                   DELTA(I) = 0.0 - DELTA(I)
-                  Z(I) = POINT(I) + DELTA(I)
+                  Z(I)     = POINT(I) + DELTA(I)
+
                   FTMP = F(Z, NVARS)
 
                   IF (FTMP .LT. MINF) THEN
@@ -224,6 +234,7 @@ C         MAX NUMBER OF VARIABLES.
 30        CONTINUE
 
           BEST_N = MINF
+
           RETURN
       END
 
@@ -231,21 +242,24 @@ C         MAX NUMBER OF VARIABLES.
           IMPLICIT NONE
 
 C         MAX NUMBER OF VARIABLES.
-          INTEGER VARS
-          PARAMETER (VARS=250)
+          INTEGER    VARS
+          PARAMETER (VARS = 250)
 
           INTEGER HOOKE
           INTEGER NVARS
+
           DOUBLE PRECISION STARTP(VARS)
           DOUBLE PRECISION ENDPT(VARS)
           DOUBLE PRECISION RHO
           DOUBLE PRECISION EPSILO
+
           INTEGER ITERMA
           INTEGER I
           INTEGER IADJ
           INTEGER ITERS
           INTEGER J
           INTEGER KEEP
+
           DOUBLE PRECISION NEWX(VARS)
           DOUBLE PRECISION XBEFOR(VARS)
           DOUBLE PRECISION DELTA(VARS)
@@ -256,14 +270,15 @@ C         MAX NUMBER OF VARIABLES.
 
 C         GLOBAL VARIABLES.
           INTEGER FUNEVA
-          COMMON FUNEVA
+          COMMON  FUNEVA
 
           DOUBLE PRECISION F
           DOUBLE PRECISION BEST_N
 
           DO 10 I = 1, NVARS
               XBEFOR(I) = STARTP(I)
-              NEWX(I) = XBEFOR(I)
+              NEWX(I)   = XBEFOR(I)
+
               DELTA(I) = ABS(STARTP(I) * RHO)
 
               IF (DELTA(I) .EQ. 0.0) THEN
@@ -271,18 +286,21 @@ C         GLOBAL VARIABLES.
               END IF
 10        CONTINUE
 
-          IADJ = 0
+          IADJ   = 0
           STEPLE = RHO
-          ITERS = 0
+          ITERS  = 0
+
           FBEFOR = F(NEWX, NVARS)
+
           NEWF = FBEFOR
 
 120       IF ((ITERS .LT. ITERMA) .AND. (STEPLE .GT. EPSILO)) THEN
               ITERS = ITERS + 1
-              IADJ = IADJ + 1
+              IADJ  = IADJ + 1
+
               PRINT 20, FUNEVA, FBEFOR
 20            FORMAT (/, 'AFTER ', I5, ' FUNEVALS, F(X) =  ', 1PE11.4E3,
-     *            ' AT')
+     *                ' AT')
 
               DO 30 J = 1, NVARS
                   PRINT 40, J - 1, XBEFOR(J)
@@ -311,12 +329,13 @@ C                     FIRSTLY, ARRANGE THE SIGN OF DELTA().
                       END IF
 
 C                     NOW, MOVE FURTHER IN THIS DIRECTION.
-                      TMP = XBEFOR(I)
+                      TMP       = XBEFOR(I)
                       XBEFOR(I) = NEWX(I)
-                      NEWX(I) = NEWX(I) + NEWX(I) - TMP
+                      NEWX(I)   = NEWX(I) + NEWX(I) - TMP
 60                CONTINUE
 
                   FBEFOR = NEWF
+
                   NEWF = BEST_N(DELTA, NEWX, FBEFOR, NVARS)
 
 C                 IF THE FURTHER (OPTIMISTIC) MOVE WAS BAD....
@@ -335,6 +354,7 @@ C                 NEWF .LT. FBEFORE.
 
                       IF (ABS(NEWX(I) - XBEFOR(I))
      *                    .GT. (0.5 * ABS(DELTA(I)))) THEN
+
                           GO TO 90
                       ELSE
                           KEEP = 0
@@ -360,6 +380,7 @@ C                 NEWF .LT. FBEFORE.
 130       CONTINUE
 
           HOOKE = ITERS
+
           RETURN
       END
 
@@ -367,45 +388,49 @@ C                 NEWF .LT. FBEFORE.
           IMPLICIT NONE
 
 C         MAX NUMBER OF VARIABLES.
-          INTEGER VARS
-          PARAMETER (VARS=250)
+          INTEGER    VARS
+          PARAMETER (VARS = 250)
 
 C         STEPSIZE GEOMETRIC SHRINK.
           DOUBLE PRECISION RHO_BE
-          PARAMETER (RHO_BE=0.5)
+          PARAMETER       (RHO_BE = 0.5)
 
 C         ENDING VALUE OF STEPSIZE.
           DOUBLE PRECISION EPSMIN
-          PARAMETER (EPSMIN=1E-6)
+          PARAMETER       (EPSMIN = 1E-6)
 
 C         MAX NUMBER OF ITERATIONS.
-          INTEGER IMAX
-          PARAMETER (IMAX=5000)
+          INTEGER    IMAX
+          PARAMETER (IMAX = 5000)
 
 C         GLOBAL VARIABLES.
           INTEGER FUNEVA
-          COMMON FUNEVA
+          COMMON  FUNEVA
 
           INTEGER NVARS
           INTEGER ITERMA
           INTEGER JJ
           INTEGER I
+
           DOUBLE PRECISION STARTP(VARS)
           DOUBLE PRECISION RHO
           DOUBLE PRECISION EPSILO
           DOUBLE PRECISION ENDPT(VARS)
+
           INTEGER HOOKE
 
           FUNEVA = 0
 
 C         STARTING GUESS FOR ROSENBROCK'S TEST FUNCTION.
-          NVARS = 2
+          NVARS     = 2
           STARTP(1) = -1.2
           STARTP(2) = 1.0
-          ITERMA = IMAX
-          RHO = RHO_BE
-          EPSILO = EPSMIN
+          ITERMA    = IMAX
+          RHO       = RHO_BE
+          EPSILO    = EPSMIN
+
           JJ = HOOKE(NVARS, STARTP, ENDPT, RHO, EPSILO, ITERMA)
+
           PRINT 10, JJ
 10        FORMAT (///, 'HOOKE USED ', I2, ' ITERATIONS, AND RETURNED')
 
