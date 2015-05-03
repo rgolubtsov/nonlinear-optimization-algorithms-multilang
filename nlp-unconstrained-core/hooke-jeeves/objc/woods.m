@@ -15,8 +15,7 @@
 #import "woods.h"
 
 @implementation OWoods
-- (double) f: (double *) x atN: (int) n
-{
+- (double) f: (double *) x atN: (int) n {
     double s1;
     double s2;
     double s3;
@@ -27,6 +26,7 @@
     double t5;
 
     funevals++;
+
     s1 = x[1] - x[0] * x[0];
     s2 = 1 - x[0];
     s3 = x[1] - 1;
@@ -36,65 +36,62 @@
     t4 = s3 + t3;
     t5 = s3 - t3;
 
-    return 100 * (s1 * s1) + s2 * s2 + 90 * (t1 * t1) + t2 * t2
-        + 10 * (t4 * t4) + t5 * t5 / 10.;
+    return (100 * (s1 * s1) + s2 * s2
+           + 90 * (t1 * t1) + t2 * t2
+           + 10 * (t4 * t4) + t5 * t5 / 10.);
 }
 
-- (double) bestNearby: (double *) delta atPoint: (double *) point atPrevbest: (double) prevbest
-{
+- (double) bestNearby: (double *) delta
+              atPoint: (double *) point
+           atPrevbest: (double) prevbest {
+
     double minf;
     double z[VARS];
     double ftmp;
+
     int i;
 
     minf = prevbest;
 
-    for (i = 0; i < nvars; i++)
-    {
+    for (i = 0; i < nvars; i++) {
         z[i] = point[i];
     }
 
-    for (i = 0; i < nvars; i++)
-    {
+    for (i = 0; i < nvars; i++) {
         z[i] = point[i] + delta[i];
+
         ftmp = [self f: z atN: nvars];
 
-        if (ftmp < minf)
-        {
+        if (ftmp < minf) {
             minf = ftmp;
-        }
-        else
-        {
+        } else {
             delta[i] = 0.0 - delta[i];
-            z[i] = point[i] + delta[i];
+            z[i]     = point[i] + delta[i];
+
             ftmp = [self f: z atN: nvars];
 
-            if (ftmp < minf)
-            {
+            if (ftmp < minf) {
                 minf = ftmp;
-            }
-            else
-            {
+            } else {
                 z[i] = point[i];
             }
         }
     }
 
-    for (i = 0; i < nvars; i++)
-    {
+    for (i = 0; i < nvars; i++) {
         point[i] = z[i];
     }
 
     return minf;
 }
 
-- (int) hooke
-{
+- (int) hooke {
     int i;
     int iadj;
     int iters;
     int j;
     int keep;
+
     double newx[VARS];
     double xbefore[VARS];
     double delta[VARS];
@@ -103,38 +100,36 @@
     double newf;
     double tmp;
 
-    for (i = 0; i < nvars; i++)
-    {
+    for (i = 0; i < nvars; i++) {
         newx[i] = xbefore[i] = startpt[i];
+
         delta[i] = fabs(startpt[i] * rho);
 
-        if (delta[i] == 0.0)
-        {
+        if (delta[i] == 0.0) {
             delta[i] = rho;
         }
     }
 
-    iadj = 0;
+    iadj       = 0;
     steplength = rho;
-    iters = 0;
+    iters      = 0;
+
     fbefore = [self f: newx atN: nvars];
+
     newf = fbefore;
 
-    while ((iters < itermax) && (steplength > epsilon))
-    {
+    while ((iters < itermax) && (steplength > epsilon)) {
         iters++;
         iadj++;
 
         printf("\nAfter %5d funevals, f(x) =  %.4le at\n", funevals, fbefore);
 
-        for (j = 0; j < nvars; j++)
-        {
+        for (j = 0; j < nvars; j++) {
             printf("   x[%2d] = %.4le\n", j, xbefore[j]);
         }
 
         // Find best new point, one coord at a time.
-        for (i = 0; i < nvars; i++)
-        {
+        for (i = 0; i < nvars; i++) {
             newx[i] = xbefore[i];
         }
 
@@ -143,34 +138,29 @@
         // If we made some improvements, pursue that direction.
         keep = 1;
 
-        while ((newf < fbefore) && (keep == 1))
-        {
+        while ((newf < fbefore) && (keep == 1)) {
             iadj = 0;
 
-            for (i = 0; i < nvars; i++)
-            {
+            for (i = 0; i < nvars; i++) {
                 // Firstly, arrange the sign of delta[].
-                if (newx[i] <= xbefore[i])
-                {
+                if (newx[i] <= xbefore[i]) {
                     delta[i] = 0.0 - fabs(delta[i]);
-                }
-                else
-                {
+                } else {
                     delta[i] = fabs(delta[i]);
                 }
 
                 // Now, move further in this direction.
-                tmp = xbefore[i];
+                tmp        = xbefore[i];
                 xbefore[i] = newx[i];
-                newx[i] = newx[i] + newx[i] - tmp;
+                newx[i]    = newx[i] + newx[i] - tmp;
             }
 
             fbefore = newf;
+
             newf = [self bestNearby: delta atPoint: newx atPrevbest: fbefore];
 
             // If the further (optimistic) move was bad....
-            if (newf >= fbefore)
-            {
+            if (newf >= fbefore) {
                 break;
             }
 
@@ -181,34 +171,27 @@
              */
             keep = 0;
 
-            for (i = 0; i < nvars; i++)
-            {
+            for (i = 0; i < nvars; i++) {
                 keep = 1;
 
-                if (fabs(newx[i] - xbefore[i]) > (0.5 * fabs(delta[i])))
-                {
+                if (fabs(newx[i] - xbefore[i]) > (0.5 * fabs(delta[i]))) {
                     break;
-                }
-                else
-                {
+                } else {
                     keep = 0;
                 }
             }
         }
 
-        if ((steplength >= epsilon) && (newf >= fbefore))
-        {
+        if ((steplength >= epsilon) && (newf >= fbefore)) {
             steplength = steplength * rho;
 
-            for (i = 0; i < nvars; i++)
-            {
+            for (i = 0; i < nvars; i++) {
                 delta[i] *= rho;
             }
         }
     }
 
-    for (i = 0; i < nvars; i++)
-    {
+    for (i = 0; i < nvars; i++) {
         endpt[i] = xbefore[i];
     }
 

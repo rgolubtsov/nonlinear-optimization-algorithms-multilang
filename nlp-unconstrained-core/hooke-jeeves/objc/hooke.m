@@ -152,24 +152,24 @@
 
 #ifndef Woods
 
-int main(void)
-{
+int main(void) {
     ORosenbrock *rosenbrock = [[ORosenbrock alloc] init];
+
     int i;
 
     // Starting guess for Rosenbrock's test function.
-    rosenbrock->nvars = 2;
+    rosenbrock->nvars      = 2;
     rosenbrock->startpt[0] = -1.2;
     rosenbrock->startpt[1] = 1.0;
-    rosenbrock->itermax = IMAX;
-    rosenbrock->rho = RHO_BEGIN;
-    rosenbrock->epsilon = EPSMIN;
+    rosenbrock->itermax    = IMAX;
+    rosenbrock->rho        = RHO_BEGIN;
+    rosenbrock->epsilon    = EPSMIN;
 
     // Performing the Hooke-Jeeves search and printing the results.
-    printf("\n\n\nHOOKE USED %d ITERATIONS, AND RETURNED\n", [rosenbrock hooke]);
+    printf("\n\n\nHOOKE USED %d ITERATIONS, AND RETURNED\n",
+           [rosenbrock hooke]);
 
-    for (i = 0; i < rosenbrock->nvars; i++)
-    {
+    for (i = 0; i < rosenbrock->nvars; i++) {
         printf("x[%3d] = %15.7le \n", i, rosenbrock->endpt[i]);
     }
 
@@ -188,26 +188,25 @@ int main(void)
     #define RHO_WOODS 0.6
 #endif
 
-int main(void)
-{
+int main(void) {
     OWoods *woods = [[OWoods alloc] init];
+
     int i;
 
     // Starting guess test problem "Woods".
-    woods->nvars = 4;
+    woods->nvars      = 4;
     woods->startpt[0] = -3;
     woods->startpt[1] = -1;
     woods->startpt[2] = -3;
     woods->startpt[3] = -1;
-    woods->itermax = IMAX;
-    woods->rho = RHO_WOODS;
-    woods->epsilon = EPSMIN;
+    woods->itermax    = IMAX;
+    woods->rho        = RHO_WOODS;
+    woods->epsilon    = EPSMIN;
 
     // Performing the Hooke-Jeeves search and printing the results.
     printf("\n\n\nHOOKE USED %d ITERATIONS, AND RETURNED\n", [woods hooke]);
 
-    for (i = 0; i < woods->nvars; i++)
-    {
+    for (i = 0; i < woods->nvars; i++) {
         printf("x[%3d] = %15.7le \n", i, woods->endpt[i]);
     }
 

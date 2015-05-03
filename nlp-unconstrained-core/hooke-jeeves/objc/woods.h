@@ -20,14 +20,14 @@
  * The Hooke-Jeeves nonlinear minimization algorithm in application
  * to the Woods test problem.
  */
-@interface OWoods : NSObject
-{
+@interface OWoods: NSObject {
 @private
     int funevals;
 
 @public
     int nvars;
     int itermax;
+
     double startpt[VARS];
     double rho;
     double epsilon;
@@ -45,7 +45,7 @@
  * @param x The point at which f(x) should be evaluated.
  * @param n The number of coordinates of x.
  *
- * @return Objective function value.
+ * @return The objective function value.
  */
 - (double) f: (double *) x atN: (int) n;
 
@@ -57,18 +57,20 @@
  * Helper method.
  * Given a point, look for a better one nearby, one coord at a time.
  *
- * @param delta The delta between prevbest and point.
- * @param point The coordinate from where to begin.
+ * @param delta    The delta between prevbest and point.
+ * @param point    The coordinate from where to begin.
  * @param prevbest The previous best-valued coordinate.
  *
- * @return Objective function value at a nearby.
+ * @return The objective function value at a nearby.
  */
-- (double) bestNearby: (double *) delta atPoint: (double *) point atPrevbest: (double) prevbest;
+- (double) bestNearby: (double *) delta
+              atPoint: (double *) point
+           atPrevbest: (double) prevbest;
 
 /**
  * Main optimization method. (See hooke.m for description.)
  *
- * @return Number of iterations used to find the local minimum.
+ * @return The number of iterations used to find the local minimum.
  */
 - (int) hooke;
 @end
