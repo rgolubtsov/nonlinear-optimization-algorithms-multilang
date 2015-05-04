@@ -91,10 +91,10 @@ public final class Woods {
     /**
      * Woods &ndash; a la More, Garbow &amp; Hillstrom (TOMS algorithm 566).
      *
-     * @param x vector of variables
-     * @param n number of variables
+     * @param x The vector of variables.
+     * @param n The number of variables.
      *
-     * @return objective function value
+     * @return The objective function value.
      */
     private static double f(final double[] x, final int n) {
         double s1;
@@ -107,6 +107,7 @@ public final class Woods {
         double t5;
 
         funEvals++;
+
         s1 = x[INDEX_ONE] - x[INDEX_ZERO] * x[INDEX_ZERO];
         s2 = 1 - x[INDEX_ZERO];
         s3 = x[INDEX_ONE] - 1;
@@ -116,26 +117,30 @@ public final class Woods {
         t4 = s3 + t3;
         t5 = s3 - t3;
 
-        return ONE_HUNDRED * (s1 * s1) + s2 * s2 + NINETY * (t1 * t1)
-            + t2 * t2 + TEN * (t4 * t4) + t5 * t5 / TEN_POINT;
+        return (ONE_HUNDRED * (s1 * s1) + s2 * s2
+                   + NINETY * (t1 * t1) + t2 * t2
+                      + TEN * (t4 * t4) + t5 * t5 / TEN_POINT);
     }
 
     /**
      * Given a point, look for a better one nearby, one coord at a time.
      *
-     * @param delta    delta coordinates
-     * @param point    point coordinates
-     * @param prevBest previous best value
-     * @param nVars    number of variables
+     * @param delta    The delta coordinates.
+     * @param point    The point coordinates.
+     * @param prevBest The previous best value.
+     * @param nVars    The number of variables.
      *
-     * @return best nearby value
+     * @return The best nearby value.
      */
     private static double bestNearby(final double[] delta,
-        final double[] point, final double prevBest, final int nVars) {
+                                     final double[] point,
+                                     final double prevBest,
+                                     final int nVars) {
 
         double minF;
         double[] z = new double[VARS];
         double fTmp;
+
         int i;
 
         minF = prevBest;
@@ -146,13 +151,15 @@ public final class Woods {
 
         for (i = 0; i < nVars; i++) {
             z[i] = point[i] + delta[i];
+
             fTmp = f(z, nVars);
 
             if (fTmp < minF) {
                 minF = fTmp;
             } else {
                 delta[i] = 0.0 - delta[i];
-                z[i] = point[i] + delta[i];
+                z[i]     = point[i] + delta[i];
+
                 fTmp = f(z, nVars);
 
                 if (fTmp < minF) {
@@ -173,27 +180,31 @@ public final class Woods {
     /**
      * The hooke subroutine itself.
      *
-     * @param nVars   number of variables
-     * @param startPt starting point coordinates
-     * @param endPt   ending point coordinates
-     * @param rho     rho value
-     * @param epsilon epsilon value
-     * @param iterMax maximum number of iterations
+     * @param nVars   The number of variables.
+     * @param startPt The starting point coordinates.
+     * @param endPt   The ending point coordinates.
+     * @param rho     The rho value.
+     * @param epsilon The epsilon value.
+     * @param iterMax The maximum number of iterations.
      *
-     * @return number of iterations actually spent
+     * @return The number of iterations actually spent.
      */
-    private static int hooke(final int nVars, final double[] startPt,
-        final double[] endPt, final double rho, final double epsilon,
-        final int iterMax) {
+    private static int hooke(final int nVars,
+                             final double[] startPt,
+                             final double[] endPt,
+                             final double rho,
+                             final double epsilon,
+                             final int iterMax) {
 
         int i;
         int iAdj;
         int iters;
         int j;
         int keep;
-        double[] newX = new double[VARS];
+
+        double[] newX    = new double[VARS];
         double[] xBefore = new double[VARS];
-        double[] delta = new double[VARS];
+        double[] delta   = new double[VARS];
         double stepLength;
         double fBefore;
         double newF;
@@ -201,7 +212,8 @@ public final class Woods {
 
         for (i = 0; i < nVars; i++) {
             xBefore[i] = startPt[i];
-            newX[i] = xBefore[i];
+            newX[i]    = xBefore[i];
+
             delta[i] = Math.abs(startPt[i] * rho);
 
             if (delta[i] == 0.0) {
@@ -209,17 +221,21 @@ public final class Woods {
             }
         }
 
-        iAdj = 0;
+        iAdj       = 0;
         stepLength = rho;
-        iters = 0;
+        iters      = 0;
+
         fBefore = f(newX, nVars);
+
         newF = fBefore;
 
         while ((iters < iterMax) && (stepLength > epsilon)) {
             iters++;
             iAdj++;
-            System.out.printf("\nAfter %5d funevals, f(x) =  %.4e at\n",
-                funEvals, fBefore);
+
+            System.out.printf(
+                "\nAfter %5d funevals, f(x) =  %.4e at\n", funEvals, fBefore
+            );
 
             for (j = 0; j < nVars; j++) {
                 System.out.printf("   x[%2d] = %.4e\n", j, xBefore[j]);
@@ -247,12 +263,13 @@ public final class Woods {
                     }
 
                     // Now, move further in this direction.
-                    tmp = xBefore[i];
+                    tmp        = xBefore[i];
                     xBefore[i] = newX[i];
-                    newX[i] = newX[i] + newX[i] - tmp;
+                    newX[i]    = newX[i] + newX[i] - tmp;
                 }
 
                 fBefore = newF;
+
                 newF = bestNearby(delta, newX, fBefore, nVars);
 
                 // If the further (optimistic) move was bad....
@@ -272,6 +289,7 @@ public final class Woods {
 
                     if (Math.abs(newX[i] - xBefore[i])
                         > (ZERO_POINT_FIVE * Math.abs(delta[i]))) {
+
                         break;
                     } else {
                         keep = 0;
@@ -298,30 +316,34 @@ public final class Woods {
     /**
      * Main program function.
      *
-     * @param args array of command-line arguments
+     * @param args The array of command-line arguments.
      */
     public static void main(final String[] args) {
         int nVars;
         int iterMax;
         int jj;
         int i;
+
         double[] startPt = new double[VARS];
         double rho;
         double epsilon;
-        double[] endPt = new double[VARS];
+        double[] endPt   = new double[VARS];
 
         // Starting guess test problem "Woods".
-        nVars = FOUR;
-        startPt[INDEX_ZERO] = MINUS_THREE;
-        startPt[INDEX_ONE] = MINUS_ONE;
-        startPt[INDEX_TWO] = MINUS_THREE;
+        nVars                = FOUR;
+        startPt[INDEX_ZERO]  = MINUS_THREE;
+        startPt[INDEX_ONE]   = MINUS_ONE;
+        startPt[INDEX_TWO]   = MINUS_THREE;
         startPt[INDEX_THREE] = MINUS_ONE;
-        iterMax = IMAX;
-        rho = RHO_WOODS;
-        epsilon = EPSMIN;
+        iterMax              = IMAX;
+        rho                  = RHO_WOODS;
+        epsilon              = EPSMIN;
+
         jj = hooke(nVars, startPt, endPt, rho, epsilon, iterMax);
-        System.out.printf("\n\n\nHOOKE USED %d ITERATIONS, AND RETURNED\n",
-            jj);
+
+        System.out.printf(
+            "\n\n\nHOOKE USED %d ITERATIONS, AND RETURNED\n", jj
+        );
 
         for (i = 0; i < nVars; i++) {
             System.out.printf("x[%3d] = %15.7e \n", i, endPt[i]);

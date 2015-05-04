@@ -193,6 +193,9 @@ public final class Rosenbrock {
     private static final double ZERO_POINT_FIVE = 0.5;
 
     /** Helper constant. */
+    private static final int TWO = 2;
+
+    /** Helper constant. */
     private static final double MINUS_ONE_POINT_TWO = -1.2;
 
     /** Default constructor. */
@@ -201,10 +204,10 @@ public final class Rosenbrock {
     /**
      * Rosenbrock's classic parabolic valley ("banana") function.
      *
-     * @param x vector of variables
-     * @param n number of variables
+     * @param x The vector of variables.
+     * @param n The number of variables.
      *
-     * @return objective function value
+     * @return The objective function value.
      */
     private static double f(final double[] x, final int n) {
         double a;
@@ -212,29 +215,34 @@ public final class Rosenbrock {
         double c;
 
         funEvals++;
+
         a = x[INDEX_ZERO];
         b = x[INDEX_ONE];
+
         c = ONE_HUNDRED_POINT_ZERO * (b - (a * a)) * (b - (a * a));
 
-        return c + ((ONE_POINT_ZERO - a) * (ONE_POINT_ZERO - a));
+        return (c + ((ONE_POINT_ZERO - a) * (ONE_POINT_ZERO - a)));
     }
 
     /**
      * Given a point, look for a better one nearby, one coord at a time.
      *
-     * @param delta    delta coordinates
-     * @param point    point coordinates
-     * @param prevBest previous best value
-     * @param nVars    number of variables
+     * @param delta    The delta coordinates.
+     * @param point    The point coordinates.
+     * @param prevBest The previous best value.
+     * @param nVars    The number of variables.
      *
-     * @return best nearby value
+     * @return The best nearby value.
      */
     private static double bestNearby(final double[] delta,
-        final double[] point, final double prevBest, final int nVars) {
+                                     final double[] point,
+                                     final double prevBest,
+                                     final int nVars) {
 
         double minF;
         double[] z = new double[VARS];
         double fTmp;
+
         int i;
 
         minF = prevBest;
@@ -245,13 +253,15 @@ public final class Rosenbrock {
 
         for (i = 0; i < nVars; i++) {
             z[i] = point[i] + delta[i];
+
             fTmp = f(z, nVars);
 
             if (fTmp < minF) {
                 minF = fTmp;
             } else {
                 delta[i] = 0.0 - delta[i];
-                z[i] = point[i] + delta[i];
+                z[i]     = point[i] + delta[i];
+
                 fTmp = f(z, nVars);
 
                 if (fTmp < minF) {
@@ -272,27 +282,31 @@ public final class Rosenbrock {
     /**
      * The hooke subroutine itself.
      *
-     * @param nVars   number of variables
-     * @param startPt starting point coordinates
-     * @param endPt   ending point coordinates
-     * @param rho     rho value
-     * @param epsilon epsilon value
-     * @param iterMax maximum number of iterations
+     * @param nVars   The number of variables.
+     * @param startPt The starting point coordinates.
+     * @param endPt   The ending point coordinates.
+     * @param rho     The rho value.
+     * @param epsilon The epsilon value.
+     * @param iterMax The maximum number of iterations.
      *
-     * @return number of iterations actually spent
+     * @return The number of iterations actually spent.
      */
-    private static int hooke(final int nVars, final double[] startPt,
-        final double[] endPt, final double rho, final double epsilon,
-        final int iterMax) {
+    private static int hooke(final int nVars,
+                             final double[] startPt,
+                             final double[] endPt,
+                             final double rho,
+                             final double epsilon,
+                             final int iterMax) {
 
         int i;
         int iAdj;
         int iters;
         int j;
         int keep;
-        double[] newX = new double[VARS];
+
+        double[] newX    = new double[VARS];
         double[] xBefore = new double[VARS];
-        double[] delta = new double[VARS];
+        double[] delta   = new double[VARS];
         double stepLength;
         double fBefore;
         double newF;
@@ -300,7 +314,8 @@ public final class Rosenbrock {
 
         for (i = 0; i < nVars; i++) {
             xBefore[i] = startPt[i];
-            newX[i] = xBefore[i];
+            newX[i]    = xBefore[i];
+
             delta[i] = Math.abs(startPt[i] * rho);
 
             if (delta[i] == 0.0) {
@@ -308,17 +323,21 @@ public final class Rosenbrock {
             }
         }
 
-        iAdj = 0;
+        iAdj       = 0;
         stepLength = rho;
-        iters = 0;
+        iters      = 0;
+
         fBefore = f(newX, nVars);
+
         newF = fBefore;
 
         while ((iters < iterMax) && (stepLength > epsilon)) {
             iters++;
             iAdj++;
-            System.out.printf("\nAfter %5d funevals, f(x) =  %.4e at\n",
-                funEvals, fBefore);
+
+            System.out.printf(
+                "\nAfter %5d funevals, f(x) =  %.4e at\n", funEvals, fBefore
+            );
 
             for (j = 0; j < nVars; j++) {
                 System.out.printf("   x[%2d] = %.4e\n", j, xBefore[j]);
@@ -346,12 +365,13 @@ public final class Rosenbrock {
                     }
 
                     // Now, move further in this direction.
-                    tmp = xBefore[i];
+                    tmp        = xBefore[i];
                     xBefore[i] = newX[i];
-                    newX[i] = newX[i] + newX[i] - tmp;
+                    newX[i]    = newX[i] + newX[i] - tmp;
                 }
 
                 fBefore = newF;
+
                 newF = bestNearby(delta, newX, fBefore, nVars);
 
                 // If the further (optimistic) move was bad....
@@ -371,6 +391,7 @@ public final class Rosenbrock {
 
                     if (Math.abs(newX[i] - xBefore[i])
                         > (ZERO_POINT_FIVE * Math.abs(delta[i]))) {
+
                         break;
                     } else {
                         keep = 0;
@@ -397,28 +418,32 @@ public final class Rosenbrock {
     /**
      * Main program function.
      *
-     * @param args array of command-line arguments
+     * @param args The array of command-line arguments.
      */
     public static void main(final String[] args) {
         int nVars;
         int iterMax;
         int jj;
         int i;
+
         double[] startPt = new double[VARS];
         double rho;
         double epsilon;
-        double[] endPt = new double[VARS];
+        double[] endPt   = new double[VARS];
 
         // Starting guess for Rosenbrock's test function.
-        nVars = 2;
+        nVars               = TWO;
         startPt[INDEX_ZERO] = MINUS_ONE_POINT_TWO;
-        startPt[INDEX_ONE] = ONE_POINT_ZERO;
-        iterMax = IMAX;
-        rho = RHO_BEGIN;
-        epsilon = EPSMIN;
+        startPt[INDEX_ONE]  = ONE_POINT_ZERO;
+        iterMax             = IMAX;
+        rho                 = RHO_BEGIN;
+        epsilon             = EPSMIN;
+
         jj = hooke(nVars, startPt, endPt, rho, epsilon, iterMax);
-        System.out.printf("\n\n\nHOOKE USED %d ITERATIONS, AND RETURNED\n",
-            jj);
+
+        System.out.printf(
+            "\n\n\nHOOKE USED %d ITERATIONS, AND RETURNED\n", jj
+        );
 
         for (i = 0; i < nVars; i++) {
             System.out.printf("x[%3d] = %15.7e \n", i, endPt[i]);
