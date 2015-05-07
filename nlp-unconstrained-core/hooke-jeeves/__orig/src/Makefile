@@ -1,5 +1,5 @@
 # =============================================================================
-# nlp-unconstrained-core/hooke-jeeves/__orig/Makefile
+# nlp-unconstrained-core/hooke-jeeves/__orig/src/Makefile
 # =============================================================================
 # Nonlinear Optimization Algorithms Multilang. Version 0.1
 # =============================================================================
@@ -11,29 +11,47 @@
 # =============================================================================
 # Copyright (C) 2015 Radislav (Radic) Golubtsov
 
-BIN_DIR    = bin
-SRC_DIR    = src
-ALL_TARGET = all
+BIN_DIR = ../bin
+EXEC1   = hooke
+EXEC2S  = -woods
+EXEC2   = $(EXEC1)$(EXEC2S)
+DEPS1   = $(EXEC1).o
+DEPS2   = $(EXEC2).o
 
 # Specify flags and other vars here.
-MKDIR      = mkdir
-MAKE       = make
-MAKE_FLAGS = -C
-RMFLAGS    = -vR
+# Note: To use the default system C compiler (likely gcc, the GNU C Compiler)
+#       instead of tcc, simply comment out next line, just like this:
+#       "#CC = tcc" - and it will be used automatically.
+CC     = tcc
+CFLAGS = -Wall
+LDLIBS = -lm
 
-# Making the target.
-$(BIN_DIR):
-	if [ ! -d "$(BIN_DIR)" ]; then \
-		$(MKDIR) $(BIN_DIR); \
-		$(MAKE) $(MAKE_FLAGS)$(SRC_DIR) $(ALL_TARGET); \
-	fi
+MV      = mv
+MVFLAGS = -v
 
-.PHONY: all clean
+# Making the first target (rosenbrock).
+$(DEPS1): %.o: %.c
 
-all: $(BIN_DIR)
+$(EXEC1): $(DEPS1)
+
+# Making the second target (woods).
+$(DEPS2): CFLAGS += -DWoods -c -o
+$(DEPS2): %$(EXEC2S).o: %.c
+	$(CC) $(CFLAGS) $@ $<
+
+$(EXEC2): $(DEPS2)
+
+.PHONY: rosenbrock woods all clean
+
+rosenbrock: $(EXEC1)
+
+woods: $(EXEC2)
+
+all: rosenbrock woods
+	$(MV) $(MVFLAGS) $(EXEC1) $(DEPS1) $(EXEC2) $(DEPS2) $(BIN_DIR)
 
 clean:
-	$(RM) $(RMFLAGS) $(BIN_DIR)
+	$(RM) $(EXEC1) $(DEPS1) $(EXEC2) $(DEPS2)
 
 # =============================================================================
 # vim:set nu:et:ts=4:sw=4:
