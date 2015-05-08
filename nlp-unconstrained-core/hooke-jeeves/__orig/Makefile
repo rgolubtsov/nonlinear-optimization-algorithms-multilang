@@ -17,8 +17,13 @@ ALL_TARGET = all
 
 # Specify flags and other vars here.
 MKDIR      = mkdir
-MAKE       = make
+
+# Using here this user-defined var because "The options ‘-C’, ‘-f’, ‘-o’,
+# and ‘-W’ are not put into MAKEFLAGS; these options are not passed down."
+# -- from the GNU Make Manual. I.e. use of MAKEFLAGS cannot be applicable
+# in this case.
 MAKE_FLAGS = -C
+
 RMFLAGS    = -vR
 
 # Making the target.
