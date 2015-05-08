@@ -1,5 +1,5 @@
 # =============================================================================
-# nlp-unconstrained-core/hooke-jeeves/f77/Makefile
+# nlp-unconstrained-core/hooke-jeeves/f77/src/Makefile
 # =============================================================================
 # Nonlinear Optimization Algorithms Multilang. Version 0.1
 # =============================================================================
@@ -11,38 +11,52 @@
 # =============================================================================
 # Copyright (C) 2015 Radislav (Radic) Golubtsov
 
-BIN_DIR    = bin
-OBJ_DIR    = obj
-SRC_DIR    = src
-ALL_TARGET = all
+EXEC1   = hooke
+EXEC2S  = -woods
+EXEC2   = $(EXEC1)$(EXEC2S)
+DEPS1P  = rosenbrock
+DEPS1   = $(DEPS1P).o
+DEPS2P  = woods
+DEPS2   = $(DEPS2P).o
+BIN_DIR = ../bin
+OBJ_DIR = ../obj
 
 # Specify flags and other vars here.
-MKDIR      = mkdir
+CC      = gfortran
+CFLAGS  = -Wall
+LDFLAGS = -o
 
-# Using here this user-defined var because "The options ‘-C’, ‘-f’, ‘-o’,
-# and ‘-W’ are not put into MAKEFLAGS; these options are not passed down."
-# -- from the GNU Make Manual. I.e. use of MAKEFLAGS cannot be applicable
-# in this case.
-MAKE_FLAGS = -C
+MV      = mv
+MVFLAGS = -v
 
-RMFLAGS    = -vR
+# Making the first target (rosenbrock).
+$(DEPS1): CFLAGS += -c -o
+$(DEPS1): %.o: %.f
+	$(CC) $(CFLAGS) $@ $<
 
-# Making the target.
-$(BIN_DIR) $(OBJ_DIR):
-	if [ ! -d "$(BIN_DIR)" ]; then \
-		$(MKDIR) $(BIN_DIR); \
-		if [ ! -d "$(OBJ_DIR)" ]; then \
-			$(MKDIR) $(OBJ_DIR); \
-		fi; \
-		$(MAKE) $(MAKE_FLAGS)$(SRC_DIR) $(ALL_TARGET); \
-	fi
+$(EXEC1): $(DEPS1)
+	$(CC) $(LDFLAGS) $@ $<
 
-.PHONY: all clean
+# Making the second target (woods).
+$(DEPS2): CFLAGS += -DWoods -c -o
+$(DEPS2): %.o: %.f
+	$(CC) $(CFLAGS) $@ $<
 
-all: $(BIN_DIR) $(OBJ_DIR)
+$(EXEC2): $(DEPS2)
+	$(CC) $(LDFLAGS) $@ $<
+
+.PHONY: rosenbrock woods all clean
+
+rosenbrock: $(EXEC1)
+
+woods: $(EXEC2)
+
+all: rosenbrock woods
+	$(MV) $(MVFLAGS) $(EXEC1) $(EXEC2) $(BIN_DIR)
+	$(MV) $(MVFLAGS) $(DEPS1) $(DEPS2) $(OBJ_DIR)
 
 clean:
-	$(RM) $(RMFLAGS) $(BIN_DIR) $(OBJ_DIR)
+	$(RM) $(EXEC1) $(DEPS1) $(EXEC2) $(DEPS2)
 
 # =============================================================================
 # vim:set nu:et:ts=4:sw=4:

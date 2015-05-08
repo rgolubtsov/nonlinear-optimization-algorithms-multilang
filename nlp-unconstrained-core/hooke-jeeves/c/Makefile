@@ -11,42 +11,38 @@
 # =============================================================================
 # Copyright (C) 2015 Radislav (Radic) Golubtsov
 
-EXEC1  = hooke
-EXEC2S = -woods
-EXEC2  = $(EXEC1)$(EXEC2S)
-DEPS1  = $(EXEC1).o
-DEPS2  = $(EXEC2).o
+BIN_DIR    = bin
+OBJ_DIR    = obj
+SRC_DIR    = src
+ALL_TARGET = all
 
 # Specify flags and other vars here.
-# Note: To use the default system C compiler (likely gcc, the GNU C Compiler)
-#       instead of tcc, simply comment out next line, just like this:
-#       "#CC = tcc" - and it will be used automatically.
-CC     = tcc
-CFLAGS = -Wall
-LDLIBS = -lm
+MKDIR      = mkdir
 
-# Making the first target (rosenbrock).
-$(DEPS1): %.o: %.c
+# Using here this user-defined var because "The options ‘-C’, ‘-f’, ‘-o’,
+# and ‘-W’ are not put into MAKEFLAGS; these options are not passed down."
+# -- from the GNU Make Manual. I.e. use of MAKEFLAGS cannot be applicable
+# in this case.
+MAKE_FLAGS = -C
 
-$(EXEC1): $(DEPS1)
+RMFLAGS    = -vR
 
-# Making the second target (woods).
-$(DEPS2): CFLAGS += -DWoods -c -o
-$(DEPS2): %$(EXEC2S).o: %.c
-	$(CC) $(CFLAGS) $@ $<
+# Making the target.
+$(BIN_DIR) $(OBJ_DIR):
+	if [ ! -d "$(BIN_DIR)" ]; then \
+		$(MKDIR) $(BIN_DIR); \
+		if [ ! -d "$(OBJ_DIR)" ]; then \
+			$(MKDIR) $(OBJ_DIR); \
+		fi; \
+		$(MAKE) $(MAKE_FLAGS)$(SRC_DIR) $(ALL_TARGET); \
+	fi
 
-$(EXEC2): $(DEPS2)
+.PHONY: all clean
 
-.PHONY: rosenbrock woods all clean
-
-rosenbrock: $(EXEC1)
-
-woods: $(EXEC2)
-
-all: rosenbrock woods
+all: $(BIN_DIR) $(OBJ_DIR)
 
 clean:
-	$(RM) $(EXEC1) $(DEPS1) $(EXEC2) $(DEPS2)
+	$(RM) $(RMFLAGS) $(BIN_DIR) $(OBJ_DIR)
 
 # =============================================================================
 # vim:set nu:et:ts=4:sw=4:
