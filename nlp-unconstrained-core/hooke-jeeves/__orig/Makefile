@@ -12,6 +12,7 @@
 # Copyright (C) 2015 Radislav (Radic) Golubtsov
 
 BIN_DIR    = bin
+OBJ_DIR    = obj
 SRC_DIR    = src
 ALL_TARGET = all
 
@@ -27,18 +28,21 @@ MAKE_FLAGS = -C
 RMFLAGS    = -vR
 
 # Making the target.
-$(BIN_DIR):
+$(BIN_DIR) $(OBJ_DIR):
 	if [ ! -d "$(BIN_DIR)" ]; then \
 		$(MKDIR) $(BIN_DIR); \
+		if [ ! -d "$(OBJ_DIR)" ]; then \
+			$(MKDIR) $(OBJ_DIR); \
+		fi; \
 		$(MAKE) $(MAKE_FLAGS)$(SRC_DIR) $(ALL_TARGET); \
 	fi
 
 .PHONY: all clean
 
-all: $(BIN_DIR)
+all: $(BIN_DIR) $(OBJ_DIR)
 
 clean:
-	$(RM) $(RMFLAGS) $(BIN_DIR)
+	$(RM) $(RMFLAGS) $(BIN_DIR) $(OBJ_DIR)
 
 # =============================================================================
 # vim:set nu:et:ts=4:sw=4:

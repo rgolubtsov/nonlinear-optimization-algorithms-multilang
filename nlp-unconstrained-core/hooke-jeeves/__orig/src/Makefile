@@ -11,12 +11,13 @@
 # =============================================================================
 # Copyright (C) 2015 Radislav (Radic) Golubtsov
 
-BIN_DIR = ../bin
 EXEC1   = hooke
 EXEC2S  = -woods
 EXEC2   = $(EXEC1)$(EXEC2S)
 DEPS1   = $(EXEC1).o
 DEPS2   = $(EXEC2).o
+BIN_DIR = ../bin
+OBJ_DIR = ../obj
 
 # Specify flags and other vars here.
 # Note: To use the default system C compiler (likely gcc, the GNU C Compiler)
@@ -48,7 +49,8 @@ rosenbrock: $(EXEC1)
 woods: $(EXEC2)
 
 all: rosenbrock woods
-	$(MV) $(MVFLAGS) $(EXEC1) $(DEPS1) $(EXEC2) $(DEPS2) $(BIN_DIR)
+	$(MV) $(MVFLAGS) $(EXEC1) $(EXEC2) $(BIN_DIR)
+	$(MV) $(MVFLAGS) $(DEPS1) $(DEPS2) $(OBJ_DIR)
 
 clean:
 	$(RM) $(EXEC1) $(DEPS1) $(EXEC2) $(DEPS2)
