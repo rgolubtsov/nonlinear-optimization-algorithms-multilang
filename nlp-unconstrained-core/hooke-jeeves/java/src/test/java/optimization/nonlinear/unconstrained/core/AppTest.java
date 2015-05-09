@@ -1,5 +1,5 @@
 /*
- * nlp-unconstrained-core/hooke-jeeves/java/hooke-jeeves/src/test/java/
+ * nlp-unconstrained-core/hooke-jeeves/java/src/test/java/
  * optimization/nonlinear/unconstrained/core/AppTest.java
  * ============================================================================
  * Nonlinear Optimization Algorithms Multilang. Version 0.1

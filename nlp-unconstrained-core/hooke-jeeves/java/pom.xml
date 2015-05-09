@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <!--
- * nlp-unconstrained-core/hooke-jeeves/java/hooke-jeeves/pom.xml
+ * nlp-unconstrained-core/hooke-jeeves/java/pom.xml
  * ============================================================================
  * Nonlinear Optimization Algorithms Multilang. Version 0.1
  * ============================================================================
@@ -27,7 +27,7 @@
     <packaging>jar</packaging>
     <name>hooke-jeeves</name>
     <description>The Hooke and Jeeves nonlinear unconstrained minimization algorithm (Java implementation).</description>
-    <url>https://github.com/rgolubtsov/nonlinear-optimization-algorithms-multilang/tree/master/nlp-unconstrained-core/hooke-jeeves/java/hooke-jeeves</url>
+    <url>https://github.com/rgolubtsov/nonlinear-optimization-algorithms-multilang/tree/master/nlp-unconstrained-core/hooke-jeeves/java</url>
     <inceptionYear>2015</inceptionYear>
     <dependencies>
         <dependency>

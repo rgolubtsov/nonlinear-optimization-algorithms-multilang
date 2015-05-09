@@ -1,5 +1,5 @@
 /*
- * nlp-unconstrained-core/hooke-jeeves/java/hooke-jeeves/src/main/java/
+ * nlp-unconstrained-core/hooke-jeeves/java/src/main/java/
  * optimization/nonlinear/unconstrained/core/Rosenbrock.java
  * ============================================================================
  * Nonlinear Optimization Algorithms Multilang. Version 0.1
