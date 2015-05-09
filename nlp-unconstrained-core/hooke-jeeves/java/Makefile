@@ -16,9 +16,8 @@ POM_ARTIFACT_ID = hooke-jeeves
 POM_VERSION     = 0.1
 POM_PACKAGING   = jar
 
-APP_DIR             = $(POM_ARTIFACT_ID)
 POM_XML             = pom.xml
-PATH_TO_APP_JAR     = $(APP_DIR)/target
+PATH_TO_APP_JAR     = target
 PATH_TO_APP_CLASSES = $(PATH_TO_APP_JAR)/classes
 JAVA_PACKAGE_PATH   = optimization/nonlinear/unconstrained/core
 JAR                 = $(POM_ARTIFACT_ID)-$(POM_VERSION).$(POM_PACKAGING)
@@ -37,27 +36,22 @@ ECHO         = echo
 EXIT         = exit
 EXIT_FAILURE = 1
 EXIT_SUCCESS = 0
-CD           = cd
 
 # Making the target.
 $(DEPS):
-	if [ ! -e "$(APP_DIR)/$(POM_XML)" ]; then \
+	if [ ! -e "$(POM_XML)" ]; then \
 		$(ECHO) "Error: The main build scenario ($(POM_XML)) does not exist. Exiting..."; \
 		$(EXIT) $(EXIT_FAILURE); \
 	fi
 
-	$(CD) $(APP_DIR); \
-	$(MVN) $(MVNFLAGS) $(MVN_PACKAGE); \
-	$(CD) -
+	$(MVN) $(MVNFLAGS) $(MVN_PACKAGE)
 
 .PHONY: all clean
 
 all: $(DEPS)
 
 clean:
-	$(CD) $(APP_DIR); \
-	$(MVN) $(MVN_CLEAN); \
-	$(CD) -
+	$(MVN) $(MVN_CLEAN)
 
 	$(RM) $(DEPS)
 
