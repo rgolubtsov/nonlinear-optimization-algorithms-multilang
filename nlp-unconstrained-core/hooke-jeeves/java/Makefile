@@ -24,6 +24,8 @@ JAR                 = $(POM_ARTIFACT_ID)-$(POM_VERSION).$(POM_PACKAGING)
 DEPS                = $(PATH_TO_APP_CLASSES)/$(JAVA_PACKAGE_PATH)/Rosenbrock.class \
                       $(PATH_TO_APP_CLASSES)/$(JAVA_PACKAGE_PATH)/Woods.class \
                       $(PATH_TO_APP_JAR)/$(JAR)
+BIN_DIR             = bin
+LIB_DIR             = lib
 
 # Specify flags and other vars here.
 # Apache Maven:
@@ -36,9 +38,13 @@ ECHO         = echo
 EXIT         = exit
 EXIT_FAILURE = 1
 EXIT_SUCCESS = 0
+MKDIR        = mkdir
+CP           = cp
+CPFLAGS      = -v
+RMFLAGS      = -vR
 
 # Making the target.
-$(DEPS):
+$(DEPS) $(BIN_DIR) $(LIB_DIR):
 	if [ ! -e "$(POM_XML)" ]; then \
 		$(ECHO) "Error: The main build scenario ($(POM_XML)) does not exist. Exiting..."; \
 		$(EXIT) $(EXIT_FAILURE); \
@@ -46,14 +52,32 @@ $(DEPS):
 
 	$(MVN) $(MVNFLAGS) $(MVN_PACKAGE)
 
+	if [ ! -d "$(BIN_DIR)" ]; then \
+		$(MKDIR) $(BIN_DIR); \
+		if [ ! -d "$(LIB_DIR)" ]; then \
+			$(MKDIR) $(LIB_DIR); \
+		fi; \
+		if [ ! -d "$(PATH_TO_APP_JAR)" ]; then \
+			$(ECHO) "Error: There is no such directory ($(PATH_TO_APP_JAR)) - from where the app JAR should be taken. Exiting..."; \
+			$(EXIT) $(EXIT_FAILURE); \
+		else \
+			if [ ! -e "$(PATH_TO_APP_JAR)/$(JAR)" ]; then \
+				$(ECHO) "Error: The app JAR ($(JAR)) is not found. Exiting..."; \
+				$(EXIT) $(EXIT_FAILURE); \
+			else \
+				$(CP) $(CPFLAGS) $(PATH_TO_APP_JAR)/$(JAR) $(LIB_DIR); \
+			fi \
+		fi \
+	fi
+
 .PHONY: all clean
 
-all: $(DEPS)
+all: $(DEPS) $(BIN_DIR) $(LIB_DIR)
 
 clean:
 	$(MVN) $(MVN_CLEAN)
 
-	$(RM) $(DEPS)
+	$(RM) $(RMFLAGS) $(DEPS) $(BIN_DIR) $(LIB_DIR)
 
 # =============================================================================
 # vim:set nu:et:ts=4:sw=4:

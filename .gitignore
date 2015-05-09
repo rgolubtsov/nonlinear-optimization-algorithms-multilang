@@ -34,6 +34,7 @@
 hooke
 hooke-woods
 target/
+lib/
 
 # Debug files
 *.dSYM/
