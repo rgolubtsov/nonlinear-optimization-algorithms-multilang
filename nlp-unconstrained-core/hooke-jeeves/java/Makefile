@@ -26,6 +26,8 @@ DEPS                = $(PATH_TO_APP_CLASSES)/$(JAVA_PACKAGE_PATH)/Rosenbrock.cla
                       $(PATH_TO_APP_JAR)/$(JAR)
 BIN_DIR             = bin
 LIB_DIR             = lib
+SRC_DIR             = src
+TMP_DIR             = tmp
 
 # Specify flags and other vars here.
 # Apache Maven:
@@ -65,6 +67,7 @@ $(DEPS) $(BIN_DIR) $(LIB_DIR):
 				$(ECHO) "Error: The app JAR ($(JAR)) is not found. Exiting..."; \
 				$(EXIT) $(EXIT_FAILURE); \
 			else \
+				$(CP) $(CPFLAGS) $(SRC_DIR)/$(TMP_DIR)/* $(BIN_DIR); \
 				$(CP) $(CPFLAGS) $(PATH_TO_APP_JAR)/$(JAR) $(LIB_DIR); \
 			fi \
 		fi \
