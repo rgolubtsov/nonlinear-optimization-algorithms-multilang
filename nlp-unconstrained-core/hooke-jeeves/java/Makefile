@@ -24,6 +24,9 @@ JAR                 = $(POM_ARTIFACT_ID)-$(POM_VERSION).$(POM_PACKAGING)
 DEPS                = $(PATH_TO_APP_CLASSES)/$(JAVA_PACKAGE_PATH)/Rosenbrock.class \
                       $(PATH_TO_APP_CLASSES)/$(JAVA_PACKAGE_PATH)/Woods.class \
                       $(PATH_TO_APP_JAR)/$(JAR)
+SCRIPT1             = hooke
+SCRIPT2S            = -woods
+SCRIPT2             = $(SCRIPT1)$(SCRIPT2S)
 BIN_DIR             = bin
 LIB_DIR             = lib
 
@@ -33,6 +36,11 @@ MVN         = mvn
 MVN_PACKAGE = package
 MVN_CLEAN   = clean
 MVNFLAGS    = --strict-checksums
+
+# Java:
+JAVA       = java
+JAVAFLAGS1 = -jar
+JAVAFLAGS2 = -cp
 
 ECHO         = echo
 ECHOFLAGS    = -e
@@ -52,11 +60,10 @@ RMFLAGS      = -vR
 
 # Startup scripts for Rosenbrock and Woods test problems like here documents.
 # Rosenbrock:
-HOOKE = hooke
-define HOOKE_SCRIPT
+define SCRIPT1_FULL
 #!/usr/bin/env sh\n\
 # =============================================================================\n\
-# nlp-unconstrained-core/hooke-jeeves/java/bin/hooke\n\
+# nlp-unconstrained-core/$(POM_ARTIFACT_ID)/$(JAVA)/$(BIN_DIR)/$(SCRIPT1)\n\
 # =============================================================================\n\
 # Nonlinear Optimization Algorithms Multilang. Version 0.1\n\
 # =============================================================================\n\
@@ -71,10 +78,10 @@ define HOOKE_SCRIPT
 declare -r EXIT_FAILURE=1 # Failing exit status.\n\
 declare -r EXIT_SUCCESS=0 # Successful exit status.\n\
 \n\
-declare -r JAVA=java\n\
-declare -r JAVAFLAGS=-jar\n\
-declare -r LIB_DIR=lib\n\
-declare -r JAR=hooke-jeeves-0.1.jar\n\
+declare -r JAVA=$(JAVA)\n\
+declare -r JAVAFLAGS=$(JAVAFLAGS1)\n\
+declare -r LIB_DIR=$(LIB_DIR)\n\
+declare -r JAR=$(JAR)\n\
 \n\
 $$'{JAVA}' $$'{JAVAFLAGS}' $$'{LIB_DIR}'/$$'{JAR}'\n\
 \n\
@@ -90,11 +97,10 @@ exit $$'{EXIT_SUCCESS}'\n\
 endef
 
 # Woods:
-HOOKE_WOODS = hooke-woods
-define HOOKE_WOODS_SCRIPT
+define SCRIPT2_FULL
 #!/usr/bin/env sh\n\
 # =============================================================================\n\
-# nlp-unconstrained-core/hooke-jeeves/java/bin/hooke-woods\n\
+# nlp-unconstrained-core/$(POM_ARTIFACT_ID)/$(JAVA)/$(BIN_DIR)/$(SCRIPT2)\n\
 # =============================================================================\n\
 # Nonlinear Optimization Algorithms Multilang. Version 0.1\n\
 # =============================================================================\n\
@@ -109,10 +115,10 @@ define HOOKE_WOODS_SCRIPT
 declare -r EXIT_FAILURE=1 # Failing exit status.\n\
 declare -r EXIT_SUCCESS=0 # Successful exit status.\n\
 \n\
-declare -r JAVA=java\n\
-declare -r JAVAFLAGS=-cp\n\
-declare -r LIB_DIR=lib\n\
-declare -r JAR=hooke-jeeves-0.1.jar\n\
+declare -r JAVA=$(JAVA)\n\
+declare -r JAVAFLAGS=$(JAVAFLAGS2)\n\
+declare -r LIB_DIR=$(LIB_DIR)\n\
+declare -r JAR=$(JAR)\n\
 declare -r WOODS_CLASS=optimization.nonlinear.unconstrained.core.Woods\n\
 \n\
 $$'{JAVA}' $$'{JAVAFLAGS}' $$'{LIB_DIR}'/$$'{JAR}' $$'{WOODS_CLASS}'\n\
@@ -150,8 +156,8 @@ $(DEPS) $(BIN_DIR) $(LIB_DIR):
 				$(ECHO) "Error: The app JAR ($(JAR)) is not found. Exiting..."; \
 				$(EXIT) $(EXIT_FAILURE); \
 			else \
-				$(ECHO) $(ECHOFLAGS) "$(HOOKE_SCRIPT)" > $(BIN_DIR)/$(HOOKE); \
-				$(ECHO) $(ECHOFLAGS) "$(HOOKE_WOODS_SCRIPT)" > $(BIN_DIR)/$(HOOKE_WOODS); \
+				$(ECHO) $(ECHOFLAGS) "$(SCRIPT1_FULL)" > $(BIN_DIR)/$(SCRIPT1); \
+				$(ECHO) $(ECHOFLAGS) "$(SCRIPT2_FULL)" > $(BIN_DIR)/$(SCRIPT2); \
 				$(SED) $(SEDFLAGS) $(SEDREGEX) $(BIN_DIR)/*; \
 				$(CHMOD) $(CHMODFLAGS) $(CHMODMODE) $(BIN_DIR)/*; \
 				$(CP) $(CPFLAGS) $(PATH_TO_APP_JAR)/$(JAR) $(LIB_DIR); \
