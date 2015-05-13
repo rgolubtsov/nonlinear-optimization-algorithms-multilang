@@ -9,7 +9,7 @@
 #
 # This is the Hooke and Jeeves nonlinear unconstrained minimization algorithm.
 # =============================================================================
-# Copyright (C) 2015 Radislav (Radic) Golubtsov
+# Written by Radislav (Radic) Golubtsov <https://github.com/rgolubtsov>
 
 # Vars from pom.xml (artifactId, version, etc.)
 POM_ARTIFACT_ID = hooke-jeeves
@@ -73,7 +73,7 @@ define SCRIPT1_FULL
 #\n\
 # This is the Hooke and Jeeves nonlinear unconstrained minimization algorithm.\n\
 # =============================================================================\n\
-# Copyright (C) 2015 Radislav (Radic) Golubtsov\n\
+# Written by Radislav (Radic) Golubtsov <https://github.com/rgolubtsov>\n\
 \n\
 declare -r EXIT_FAILURE=1 # Failing exit status.\n\
 declare -r EXIT_SUCCESS=0 # Successful exit status.\n\
@@ -110,7 +110,7 @@ define SCRIPT2_FULL
 #\n\
 # This is the Hooke and Jeeves nonlinear unconstrained minimization algorithm.\n\
 # =============================================================================\n\
-# Copyright (C) 2015 Radislav (Radic) Golubtsov\n\
+# Written by Radislav (Radic) Golubtsov <https://github.com/rgolubtsov>\n\
 \n\
 declare -r EXIT_FAILURE=1 # Failing exit status.\n\
 declare -r EXIT_SUCCESS=0 # Successful exit status.\n\

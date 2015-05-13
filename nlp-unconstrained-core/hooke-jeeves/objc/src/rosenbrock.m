@@ -9,7 +9,7 @@
  *
  * This is the Hooke and Jeeves nonlinear unconstrained minimization algorithm.
  * ============================================================================
- * Copyright (C) 2015 Radislav (Radic) Golubtsov
+ * Written by Radislav (Radic) Golubtsov <https://github.com/rgolubtsov>
  */
 
 #import "rosenbrock.h"
