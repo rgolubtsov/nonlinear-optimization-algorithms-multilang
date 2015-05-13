@@ -67,13 +67,6 @@ define SCRIPT1_FULL
 # =============================================================================\n\
 # Nonlinear Optimization Algorithms Multilang. Version 0.1\n\
 # =============================================================================\n\
-# Nonlinear programming algorithms as the (un-)constrained minimization\n\
-# problems with the focus on their numerical expression using various\n\
-# programming languages.\n\
-#\n\
-# This is the Hooke and Jeeves nonlinear unconstrained minimization algorithm.\n\
-# =============================================================================\n\
-# Written by Radislav (Radic) Golubtsov <https://github.com/rgolubtsov>\n\
 \n\
 declare -r EXIT_FAILURE=1 # Failing exit status.\n\
 declare -r EXIT_SUCCESS=0 # Successful exit status.\n\
@@ -104,13 +97,6 @@ define SCRIPT2_FULL
 # =============================================================================\n\
 # Nonlinear Optimization Algorithms Multilang. Version 0.1\n\
 # =============================================================================\n\
-# Nonlinear programming algorithms as the (un-)constrained minimization\n\
-# problems with the focus on their numerical expression using various\n\
-# programming languages.\n\
-#\n\
-# This is the Hooke and Jeeves nonlinear unconstrained minimization algorithm.\n\
-# =============================================================================\n\
-# Written by Radislav (Radic) Golubtsov <https://github.com/rgolubtsov>\n\
 \n\
 declare -r EXIT_FAILURE=1 # Failing exit status.\n\
 declare -r EXIT_SUCCESS=0 # Successful exit status.\n\
