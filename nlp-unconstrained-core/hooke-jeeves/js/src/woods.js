@@ -27,79 +27,130 @@ var NLPUCCoreHooke = NLPUCCoreHooke || {};
  * <br />The objective function in this case
  * is so called "Woods" function.
  *
- * @class       Woods
- * @memberof    NLPUCCoreHooke
- * @author      Radislav (Radic) Golubtsov
- * @version     0.1
- * @see         {@link https://github.com/rgolubtsov/nonlinear-optimization-algorithms-multilang/blob/master/nlp-unconstrained-core/hooke-jeeves/js/src/rosenbrock.js|NLPUCCoreHooke.Rosenbrock}
- * @since       0.1
+ * @class    Woods
+ * @memberof NLPUCCoreHooke
+ * @author   Radislav (Radic) Golubtsov
+ * @version  0.1
+ * @see      {@link https://github.com/rgolubtsov/nonlinear-optimization-algorithms-multilang/blob/master/nlp-unconstrained-core/hooke-jeeves/js/src/rosenbrock.js|NLPUCCoreHooke.Rosenbrock}
+ * @since    0.1
  */
 var Woods = function() {
 
 // === Private properties =====================================================
 
-    /** Number of function evaluations. */
+    /**
+     * The number of function evaluations.
+     * @member  {Number} funEvals
+     * @default
+     */
     var funEvals = 0;
 
-    /** Constant: maximum number of variables. */
+    /**
+     * The maximum number of variables.
+     * @constant {Number} VARS
+     */
     var VARS = 250;
 
     /**
-     * Constant: stepsize geometric.
-     *
-     * The Hooke & Jeeves algorithm works reasonably well on Rosenbrock's
+     * The stepsize geometric.
+     * <br />
+     * <br />The Hooke & Jeeves algorithm works reasonably well on Rosenbrock's
      * function, but can fare worse on some standard test functions,
      * depending on rho. Here is an example that works well when rho = 0.5,
      * but fares poorly with rho = 0.6, and better again with rho = 0.8.
+     * @constant {Number} RHO_WOODS
      */
     var RHO_WOODS = 0.6;
 
-    /** Constant: ending value of stepsize. */
+    /**
+     * The ending value of stepsize.
+     * @constant {Number} EPSMIN
+     */
     var EPSMIN = 1E-6;
 
-    /** Constant: maximum number of iterations. */
+    /**
+     * The maximum number of iterations.
+     * @constant {Number} IMAX
+     */
     var IMAX = 5000;
 
-    /** Helper constant. */
+    /**
+     * Helper constant.
+     * @constant {Number} INDEX_ZERO
+     */
     var INDEX_ZERO = 0;
 
-    /** Helper constant. */
+    /**
+     * Helper constant.
+     * @constant {Number} INDEX_ONE
+     */
     var INDEX_ONE = 1;
 
-    /** Helper constant. */
+    /**
+     * Helper constant.
+     * @constant {Number} INDEX_TWO
+     */
     var INDEX_TWO = 2;
 
-    /** Helper constant. */
+    /**
+     * Helper constant.
+     * @constant {Number} INDEX_THREE
+     */
     var INDEX_THREE = 3;
 
-    /** Helper constant. */
+    /**
+     * Helper constant.
+     * @constant {Number} ONE_HUNDRED
+     */
     var ONE_HUNDRED = 100;
 
-    /** Helper constant. */
+    /**
+     * Helper constant.
+     * @constant {Number} NINETY
+     */
     var NINETY = 90;
 
-    /** Helper constant. */
+    /**
+     * Helper constant.
+     * @constant {Number} TEN
+     */
     var TEN = 10;
 
-    /** Helper constant. */
+    /**
+     * Helper constant.
+     * @constant {Number} TEN_POINT
+     */
     var TEN_POINT = 10.;
 
-    /** Helper constant. */
+    /**
+     * Helper constant.
+     * @constant {Number} ZERO_POINT_FIVE
+     */
     var ZERO_POINT_FIVE = 0.5;
 
-    /** Helper constant. */
+    /**
+     * Helper constant.
+     * @constant {Number} FOUR
+     */
     var FOUR = 4;
 
-    /** Helper constant. */
+    /**
+     * Helper constant.
+     * @constant {Number} MINUS_THREE
+     */
     var MINUS_THREE = -3;
 
-    /** Helper constant. */
+    /**
+     * Helper constant.
+     * @constant {Number} MINUS_ONE
+     */
     var MINUS_ONE = -1;
 
 // === Private methods ========================================================
 
     /**
      * Woods -- a la More, Garbow & Hillstrom (TOMS algorithm 566).
+     * @function f
      *
      * @param {Number[]} x - The vector of variables.
      * @param {Number}   n - The number of variables.
@@ -134,6 +185,7 @@ var Woods = function() {
 
     /**
      * Given a point, look for a better one nearby, one coord at a time.
+     * @function bestNearby
      *
      * @param {Number[]} delta    - The delta coordinates.
      * @param {Number[]} point    - The point coordinates.
@@ -185,6 +237,7 @@ var Woods = function() {
 
     /**
      * The hooke subroutine itself.
+     * @function hooke
      *
      * @param {Number}   nVars   - The number of variables.
      * @param {Number[]} startPt - The starting point coordinates.
@@ -321,6 +374,8 @@ var Woods = function() {
 
     /**
      * Main program function.
+     * @function main
+     * @public
      *
      * @param {String[]} args - The array of command-line arguments.
      */
