@@ -12,21 +12,32 @@
  * Written by Radislav (Radic) Golubtsov <https://github.com/rgolubtsov>
  */
 
-/** Default namespace. */
+/**
+ * The <code>NLPUCCoreHooke</code> namespace is used as a "container"
+ * for the <code>Woods</code> class.
+ *
+ * @namespace NLPUCCoreHooke
+ */
 var NLPUCCoreHooke = NLPUCCoreHooke || {};
 
 /**
- * The Woods class is responsible for solving a nonlinear optimization
- * problem using the algorithm of Hooke and Jeeves.
+ * The <code>Woods</code> class is responsible for solving a nonlinear
+ * optimization problem using the algorithm of Hooke and Jeeves.
+ * <br />
+ * <br />The objective function in this case
+ * is so called "Woods" function.
  *
- * The objective function in this case is so called "Woods" function.
- *
- * @constructor
- * @author  Radislav (Radic) Golubtsov
- * @version 0.1
- * @see     NLPUCCoreHooke.Rosenbrock
+ * @class       Woods
+ * @memberof    NLPUCCoreHooke
+ * @author      Radislav (Radic) Golubtsov
+ * @version     0.1
+ * @see         {@link https://github.com/rgolubtsov/nonlinear-optimization-algorithms-multilang/blob/master/nlp-unconstrained-core/hooke-jeeves/js/src/rosenbrock.js|NLPUCCoreHooke.Rosenbrock}
+ * @since       0.1
  */
 var Woods = function() {
+
+// === Private properties =====================================================
+
     /** Number of function evaluations. */
     var funEvals = 0;
 
@@ -85,13 +96,15 @@ var Woods = function() {
     /** Helper constant. */
     var MINUS_ONE = -1;
 
+// === Private methods ========================================================
+
     /**
      * Woods -- a la More, Garbow & Hillstrom (TOMS algorithm 566).
      *
-     * @param x The vector of variables.
-     * @param n The number of variables.
+     * @param {Number[]} x - The vector of variables.
+     * @param {Number}   n - The number of variables.
      *
-     * @return The objective function value.
+     * @returns {Number} The objective function value.
      */
     var f = function(x, n) {
         var s1;
@@ -122,12 +135,12 @@ var Woods = function() {
     /**
      * Given a point, look for a better one nearby, one coord at a time.
      *
-     * @param delta    The delta coordinates.
-     * @param point    The point coordinates.
-     * @param prevBest The previous best value.
-     * @param nVars    The number of variables.
+     * @param {Number[]} delta    - The delta coordinates.
+     * @param {Number[]} point    - The point coordinates.
+     * @param {Number}   prevBest - The previous best value.
+     * @param {Number}   nVars    - The number of variables.
      *
-     * @return The best nearby value.
+     * @returns {Number} The best nearby value.
      */
     var bestNearby = function(delta, point, prevBest, nVars) {
         var minF;
@@ -173,14 +186,14 @@ var Woods = function() {
     /**
      * The hooke subroutine itself.
      *
-     * @param nVars   The number of variables.
-     * @param startPt The starting point coordinates.
-     * @param endPt   The ending point coordinates.
-     * @param rho     The rho value.
-     * @param epsilon The epsilon value.
-     * @param iterMax The maximum number of iterations.
+     * @param {Number}   nVars   - The number of variables.
+     * @param {Number[]} startPt - The starting point coordinates.
+     * @param {Number[]} endPt   - The ending point coordinates.
+     * @param {Number}   rho     - The rho value.
+     * @param {Number}   epsilon - The epsilon value.
+     * @param {Number}   iterMax - The maximum number of iterations.
      *
-     * @return The number of iterations actually spent.
+     * @returns {Number} The number of iterations actually spent.
      */
     var hooke = function(nVars, startPt, endPt, rho, epsilon, iterMax) {
         var i;
@@ -304,10 +317,12 @@ var Woods = function() {
         return iters;
     };
 
+// === Public methods =========================================================
+
     /**
      * Main program function.
      *
-     * @param args The array of command-line arguments.
+     * @param {String[]} args - The array of command-line arguments.
      */
     this.main = function(args) {
         var nVars;
