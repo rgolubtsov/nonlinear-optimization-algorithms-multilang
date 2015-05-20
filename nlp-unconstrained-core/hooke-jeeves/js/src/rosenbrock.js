@@ -27,57 +27,95 @@ var NLPUCCoreHooke = NLPUCCoreHooke || {};
  * <br />The objective function in this case
  * is the Rosenbrock's parabolic valley function.
  *
- * @class       Rosenbrock
- * @memberof    NLPUCCoreHooke
- * @author      Radislav (Radic) Golubtsov
- * @version     0.1
- * @see         {@link https://github.com/rgolubtsov/nonlinear-optimization-algorithms-multilang/blob/master/nlp-unconstrained-core/hooke-jeeves/js/src/woods.js|NLPUCCoreHooke.Woods}
- * @since       0.1
+ * @class    Rosenbrock
+ * @memberof NLPUCCoreHooke
+ * @author   Radislav (Radic) Golubtsov
+ * @version  0.1
+ * @see      {@link https://github.com/rgolubtsov/nonlinear-optimization-algorithms-multilang/blob/master/nlp-unconstrained-core/hooke-jeeves/js/src/woods.js|NLPUCCoreHooke.Woods}
+ * @since    0.1
  */
 var Rosenbrock = function() {
 
 // === Private properties =====================================================
 
-    /** Number of function evaluations. */
+    /**
+     * The number of function evaluations.
+     * @member  {Number} funEvals
+     * @default
+     */
     var funEvals = 0;
 
-    /** Constant: maximum number of variables. */
+    /**
+     * The maximum number of variables.
+     * @constant {Number} VARS
+     */
     var VARS = 250;
 
-    /** Constant: stepsize geometric. */
+    /**
+     * The stepsize geometric.
+     * @constant {Number} RHO_BEGIN
+     */
     var RHO_BEGIN = 0.5;
 
-    /** Constant: ending value of stepsize. */
+    /**
+     * The ending value of stepsize.
+     * @constant {Number} EPSMIN
+     */
     var EPSMIN = 1E-6;
 
-    /** Constant: maximum number of iterations. */
+    /**
+     * The maximum number of iterations.
+     * @constant {Number} IMAX
+     */
     var IMAX = 5000;
 
-    /** Helper constant. */
+    /**
+     * Helper constant.
+     * @constant {Number} INDEX_ZERO
+     */
     var INDEX_ZERO = 0;
 
-    /** Helper constant. */
+    /**
+     * Helper constant.
+     * @constant {Number} INDEX_ONE
+     */
     var INDEX_ONE = 1;
 
-    /** Helper constant. */
+    /**
+     * Helper constant.
+     * @constant {Number} ONE_HUNDRED_POINT_ZERO
+     */
     var ONE_HUNDRED_POINT_ZERO = 100.0;
 
-    /** Helper constant. */
+    /**
+     * Helper constant.
+     * @constant {Number} ONE_POINT_ZERO
+     */
     var ONE_POINT_ZERO = 1.0;
 
-    /** Helper constant. */
+    /**
+     * Helper constant.
+     * @constant {Number} ZERO_POINT_FIVE
+     */
     var ZERO_POINT_FIVE = 0.5;
 
-    /** Helper constant. */
+    /**
+     * Helper constant.
+     * @constant {Number} TWO
+     */
     var TWO = 2;
 
-    /** Helper constant. */
+    /**
+     * Helper constant.
+     * @constant {Number} MINUS_ONE_POINT_TWO
+     */
     var MINUS_ONE_POINT_TWO = -1.2;
 
 // === Private methods ========================================================
 
     /**
      * Rosenbrock's classic parabolic valley ("banana") function.
+     * @function f
      *
      * @param {Number[]} x - The vector of variables.
      * @param {Number}   n - The number of variables.
@@ -101,6 +139,7 @@ var Rosenbrock = function() {
 
     /**
      * Given a point, look for a better one nearby, one coord at a time.
+     * @function bestNearby
      *
      * @param {Number[]} delta    - The delta coordinates.
      * @param {Number[]} point    - The point coordinates.
@@ -152,6 +191,7 @@ var Rosenbrock = function() {
 
     /**
      * The hooke subroutine itself.
+     * @function hooke
      *
      * @param {Number}   nVars   - The number of variables.
      * @param {Number[]} startPt - The starting point coordinates.
@@ -288,6 +328,8 @@ var Rosenbrock = function() {
 
     /**
      * Main program function.
+     * @function main
+     * @public
      *
      * @param {String[]} args - The array of command-line arguments.
      */
