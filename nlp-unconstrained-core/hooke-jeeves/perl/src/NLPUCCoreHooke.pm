@@ -39,6 +39,9 @@ use v5.10;
 use NLPUCCoreHooke::Rosenbrock;
 use NLPUCCoreHooke::Woods;
 
+## The app version number.
+our $VERSION = "0.1";
+
 =head1 ATTRIBUTES
 
 =head2 FUN_EVALS
