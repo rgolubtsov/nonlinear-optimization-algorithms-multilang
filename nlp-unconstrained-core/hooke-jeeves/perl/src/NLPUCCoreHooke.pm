@@ -13,7 +13,8 @@
 
 =head1 NAME
 
-NLPUCCoreHooke.
+NLPUCCoreHooke - The Hooke-Jeeves nonlinear minimization algorithm -
+main application class
 
 =head1 VERSION
 
@@ -21,7 +22,11 @@ Version 0.1
 
 =head1 DESCRIPTION
 
-NLPUCCoreHooke.
+The C<NLPUCCoreHooke> class contains methods to start up computations
+for solving a nonlinear optimization problem using the algorithm
+of Hooke and Jeeves with respect to two test problems:
+Rosenbrock (see L<NLPUCCoreHooke::Rosenbrock>)
+and Woods (see L<NLPUCCoreHooke::Woods>).
 
 =cut
 
@@ -92,13 +97,15 @@ sub run_woods {
 
 =head1 AUTHOR
 
-Radislav (Radic) Golubtsov, L<https://github.com/rgolubtsov|https://github.com/rgolubtsov>
+Radislav (Radic) Golubtsov,
+L<https://github.com/rgolubtsov|https://github.com/rgolubtsov>
 
 =head1 COPYRIGHT AND LICENSE
 
 There is no copyright - this code is in the public domain.
 
-See the LICENSE or UNLICENSE files for more details in the root directory of the project.
+See the LICENSE or UNLICENSE files for more details in the root directory
+of the project.
 
 =cut
 

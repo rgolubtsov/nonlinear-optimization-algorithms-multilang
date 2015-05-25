@@ -13,13 +13,16 @@
 
 =head1 NAME
 
-NLPUCCoreHooke::Rosenbrock - The Rosenbrock class is responsible for solving a nonlinear optimization problem using the algorithm of Hooke and Jeeves (Rosenbrock test problem).
+NLPUCCoreHooke::Rosenbrock - The Hooke-Jeeves nonlinear minimization algorithm
+in application to the Rosenbrock test problem
 
 =head1 DESCRIPTION
 
-The Hooke-Jeeves nonlinear minimization algorithm in application to the Rosenbrock test problem.
+The C<Rosenbrock> class is responsible for solving a nonlinear optimization
+problem using the algorithm of Hooke and Jeeves (Rosenbrock test problem).
 
-The objective function in this case is the Rosenbrock's parabolic valley function.
+The objective function in this case is the Rosenbrock's parabolic valley
+function.
 
 =cut
 

@@ -13,13 +13,15 @@
 
 =head1 NAME
 
-NLPUCCoreHooke::Woods - The Woods class is responsible for solving a nonlinear optimization problem using the algorithm of Hooke and Jeeves (Woods test problem).
+NLPUCCoreHooke::Woods - The Hooke-Jeeves nonlinear minimization algorithm
+in application to the Woods test problem
 
 =head1 DESCRIPTION
 
-The Hooke-Jeeves nonlinear minimization algorithm in application to the Woods test problem.
+The C<Woods> class is responsible for solving a nonlinear optimization problem
+using the algorithm of Hooke and Jeeves (Woods test problem).
 
-The objective function in this case is so called "Woods" function.
+The objective function in this case is so called I<Woods> function.
 
 =cut
 
