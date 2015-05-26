@@ -9,7 +9,6 @@
 #
 # This is the Hooke and Jeeves nonlinear unconstrained minimization algorithm.
 # =============================================================================
-# Written by Radislav (Radic) Golubtsov <https://github.com/rgolubtsov>
 
 # Vars from pom.xml (artifactId, version, etc.)
 POM_ARTIFACT_ID = hooke-jeeves
