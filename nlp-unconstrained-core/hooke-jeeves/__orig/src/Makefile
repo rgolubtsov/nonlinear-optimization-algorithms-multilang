@@ -22,7 +22,7 @@ OBJ_DIR = ../obj
 # Note: To use the default system C compiler (likely gcc, the GNU C Compiler)
 #       instead of tcc, simply comment out next line, just like this:
 #       "#CC = tcc" - and it will be used automatically.
-CC     = tcc
+#CC     = tcc
 CFLAGS = -Wall
 LDLIBS = -lm
 
