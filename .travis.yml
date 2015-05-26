@@ -1,0 +1,39 @@
+# =============================================================================
+# .travis.yml
+# =============================================================================
+# Nonlinear Optimization Algorithms Multilang. Version 0.1
+# =============================================================================
+# Nonlinear programming algorithms as the (un-)constrained minimization
+# problems with the focus on their numerical expression using various
+# programming languages.
+#
+# This is the configuration of the project characteristics
+# used by the Travis CI (continuous integration) service
+# to rebuild the project on every push and pull request.
+# =============================================================================
+
+%YAML 1.2
+---
+
+language:
+    - c
+
+compiler:
+    - gcc
+    - clang
+
+script:
+    ## Building all the modules under unconstrained-core.
+    - cd nlp-unconstrained-core
+
+    ## Building all the modules for hooke-jeeves.
+    - cd hooke-jeeves
+
+    ## Building the original Hooke and Jeeves alg as the K&R C impl.
+    - cd __orig && make all
+
+...
+
+# =============================================================================
+# vim:set nu:et:ts=4:sw=4:
+# =============================================================================
