@@ -12,7 +12,7 @@
 # to rebuild the project on every push and pull request.
 # =============================================================================
 
-%YAML 1.2
+%YAML 1.1
 ---
 
 language:
