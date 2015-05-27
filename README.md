@@ -4,4 +4,6 @@ Note: The Travis CI build status badge above is applicable to the following pack
 * The (original) Hooke and Jeeves :small_blue_diamond: K&R C implementation
 * The Hooke and Jeeves :small_blue_diamond: ANSI C (C89/90/95) implementation
 
+---
+
 This project is aimed at implementing nonlinear programming algorithms as the (un-)constrained minimization problems with the focus on their numerical expression using various programming languages.
