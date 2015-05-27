@@ -23,14 +23,39 @@ compiler:
     - clang
 
 script:
-    ## Building all the modules under unconstrained-core.
-    - cd nlp-unconstrained-core
+    ## TODO: Building all the packages under unconstrained-core.
+    - cd nlp-unconstrained-core && ls -al
 
-    ## Building all the modules for hooke-jeeves.
-    - cd hooke-jeeves
+    ## TODO: Building all the packages for hooke-jeeves.
+    - cd hooke-jeeves && ls -al
 
     ## Building the original Hooke and Jeeves alg as the K&R C impl.
-    - cd __orig && make all
+    - cd __orig && ls -al
+                && make clean
+                && make clean
+                && ls -al
+                && make all
+                && make all
+                && ls -al
+                && ls -al bin obj src
+                && ls -al
+
+    ## Returning to the previous working dir.
+    - cd - && ls -al
+
+    ## Building the Hooke and Jeeves alg as the ANSI C (C89/90/95) impl.
+    - cd c && ls -al
+           && make clean
+           && make clean
+           && ls -al
+           && make all
+           && make all
+           && ls -al
+           && ls -al bin obj src
+           && ls -al
+
+    ## Returning to the previous working dir.
+    - cd - && ls -al
 
 ...
 
