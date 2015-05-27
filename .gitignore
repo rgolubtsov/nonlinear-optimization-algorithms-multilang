@@ -1,30 +1,43 @@
-# Object files
+# =============================================================================
+# .gitignore
+# =============================================================================
+# Nonlinear Optimization Algorithms Multilang. Version 0.1
+# =============================================================================
+# Nonlinear programming algorithms as the (un-)constrained minimization
+# problems with the focus on their numerical expression using various
+# programming languages.
+#
+# This is the configuration of the project Git ignorables,
+# i.e. objects that should not be put into the repository.
+# =============================================================================
+
+# === Object files ============================================================
 *.o
 *.ko
 *.obj
 *.elf
 
-# Intermediates
+# === Intermediates ===========================================================
 *.d
 *.mod
 
-# Precompiled Headers
+# === Precompiled headers =====================================================
 *.gch
 *.pch
 
-# Libraries
+# === Libraries ===============================================================
 *.lib
 *.a
 *.la
 *.lo
 
-# Shared objects (inc. Windows DLLs)
+# === Shared objects (inc. Windows DLLs) ======================================
 *.dll
 *.so
 *.so.*
 *.dylib
 
-# Executables
+# === Executables =============================================================
 *.exe
 *.out
 *.app
@@ -36,5 +49,9 @@ hooke-woods
 target/
 lib/
 
-# Debug files
+# === Debug files =============================================================
 *.dSYM/
+
+# =============================================================================
+# vim:set nu:et:ts=4:sw=4:
+# =============================================================================
