@@ -43,17 +43,17 @@ our $VERSION = "0.1";
 
 =head1 ATTRIBUTES
 
-=head2 FUN_EVALS
+=head2 FUNEVALS
 
 Global var. The number of function evaluations.
 
 =cut
 
-our $FUN_EVALS = 0;
+our $FUNEVALS = 0;
 
 =head1 METHODS
 
-=head2 run_rosenbrock
+=head2 rosenbrock
 
 Solve the Rosenbrock test problem.
 
@@ -61,20 +61,20 @@ Solve the Rosenbrock test problem.
 
 =cut
 
-sub run_rosenbrock {
+sub rosenbrock {
     my $self = shift();
     my ($args) = @_;
 
     # Instantiating the Rosenbrock class.
-    my $rosenbrock = NLPUCCoreHooke::Rosenbrock->new();
+    my $r = NLPUCCoreHooke::Rosenbrock->new();
 
     # Firing up computations.
-    $rosenbrock->main($args);
+    $r->main($args);
 
     return 1;
 }
 
-=head2 run_woods
+=head2 woods
 
 Solve the Woods test problem.
 
@@ -82,15 +82,15 @@ Solve the Woods test problem.
 
 =cut
 
-sub run_woods {
+sub woods {
     my $self = shift();
     my ($args) = @_;
 
     # Instantiating the Woods class.
-    my $woods = NLPUCCoreHooke::Woods->new();
+    my $w = NLPUCCoreHooke::Woods->new();
 
     # Firing up computations.
-    $woods->main($args);
+    $w->main($args);
 
     return 1;
 }
