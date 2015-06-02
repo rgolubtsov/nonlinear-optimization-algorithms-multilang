@@ -101,7 +101,7 @@ sub f {
     my $t4;
     my $t5;
 
-    $NLPUCCoreHooke::FUN_EVALS++;
+    $NLPUCCoreHooke::FUNEVALS++;
 
     $s1 = $x->[INDEX_ONE] - $x->[INDEX_ZERO] * $x->[INDEX_ZERO];
     $s2 = 1 - $x->[INDEX_ZERO];
@@ -129,37 +129,35 @@ sub main {
     my $self = shift();
     my ($args) = @_;
 
-    my $n_vars;
-    my $iter_max;
+    my $nvars;
+    my $itermax;
     my $jj;
     my $i;
 
-    my @start_pt = (0)x(VARS);
+    my @startpt = (0)x(VARS);
     my $rho;
     my $epsilon;
-    my @end_pt   = (0)x(VARS);
+    my @endpt   = (0)x(VARS);
 
     # Starting guess test problem "Woods".
-    $n_vars                = FOUR;
-    $start_pt[INDEX_ZERO]  = MINUS_THREE;
-    $start_pt[INDEX_ONE]   = MINUS_ONE;
-    $start_pt[INDEX_TWO]   = MINUS_THREE;
-    $start_pt[INDEX_THREE] = MINUS_ONE;
-    $iter_max              = IMAX;
-    $rho                   = RHO_WOODS;
-    $epsilon               = EPSMIN;
+    $nvars                = FOUR;
+    $startpt[INDEX_ZERO]  = MINUS_THREE;
+    $startpt[INDEX_ONE]   = MINUS_ONE;
+    $startpt[INDEX_TWO]   = MINUS_THREE;
+    $startpt[INDEX_THREE] = MINUS_ONE;
+    $itermax              = IMAX;
+    $rho                  = RHO_WOODS;
+    $epsilon              = EPSMIN;
 
     # Instantiating the Hooke class.
-    my $hk = NLPUCCoreHooke::Hooke->new();
+    my $h = NLPUCCoreHooke::Hooke->new();
 
-    $jj = $hk->hooke(
-        $n_vars, \@start_pt, \@end_pt, $rho, $epsilon, $iter_max, \&f
-    );
+    $jj = $h->hooke($nvars, \@startpt, \@endpt, $rho, $epsilon, $itermax, \&f);
 
     print("\n\n\nHOOKE USED $jj ITERATIONS, AND RETURNED\n");
 
-    for ($i = 0; $i < $n_vars; $i++) {
-        printf("x[%3d] = %15.7le \n", $i, $end_pt[$i]);
+    for ($i = 0; $i < $nvars; $i++) {
+        printf("x[%3d] = %15.7le \n", $i, $endpt[$i]);
     }
 
     print("True answer: f(1, 1, 1, 1) = 0.\n");

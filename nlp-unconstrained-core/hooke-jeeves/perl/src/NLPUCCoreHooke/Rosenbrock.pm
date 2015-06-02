@@ -77,7 +77,7 @@ sub f {
     my $b;
     my $c;
 
-    $NLPUCCoreHooke::FUN_EVALS++;
+    $NLPUCCoreHooke::FUNEVALS++;
 
     $a = $x->[INDEX_ZERO];
     $b = $x->[INDEX_ONE];
@@ -99,35 +99,33 @@ sub main {
     my $self = shift();
     my ($args) = @_;
 
-    my $n_vars;
-    my $iter_max;
+    my $nvars;
+    my $itermax;
     my $jj;
     my $i;
 
-    my @start_pt = (0)x(VARS);
+    my @startpt = (0)x(VARS);
     my $rho;
     my $epsilon;
-    my @end_pt   = (0)x(VARS);
+    my @endpt   = (0)x(VARS);
 
     # Starting guess for Rosenbrock's test function.
-    $n_vars               = TWO;
-    $start_pt[INDEX_ZERO] = MINUS_ONE_POINT_TWO;
-    $start_pt[INDEX_ONE]  = ONE_POINT_ZERO;
-    $iter_max             = IMAX;
-    $rho                  = RHO_BEGIN;
-    $epsilon              = EPSMIN;
+    $nvars               = TWO;
+    $startpt[INDEX_ZERO] = MINUS_ONE_POINT_TWO;
+    $startpt[INDEX_ONE]  = ONE_POINT_ZERO;
+    $itermax             = IMAX;
+    $rho                 = RHO_BEGIN;
+    $epsilon             = EPSMIN;
 
     # Instantiating the Hooke class.
-    my $hk = NLPUCCoreHooke::Hooke->new();
+    my $h = NLPUCCoreHooke::Hooke->new();
 
-    $jj = $hk->hooke(
-        $n_vars, \@start_pt, \@end_pt, $rho, $epsilon, $iter_max, \&f
-    );
+    $jj = $h->hooke($nvars, \@startpt, \@endpt, $rho, $epsilon, $itermax, \&f);
 
     print("\n\n\nHOOKE USED $jj ITERATIONS, AND RETURNED\n");
 
-    for ($i = 0; $i < $n_vars; $i++) {
-        printf("x[%3d] = %15.7le \n", $i, $end_pt[$i]);
+    for ($i = 0; $i < $nvars; $i++) {
+        printf("x[%3d] = %15.7le \n", $i, $endpt[$i]);
     }
 
     return 1;

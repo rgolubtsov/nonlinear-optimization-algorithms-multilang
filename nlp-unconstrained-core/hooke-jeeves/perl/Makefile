@@ -53,7 +53,7 @@ use lib \"$(LIB_DIR)\";\n\
 use $(BASE_PACKAGE);\n\
 \n\
 # Solving the Rosenbrock test problem.\n\
-$(BASE_PACKAGE)->run_rosenbrock();\n\
+$(BASE_PACKAGE)->rosenbrock();\n\
 \n\
 # =============================================================================\n\
 # vim:set nu:et:ts=4:sw=4:\n\
@@ -78,7 +78,7 @@ use lib \"$(LIB_DIR)\";\n\
 use $(BASE_PACKAGE);\n\
 \n\
 # Solving the Woods test problem.\n\
-$(BASE_PACKAGE)->run_woods();\n\
+$(BASE_PACKAGE)->woods();\n\
 \n\
 # =============================================================================\n\
 # vim:set nu:et:ts=4:sw=4:\n\
