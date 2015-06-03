@@ -101,7 +101,7 @@ sub f {
     my $t4;
     my $t5;
 
-    $NLPUCCoreHooke::FUNEVALS++;
+    $NLPUCCoreHooke::Hooke::FUNEVALS++;
 
     $s1 = $x->[INDEX_ONE] - $x->[INDEX_ZERO] * $x->[INDEX_ZERO];
     $s2 = 1 - $x->[INDEX_ZERO];

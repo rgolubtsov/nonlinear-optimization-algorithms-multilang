@@ -64,6 +64,15 @@ Constant. The maximum number of iterations.
 
 use constant IMAX => 5000;
 
+=head2 FUNEVALS
+
+The number of function evaluations.
+
+=cut
+
+our $FUNEVALS = 0;
+
+## Props to export.
 our @EXPORT = (
     "INDEX_ZERO",
     "INDEX_ONE",
@@ -194,8 +203,7 @@ sub hooke {
         $iadj++;
 
         printf(
-            "\nAfter %5d funevals, f(x) =  %.4le at\n",
-            $NLPUCCoreHooke::FUNEVALS, $fbefore
+            "\nAfter %5d funevals, f(x) =  %.4le at\n", $FUNEVALS, $fbefore
         );
 
         for ($j = 0; $j < $nvars; $j++) {
