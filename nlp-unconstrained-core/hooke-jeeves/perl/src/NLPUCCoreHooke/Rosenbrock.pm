@@ -77,7 +77,7 @@ sub f {
     my $b;
     my $c;
 
-    $NLPUCCoreHooke::FUNEVALS++;
+    $NLPUCCoreHooke::Hooke::FUNEVALS++;
 
     $a = $x->[INDEX_ZERO];
     $b = $x->[INDEX_ONE];

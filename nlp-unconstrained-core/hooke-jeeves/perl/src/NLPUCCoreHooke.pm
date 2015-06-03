@@ -38,18 +38,8 @@ use v5.10;
 use NLPUCCoreHooke::Rosenbrock;
 use NLPUCCoreHooke::Woods;
 
-## The app version number.
+## The module version number.
 our $VERSION = "0.1";
-
-=head1 ATTRIBUTES
-
-=head2 FUNEVALS
-
-Global var. The number of function evaluations.
-
-=cut
-
-our $FUNEVALS = 0;
 
 =head1 METHODS
 
