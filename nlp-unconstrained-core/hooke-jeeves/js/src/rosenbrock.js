@@ -11,6 +11,8 @@
  * ============================================================================
  */
 
+//"use strict";
+
 /**
  * The <code>NLPUCCoreHooke</code> namespace is used as a container
  * for the <code>Rosenbrock</code> class.
