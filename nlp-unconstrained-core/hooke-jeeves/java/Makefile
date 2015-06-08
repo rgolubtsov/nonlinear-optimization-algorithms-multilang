@@ -22,6 +22,7 @@ JAVA_PACKAGE_PATH   = optimization/nonlinear/unconstrained/core
 JAR                 = $(POM_ARTIFACT_ID)-$(POM_VERSION).$(POM_PACKAGING)
 DEPS                = $(PATH_TO_APP_CLASSES)/$(JAVA_PACKAGE_PATH)/Rosenbrock.class \
                       $(PATH_TO_APP_CLASSES)/$(JAVA_PACKAGE_PATH)/Woods.class \
+                      $(PATH_TO_APP_CLASSES)/$(JAVA_PACKAGE_PATH)/Hooke.class \
                       $(PATH_TO_APP_JAR)/$(JAR)
 SCRIPT1             = hooke
 SCRIPT2S            = -woods
