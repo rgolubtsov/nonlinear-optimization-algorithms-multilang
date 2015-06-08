@@ -32,8 +32,8 @@ var NLPUCCoreHooke = NLPUCCoreHooke || {};
  * @memberof NLPUCCoreHooke
  * @author   Radislav (Radic) Golubtsov
  * @version  0.1
- * @see      {@link https://raw.githubusercontent.com/rgolubtsov/nonlinear-optimization-algorithms-multilang/master/nlp-unconstrained-core/hooke-jeeves/js/src/woods.js|NLPUCCoreHooke.Woods}
- * @since    0.1
+ * @see      {@link https://raw.githubusercontent.com/rgolubtsov/nonlinear-optimization-algorithms-multilang/master/nlp-unconstrained-core/hooke-jeeves/js/src/hooke.js|NLPUCCoreHooke.Hooke}
+ * @since    hooke-jeeves 0.1
  */
 var Rosenbrock = function() {
     // Importing the "hooke.js" module (containing the Hooke class).

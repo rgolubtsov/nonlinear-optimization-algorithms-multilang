@@ -31,7 +31,7 @@ var NLPUCCoreHooke = NLPUCCoreHooke || {};
  * @version  0.1
  * @see      {@link https://raw.githubusercontent.com/rgolubtsov/nonlinear-optimization-algorithms-multilang/master/nlp-unconstrained-core/hooke-jeeves/js/src/rosenbrock.js|NLPUCCoreHooke.Rosenbrock}
  * @see      {@link https://raw.githubusercontent.com/rgolubtsov/nonlinear-optimization-algorithms-multilang/master/nlp-unconstrained-core/hooke-jeeves/js/src/woods.js|NLPUCCoreHooke.Woods}
- * @since    0.1
+ * @since    hooke-jeeves 0.1
  */
 var Hooke = function() {
 

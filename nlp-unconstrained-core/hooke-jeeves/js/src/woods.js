@@ -32,8 +32,8 @@ var NLPUCCoreHooke = NLPUCCoreHooke || {};
  * @memberof NLPUCCoreHooke
  * @author   Radislav (Radic) Golubtsov
  * @version  0.1
- * @see      {@link https://raw.githubusercontent.com/rgolubtsov/nonlinear-optimization-algorithms-multilang/master/nlp-unconstrained-core/hooke-jeeves/js/src/rosenbrock.js|NLPUCCoreHooke.Rosenbrock}
- * @since    0.1
+ * @see      {@link https://raw.githubusercontent.com/rgolubtsov/nonlinear-optimization-algorithms-multilang/master/nlp-unconstrained-core/hooke-jeeves/js/src/hooke.js|NLPUCCoreHooke.Hooke}
+ * @since    hooke-jeeves 0.1
  */
 var Woods = function() {
     // Importing the "hooke.js" module (containing the Hooke class).
@@ -98,10 +98,11 @@ var Woods = function() {
     /**
      * Constant. The stepsize geometric.
      * <br />
-     * <br />The Hooke & Jeeves algorithm works reasonably well on Rosenbrock's
-     * function, but can fare worse on some standard test functions,
-     * depending on rho. Here is an example that works well when rho = 0.5,
-     * but fares poorly with rho = 0.6, and better again with rho = 0.8.
+     * <br />The Hooke &amp; Jeeves algorithm works reasonably well
+     * on Rosenbrock's function, but can fare worse on some standard
+     * test functions, depending on rho. Here is an example that works well
+     * when rho = 0.5, but fares poorly with rho = 0.6, and better again
+     * with rho = 0.8.
      * @constant {Number} RHO_WOODS
      */
     var RHO_WOODS = 0.6;
