@@ -20,7 +20,7 @@ language:
 
 compiler:
     - gcc
-    - clang
+#    - clang
 
 script:
     ## TODO: Building all the packages under unconstrained-core.
@@ -53,6 +53,20 @@ script:
            && ls -al
            && ls -al bin obj src
            && ls -al
+
+    ## Returning to the previous working dir.
+    - cd - && ls -al
+
+    ## Building the Hooke and Jeeves alg as the ISO C++ (C++98/03/11) impl.
+    - cd cc && ls -al
+            && make clean
+            && make clean
+            && ls -al
+            && make all
+            && make all
+            && ls -al
+            && ls -al bin obj src
+            && ls -al
 
     ## Returning to the previous working dir.
     - cd - && ls -al
