@@ -6,6 +6,7 @@
 * The Hooke and Jeeves :small_blue_diamond: ISO C++ (C++98/03/11) implementation
 * The Hooke and Jeeves :small_blue_diamond: Perl 5 implementation
 * The Hooke and Jeeves :small_blue_diamond: JavaScript implementation
+* The Hooke and Jeeves :small_blue_diamond: Java implementation
 
 ---
 
