@@ -3,6 +3,9 @@
 **Note:** The Travis CI build status badge above is applicable to the following packages ONLY (for the moment):
 * The (original) Hooke and Jeeves :small_blue_diamond: K&R C implementation
 * The Hooke and Jeeves :small_blue_diamond: ANSI C (C89/90/95) implementation
+* The Hooke and Jeeves :small_blue_diamond: ISO C++ (C++98/03/11) implementation
+* The Hooke and Jeeves :small_blue_diamond: Perl 5 implementation
+* The Hooke and Jeeves :small_blue_diamond: JavaScript implementation
 
 ---
 
