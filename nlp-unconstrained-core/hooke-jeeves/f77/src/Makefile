@@ -13,17 +13,14 @@
 EXEC1   = hooke
 EXEC2S  = -woods
 EXEC2   = $(EXEC1)$(EXEC2S)
-DEPS1P  = rosenbrock
-DEPS1   = $(DEPS1P).o
-DEPS2P  = woods
-DEPS2   = $(DEPS2P).o
+DEPS1   = $(EXEC1).o
+DEPS2   = $(EXEC2).o
 BIN_DIR = ../bin
 OBJ_DIR = ../obj
 
 # Specify flags and other vars here.
 CC      = gfortran
-CFLAGS  = -Wall
-LDFLAGS = -o
+CFLAGS  = -Wall -cpp
 
 MV      = mv
 MVFLAGS = -v
@@ -34,15 +31,13 @@ $(DEPS1): %.o: %.f
 	$(CC) $(CFLAGS) $@ $<
 
 $(EXEC1): $(DEPS1)
-	$(CC) $(LDFLAGS) $@ $<
 
 # Making the second target (woods).
-$(DEPS2): CFLAGS += -DWoods -c -o
-$(DEPS2): %.o: %.f
+$(DEPS2): CFLAGS += -DWOODS -c -o
+$(DEPS2): %$(EXEC2S).o: %.f
 	$(CC) $(CFLAGS) $@ $<
 
 $(EXEC2): $(DEPS2)
-	$(CC) $(LDFLAGS) $@ $<
 
 .PHONY: rosenbrock woods all clean
 
