@@ -15,12 +15,21 @@
 %YAML 1.1
 ---
 
-language:
-    - c
+language: c
 
 compiler:
     - gcc
 #    - clang
+
+sudo: required
+
+before_install:
+    - sudo apt-get update
+
+    ##
+    # Installing the GNU Fortran 95 compiler
+    # to build FORTRAN 77 and Fortran 95 impls.
+    - sudo apt-get install gfortran
 
 script:
     ## TODO: Building all the packages under unconstrained-core.
