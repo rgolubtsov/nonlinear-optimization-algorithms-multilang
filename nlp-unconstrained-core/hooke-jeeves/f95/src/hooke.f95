@@ -1,5 +1,5 @@
 ! =============================================================================
-! nlp-unconstrained-core/hooke-jeeves/f95/rosenbrock.f95
+! nlp-unconstrained-core/hooke-jeeves/f95/src/hooke.f95
 ! =============================================================================
 ! Nonlinear Optimization Algorithms Multilang. Version 0.1
 ! =============================================================================
@@ -10,63 +10,76 @@
 ! This is the Hooke and Jeeves nonlinear unconstrained minimization algorithm.
 ! =============================================================================
 
-! Helper module.
-module rosenbrock
+! === Helper module.
+! Contains constants and variables declaration and function prototypes.
+module proto__
     implicit none
 
-    ! Max # of variables.
+    ! Constant. The maximum number of variables.
     integer, parameter :: VARS = 250
 
-    ! Stepsize geometric shrink.
+    ! Constant. The stepsize geometric shrink.
     double precision, parameter :: RHO_BEGIN = 0.5
 
-    ! Ending value of stepsize.
+    ! The Hooke & Jeeves algorithm works reasonably well on Rosenbrock's
+    ! function, but can fare worse on some standard test functions,
+    ! depending on rho. Here is an example that works well when rho = 0.5,
+    ! but fares poorly with rho = 0.6, and better again with rho = 0.8.
+    double precision, parameter :: RHO_WOODS = 0.6
+
+    ! Constant. The ending value of stepsize.
     double precision, parameter :: EPSMIN = 1e-6
 
-    ! Max # of iterations.
+    ! Constant. The maximum number of iterations.
     integer, parameter :: IMAX = 5000
 
-    ! Global variables.
+    ! The number of function evaluations.
     integer :: funevals = 0
 
+    ! Function prototypes.
     interface
+        ! The objective function f(x,n).
         double precision function f(x, n)
-            double precision, intent(in) :: x(:)
-
+            double precision, intent(in)     :: x(:)
             integer, intent(inout), optional :: n
         end function f
 
+        ! The helper function best_nearby(...).
         double precision function best_nearby(delta, point, prevbest, nvars)
             double precision, intent(inout) :: delta(:)
             double precision, intent(inout) :: point(:)
             double precision, intent(in)    :: prevbest
-
-            integer, intent(in) :: nvars
+            integer, intent(in)             :: nvars
         end function best_nearby
 
+        ! The main optimization function hooke(...).
         integer function hooke(nvars, startpt, endpt, rho, epsilon, itermax)
-            integer, intent(in) :: nvars
-
+            integer, intent(in)           :: nvars
             double precision, intent(in)  :: startpt(:)
             double precision, intent(out) :: endpt(:)
             double precision, intent(in)  :: rho
             double precision, intent(in)  :: epsilon
-
-            integer, intent(in) :: itermax
+            integer, intent(in)           :: itermax
         end function hooke
     end interface
-end module rosenbrock
+end module proto__
 
-! Rosenbrock's classic parabolic valley ("banana") function.
+! === The user-supplied objective function f(x,n).
 double precision function f(x, n)
-    use rosenbrock, only: funevals
+    use proto__, only: funevals
 
     implicit none
 
+    ! Returns: The objective function value.
+
+    ! Arg. The point at which f(x) should be evaluated.
     double precision, intent(in) :: x(:)
 
+    ! Arg. The number of coordinates of x.
     integer, intent(inout), optional :: n
 
+#ifndef WOODS
+! Rosenbrock's classic parabolic valley ("banana") function.
     double precision :: a
     double precision :: b
     double precision :: c
@@ -79,18 +92,53 @@ double precision function f(x, n)
     c = 100.0 * (b - (a * a)) * (b - (a * a))
 
     f = c + ((1.0 - a) * (1.0 - a))
+#else
+! Woods -- a la More, Garbow & Hillstrom (TOMS algorithm 566).
+    double precision :: s1
+    double precision :: s2
+    double precision :: s3
+    double precision :: t1
+    double precision :: t2
+    double precision :: t3
+    double precision :: t4
+    double precision :: t5
+
+    funevals = funevals + 1
+
+    s1 = x(2) - x(1) * x(1)
+    s2 = 1 - x(1)
+    s3 = x(2) - 1
+    t1 = x(4) - x(3) * x(3)
+    t2 = 1 - x(3)
+    t3 = x(4) - 1
+    t4 = s3 + t3
+    t5 = s3 - t3
+
+    f = 100 * (s1 * s1) + s2 * s2 &
+       + 90 * (t1 * t1) + t2 * t2 &
+       + 10 * (t4 * t4) + t5 * t5 / 10.
+#endif
 end function f
 
+! === Helper function.
 ! Given a point, look for a better one nearby, one coord at a time.
 double precision function best_nearby(delta, point, prevbest, nvars)
-    use rosenbrock, only: VARS, f
+    use proto__, only: VARS, f
 
     implicit none
 
-    double precision, intent(inout) :: delta(:)
-    double precision, intent(inout) :: point(:)
-    double precision, intent(in)    :: prevbest
+    ! Returns: The objective function value at a nearby.
 
+    ! Arg. The delta between prevbest and point.
+    double precision, intent(inout) :: delta(:)
+
+    ! Arg. The coordinate from where to begin.
+    double precision, intent(inout) :: point(:)
+
+    ! Arg. The previous best-valued coordinate.
+    double precision, intent(in) :: prevbest
+
+    ! Arg. The number of variables.
     integer, intent(in) :: nvars
 
     double precision :: minf
@@ -133,18 +181,31 @@ double precision function best_nearby(delta, point, prevbest, nvars)
     best_nearby = minf
 end function best_nearby
 
+! === Main optimization function.
+! The hooke subroutine itself.
 integer function hooke(nvars, startpt, endpt, rho, epsilon, itermax)
-    use rosenbrock, only: VARS, funevals, f, best_nearby
+    use proto__, only: VARS, funevals, f, best_nearby
 
     implicit none
 
+    ! Returns: The number of iterations used to find the local minimum.
+
+    ! Arg. The number of variables.
     integer, intent(in) :: nvars
 
-    double precision, intent(in)  :: startpt(:)
-    double precision, intent(out) :: endpt(:)
-    double precision, intent(in)  :: rho
-    double precision, intent(in)  :: epsilon
+    ! Arg. The starting point coordinates.
+    double precision, intent(in) :: startpt(:)
 
+    ! Arg. The ending point coordinates.
+    double precision, intent(out) :: endpt(:)
+
+    ! Arg. The rho value.
+    double precision, intent(in) :: rho
+
+    ! Arg. The epsilon value.
+    double precision, intent(in) :: epsilon
+
+    ! Arg. The maximum number of iterations.
     integer, intent(in) :: itermax
 
     integer :: i
@@ -206,7 +267,7 @@ integer function hooke(nvars, startpt, endpt, rho, epsilon, itermax)
             iadj = 0
 
             do i = 1, nvars
-                ! Firstly, arrange the sign of delta[].
+                ! Firstly, arrange the sign of delta().
                 if (newx(i) <= xbefore(i)) then
                     delta(i) = 0.0 - abs(delta(i))
                 else
@@ -260,8 +321,9 @@ integer function hooke(nvars, startpt, endpt, rho, epsilon, itermax)
     hooke = iters
 end function hooke
 
-program banana
-    use rosenbrock, only: VARS, RHO_BEGIN, EPSMIN, IMAX, hooke
+! === Main program.
+program hooke__
+    use proto__, only: VARS, RHO_BEGIN, RHO_WOODS, EPSMIN, IMAX, hooke
 
     implicit none
 
@@ -275,12 +337,23 @@ program banana
     double precision :: epsilon
     double precision :: endpt(VARS)
 
+#ifndef WOODS
     ! Starting guess for Rosenbrock's test function.
     nvars      = 2
     startpt(1) = -1.2
     startpt(2) = 1.0
-    itermax    = IMAX
     rho        = RHO_BEGIN
+#else
+    ! Starting guess test problem "Woods".
+    nvars      = 4
+    startpt(1) = -3
+    startpt(2) = -1
+    startpt(3) = -3
+    startpt(4) = -1
+    rho        = RHO_WOODS
+#endif
+
+    itermax    = IMAX
     epsilon    = EPSMIN
 
     jj = hooke(nvars, startpt, endpt, rho, epsilon, itermax)
@@ -290,7 +363,11 @@ program banana
     do i = 1, nvars
         write (*, '("x[", i3, "] = ", 1pe15.7e3, " ")') i - 1, endpt(i)
     end do
-end program banana
+
+#ifdef WOODS
+    write (*, '("True answer: f(1, 1, 1, 1) = 0.")')
+#endif
+end program hooke__
 
 ! =============================================================================
 ! vim:set nu:et:ts=4:sw=4:
