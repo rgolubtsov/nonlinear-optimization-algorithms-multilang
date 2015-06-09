@@ -113,6 +113,20 @@ script:
     ## Returning to the previous working dir.
     - cd - && ls -al
 
+    ## Building the Hooke and Jeeves alg as the FORTRAN 77 impl.
+    - cd f77 && ls -al
+             && make clean
+             && make clean
+             && ls -al
+             && make all
+             && make all
+             && ls -al
+             && ls -al bin lib src
+             && ls -al
+
+    ## Returning to the previous working dir.
+    - cd - && ls -al
+
 ...
 
 # =============================================================================
