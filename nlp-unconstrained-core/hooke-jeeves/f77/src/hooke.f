@@ -222,12 +222,12 @@ C         PROTO REF. THE HELPER FUNCTION BEST_NEARBY(...).
               IADJ  = IADJ + 1
 
               PRINT 20, FUNEVA, FBEFOR
-20            FORMAT (/, 'AFTER ', I5, ' FUNEVALS, F(X) =  ', 1PE11.4E3,
-     *                ' AT')
+20            FORMAT (/, 'After ', I5, ' funevals, f(x) =  ', 1PE10.4E2,
+     *                ' at')
 
               DO 30 J = 1, NVARS
                   PRINT 40, J - 1, XBEFOR(J)
-40                FORMAT ('   X(', I2, ') = ', 1PE12.4E3)
+40                FORMAT ('   x[', I2, '] = ', 1PE11.4E2)
 30            CONTINUE
 
 C             FIND BEST NEW POINT, ONE COORD AT A TIME.
@@ -381,12 +381,12 @@ C     STARTING GUESS TEST PROBLEM 'WOODS'.
 
           DO 20 I = 1, NVARS
               PRINT 30, I - 1, ENDPT(I)
-30            FORMAT ('X(', I3, ') = ', 1PE15.7E3, ' ')
+30            FORMAT ('x[', I3, '] = ', 1PE15.7E2, ' ')
 20        CONTINUE
 
 #ifdef WOODS
           PRINT 40
-40        FORMAT ('TRUE ANSWER: F(1, 1, 1, 1) = 0.')
+40        FORMAT ('True answer: f(1, 1, 1, 1) = 0.')
 #endif
       END
 
