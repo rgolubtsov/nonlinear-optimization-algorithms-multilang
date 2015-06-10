@@ -27,7 +27,7 @@ package optimization.nonlinear.unconstrained.core;
  * @since   hooke-jeeves 0.1
  */
 public final class Rosenbrock {
-    /** Constant. The stepsize geometric. */
+    /** Constant. The stepsize geometric shrink. */
     private static final double RHO_BEGIN = 0.5;
 
     /** Helper constant. */

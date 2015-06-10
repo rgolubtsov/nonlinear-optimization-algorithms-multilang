@@ -49,7 +49,7 @@ use constant MINUS_ONE_POINT_TWO => -1.2;
 
 =head2 RHO_BEGIN
 
-Constant. The stepsize geometric.
+Constant. The stepsize geometric shrink.
 
 =cut
 

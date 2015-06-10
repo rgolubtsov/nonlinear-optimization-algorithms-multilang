@@ -63,7 +63,7 @@ use constant MINUS_ONE => -1;
 
 =head2 RHO_WOODS
 
-Constant. The stepsize geometric.
+Constant. The stepsize geometric shrink.
 
  The Hooke & Jeeves algorithm works reasonably well on Rosenbrock's
  function, but can fare worse on some standard test functions,

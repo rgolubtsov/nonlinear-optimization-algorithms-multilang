@@ -28,7 +28,7 @@ package optimization.nonlinear.unconstrained.core;
  */
 public final class Woods {
     /**
-     * Constant. The stepsize geometric.
+     * Constant. The stepsize geometric shrink.
      * <br />
      * <br />The Hooke &amp; Jeeves algorithm works reasonably well
      * on Rosenbrock's function, but can fare worse on some standard

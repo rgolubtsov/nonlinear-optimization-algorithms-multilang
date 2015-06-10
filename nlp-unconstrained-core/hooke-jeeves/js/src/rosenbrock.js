@@ -66,7 +66,7 @@ var Rosenbrock = function() {
     var MINUS_ONE_POINT_TWO = -1.2;
 
     /**
-     * Constant. The stepsize geometric.
+     * Constant. The stepsize geometric shrink.
      * @constant {Number} RHO_BEGIN
      */
     var RHO_BEGIN = 0.5;

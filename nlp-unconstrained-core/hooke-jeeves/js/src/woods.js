@@ -96,7 +96,7 @@ var Woods = function() {
     var MINUS_ONE = -1;
 
     /**
-     * Constant. The stepsize geometric.
+     * Constant. The stepsize geometric shrink.
      * <br />
      * <br />The Hooke &amp; Jeeves algorithm works reasonably well
      * on Rosenbrock's function, but can fare worse on some standard
