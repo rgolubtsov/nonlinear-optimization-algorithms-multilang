@@ -249,11 +249,11 @@ integer function hooke(nvars, startpt, endpt, rho, epsilon, itermax)
         iadj  = iadj + 1
 
         write ( &
-            *, '(/, "After ", i5, " funevals, f(x) =  ", 1pe11.4e3, " at")' &
+            *, '(/, "After ", i5, " funevals, f(x) =  ", 1pe10.4e2, " at")' &
         ) funevals, fbefore
 
         do j = 1, nvars
-            write (*, '("   x[", i2, "] = ", 1pe12.4e3)') j - 1, xbefore(j)
+            write (*, '("   x[", i2, "] = ", 1pe11.4e2)') j - 1, xbefore(j)
         end do
 
         ! Find best new point, one coord at a time.
@@ -364,7 +364,7 @@ program hooke__
     write (*, '(///, "HOOKE USED ", i2, " ITERATIONS, AND RETURNED")') jj
 
     do i = 1, nvars
-        write (*, '("x[", i3, "] = ", 1pe15.7e3, " ")') i - 1, endpt(i)
+        write (*, '("x[", i3, "] = ", 1pe15.7e2, " ")') i - 1, endpt(i)
     end do
 
 #ifdef WOODS
