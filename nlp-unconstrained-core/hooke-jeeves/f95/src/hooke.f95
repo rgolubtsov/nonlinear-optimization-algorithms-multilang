@@ -15,20 +15,23 @@
 module proto__
     implicit none
 
+    ! Constant. The double precision kind for real type values.
+    integer, parameter :: DP = kind(1.d0)
+
     ! Constant. The maximum number of variables.
     integer, parameter :: VARS = 250
 
     ! Constant. The stepsize geometric shrink.
-    double precision, parameter :: RHO_BEGIN = 0.5
+    real(DP), parameter :: RHO_BEGIN = 0.5
 
     ! The Hooke & Jeeves algorithm works reasonably well on Rosenbrock's
     ! function, but can fare worse on some standard test functions,
     ! depending on rho. Here is an example that works well when rho = 0.5,
     ! but fares poorly with rho = 0.6, and better again with rho = 0.8.
-    double precision, parameter :: RHO_WOODS = 0.6
+    real(DP), parameter :: RHO_WOODS = 0.6
 
     ! Constant. The ending value of stepsize.
-    double precision, parameter :: EPSMIN = 1e-6
+    real(DP), parameter :: EPSMIN = 1e-6
 
     ! Constant. The maximum number of iterations.
     integer, parameter :: IMAX = 5000
@@ -39,50 +42,50 @@ module proto__
     ! Function prototypes.
     interface
         ! The objective function f(x,n).
-        double precision function f(x, n)
-            double precision, intent(in)     :: x(:)
+        real(kind(1.d0)) function f(x, n)
+            real(kind(1.d0)), intent(in)     :: x(:)
             integer, intent(inout), optional :: n
         end function f
 
         ! The helper function best_nearby(...).
-        double precision function best_nearby(delta, point, prevbest, nvars)
-            double precision, intent(inout) :: delta(:)
-            double precision, intent(inout) :: point(:)
-            double precision, intent(in)    :: prevbest
+        real(kind(1.d0)) function best_nearby(delta, point, prevbest, nvars)
+            real(kind(1.d0)), intent(inout) :: delta(:)
+            real(kind(1.d0)), intent(inout) :: point(:)
+            real(kind(1.d0)), intent(in)    :: prevbest
             integer, intent(in)             :: nvars
         end function best_nearby
 
         ! The main optimization function hooke(...).
         integer function hooke(nvars, startpt, endpt, rho, epsilon, itermax)
             integer, intent(in)           :: nvars
-            double precision, intent(in)  :: startpt(:)
-            double precision, intent(out) :: endpt(:)
-            double precision, intent(in)  :: rho
-            double precision, intent(in)  :: epsilon
+            real(kind(1.d0)), intent(in)  :: startpt(:)
+            real(kind(1.d0)), intent(out) :: endpt(:)
+            real(kind(1.d0)), intent(in)  :: rho
+            real(kind(1.d0)), intent(in)  :: epsilon
             integer, intent(in)           :: itermax
         end function hooke
     end interface
 end module proto__
 
 ! === The user-supplied objective function f(x,n).
-double precision function f(x, n)
-    use proto__, only: funevals
+real(DP) function f(x, n)
+    use proto__, only: DP, funevals
 
     implicit none
 
     ! Returns: The objective function value.
 
     ! Arg. The point at which f(x) should be evaluated.
-    double precision, intent(in) :: x(:)
+    real(DP), intent(in) :: x(:)
 
     ! Arg. The number of coordinates of x.
     integer, intent(inout), optional :: n
 
 #ifndef WOODS
 ! Rosenbrock's classic parabolic valley ("banana") function.
-    double precision :: a
-    double precision :: b
-    double precision :: c
+    real(DP) :: a
+    real(DP) :: b
+    real(DP) :: c
 
     funevals = funevals + 1
 
@@ -94,14 +97,14 @@ double precision function f(x, n)
     f = c + ((1.0 - a) * (1.0 - a))
 #else
 ! Woods -- a la More, Garbow & Hillstrom (TOMS algorithm 566).
-    double precision :: s1
-    double precision :: s2
-    double precision :: s3
-    double precision :: t1
-    double precision :: t2
-    double precision :: t3
-    double precision :: t4
-    double precision :: t5
+    real(DP) :: s1
+    real(DP) :: s2
+    real(DP) :: s3
+    real(DP) :: t1
+    real(DP) :: t2
+    real(DP) :: t3
+    real(DP) :: t4
+    real(DP) :: t5
 
     funevals = funevals + 1
 
@@ -122,28 +125,28 @@ end function f
 
 ! === Helper function.
 ! Given a point, look for a better one nearby, one coord at a time.
-double precision function best_nearby(delta, point, prevbest, nvars)
-    use proto__, only: VARS, f
+real(DP) function best_nearby(delta, point, prevbest, nvars)
+    use proto__, only: DP, VARS, f
 
     implicit none
 
     ! Returns: The objective function value at a nearby.
 
     ! Arg. The delta between prevbest and point.
-    double precision, intent(inout) :: delta(:)
+    real(DP), intent(inout) :: delta(:)
 
     ! Arg. The coordinate from where to begin.
-    double precision, intent(inout) :: point(:)
+    real(DP), intent(inout) :: point(:)
 
     ! Arg. The previous best-valued coordinate.
-    double precision, intent(in) :: prevbest
+    real(DP), intent(in) :: prevbest
 
     ! Arg. The number of variables.
     integer, intent(in) :: nvars
 
-    double precision :: minf
-    double precision :: z(VARS)
-    double precision :: ftmp
+    real(DP) :: minf
+    real(DP) :: z(VARS)
+    real(DP) :: ftmp
 
     integer :: i
 
@@ -184,7 +187,7 @@ end function best_nearby
 ! === Main optimization function.
 ! The hooke subroutine itself.
 integer function hooke(nvars, startpt, endpt, rho, epsilon, itermax)
-    use proto__, only: VARS, funevals, f, best_nearby
+    use proto__, only: DP, VARS, funevals, f, best_nearby
 
     implicit none
 
@@ -194,16 +197,16 @@ integer function hooke(nvars, startpt, endpt, rho, epsilon, itermax)
     integer, intent(in) :: nvars
 
     ! Arg. The starting point coordinates.
-    double precision, intent(in) :: startpt(:)
+    real(DP), intent(in) :: startpt(:)
 
     ! Arg. The ending point coordinates.
-    double precision, intent(out) :: endpt(:)
+    real(DP), intent(out) :: endpt(:)
 
     ! Arg. The rho value.
-    double precision, intent(in) :: rho
+    real(DP), intent(in) :: rho
 
     ! Arg. The epsilon value.
-    double precision, intent(in) :: epsilon
+    real(DP), intent(in) :: epsilon
 
     ! Arg. The maximum number of iterations.
     integer, intent(in) :: itermax
@@ -214,13 +217,13 @@ integer function hooke(nvars, startpt, endpt, rho, epsilon, itermax)
     integer :: j
     integer :: keep
 
-    double precision :: newx(VARS)
-    double precision :: xbefore(VARS)
-    double precision :: delta(VARS)
-    double precision :: steplength
-    double precision :: fbefore
-    double precision :: newf
-    double precision :: tmp
+    real(DP) :: newx(VARS)
+    real(DP) :: xbefore(VARS)
+    real(DP) :: delta(VARS)
+    real(DP) :: steplength
+    real(DP) :: fbefore
+    real(DP) :: newf
+    real(DP) :: tmp
 
     do i = 1, nvars
         xbefore(i) = startpt(i)
@@ -323,7 +326,7 @@ end function hooke
 
 ! === Main program.
 program hooke__
-    use proto__, only: VARS, RHO_BEGIN, RHO_WOODS, EPSMIN, IMAX, hooke
+    use proto__, only: DP, VARS, RHO_BEGIN, RHO_WOODS, EPSMIN, IMAX, hooke
 
     implicit none
 
@@ -332,10 +335,10 @@ program hooke__
     integer :: jj
     integer :: i
 
-    double precision :: startpt(VARS)
-    double precision :: rho
-    double precision :: epsilon
-    double precision :: endpt(VARS)
+    real(DP) :: startpt(VARS)
+    real(DP) :: rho
+    real(DP) :: epsilon
+    real(DP) :: endpt(VARS)
 
 #ifndef WOODS
     ! Starting guess for Rosenbrock's test function.
