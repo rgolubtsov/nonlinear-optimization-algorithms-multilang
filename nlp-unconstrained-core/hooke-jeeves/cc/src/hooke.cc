@@ -1,5 +1,5 @@
 /*
- * nlp-unconstrained-core/hooke-jeeves/cc/hooke.cc
+ * nlp-unconstrained-core/hooke-jeeves/cc/src/hooke.cc
  * ============================================================================
  * Nonlinear Optimization Algorithms Multilang. Version 0.1
  * ============================================================================

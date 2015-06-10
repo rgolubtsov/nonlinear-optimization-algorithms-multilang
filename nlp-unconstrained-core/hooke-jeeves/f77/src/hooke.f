@@ -1,5 +1,5 @@
 C =============================================================================
-C NLP-UNCONSTRAINED-CORE/HOOKE-JEEVES/F77/HOOKE.F
+C NLP-UNCONSTRAINED-CORE/HOOKE-JEEVES/F77/SRC/HOOKE.F
 C =============================================================================
 C NONLINEAR OPTIMIZATION ALGORITHMS MULTILANG. VERSION 0.1
 C =============================================================================
