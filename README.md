@@ -7,6 +7,8 @@
 * The Hooke and Jeeves :small_blue_diamond: Perl 5 implementation
 * The Hooke and Jeeves :small_blue_diamond: JavaScript implementation
 * The Hooke and Jeeves :small_blue_diamond: Java implementation
+* The Hooke and Jeeves :small_blue_diamond: FORTRAN 77 implementation
+* The Hooke and Jeeves :small_blue_diamond: Fortran 95 implementation
 
 ---
 
