@@ -49,7 +49,7 @@ public final class Rosenbrock {
      * (&quot;banana&quot;) function.
      *
      * @param x The point at which f(x) should be evaluated.
-     * @param n The number of coordinates of x.
+     * @param n The number of coordinates of <code>x</code>.
      *
      * @return The objective function value.
      */

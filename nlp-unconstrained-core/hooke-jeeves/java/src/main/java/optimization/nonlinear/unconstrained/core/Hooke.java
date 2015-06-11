@@ -69,7 +69,8 @@ public class Hooke {
      * <br />
      * <br />Given a point, look for a better one nearby, one coord at a time.
      *
-     * @param delta     The delta between prevBest and point.
+     * @param delta     The delta between <code>prevBest</code>
+     *                  and <code>point</code>.
      * @param point     The coordinate from where to begin.
      * @param prevBest  The previous best-valued coordinate.
      * @param nVars     The number of variables.
