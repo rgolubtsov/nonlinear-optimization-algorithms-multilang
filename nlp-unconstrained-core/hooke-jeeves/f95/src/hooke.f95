@@ -356,8 +356,8 @@ program hooke__
     rho        = RHO_WOODS
 #endif
 
-    itermax    = IMAX
-    epsilon    = EPSMIN
+    itermax = IMAX
+    epsilon = EPSMIN
 
     jj = hooke(nvars, startpt, endpt, rho, epsilon, itermax)
 
