@@ -72,7 +72,7 @@ public final class Woods {
      * (TOMS algorithm 566).
      *
      * @param x The point at which f(x) should be evaluated.
-     * @param n The number of coordinates of x.
+     * @param n The number of coordinates of <code>x</code>.
      *
      * @return The objective function value.
      */
@@ -132,7 +132,7 @@ public final class Woods {
         Hooke h = new Hooke();
 
         jj = h.hooke(
-            nVars, startPt, endPt, rho, epsilon, iterMax, new Woods()
+            nVars, startPt, endPt, rho, epsilon, iterMax, Woods.class
         );
 
         System.out.println(

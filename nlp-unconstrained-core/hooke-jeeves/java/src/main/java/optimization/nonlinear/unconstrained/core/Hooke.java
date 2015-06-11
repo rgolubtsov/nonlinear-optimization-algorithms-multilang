@@ -69,11 +69,12 @@ public class Hooke {
      * <br />
      * <br />Given a point, look for a better one nearby, one coord at a time.
      *
-     * @param delta        The delta between prevBest and point.
-     * @param point        The coordinate from where to begin.
-     * @param prevBest     The previous best-valued coordinate.
-     * @param nVars        The number of variables.
-     * @param objFunClsObj The class object containing objective function.
+     * @param delta     The delta between <code>prevBest</code>
+     *                  and <code>point</code>.
+     * @param point     The coordinate from where to begin.
+     * @param prevBest  The previous best-valued coordinate.
+     * @param nVars     The number of variables.
+     * @param objFunCls The class in which the objective function is defined.
      *
      * @return The objective function value at a nearby.
      */
@@ -81,7 +82,7 @@ public class Hooke {
                               final double[] point,
                               final double prevBest,
                               final int nVars,
-                              final Object objFunClsObj) {
+                              final Class objFunCls) {
 
         double minF;
         double[] z = new double[VARS];
@@ -98,9 +99,9 @@ public class Hooke {
         for (i = 0; i < nVars; i++) {
             z[i] = point[i] + delta[i];
 
-            if (objFunClsObj instanceof Rosenbrock) {
+            if (objFunCls.equals(Rosenbrock.class)) {
                 fTmp = Rosenbrock.f(z, nVars);
-            } else if (objFunClsObj instanceof Woods) {
+            } else if (objFunCls.equals(Woods.class)) {
                 fTmp = Woods.f(z, nVars);
             } else {
                 fTmp = 0;
@@ -112,9 +113,9 @@ public class Hooke {
                 delta[i] = 0.0 - delta[i];
                 z[i]     = point[i] + delta[i];
 
-                if (objFunClsObj instanceof Rosenbrock) {
+                if (objFunCls.equals(Rosenbrock.class)) {
                     fTmp = Rosenbrock.f(z, nVars);
-                } else if (objFunClsObj instanceof Woods) {
+                } else if (objFunCls.equals(Woods.class)) {
                     fTmp = Woods.f(z, nVars);
                 } else {
                     fTmp = 0;
@@ -140,13 +141,13 @@ public class Hooke {
      * <br />
      * <br />The hooke subroutine itself.
      *
-     * @param nVars        The number of variables.
-     * @param startPt      The starting point coordinates.
-     * @param endPt        The ending point coordinates.
-     * @param rho          The rho value.
-     * @param epsilon      The epsilon value.
-     * @param iterMax      The maximum number of iterations.
-     * @param objFunClsObj The class object containing objective function.
+     * @param nVars     The number of variables.
+     * @param startPt   The starting point coordinates.
+     * @param endPt     The ending point coordinates.
+     * @param rho       The rho value.
+     * @param epsilon   The epsilon value.
+     * @param iterMax   The maximum number of iterations.
+     * @param objFunCls The class in which the objective function is defined.
      *
      * @return The number of iterations used to find the local minimum.
      */
@@ -156,7 +157,7 @@ public class Hooke {
                      final double rho,
                      final double epsilon,
                      final int iterMax,
-                     final Object objFunClsObj) {
+                     final Class objFunCls) {
 
         int i;
         int iAdj;
@@ -187,9 +188,9 @@ public class Hooke {
         stepLength = rho;
         iters      = 0;
 
-        if (objFunClsObj instanceof Rosenbrock) {
+        if (objFunCls.equals(Rosenbrock.class)) {
             fBefore = Rosenbrock.f(newX, nVars);
-        } else if (objFunClsObj instanceof Woods) {
+        } else if (objFunCls.equals(Woods.class)) {
             fBefore = Woods.f(newX, nVars);
         } else {
             fBefore = 0;
@@ -214,7 +215,7 @@ public class Hooke {
                 newX[i] = xBefore[i];
             }
 
-            newF = bestNearby(delta, newX, fBefore, nVars, objFunClsObj);
+            newF = bestNearby(delta, newX, fBefore, nVars, objFunCls);
 
             // If we made some improvements, pursue that direction.
             keep = 1;
@@ -238,7 +239,7 @@ public class Hooke {
 
                 fBefore = newF;
 
-                newF = bestNearby(delta, newX, fBefore, nVars, objFunClsObj);
+                newF = bestNearby(delta, newX, fBefore, nVars, objFunCls);
 
                 // If the further (optimistic) move was bad....
                 if (newF >= fBefore) {
