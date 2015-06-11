@@ -33,7 +33,7 @@ const int IMAX = 5000;
 // Global variables.
 int funevals = 0;
 
-#ifdef Woods
+#ifdef WOODS
     double f(double *, int);
 #else
     // Rosenbrock's classic parabolic valley ("banana") function.
@@ -218,7 +218,7 @@ int hooke(int nvars,
     return iters;
 }
 
-#ifndef Woods
+#ifndef WOODS
     int main(void) {
         int nvars;
         int itermax;

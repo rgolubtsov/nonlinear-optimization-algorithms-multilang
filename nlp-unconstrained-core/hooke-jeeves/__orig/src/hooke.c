@@ -163,7 +163,7 @@
 /* Global variables. */
 int funevals = 0;
 
-#ifdef Woods
+#ifdef WOODS
     double f();
 #else
     /* Rosenbrock's classic parabolic valley ("banana") function. */
@@ -350,7 +350,7 @@ int    itermax; {
     return iters;
 }
 
-#ifndef Woods
+#ifndef WOODS
     main() {
         int nvars;
         int itermax;

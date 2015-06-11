@@ -15,7 +15,7 @@
 #import "rosenbrock.h"
 #import "woods.h"
 
-#ifndef Woods
+#ifndef WOODS
 
 int main(void) {
     ORosenbrock *rosenbrock = [[ORosenbrock alloc] init];

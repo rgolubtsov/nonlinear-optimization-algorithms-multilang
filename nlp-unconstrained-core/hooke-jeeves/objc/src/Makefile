@@ -36,7 +36,7 @@ $(DEPS1): %.o: %.m
 $(EXEC1): $(DEPS1)
 
 # Making the second target (woods).
-$(DEPS2): CFLAGS += -DWoods -c -o
+$(DEPS2): CFLAGS += -DWOODS -c -o
 $(DEPS2): %$(EXEC2S).o: %.m
 	$(CC) $(CFLAGS) $@ $<
 
