@@ -132,7 +132,7 @@ public final class Woods {
         Hooke h = new Hooke();
 
         jj = h.hooke(
-            nVars, startPt, endPt, rho, epsilon, iterMax, new Woods()
+            nVars, startPt, endPt, rho, epsilon, iterMax, Woods.class
         );
 
         System.out.println(

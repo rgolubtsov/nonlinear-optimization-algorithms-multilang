@@ -96,7 +96,7 @@ public final class Rosenbrock {
         Hooke h = new Hooke();
 
         jj = h.hooke(
-            nVars, startPt, endPt, rho, epsilon, iterMax, new Rosenbrock()
+            nVars, startPt, endPt, rho, epsilon, iterMax, Rosenbrock.class
         );
 
         System.out.println(
