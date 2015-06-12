@@ -12,75 +12,283 @@
  */
 
 #import "hooke.h"
-#import "rosenbrock.h"
-#import "woods.h"
 
 #ifndef WOODS
-
-int main(void) {
-    ORosenbrock *rosenbrock = [[ORosenbrock alloc] init];
-
-    int i;
-
-    // Starting guess for Rosenbrock's test function.
-    rosenbrock->nvars      = 2;
-    rosenbrock->startpt[0] = -1.2;
-    rosenbrock->startpt[1] = 1.0;
-    rosenbrock->itermax    = IMAX;
-    rosenbrock->rho        = RHO_BEGIN;
-    rosenbrock->epsilon    = EPSMIN;
-
-    // Performing the Hooke-Jeeves search and printing the results.
-    printf("\n\n\nHOOKE USED %d ITERATIONS, AND RETURNED\n",
-           [rosenbrock hooke]);
-
-    for (i = 0; i < rosenbrock->nvars; i++) {
-        printf("x[%3d] = %15.7le \n", i, rosenbrock->endpt[i]);
-    }
-
-    return EXIT_SUCCESS;
-}
-
+    #import "rosenbrock.h"
 #else
-
-/**
- * The Hooke & Jeeves algorithm works reasonably well on Rosenbrock's
- * function, but can fare worse on some standard test functions,
- * depending on rho. Here is an example that works well when rho = 0.5,
- * but fares poorly with rho = 0.6, and better again with rho = 0.8.
- */
-#ifndef RHO_WOODS
-    #define RHO_WOODS 0.6
+    #import "woods.h"
 #endif
 
-int main(void) {
-    OWoods *woods = [[OWoods alloc] init];
+// Constant. The maximum number of variables.
+const NSUInteger VARS = 250;
 
-    int i;
+// Constant. The ending value of stepsize.
+const NSUInteger EPSMIN = 1E-6;
 
-    // Starting guess test problem "Woods".
-    woods->nvars      = 4;
-    woods->startpt[0] = -3;
-    woods->startpt[1] = -1;
-    woods->startpt[2] = -3;
-    woods->startpt[3] = -1;
-    woods->itermax    = IMAX;
-    woods->rho        = RHO_WOODS;
-    woods->epsilon    = EPSMIN;
+// Constant. The maximum number of iterations.
+const NSUInteger IMAX = 5000;
 
-    // Performing the Hooke-Jeeves search and printing the results.
-    printf("\n\n\nHOOKE USED %d ITERATIONS, AND RETURNED\n", [woods hooke]);
+// Helper constant.
+const NSUInteger INDEX_ZERO = 0;
 
-    for (i = 0; i < woods->nvars; i++) {
-        printf("x[%3d] = %15.7le \n", i, woods->endpt[i]);
+// Helper constant.
+const NSUInteger INDEX_ONE = 1;
+
+// Helper constant.
+const CGFloat ZERO_POINT_FIVE = 0.5;
+
+// The number of function evaluations.
+NSUInteger funEvals = 0;
+
+// The Hooke class.
+@implementation Hooke
+// The number of function evaluations.
+@synthesize funEvalsX;
+
+// Helper method bestNearby(...).
+- (CGFloat) bestNearby : (CGFloat *) delta
+               point__ : (CGFloat *) point
+            prevBest__ : (CGFloat) prevBest
+               nVars__ : (NSUInteger) nVars {
+
+    CGFloat minF;
+    CGFloat z[VARS];
+    CGFloat fTmp;
+
+    NSUInteger i;
+
+    minF = prevBest;
+
+    for (i = 0; i < nVars; i++) {
+        z[i] = point[i];
     }
 
+    for (i = 0; i < nVars; i++) {
+        z[i] = point[i] + delta[i];
+
+#ifndef WOODS
+        fTmp = [Rosenbrock f : z n__ : nVars];
+#else
+        fTmp = [Woods f : z n__ : nVars];
+#endif
+
+        if (fTmp < minF) {
+            minF = fTmp;
+        } else {
+            delta[i] = 0.0 - delta[i];
+            z[i]     = point[i] + delta[i];
+
+#ifndef WOODS
+            fTmp = [Rosenbrock f : z n__ : nVars];
+#else
+            fTmp = [Woods f : z n__ : nVars];
+#endif
+
+            if (fTmp < minF) {
+                minF = fTmp;
+            } else {
+                z[i] = point[i];
+            }
+        }
+    }
+
+    for (i = 0; i < nVars; i++) {
+        point[i] = z[i];
+    }
+
+    return minF;
+}
+
+// Main optimization method hooke(...).
+- (NSUInteger) hooke : (NSUInteger) nVars
+           startPt__ : (CGFloat *) startPt
+             endPt__ : (CGFloat *) endPt
+               rho__ : (CGFloat) rho
+           epsilon__ : (CGFloat) epsilon
+           iterMax__ : (NSUInteger) iterMax {
+
+    NSUInteger i;
+    NSUInteger iAdj;
+    NSUInteger iters;
+    NSUInteger j;
+    NSUInteger keep;
+
+    CGFloat newX[VARS];
+    CGFloat xBefore[VARS];
+    CGFloat delta[VARS];
+    CGFloat stepLength;
+    CGFloat fBefore;
+    CGFloat newF;
+    CGFloat tmp;
+
+    for (i = 0; i < nVars; i++) {
+        newX[i] = xBefore[i] = startPt[i];
+
+        delta[i] = fabs(startPt[i] * rho);
+
+        if (delta[i] == 0.0) {
+            delta[i] = rho;
+        }
+    }
+
+    iAdj       = 0;
+    stepLength = rho;
+    iters      = 0;
+
+#ifndef WOODS
+    fBefore = [Rosenbrock f : newX n__ : nVars];
+#else
+    fBefore = [Woods f : newX n__ : nVars];
+#endif
+
+    newF = fBefore;
+
+    while ((iters < iterMax) && (stepLength > epsilon)) {
+        iters++;
+        iAdj++;
+
+        printf(
+            "\nAfter %5d funevals, f(x) =  %.4le at\n", funEvals, fBefore
+//            [self funEvalsX], fBefore
+        );
+
+        for (j = 0; j < nVars; j++) {
+            printf("   x[%2d] = %.4le\n", j, xBefore[j]);
+        }
+
+        // Find best new point, one coord at a time.
+        for (i = 0; i < nVars; i++) {
+            newX[i] = xBefore[i];
+        }
+
+        newF = [self bestNearby : delta
+                        point__ : newX
+                     prevBest__ : fBefore
+                        nVars__ : nVars];
+
+        // If we made some improvements, pursue that direction.
+        keep = 1;
+
+        while ((newF < fBefore) && (keep == 1)) {
+            iAdj = 0;
+
+            for (i = 0; i < nVars; i++) {
+                // Firstly, arrange the sign of delta[].
+                if (newX[i] <= xBefore[i]) {
+                    delta[i] = 0.0 - fabs(delta[i]);
+                } else {
+                    delta[i] = fabs(delta[i]);
+                }
+
+                // Now, move further in this direction.
+                tmp        = xBefore[i];
+                xBefore[i] = newX[i];
+                newX[i]    = newX[i] + newX[i] - tmp;
+            }
+
+            fBefore = newF;
+
+            newF = [self bestNearby : delta
+                            point__ : newX
+                         prevBest__ : fBefore
+                            nVars__ : nVars];
+
+            // If the further (optimistic) move was bad....
+            if (newF >= fBefore) {
+                break;
+            }
+
+            /*
+             * Make sure that the differences between the new and the old
+             * points are due to actual displacements; beware of roundoff
+             * errors that might cause newF < fBefore.
+             */
+            keep = 0;
+
+            for (i = 0; i < nVars; i++) {
+                keep = 1;
+
+                if (fabs(newX[i] - xBefore[i])
+                    > (ZERO_POINT_FIVE * fabs(delta[i]))) {
+
+                    break;
+                } else {
+                    keep = 0;
+                }
+            }
+        }
+
+        if ((stepLength >= epsilon) && (newF >= fBefore)) {
+            stepLength = stepLength * rho;
+
+            for (i = 0; i < nVars; i++) {
+                delta[i] *= rho;
+            }
+        }
+    }
+
+    for (i = 0; i < nVars; i++) {
+        endPt[i] = xBefore[i];
+    }
+
+    return iters;
+}
+
+@end
+
+// Main program function main() :-).
+NSInteger main(void) {
+    NSUInteger nVars;
+    NSUInteger iterMax;
+    NSUInteger jj;
+    NSUInteger i;
+
+    CGFloat startPt[VARS];
+    CGFloat rho;
+    CGFloat epsilon;
+    CGFloat endPt[VARS];
+
+#ifndef WOODS
+    // Starting guess for Rosenbrock's test function.
+    nVars               = TWO;
+    startPt[INDEX_ZERO] = MINUS_ONE_POINT_TWO;
+    startPt[INDEX_ONE]  = ONE_POINT_ZERO;
+    rho                 = RHO_BEGIN;
+#else
+    // Starting guess test problem "Woods".
+    nVars                = FOUR;
+    startPt[INDEX_ZERO]  = MINUS_THREE;
+    startPt[INDEX_ONE]   = MINUS_ONE;
+    startPt[INDEX_TWO]   = MINUS_THREE;
+    startPt[INDEX_THREE] = MINUS_ONE;
+    rho                  = RHO_WOODS;
+#endif
+
+    iterMax = IMAX;
+    epsilon = EPSMIN;
+
+    // Instantiating the Hooke class.
+    Hooke *h = [[Hooke alloc] init];
+
+    jj = [h hooke : nVars
+        startPt__ : startPt
+          endPt__ : endPt
+            rho__ : rho
+        epsilon__ : epsilon
+        iterMax__ : iterMax];
+
+    printf("\n\n\nHOOKE USED %d ITERATIONS, AND RETURNED\n", jj);
+
+    for (i = 0; i < nVars; i++) {
+        printf("x[%3d] = %15.7le \n", i, endPt[i]);
+    }
+
+#ifdef WOODS
     printf("True answer: f(1, 1, 1, 1) = 0.\n");
+#endif
 
     return EXIT_SUCCESS;
 }
-
-#endif
 
 // ============================================================================
 // vim:set nu:et:ts=4:sw=4:
