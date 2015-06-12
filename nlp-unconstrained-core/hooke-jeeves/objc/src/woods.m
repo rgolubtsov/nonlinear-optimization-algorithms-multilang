@@ -56,7 +56,10 @@ const NSInteger MINUS_ONE = -1;
     CGFloat t4;
     CGFloat t5;
 
-    [Hooke setFunEvals : [Hooke getFunEvals] + 1];
+    // Instantiating the Hooke class.
+    Hooke *h = [[Hooke alloc] init];
+
+    [h setFunEvals : [h funEvals] + 1];
 
     s1 = x[INDEX_ONE] - x[INDEX_ZERO] * x[INDEX_ZERO];
     s2 = 1 - x[INDEX_ZERO];

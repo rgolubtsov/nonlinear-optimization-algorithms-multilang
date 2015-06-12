@@ -39,15 +39,8 @@ const CGFloat ZERO_POINT_FIVE = 0.5;
 
 // The Hooke class.
 @implementation Hooke
-// Getter for funEvals.
-+ (NSUInteger) getFunEvals {
-    return funEvals;
-}
-
-// Setter for funEvals.
-+ (void) setFunEvals : (NSUInteger) __funEvals {
-    funEvals = __funEvals;
-}
+// The number of function evaluations.
+@synthesize funEvals;
 
 // Helper method bestNearby(...).
 - (CGFloat) bestNearby : (CGFloat *) delta
@@ -151,7 +144,10 @@ const CGFloat ZERO_POINT_FIVE = 0.5;
         iters++;
         iAdj++;
 
-        printf("\nAfter %5d funevals, f(x) =  %.4le at\n", funEvals, fBefore);
+        printf(
+            "\nAfter %5d funevals, f(x) =  %.4le at\n",
+            [self funEvals], fBefore
+        );
 
         for (j = 0; j < nVars; j++) {
             printf("   x[%2d] = %.4le\n", j, xBefore[j]);

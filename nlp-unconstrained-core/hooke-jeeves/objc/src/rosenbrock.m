@@ -36,7 +36,10 @@ const CGFloat MINUS_ONE_POINT_TWO = -1.2;
     CGFloat b;
     CGFloat c;
 
-    [Hooke setFunEvals : [Hooke getFunEvals] + 1];
+    // Instantiating the Hooke class.
+    Hooke *h = [[Hooke alloc] init];
+
+    [h setFunEvals : [h funEvals] + 1];
 
     a = x[INDEX_ZERO];
     b = x[INDEX_ONE];

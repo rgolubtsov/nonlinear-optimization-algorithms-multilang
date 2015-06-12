@@ -44,23 +44,20 @@ extern const CGFloat ZERO_POINT_FIVE;
 @interface Hooke : NSObject
 {
 @private
-    /** The number of function evaluations. */
+    /*
+     * GCC kludge: Properties must be declared as ivars too
+     *             to avoid compile-time errors like the following:
+     *
+     * error: ivar ‘funEvals’ used by ‘@synthesize’ declaration
+     *        must be an existing ivar
+     *
+     * Effective at least for GCC 5.1.0.
+     */
     NSInteger funEvals;
 }
 
-/**
- * Getter for <code>funEvals</code>.
- *
- * @returns The number of function evaluations.
- */
-+ (NSUInteger) getFunEvals;
-
-/**
- * Setter for <code>funEvals</code>.
- *
- * @param __funEvals The number of function evaluations.
- */
-+ (void) setFunEvals : (NSUInteger) __funEvals;
+/** The number of function evaluations. */
+@property NSInteger funEvals;
 
 /**
  * Helper method.
