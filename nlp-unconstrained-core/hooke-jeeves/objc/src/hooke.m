@@ -37,10 +37,13 @@ const NSUInteger INDEX_ONE = 1;
 // Helper constant.
 const CGFloat ZERO_POINT_FIVE = 0.5;
 
+// The number of function evaluations.
+NSUInteger funEvals = 0;
+
 // The Hooke class.
 @implementation Hooke
 // The number of function evaluations.
-@synthesize funEvals;
+@synthesize funEvalsX;
 
 // Helper method bestNearby(...).
 - (CGFloat) bestNearby : (CGFloat *) delta
@@ -52,7 +55,7 @@ const CGFloat ZERO_POINT_FIVE = 0.5;
     CGFloat z[VARS];
     CGFloat fTmp;
 
-    NSInteger i;
+    NSUInteger i;
 
     minF = prevBest;
 
@@ -104,11 +107,11 @@ const CGFloat ZERO_POINT_FIVE = 0.5;
            epsilon__ : (CGFloat) epsilon
            iterMax__ : (NSUInteger) iterMax {
 
-    NSInteger i;
-    NSInteger iAdj;
-    NSInteger iters;
-    NSInteger j;
-    NSInteger keep;
+    NSUInteger i;
+    NSUInteger iAdj;
+    NSUInteger iters;
+    NSUInteger j;
+    NSUInteger keep;
 
     CGFloat newX[VARS];
     CGFloat xBefore[VARS];
@@ -145,8 +148,8 @@ const CGFloat ZERO_POINT_FIVE = 0.5;
         iAdj++;
 
         printf(
-            "\nAfter %5d funevals, f(x) =  %.4le at\n",
-            [self funEvals], fBefore
+            "\nAfter %5d funevals, f(x) =  %.4le at\n", funEvals, fBefore
+//            [self funEvalsX], fBefore
         );
 
         for (j = 0; j < nVars; j++) {
@@ -235,10 +238,10 @@ const CGFloat ZERO_POINT_FIVE = 0.5;
 
 // Main program function main() :-).
 NSInteger main(void) {
-    NSInteger nVars;
-    NSInteger iterMax;
-    NSInteger jj;
-    NSInteger i;
+    NSUInteger nVars;
+    NSUInteger iterMax;
+    NSUInteger jj;
+    NSUInteger i;
 
     CGFloat startPt[VARS];
     CGFloat rho;

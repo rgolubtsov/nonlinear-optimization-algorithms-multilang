@@ -59,7 +59,9 @@ const NSInteger MINUS_ONE = -1;
     // Instantiating the Hooke class.
     Hooke *h = [[Hooke alloc] init];
 
-    [h setFunEvals : [h funEvals] + 1];
+    [h setFunEvalsX : [h funEvalsX] + 1];
+
+    funEvals++;
 
     s1 = x[INDEX_ONE] - x[INDEX_ZERO] * x[INDEX_ZERO];
     s2 = 1 - x[INDEX_ZERO];

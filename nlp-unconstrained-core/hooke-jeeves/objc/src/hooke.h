@@ -31,6 +31,9 @@ extern const NSUInteger INDEX_ONE;
 /** Helper constant. */
 extern const CGFloat ZERO_POINT_FIVE;
 
+/** The number of function evaluations. */
+extern NSUInteger funEvals;
+
 /**
  * The <code>Hooke</code> class contains methods for solving a nonlinear
  * optimization problem using the algorithm of Hooke and Jeeves.
@@ -48,16 +51,16 @@ extern const CGFloat ZERO_POINT_FIVE;
      * GCC kludge: Properties must be declared as ivars too
      *             to avoid compile-time errors like the following:
      *
-     * error: ivar ‘funEvals’ used by ‘@synthesize’ declaration
+     * error: ivar ‘funEvalsX’ used by ‘@synthesize’ declaration
      *        must be an existing ivar
      *
      * Effective at least for GCC 5.1.0.
      */
-    NSInteger funEvals;
+    NSUInteger funEvalsX;
 }
 
 /** The number of function evaluations. */
-@property NSInteger funEvals;
+@property NSUInteger funEvalsX;
 
 /**
  * Helper method.
