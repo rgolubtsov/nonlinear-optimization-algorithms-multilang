@@ -13,66 +13,47 @@
 
 #import "hooke.h"
 
+/** Constant. The stepsize geometric shrink. */
+extern const CGFloat RHO_BEGIN;
+
+/** Helper constant. */
+extern const CGFloat ONE_HUNDRED_POINT_ZERO;
+
+/** Helper constant. */
+extern const CGFloat ONE_POINT_ZERO;
+
+/** Helper constant. */
+extern const NSUInteger TWO;
+
+/** Helper constant. */
+extern const CGFloat MINUS_ONE_POINT_TWO;
+
 /**
- * The Rosenbrock model.
+ * The <code>Rosenbrock</code> class is responsible for solving a nonlinear
+ * optimization problem using the algorithm of Hooke and Jeeves.
+ * <br />
+ * <br />The objective function in this case
+ * is the Rosenbrock's parabolic valley function.
  *
- * The Hooke-Jeeves nonlinear minimization algorithm in application
- * to the Rosenbrock test problem.
+ * @author  Radislav (Radic) Golubtsov
+ * @version 0.1
+ * @see     Hooke
+ * @since   hooke-jeeves 0.1
  */
-@interface ORosenbrock: NSObject {
-@private
-    int funevals;
-
-@public
-    int nvars;
-    int itermax;
-
-    double startpt[VARS];
-    double rho;
-    double epsilon;
-    double endpt[VARS];
-}
-
-///---------------------
-/// @name Test function
-///---------------------
-
+@interface Rosenbrock : NSObject
 /**
  * The user-supplied objective function f(x,n).
- * Represents here the Rosenbrock's classic parabolic valley ("banana")
- * function.
+ * <br />
+ * <br />Represents here the Rosenbrock's classic parabolic valley
+ * (&quot;banana&quot;) function.
  *
  * @param x The point at which f(x) should be evaluated.
- * @param n The number of coordinates of x.
+ * @param n The number of coordinates of <code>x</code>.
  *
- * @return The objective function value.
+ * @returns The objective function value.
  */
-- (double) f: (double *) x atN: (int) n;
++ (CGFloat) f : (CGFloat *) x n__ : (NSUInteger) n;
 
-///------------------------------
-/// @name Hooke-Jeeves algorithm
-///------------------------------
-
-/**
- * Helper method.
- * Given a point, look for a better one nearby, one coord at a time.
- *
- * @param delta    The delta between prevbest and point.
- * @param point    The coordinate from where to begin.
- * @param prevbest The previous best-valued coordinate.
- *
- * @return The objective function value at a nearby.
- */
-- (double) bestNearby: (double *) delta
-              atPoint: (double *) point
-           atPrevbest: (double) prevbest;
-
-/**
- * Main optimization method. (See hooke.m for description.)
- *
- * @return The number of iterations used to find the local minimum.
- */
-- (int) hooke;
 @end
 
 // ============================================================================

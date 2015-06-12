@@ -14,64 +14,69 @@
 #import "hooke.h"
 
 /**
- * The Woods model.
- *
- * The Hooke-Jeeves nonlinear minimization algorithm in application
- * to the Woods test problem.
+ * Constant. The stepsize geometric shrink.
+ * <br />
+ * <br />The Hooke &amp; Jeeves algorithm works reasonably well
+ * on Rosenbrock's function, but can fare worse on some standard
+ * test functions, depending on rho. Here is an example that works well
+ * when rho = 0.5, but fares poorly with rho = 0.6, and better again
+ * with rho = 0.8.
  */
-@interface OWoods: NSObject {
-@private
-    int funevals;
+extern const CGFloat RHO_WOODS;
 
-@public
-    int nvars;
-    int itermax;
+/** Helper constant. */
+extern const NSUInteger INDEX_TWO;
 
-    double startpt[VARS];
-    double rho;
-    double epsilon;
-    double endpt[VARS];
-}
+/** Helper constant. */
+extern const NSUInteger INDEX_THREE;
 
-///---------------------
-/// @name Test function
-///---------------------
+/** Helper constant. */
+extern const NSUInteger ONE_HUNDRED;
 
+/** Helper constant. */
+extern const NSUInteger NINETY;
+
+/** Helper constant. */
+extern const NSUInteger TEN;
+
+/** Helper constant. */
+extern const CGFloat TEN_POINT;
+
+/** Helper constant. */
+extern const NSUInteger FOUR;
+
+/** Helper constant. */
+extern const NSInteger MINUS_THREE;
+
+/** Helper constant. */
+extern const NSInteger MINUS_ONE;
+
+/**
+ * The <code>Woods</code> class is responsible for solving a nonlinear
+ * optimization problem using the algorithm of Hooke and Jeeves.
+ * <br />
+ * <br />The objective function in this case
+ * is so called &quot;Woods&quot; function.
+ *
+ * @author  Radislav (Radic) Golubtsov
+ * @version 0.1
+ * @see     Hooke
+ * @since   hooke-jeeves 0.1
+ */
+@interface Woods : NSObject
 /**
  * The user-supplied objective function f(x,n).
- * Woods -- a la More, Garbow & Hillstrom (TOMS algorithm 566).
+ * <br />
+ * <br />Woods &ndash; a la More, Garbow &amp; Hillstrom
+ * (TOMS algorithm 566).
  *
  * @param x The point at which f(x) should be evaluated.
- * @param n The number of coordinates of x.
+ * @param n The number of coordinates of <code>x</code>.
  *
- * @return The objective function value.
+ * @returns The objective function value.
  */
-- (double) f: (double *) x atN: (int) n;
++ (CGFloat) f : (CGFloat *) x n__ : (NSUInteger) n;
 
-///------------------------------
-/// @name Hooke-Jeeves algorithm
-///------------------------------
-
-/**
- * Helper method.
- * Given a point, look for a better one nearby, one coord at a time.
- *
- * @param delta    The delta between prevbest and point.
- * @param point    The coordinate from where to begin.
- * @param prevbest The previous best-valued coordinate.
- *
- * @return The objective function value at a nearby.
- */
-- (double) bestNearby: (double *) delta
-              atPoint: (double *) point
-           atPrevbest: (double) prevbest;
-
-/**
- * Main optimization method. (See hooke.m for description.)
- *
- * @return The number of iterations used to find the local minimum.
- */
-- (int) hooke;
 @end
 
 // ============================================================================
