@@ -13,20 +13,8 @@
 
 #import "hooke.h"
 
-/** Constant. The stepsize geometric shrink. */
-extern const CGFloat RHO_BEGIN;
-
 /** Helper constant. */
 extern const CGFloat ONE_HUNDRED_POINT_ZERO;
-
-/** Helper constant. */
-extern const CGFloat ONE_POINT_ZERO;
-
-/** Helper constant. */
-extern const NSUInteger TWO;
-
-/** Helper constant. */
-extern const CGFloat MINUS_ONE_POINT_TWO;
 
 /**
  * The <code>Rosenbrock</code> class is responsible for solving a nonlinear

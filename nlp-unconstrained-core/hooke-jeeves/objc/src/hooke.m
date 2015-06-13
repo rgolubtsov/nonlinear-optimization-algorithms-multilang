@@ -22,8 +22,14 @@
 // Constant. The maximum number of variables.
 const NSUInteger VARS = 250;
 
+// Constant. The stepsize geometric shrink.
+const CGFloat RHO_BEGIN = 0.5;
+
+// Constant. The stepsize geometric shrink.
+const CGFloat RHO_WOODS = 0.6;
+
 // Constant. The ending value of stepsize.
-const NSUInteger EPSMIN = 1E-6;
+const CGFloat EPSMIN = 1E-6;
 
 // Constant. The maximum number of iterations.
 const NSUInteger IMAX = 5000;
@@ -33,6 +39,30 @@ const NSUInteger INDEX_ZERO = 0;
 
 // Helper constant.
 const NSUInteger INDEX_ONE = 1;
+
+// Helper constant.
+const NSUInteger INDEX_TWO = 2;
+
+// Helper constant.
+const NSUInteger INDEX_THREE = 3;
+
+// Helper constant.
+const NSUInteger TWO = 2;
+
+// Helper constant.
+const NSUInteger FOUR = 4;
+
+// Helper constant.
+const CGFloat MINUS_ONE_POINT_TWO = -1.2;
+
+// Helper constant.
+const CGFloat ONE_POINT_ZERO = 1.0;
+
+// Helper constant.
+const NSInteger MINUS_THREE = -3;
+
+// Helper constant.
+const NSInteger MINUS_ONE = -1;
 
 // Helper constant.
 const CGFloat ZERO_POINT_FIVE = 0.5;

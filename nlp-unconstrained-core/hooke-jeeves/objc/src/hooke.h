@@ -11,13 +11,34 @@
  * ============================================================================
  */
 
+// (Not so dirty :-) hack: But we need double! Even on 32-bit systems.
+#define CGFLOAT_DEFINED 1
+typedef double          CGFloat;
+#define CGFLOAT_MIN     DBL_MIN
+#define CGFLOAT_MAX     DBL_MAX
+#define CGFLOAT_IS_DBL  1
+
 #import <Foundation/Foundation.h>
 
 /** Constant. The maximum number of variables. */
 extern const NSUInteger VARS;
 
+/** Constant. The stepsize geometric shrink. */
+extern const CGFloat RHO_BEGIN;
+
+/**
+ * Constant. The stepsize geometric shrink.
+ * <br />
+ * <br />The Hooke &amp; Jeeves algorithm works reasonably well
+ * on Rosenbrock's function, but can fare worse on some standard
+ * test functions, depending on rho. Here is an example that works well
+ * when rho = 0.5, but fares poorly with rho = 0.6, and better again
+ * with rho = 0.8.
+ */
+extern const CGFloat RHO_WOODS;
+
 /** Constant. The ending value of stepsize. */
-extern const NSUInteger EPSMIN;
+extern const CGFloat EPSMIN;
 
 /** Constant. The maximum number of iterations. */
 extern const NSUInteger IMAX;
@@ -27,6 +48,30 @@ extern const NSUInteger INDEX_ZERO;
 
 /** Helper constant. */
 extern const NSUInteger INDEX_ONE;
+
+/** Helper constant. */
+extern const NSUInteger INDEX_TWO;
+
+/** Helper constant. */
+extern const NSUInteger INDEX_THREE;
+
+/** Helper constant. */
+extern const NSUInteger TWO;
+
+/** Helper constant. */
+extern const NSUInteger FOUR;
+
+/** Helper constant. */
+extern const CGFloat MINUS_ONE_POINT_TWO;
+
+/** Helper constant. */
+extern const CGFloat ONE_POINT_ZERO;
+
+/** Helper constant. */
+extern const NSInteger MINUS_THREE;
+
+/** Helper constant. */
+extern const NSInteger MINUS_ONE;
 
 /** Helper constant. */
 extern const CGFloat ZERO_POINT_FIVE;

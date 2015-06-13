@@ -13,23 +13,6 @@
 
 #import "hooke.h"
 
-/**
- * Constant. The stepsize geometric shrink.
- * <br />
- * <br />The Hooke &amp; Jeeves algorithm works reasonably well
- * on Rosenbrock's function, but can fare worse on some standard
- * test functions, depending on rho. Here is an example that works well
- * when rho = 0.5, but fares poorly with rho = 0.6, and better again
- * with rho = 0.8.
- */
-extern const CGFloat RHO_WOODS;
-
-/** Helper constant. */
-extern const NSUInteger INDEX_TWO;
-
-/** Helper constant. */
-extern const NSUInteger INDEX_THREE;
-
 /** Helper constant. */
 extern const NSUInteger ONE_HUNDRED;
 
@@ -41,15 +24,6 @@ extern const NSUInteger TEN;
 
 /** Helper constant. */
 extern const CGFloat TEN_POINT;
-
-/** Helper constant. */
-extern const NSUInteger FOUR;
-
-/** Helper constant. */
-extern const NSInteger MINUS_THREE;
-
-/** Helper constant. */
-extern const NSInteger MINUS_ONE;
 
 /**
  * The <code>Woods</code> class is responsible for solving a nonlinear
