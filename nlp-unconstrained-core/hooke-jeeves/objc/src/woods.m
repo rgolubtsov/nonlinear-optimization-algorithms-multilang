@@ -13,15 +13,6 @@
 
 #import "woods.h"
 
-// Constant. The stepsize geometric shrink.
-const CGFloat RHO_WOODS = 0.6;
-
-// Helper constant.
-const NSUInteger INDEX_TWO = 2;
-
-// Helper constant.
-const NSUInteger INDEX_THREE = 3;
-
 // Helper constant.
 const NSUInteger ONE_HUNDRED = 100;
 
@@ -33,15 +24,6 @@ const NSUInteger TEN = 10;
 
 // Helper constant.
 const CGFloat TEN_POINT = 10.;
-
-// Helper constant.
-const NSUInteger FOUR = 4;
-
-// Helper constant.
-const NSInteger MINUS_THREE = -3;
-
-// Helper constant.
-const NSInteger MINUS_ONE = -1;
 
 // The Woods class.
 @implementation Woods

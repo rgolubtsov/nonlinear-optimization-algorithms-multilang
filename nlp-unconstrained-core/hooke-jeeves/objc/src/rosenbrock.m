@@ -13,20 +13,8 @@
 
 #import "rosenbrock.h"
 
-// Constant. The stepsize geometric shrink.
-const CGFloat RHO_BEGIN = 0.5;
-
 // Helper constant.
 const CGFloat ONE_HUNDRED_POINT_ZERO = 100.0;
-
-// Helper constant.
-const CGFloat ONE_POINT_ZERO = 1.0;
-
-// Helper constant.
-const NSUInteger TWO = 2;
-
-// Helper constant.
-const CGFloat MINUS_ONE_POINT_TWO = -1.2;
 
 // The Rosenbrock class.
 @implementation Rosenbrock
