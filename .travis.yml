@@ -32,9 +32,9 @@ before_install:
     - sudo apt-get install gfortran
 
     ##
-    # Installing the GNUstep Make package and deps
+    # Installing the GNUstep Base-dev package and deps
     # to build the Objective-C 2.0 impl.
-    - sudo apt-get install gnustep-make
+    - sudo apt-get install libgnustep-base-dev
 
 script:
     ## TODO: Building all the packages under unconstrained-core.
