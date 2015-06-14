@@ -150,6 +150,21 @@ script:
     ## Returning to the previous working dir.
     - cd - && ls -al
 
+    ## Building the Hooke and Jeeves alg as the Objective-C 2.0 impl.
+
+    - cd objc && ls -al
+              && make clean
+              && make clean
+              && ls -al
+              && make all
+              && make all
+              && ls -al
+              && ls -al bin obj src
+              && ls -al
+
+    ## Returning to the previous working dir.
+    - cd - && ls -al
+
 ...
 
 # =============================================================================
