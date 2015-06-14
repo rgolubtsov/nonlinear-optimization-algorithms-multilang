@@ -35,12 +35,13 @@ extern const CGFloat ONE_HUNDRED_POINT_ZERO;
  * <br />Represents here the Rosenbrock's classic parabolic valley
  * (&quot;banana&quot;) function.
  *
- * @param x The point at which f(x) should be evaluated.
- * @param n The number of coordinates of <code>x</code>.
+ * @param x       The point at which f(x) should be evaluated.
+ * @param n       The number of coordinates of <code>x</code>.
+ * @param fClsPtr The class instance containing the objective function.
  *
  * @returns The objective function value.
  */
-+ (CGFloat) f : (CGFloat *) x n__ : (NSUInteger) n;
++ (CGFloat) f : (CGFloat *) x n__ : (NSUInteger) n fClsPtr__ : (id) fClsPtr;
 
 @end
 

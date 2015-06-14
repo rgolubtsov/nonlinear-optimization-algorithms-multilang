@@ -44,12 +44,13 @@ extern const CGFloat TEN_POINT;
  * <br />Woods &ndash; a la More, Garbow &amp; Hillstrom
  * (TOMS algorithm 566).
  *
- * @param x The point at which f(x) should be evaluated.
- * @param n The number of coordinates of <code>x</code>.
+ * @param x       The point at which f(x) should be evaluated.
+ * @param n       The number of coordinates of <code>x</code>.
+ * @param fClsPtr The class instance containing the objective function.
  *
  * @returns The objective function value.
  */
-+ (CGFloat) f : (CGFloat *) x n__ : (NSUInteger) n;
++ (CGFloat) f : (CGFloat *) x n__ : (NSUInteger) n fClsPtr__ : (id) fClsPtr;
 
 @end
 

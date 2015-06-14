@@ -1,5 +1,5 @@
 /*
- * nlp-unconstrained-core/hooke-jeeves/objc/src/rosenbrock.m
+ * nlp-unconstrained-core/hooke-jeeves/objc/src/funevals.m
  * ============================================================================
  * Nonlinear Optimization Algorithms Multilang. Version 0.1
  * ============================================================================
@@ -11,29 +11,12 @@
  * ============================================================================
  */
 
-#import "rosenbrock.h"
 #import "funevals.h"
 
-// Helper constant.
-const CGFloat ONE_HUNDRED_POINT_ZERO = 100.0;
-
-// The Rosenbrock class.
-@implementation Rosenbrock
-// The user-supplied objective function f(x,n).
-+ (CGFloat) f : (CGFloat *) x n__ : (NSUInteger) n fClsPtr__ : (id) fClsPtr {
-    CGFloat a;
-    CGFloat b;
-    CGFloat c;
-
-    [(FunEvals *) fClsPtr setFunEvals : [(FunEvals *) fClsPtr funEvals] + 1];
-
-    a = x[INDEX_ZERO];
-    b = x[INDEX_ONE];
-
-    c = ONE_HUNDRED_POINT_ZERO * (b - (a * a)) * (b - (a * a));
-
-    return (c + ((ONE_POINT_ZERO - a) * (ONE_POINT_ZERO - a)));
-}
+// The FunEvals class.
+@implementation FunEvals
+// The number of function evaluations.
+@synthesize funEvals;
 
 @end
 
