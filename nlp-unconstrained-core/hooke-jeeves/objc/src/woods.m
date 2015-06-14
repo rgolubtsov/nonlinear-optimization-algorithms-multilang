@@ -12,6 +12,7 @@
  */
 
 #import "woods.h"
+#import "funevals.h"
 
 // Helper constant.
 const NSUInteger ONE_HUNDRED = 100;
@@ -28,7 +29,7 @@ const CGFloat TEN_POINT = 10.;
 // The Woods class.
 @implementation Woods
 // The user-supplied objective function f(x,n).
-+ (CGFloat) f : (CGFloat *) x n__ : (NSUInteger) n {
++ (CGFloat) f : (CGFloat *) x n__ : (NSUInteger) n fClsPtr__ : (id) fClsPtr {
     CGFloat s1;
     CGFloat s2;
     CGFloat s3;
@@ -38,12 +39,7 @@ const CGFloat TEN_POINT = 10.;
     CGFloat t4;
     CGFloat t5;
 
-    // Instantiating the Hooke class.
-    Hooke *h = [[Hooke alloc] init];
-
-    [h setFunEvalsX : [h funEvalsX] + 1];
-
-    funEvals++;
+    [(FunEvals *) fClsPtr setFunEvals : [(FunEvals *) fClsPtr funEvals] + 1];
 
     s1 = x[INDEX_ONE] - x[INDEX_ZERO] * x[INDEX_ZERO];
     s2 = 1 - x[INDEX_ZERO];

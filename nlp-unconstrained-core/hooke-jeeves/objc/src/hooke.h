@@ -76,9 +76,6 @@ extern const NSInteger MINUS_ONE;
 /** Helper constant. */
 extern const CGFloat ZERO_POINT_FIVE;
 
-/** The number of function evaluations. */
-extern NSUInteger funEvals;
-
 /**
  * The <code>Hooke</code> class contains methods for solving a nonlinear
  * optimization problem using the algorithm of Hooke and Jeeves.
@@ -90,23 +87,6 @@ extern NSUInteger funEvals;
  * @since   hooke-jeeves 0.1
  */
 @interface Hooke : NSObject
-{
-@private
-    /*
-     * GCC kludge: Properties must be declared as ivars too
-     *             to avoid compile-time errors like the following:
-     *
-     * error: ivar ‘funEvalsX’ used by ‘@synthesize’ declaration
-     *        must be an existing ivar
-     *
-     * Effective at least for GCC 5.1.0.
-     */
-    NSUInteger funEvalsX;
-}
-
-/** The number of function evaluations. */
-@property NSUInteger funEvalsX;
-
 /**
  * Helper method.
  * <br />
@@ -117,13 +97,15 @@ extern NSUInteger funEvals;
  * @param point    The coordinate from where to begin.
  * @param prevBest The previous best-valued coordinate.
  * @param nVars    The number of variables.
+ * @param fClsPtr  The class instance containing the objective function.
  *
  * @returns The objective function value at a nearby.
  */
 - (CGFloat) bestNearby : (CGFloat *) delta
                point__ : (CGFloat *) point
             prevBest__ : (CGFloat) prevBest
-               nVars__ : (NSUInteger) nVars;
+               nVars__ : (NSUInteger) nVars
+             fClsPtr__ : (id) fClsPtr;
 
 /**
  * Main optimization method.

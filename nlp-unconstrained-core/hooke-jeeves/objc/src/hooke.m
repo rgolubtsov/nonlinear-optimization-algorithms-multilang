@@ -12,6 +12,7 @@
  */
 
 #import "hooke.h"
+#import "funevals.h"
 
 #ifndef WOODS
     #import "rosenbrock.h"
@@ -67,19 +68,14 @@ const NSInteger MINUS_ONE = -1;
 // Helper constant.
 const CGFloat ZERO_POINT_FIVE = 0.5;
 
-// The number of function evaluations.
-NSUInteger funEvals = 0;
-
 // The Hooke class.
 @implementation Hooke
-// The number of function evaluations.
-@synthesize funEvalsX;
-
 // Helper method bestNearby(...).
 - (CGFloat) bestNearby : (CGFloat *) delta
                point__ : (CGFloat *) point
             prevBest__ : (CGFloat) prevBest
-               nVars__ : (NSUInteger) nVars {
+               nVars__ : (NSUInteger) nVars
+             fClsPtr__ : (id) fClsPtr {
 
     CGFloat minF;
     CGFloat z[VARS];
@@ -97,9 +93,9 @@ NSUInteger funEvals = 0;
         z[i] = point[i] + delta[i];
 
 #ifndef WOODS
-        fTmp = [Rosenbrock f : z n__ : nVars];
+        fTmp = [Rosenbrock f : z n__ : nVars fClsPtr__ : fClsPtr];
 #else
-        fTmp = [Woods f : z n__ : nVars];
+        fTmp = [Woods f : z n__ : nVars fClsPtr__ : fClsPtr];
 #endif
 
         if (fTmp < minF) {
@@ -109,9 +105,9 @@ NSUInteger funEvals = 0;
             z[i]     = point[i] + delta[i];
 
 #ifndef WOODS
-            fTmp = [Rosenbrock f : z n__ : nVars];
+            fTmp = [Rosenbrock f : z n__ : nVars fClsPtr__ : fClsPtr];
 #else
-            fTmp = [Woods f : z n__ : nVars];
+            fTmp = [Woods f : z n__ : nVars fClsPtr__ : fClsPtr];
 #endif
 
             if (fTmp < minF) {
@@ -165,10 +161,13 @@ NSUInteger funEvals = 0;
     stepLength = rho;
     iters      = 0;
 
+    // Instantiating the FunEvals class.
+    FunEvals *fe = [[FunEvals alloc] init];
+
 #ifndef WOODS
-    fBefore = [Rosenbrock f : newX n__ : nVars];
+    fBefore = [Rosenbrock f : newX n__ : nVars fClsPtr__ : fe];
 #else
-    fBefore = [Woods f : newX n__ : nVars];
+    fBefore = [Woods f : newX n__ : nVars fClsPtr__ : fe];
 #endif
 
     newF = fBefore;
@@ -178,8 +177,7 @@ NSUInteger funEvals = 0;
         iAdj++;
 
         printf(
-            "\nAfter %5d funevals, f(x) =  %.4le at\n", funEvals, fBefore
-//            [self funEvalsX], fBefore
+            "\nAfter %5d funevals, f(x) =  %.4le at\n", [fe funEvals], fBefore
         );
 
         for (j = 0; j < nVars; j++) {
@@ -194,7 +192,8 @@ NSUInteger funEvals = 0;
         newF = [self bestNearby : delta
                         point__ : newX
                      prevBest__ : fBefore
-                        nVars__ : nVars];
+                        nVars__ : nVars
+                      fClsPtr__ : fe];
 
         // If we made some improvements, pursue that direction.
         keep = 1;
@@ -221,7 +220,8 @@ NSUInteger funEvals = 0;
             newF = [self bestNearby : delta
                             point__ : newX
                          prevBest__ : fBefore
-                            nVars__ : nVars];
+                            nVars__ : nVars
+                          fClsPtr__ : fe];
 
             // If the further (optimistic) move was bad....
             if (newF >= fBefore) {
