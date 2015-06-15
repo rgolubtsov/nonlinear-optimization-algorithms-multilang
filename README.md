@@ -9,6 +9,7 @@
 * The Hooke and Jeeves :small_blue_diamond: Java implementation
 * The Hooke and Jeeves :small_blue_diamond: FORTRAN 77 implementation
 * The Hooke and Jeeves :small_blue_diamond: Fortran 95 implementation
+* The Hooke and Jeeves :small_blue_diamond: Objective-C 2.0 implementation
 
 ---
 
@@ -35,105 +36,63 @@ The project has the following directory structure and logical parts and items.
 |   |-- hooke-jeeves                   <== Hooke-Jeeves algorithm container
 |   |   |                                  (all implementations)
 |   |   |-- c                          <== ANSI C (C89/90/95) impl. container
-|   |   |   |
 |   |   |   |-- Makefile
-|   |   |   |
 |   |   |   `-- src
-|   |   |       |
 |   |   |       |-- < sources >
-|   |   |       |
 |   |   |       `-- Makefile
 |   |   |
 |   |   |-- cc                         <== ISO C++ (C++98/03/11) impl. container
-|   |   |   |
 |   |   |   |-- Makefile
-|   |   |   |
 |   |   |   `-- src
-|   |   |       |
 |   |   |       |-- < sources >
-|   |   |       |
 |   |   |       `-- Makefile
 |   |   |
 |   |   |-- f77                        <== FORTRAN 77 impl. container
-|   |   |   |
 |   |   |   |-- Makefile
-|   |   |   |
 |   |   |   `-- src
-|   |   |       |
 |   |   |       |-- < sources >
-|   |   |       |
 |   |   |       `-- Makefile
 |   |   |
 |   |   |-- f95                        <== Fortran 95 impl. container
-|   |   |   |
 |   |   |   |-- Makefile
-|   |   |   |
 |   |   |   `-- src
-|   |   |       |
 |   |   |       |-- < sources >
-|   |   |       |
 |   |   |       `-- Makefile
 |   |   |
 |   |   |-- java                       <== Java impl. container
-|   |   |   |
 |   |   |   |-- Makefile
-|   |   |   |
 |   |   |   |-- pom.xml
-|   |   |   |
 |   |   |   `-- src
-|   |   |       |
 |   |   |       `-- main
-|   |   |           |
 |   |   |           `-- java
-|   |   |               |
 |   |   |               `-- optimization
-|   |   |                   |
 |   |   |                   `-- nonlinear
-|   |   |                       |
 |   |   |                       `-- unconstrained
-|   |   |                           |
 |   |   |                           `-- core
-|   |   |                               |
 |   |   |                               `-- < sources >
 |   |   |
 |   |   |-- js                         <== JavaScript impl. container
-|   |   |   |
 |   |   |   |-- Makefile
-|   |   |   |
 |   |   |   `-- src
-|   |   |       |
 |   |   |       `-- < sources >
 |   |   |
 |   |   |-- objc                       <== Objective-C 2.0 impl. container
-|   |   |   |                              (using the GNUstep Base library)
-|   |   |   |-- Makefile
-|   |   |   |
+|   |   |   |-- Makefile                   (using the GNUstep Base library)
 |   |   |   `-- src
-|   |   |       |
 |   |   |       |-- < sources >
-|   |   |       |
 |   |   |       `-- Makefile
 |   |   |
 |   |   |-- __orig                     <== K&R C impl. container
-|   |   |   |                              (This is the original impl.)
-|   |   |   |-- Makefile
-|   |   |   |
+|   |   |   |-- Makefile                   (This is the original impl.)
 |   |   |   `-- src
-|   |   |       |
 |   |   |       |-- < sources >
-|   |   |       |
 |   |   |       `-- Makefile
 |   |   |
 |   |   `-- perl                       <== Perl 5 impl. container
-|   |       |
 |   |       |-- Makefile
-|   |       |
 |   |       `-- src
-|   |           |
 |   |           |-- NLPUCCoreHooke
-|   |           |   |
 |   |           |   `-- < sources >
-|   |           |
 |   |           `-- < sources >
 |   |
 |   `-- [ nelder-mead ]                <== [TODO] Nelder-Mead algorithm container
