@@ -95,7 +95,7 @@ const CGFloat ZERO_POINT_FIVE = 0.5;
 #ifndef WOODS
         fTmp = [Rosenbrock f : z n__ : nVars fClsPtr__ : fClsPtr];
 #else
-        fTmp = [Woods f : z n__ : nVars fClsPtr__ : fClsPtr];
+        fTmp = [Woods      f : z n__ : nVars fClsPtr__ : fClsPtr];
 #endif
 
         if (fTmp < minF) {
@@ -107,7 +107,7 @@ const CGFloat ZERO_POINT_FIVE = 0.5;
 #ifndef WOODS
             fTmp = [Rosenbrock f : z n__ : nVars fClsPtr__ : fClsPtr];
 #else
-            fTmp = [Woods f : z n__ : nVars fClsPtr__ : fClsPtr];
+            fTmp = [Woods      f : z n__ : nVars fClsPtr__ : fClsPtr];
 #endif
 
             if (fTmp < minF) {
@@ -167,7 +167,7 @@ const CGFloat ZERO_POINT_FIVE = 0.5;
 #ifndef WOODS
     fBefore = [Rosenbrock f : newX n__ : nVars fClsPtr__ : fe];
 #else
-    fBefore = [Woods f : newX n__ : nVars fClsPtr__ : fe];
+    fBefore = [Woods      f : newX n__ : nVars fClsPtr__ : fe];
 #endif
 
     newF = fBefore;
@@ -177,11 +177,12 @@ const CGFloat ZERO_POINT_FIVE = 0.5;
         iAdj++;
 
         printf(
-            "\nAfter %5d funevals, f(x) =  %.4le at\n", [fe funEvals], fBefore
+            "\nAfter %5d funevals, f(x) =  %.4le at\n",
+            (unsigned int) [fe funEvals], fBefore
         );
 
         for (j = 0; j < nVars; j++) {
-            printf("   x[%2d] = %.4le\n", j, xBefore[j]);
+            printf("   x[%2d] = %.4le\n", (unsigned int) j, xBefore[j]);
         }
 
         // Find best new point, one coord at a time.
@@ -267,7 +268,7 @@ const CGFloat ZERO_POINT_FIVE = 0.5;
 @end
 
 // Main program function main() :-).
-NSInteger main(void) {
+int main(void) {
     NSUInteger nVars;
     NSUInteger iterMax;
     NSUInteger jj;
@@ -280,10 +281,10 @@ NSInteger main(void) {
 
 #ifndef WOODS
     // Starting guess for Rosenbrock's test function.
-    nVars               = TWO;
-    startPt[INDEX_ZERO] = MINUS_ONE_POINT_TWO;
-    startPt[INDEX_ONE]  = ONE_POINT_ZERO;
-    rho                 = RHO_BEGIN;
+    nVars                = TWO;
+    startPt[INDEX_ZERO]  = MINUS_ONE_POINT_TWO;
+    startPt[INDEX_ONE]   = ONE_POINT_ZERO;
+    rho                  = RHO_BEGIN;
 #else
     // Starting guess test problem "Woods".
     nVars                = FOUR;
@@ -307,10 +308,12 @@ NSInteger main(void) {
         epsilon__ : epsilon
         iterMax__ : iterMax];
 
-    printf("\n\n\nHOOKE USED %d ITERATIONS, AND RETURNED\n", jj);
+    printf(
+        "\n\n\nHOOKE USED %d ITERATIONS, AND RETURNED\n", (unsigned int) jj
+    );
 
     for (i = 0; i < nVars; i++) {
-        printf("x[%3d] = %15.7le \n", i, endPt[i]);
+        printf("x[%3d] = %15.7le \n", (unsigned int) i, endPt[i]);
     }
 
 #ifdef WOODS
