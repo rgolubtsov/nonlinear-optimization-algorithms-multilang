@@ -184,13 +184,13 @@ unsigned int Hooke::hooke(const unsigned int nVars,
         iters++;
         iAdj++;
 
-        printf(
+        std::printf(
             "\nAfter %5d funevals, f(x) =  %.4le at\n",
             fe->getFunEvals(), fBefore
         );
 
         for (j = 0; j < nVars; j++) {
-            printf("   x[%2d] = %.4le\n", j, xBefore[j]);
+            std::printf("   x[%2d] = %.4le\n", j, xBefore[j]);
         }
 
         // Find best new point, one coord at a time.
@@ -314,14 +314,14 @@ int main(void) {
 
     jj = h->hooke(nVars, startPt, endPt, rho, epsilon, iterMax);
 
-    printf("\n\n\nHOOKE USED %d ITERATIONS, AND RETURNED\n", jj);
+    std::printf("\n\n\nHOOKE USED %d ITERATIONS, AND RETURNED\n", jj);
 
     for (i = 0; i < nVars; i++) {
-        printf("x[%3d] = %15.7le \n", i, endPt[i]);
+        std::printf("x[%3d] = %15.7le \n", i, endPt[i]);
     }
 
 #ifdef WOODS
-    printf("True answer: f(1, 1, 1, 1) = 0.\n");
+    std::puts("True answer: f(1, 1, 1, 1) = 0.");
 #endif
 
     // Destructing the Hooke class instance.
