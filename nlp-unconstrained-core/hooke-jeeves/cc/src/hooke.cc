@@ -154,7 +154,7 @@ unsigned int Hooke::hooke(const unsigned int nVars,
     for (i = 0; i < nVars; i++) {
         newX[i] = xBefore[i] = startPt[i];
 
-        delta[i] = fabs(startPt[i] * rho);
+        delta[i] = std::fabs(startPt[i] * rho);
 
         if (delta[i] == 0.0) {
             delta[i] = rho;
@@ -209,9 +209,9 @@ unsigned int Hooke::hooke(const unsigned int nVars,
             for (i = 0; i < nVars; i++) {
                 // Firstly, arrange the sign of delta[].
                 if (newX[i] <= xBefore[i]) {
-                    delta[i] = 0.0 - fabs(delta[i]);
+                    delta[i] = 0.0 - std::fabs(delta[i]);
                 } else {
-                    delta[i] = fabs(delta[i]);
+                    delta[i] = std::fabs(delta[i]);
                 }
 
                 // Now, move further in this direction.
@@ -239,8 +239,8 @@ unsigned int Hooke::hooke(const unsigned int nVars,
             for (i = 0; i < nVars; i++) {
                 keep = 1;
 
-                if (fabs(newX[i] - xBefore[i])
-                    > (ZERO_POINT_FIVE * fabs(delta[i]))) {
+                if (std::fabs(newX[i] - xBefore[i])
+                    > (ZERO_POINT_FIVE * std::fabs(delta[i]))) {
 
                     break;
                 } else {
