@@ -11,190 +11,237 @@
  * ============================================================================
  */
 
-#include <cmath>
-#include <iostream>
-#include <iomanip>
-#include <cstdlib>
+#include "funevals.h"
 
-using namespace std;
-
-// Max # of variables.
-const int VARS = 250;
-
-// Stepsize geometric shrink.
-const double RHO_BEGIN = 0.5;
-
-// Ending value of stepsize.
-const double EPSMIN = 1E-6;
-
-// Max # of iterations.
-const int IMAX = 5000;
-
-// Global variables.
-int funevals = 0;
-
-#ifdef WOODS
-    double f(double *, int);
+#ifndef WOODS
+    #include "rosenbrock.h"
 #else
-    // Rosenbrock's classic parabolic valley ("banana") function.
-    double f(double *x, int n) {
-        double a;
-        double b;
-        double c;
-
-        funevals++;
-
-        a = x[0];
-        b = x[1];
-
-        c = 100.0 * (b - (a * a)) * (b - (a * a));
-
-        return (c + ((1.0 - a) * (1.0 - a)));
-    }
+    #include "woods.h"
 #endif
 
-// Given a point, look for a better one nearby, one coord at a time.
-double best_nearby(double *delta, double *point, double prevbest, int nvars) {
-    double minf;
+// The NLPUCCoreHooke namespace.
+namespace NLPUCCoreHooke {
+
+// Constant. The maximum number of variables.
+const unsigned int VARS = 250;
+
+// Constant. The stepsize geometric shrink.
+const double RHO_BEGIN = 0.5;
+
+// Constant. The stepsize geometric shrink.
+const double RHO_WOODS = 0.6;
+
+// Constant. The ending value of stepsize.
+const double EPSMIN = 1E-6;
+
+// Constant. The maximum number of iterations.
+const unsigned int IMAX = 5000;
+
+// Helper constant.
+const unsigned int INDEX_ZERO = 0;
+
+// Helper constant.
+const unsigned int INDEX_ONE = 1;
+
+// Helper constant.
+const unsigned int INDEX_TWO = 2;
+
+// Helper constant.
+const unsigned int INDEX_THREE = 3;
+
+// Helper constant.
+const unsigned int TWO = 2;
+
+// Helper constant.
+const unsigned int FOUR = 4;
+
+// Helper constant.
+const double MINUS_ONE_POINT_TWO = -1.2;
+
+// Helper constant.
+const double ONE_POINT_ZERO = 1.0;
+
+// Helper constant.
+const int MINUS_THREE = -3;
+
+// Helper constant.
+const int MINUS_ONE = -1;
+
+// Helper constant.
+const double ZERO_POINT_FIVE = 0.5;
+
+// Helper method bestNearby(...).
+double Hooke::bestNearby(double *delta,
+                         double *point,
+                         const double prevBest,
+                         const unsigned int nVars,
+                         const void *fClsPtr) {
+
+    double minF;
     double z[VARS];
-    double ftmp;
+    double fTmp;
 
-    int i;
+    unsigned int i;
 
-    minf = prevbest;
+    minF = prevBest;
 
-    for (i = 0; i < nvars; i++) {
+    for (i = 0; i < nVars; i++) {
         z[i] = point[i];
     }
 
-    for (i = 0; i < nvars; i++) {
+    for (i = 0; i < nVars; i++) {
         z[i] = point[i] + delta[i];
 
-        ftmp = f(z, nvars);
+#ifndef WOODS
+        Rosenbrock r;
 
-        if (ftmp < minf) {
-            minf = ftmp;
+        fTmp = r.f(z, nVars, fClsPtr);
+#else
+        Woods w;
+
+        fTmp = w.f(z, nVars, fClsPtr);
+#endif
+
+        if (fTmp < minF) {
+            minF = fTmp;
         } else {
             delta[i] = 0.0 - delta[i];
             z[i]     = point[i] + delta[i];
 
-            ftmp = f(z, nvars);
+#ifndef WOODS
+            fTmp = r.f(z, nVars, fClsPtr);
+#else
+            fTmp = w.f(z, nVars, fClsPtr);
+#endif
 
-            if (ftmp < minf) {
-                minf = ftmp;
+            if (fTmp < minF) {
+                minF = fTmp;
             } else {
                 z[i] = point[i];
             }
         }
     }
 
-    for (i = 0; i < nvars; i++) {
+    for (i = 0; i < nVars; i++) {
         point[i] = z[i];
     }
 
-    return minf;
+    return minF;
 }
 
-int hooke(int nvars,
-          double *startpt,
-          double *endpt,
-          double rho,
-          double epsilon,
-          int itermax) {
+// Main optimization method hooke(...).
+unsigned int Hooke::hooke(const unsigned int nVars,
+                          const double *startPt,
+                          double *endPt,
+                          const double rho,
+                          const double epsilon,
+                          const unsigned int iterMax) {
 
-    int i;
-    int iadj;
-    int iters;
-    int j;
-    int keep;
+    unsigned int i;
+    unsigned int iAdj;
+    unsigned int iters;
+    unsigned int j;
+    unsigned int keep;
 
-    double newx[VARS];
-    double xbefore[VARS];
+    double newX[VARS];
+    double xBefore[VARS];
     double delta[VARS];
-    double steplength;
-    double fbefore;
-    double newf;
+    double stepLength;
+    double fBefore;
+    double newF;
     double tmp;
 
-    for (i = 0; i < nvars; i++) {
-        newx[i] = xbefore[i] = startpt[i];
+    for (i = 0; i < nVars; i++) {
+        newX[i] = xBefore[i] = startPt[i];
 
-        delta[i] = fabs(startpt[i] * rho);
+        delta[i] = fabs(startPt[i] * rho);
 
         if (delta[i] == 0.0) {
             delta[i] = rho;
         }
     }
 
-    iadj       = 0;
-    steplength = rho;
+    iAdj       = 0;
+    stepLength = rho;
     iters      = 0;
 
-    fbefore = f(newx, nvars);
+    // Instantiating the FunEvals class.
+    FunEvals *fe = new FunEvals();
 
-    newf = fbefore;
+#ifndef WOODS
+    Rosenbrock r;
 
-    while ((iters < itermax) && (steplength > epsilon)) {
+    fBefore = r.f(newX, nVars, fe);
+#else
+    Woods w;
+
+    fBefore = w.f(newX, nVars, fe);
+#endif
+
+    newF = fBefore;
+
+    while ((iters < iterMax) && (stepLength > epsilon)) {
         iters++;
-        iadj++;
+        iAdj++;
 
-        cout << endl
-             << "After " << setw(5) << funevals << " funevals, f(x) =  "
-             << setprecision(4) << setiosflags(cout.scientific) << fbefore
-             << " at"
-             << endl;
+        printf(
+            "\nAfter %5d funevals, f(x) =  %.4le at\n",
+            fe->getFunEvals(), fBefore
+        );
 
-        for (j = 0; j < nvars; j++) {
-            cout << "   x[" << setw(2) << j << "] = " << xbefore[j] << endl;
+        for (j = 0; j < nVars; j++) {
+            printf("   x[%2d] = %.4le\n", j, xBefore[j]);
         }
 
         // Find best new point, one coord at a time.
-        for (i = 0; i < nvars; i++) {
-            newx[i] = xbefore[i];
+        for (i = 0; i < nVars; i++) {
+            newX[i] = xBefore[i];
         }
 
-        newf = best_nearby(delta, newx, fbefore, nvars);
+        newF = bestNearby(delta, newX, fBefore, nVars, fe);
 
         // If we made some improvements, pursue that direction.
         keep = 1;
 
-        while ((newf < fbefore) && (keep == 1)) {
-            iadj = 0;
+        while ((newF < fBefore) && (keep == 1)) {
+            iAdj = 0;
 
-            for (i = 0; i < nvars; i++) {
+            for (i = 0; i < nVars; i++) {
                 // Firstly, arrange the sign of delta[].
-                if (newx[i] <= xbefore[i]) {
+                if (newX[i] <= xBefore[i]) {
                     delta[i] = 0.0 - fabs(delta[i]);
                 } else {
                     delta[i] = fabs(delta[i]);
                 }
 
                 // Now, move further in this direction.
-                tmp        = xbefore[i];
-                xbefore[i] = newx[i];
-                newx[i]    = newx[i] + newx[i] - tmp;
+                tmp        = xBefore[i];
+                xBefore[i] = newX[i];
+                newX[i]    = newX[i] + newX[i] - tmp;
             }
 
-            fbefore = newf;
+            fBefore = newF;
 
-            newf = best_nearby(delta, newx, fbefore, nvars);
+            newF = bestNearby(delta, newX, fBefore, nVars, fe);
 
             // If the further (optimistic) move was bad....
-            if (newf >= fbefore) {
+            if (newF >= fBefore) {
                 break;
             }
 
             /*
              * Make sure that the differences between the new and the old
              * points are due to actual displacements; beware of roundoff
-             * errors that might cause newf < fbefore.
+             * errors that might cause newF < fBefore.
              */
             keep = 0;
 
-            for (i = 0; i < nvars; i++) {
+            for (i = 0; i < nVars; i++) {
                 keep = 1;
 
-                if (fabs(newx[i] - xbefore[i]) > (0.5 * fabs(delta[i]))) {
+                if (fabs(newX[i] - xBefore[i])
+                    > (ZERO_POINT_FIVE * fabs(delta[i]))) {
+
                     break;
                 } else {
                     keep = 0;
@@ -202,134 +249,86 @@ int hooke(int nvars,
             }
         }
 
-        if ((steplength >= epsilon) && (newf >= fbefore)) {
-            steplength = steplength * rho;
+        if ((stepLength >= epsilon) && (newF >= fBefore)) {
+            stepLength = stepLength * rho;
 
-            for (i = 0; i < nvars; i++) {
+            for (i = 0; i < nVars; i++) {
                 delta[i] *= rho;
             }
         }
     }
 
-    for (i = 0; i < nvars; i++) {
-        endpt[i] = xbefore[i];
+    for (i = 0; i < nVars; i++) {
+        endPt[i] = xBefore[i];
     }
+
+    // Destructing the FunEvals class instance.
+    delete fe;
 
     return iters;
 }
 
+// Default constructor.
+Hooke::Hooke() {}
+
+// Destructor.
+Hooke::~Hooke() {}
+
+} // namespace NLPUCCoreHooke
+
+using namespace NLPUCCoreHooke;
+
+// Main program function main() :-).
+int main(void) {
+    unsigned int nVars;
+    unsigned int iterMax;
+    unsigned int jj;
+    unsigned int i;
+
+    double startPt[VARS];
+    double rho;
+    double epsilon;
+    double endPt[VARS];
+
 #ifndef WOODS
-    int main(void) {
-        int nvars;
-        int itermax;
-        int jj;
-        int i;
-
-        double startpt[VARS];
-        double rho;
-        double epsilon;
-        double endpt[VARS];
-
-        // Starting guess for Rosenbrock's test function.
-        nvars      = 2;
-        startpt[0] = -1.2;
-        startpt[1] = 1.0;
-        itermax    = IMAX;
-        rho        = RHO_BEGIN;
-        epsilon    = EPSMIN;
-
-        jj = hooke(nvars, startpt, endpt, rho, epsilon, itermax);
-
-        cout << endl
-             << endl
-             << endl
-             << "HOOKE USED " << jj << " ITERATIONS, AND RETURNED"
-             << endl;
-
-        for (i = 0; i < nvars; i++) {
-            cout << "x[" << setw(3) << i << "] = " << setw(15)
-                 << setprecision(7) << endpt[i] << " " << endl;
-        }
-
-        return EXIT_SUCCESS;
-    }
+    // Starting guess for Rosenbrock's test function.
+    nVars                = TWO;
+    startPt[INDEX_ZERO]  = MINUS_ONE_POINT_TWO;
+    startPt[INDEX_ONE]   = ONE_POINT_ZERO;
+    rho                  = RHO_BEGIN;
 #else
-    /*
-     * The Hooke & Jeeves algorithm works reasonably well on Rosenbrock's
-     * function, but can fare worse on some standard test functions,
-     * depending on rho. Here is an example that works well when rho = 0.5,
-     * but fares poorly with rho = 0.6, and better again with rho = 0.8.
-     */
-    #ifndef RHO_WOODS
-        const double RHO_WOODS = 0.6;
-    #endif
-
-    // Woods -- a la More, Garbow & Hillstrom (TOMS algorithm 566).
-    double f(double *x, int n) {
-        double s1;
-        double s2;
-        double s3;
-        double t1;
-        double t2;
-        double t3;
-        double t4;
-        double t5;
-
-        funevals++;
-
-        s1 = x[1] - x[0] * x[0];
-        s2 = 1 - x[0];
-        s3 = x[1] - 1;
-        t1 = x[3] - x[2] * x[2];
-        t2 = 1 - x[2];
-        t3 = x[3] - 1;
-        t4 = s3 + t3;
-        t5 = s3 - t3;
-
-        return (100 * (s1 * s1) + s2 * s2
-               + 90 * (t1 * t1) + t2 * t2
-               + 10 * (t4 * t4) + t5 * t5 / 10.);
-    }
-
-    int main(void) {
-        int nvars;
-        int itermax;
-        int jj;
-        int i;
-
-        double startpt[VARS];
-        double rho;
-        double epsilon;
-        double endpt[VARS];
-
-        // Starting guess test problem "Woods".
-        nvars      = 4;
-        startpt[0] = -3;
-        startpt[1] = -1;
-        startpt[2] = -3;
-        startpt[3] = -1;
-        itermax    = IMAX;
-        rho        = RHO_WOODS;
-        epsilon    = EPSMIN;
-
-        jj = hooke(nvars, startpt, endpt, rho, epsilon, itermax);
-
-        cout << endl
-             << endl
-             << endl
-             << "HOOKE USED " << jj << " ITERATIONS, AND RETURNED"
-             << endl;
-
-        for (i = 0; i < nvars; i++) {
-            cout << "x[" << setw(3) << i << "] = " << setw(15)
-                 << setprecision(7) << endpt[i] << " " << endl;
-        }
-
-        cout << "True answer: f(1, 1, 1, 1) = 0." << endl;
-
-        return EXIT_SUCCESS;
-    }
+    // Starting guess test problem "Woods".
+    nVars                = FOUR;
+    startPt[INDEX_ZERO]  = MINUS_THREE;
+    startPt[INDEX_ONE]   = MINUS_ONE;
+    startPt[INDEX_TWO]   = MINUS_THREE;
+    startPt[INDEX_THREE] = MINUS_ONE;
+    rho                  = RHO_WOODS;
 #endif
+
+    iterMax = IMAX;
+    epsilon = EPSMIN;
+
+    // Instantiating the Hooke class.
+    Hooke *h = new Hooke();
+
+    jj = h->hooke(nVars, startPt, endPt, rho, epsilon, iterMax);
+
+    printf("\n\n\nHOOKE USED %d ITERATIONS, AND RETURNED\n", jj);
+
+    for (i = 0; i < nVars; i++) {
+        printf("x[%3d] = %15.7le \n", i, endPt[i]);
+    }
+
+#ifdef WOODS
+    printf("True answer: f(1, 1, 1, 1) = 0.\n");
+#endif
+
+    // Destructing the Hooke class instance.
+    delete h;
+
+    return EXIT_SUCCESS;
+}
 
 // ============================================================================
 // vim:set nu:et:ts=4:sw=4:

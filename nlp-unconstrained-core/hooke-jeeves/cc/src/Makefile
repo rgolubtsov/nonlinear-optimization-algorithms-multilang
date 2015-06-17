@@ -13,8 +13,12 @@
 EXEC1   = hooke
 EXEC2S  = -woods
 EXEC2   = $(EXEC1)$(EXEC2S)
-DEPS1   = $(EXEC1).o
-DEPS2   = $(EXEC2).o
+DEPS1S  = rosenbrock
+DEPS1   = $(EXEC1).o $(DEPS1S).o
+DEPS2S  = woods
+DEPS2   = $(EXEC2).o $(DEPS2S)$(EXEC2S).o
+DEPSN1  = funevals
+DEPSN   = $(DEPSN1).o
 BIN_DIR = ../bin
 OBJ_DIR = ../obj
 
@@ -26,16 +30,16 @@ MV      = mv
 MVFLAGS = -v
 
 # Making the first target (rosenbrock).
-$(DEPS1): %.o: %.cc
+$(DEPS1) $(DEPSN): %.o: %.cc
 
-$(EXEC1): $(DEPS1)
+$(EXEC1): $(DEPS1) $(DEPSN)
 
 # Making the second target (woods).
 $(DEPS2): CXXFLAGS += -DWOODS -c -o
 $(DEPS2): %$(EXEC2S).o: %.cc
 	$(CXX) $(CXXFLAGS) $@ $<
 
-$(EXEC2): $(DEPS2)
+$(EXEC2): $(DEPS2) $(DEPSN)
 
 .PHONY: rosenbrock woods all clean
 
@@ -45,10 +49,10 @@ woods: $(EXEC2)
 
 all: rosenbrock woods
 	$(MV) $(MVFLAGS) $(EXEC1) $(EXEC2) $(BIN_DIR)
-	$(MV) $(MVFLAGS) $(DEPS1) $(DEPS2) $(OBJ_DIR)
+	$(MV) $(MVFLAGS) $(DEPS1) $(DEPS2) $(DEPSN) $(OBJ_DIR)
 
 clean:
-	$(RM) $(EXEC1) $(DEPS1) $(EXEC2) $(DEPS2)
+	$(RM) $(EXEC1) $(DEPS1) $(EXEC2) $(DEPS2) $(DEPSN)
 
 # =============================================================================
 # vim:set nu:et:ts=4:sw=4:
