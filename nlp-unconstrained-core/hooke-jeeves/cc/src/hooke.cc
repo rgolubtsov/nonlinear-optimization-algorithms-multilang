@@ -184,13 +184,16 @@ unsigned int Hooke::hooke(const unsigned int nVars,
         iters++;
         iAdj++;
 
-        std::printf(
-            "\nAfter %5d funevals, f(x) =  %.4le at\n",
-            fe->getFunEvals(), fBefore
-        );
+        std::cout << "\n" // Not using here std::endl -
+                          // see http://en.cppreference.com/w/cpp/io/manip/endl
+                          // for the reason why.
+                  << "After " << std::setw(5) << fe->getFunEvals()
+                  << " funevals, f(x) =  " << std::setprecision(4)
+                  << std::scientific << fBefore << " at\n";
 
         for (j = 0; j < nVars; j++) {
-            std::printf("   x[%2d] = %.4le\n", j, xBefore[j]);
+            std::cout << "   x[" << std::setw(2) << j << "] = " << xBefore[j]
+                      << "\n";
         }
 
         // Find best new point, one coord at a time.
@@ -314,14 +317,15 @@ int main(void) {
 
     jj = h->hooke(nVars, startPt, endPt, rho, epsilon, iterMax);
 
-    std::printf("\n\n\nHOOKE USED %d ITERATIONS, AND RETURNED\n", jj);
+    std::cout << "\n\n\nHOOKE USED " << jj << " ITERATIONS, AND RETURNED\n";
 
     for (i = 0; i < nVars; i++) {
-        std::printf("x[%3d] = %15.7le \n", i, endPt[i]);
+        std::cout << "x[" << std::setw(3) << i << "] = " << std::setw(15)
+                  << std::setprecision(7) << endPt[i] << " \n";
     }
 
 #ifdef WOODS
-    std::puts("True answer: f(1, 1, 1, 1) = 0.");
+    std::cout << "True answer: f(1, 1, 1, 1) = 0." << std::endl;
 #endif
 
     // Destructing the Hooke class instance.
