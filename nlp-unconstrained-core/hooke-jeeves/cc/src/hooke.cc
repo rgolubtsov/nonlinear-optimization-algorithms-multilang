@@ -154,7 +154,7 @@ unsigned int Hooke::hooke(const unsigned int nVars,
     for (i = 0; i < nVars; i++) {
         newX[i] = xBefore[i] = startPt[i];
 
-        delta[i] = fabs(startPt[i] * rho);
+        delta[i] = std::fabs(startPt[i] * rho);
 
         if (delta[i] == 0.0) {
             delta[i] = rho;
@@ -184,13 +184,16 @@ unsigned int Hooke::hooke(const unsigned int nVars,
         iters++;
         iAdj++;
 
-        printf(
-            "\nAfter %5d funevals, f(x) =  %.4le at\n",
-            fe->getFunEvals(), fBefore
-        );
+        std::cout << "\n" // Not using here std::endl -
+                          // see http://en.cppreference.com/w/cpp/io/manip/endl
+                          // for the reason why.
+                  << "After " << std::setw(5) << fe->getFunEvals()
+                  << " funevals, f(x) =  " << std::setprecision(4)
+                  << std::scientific << fBefore << " at\n";
 
         for (j = 0; j < nVars; j++) {
-            printf("   x[%2d] = %.4le\n", j, xBefore[j]);
+            std::cout << "   x[" << std::setw(2) << j << "] = " << xBefore[j]
+                      << "\n";
         }
 
         // Find best new point, one coord at a time.
@@ -209,9 +212,9 @@ unsigned int Hooke::hooke(const unsigned int nVars,
             for (i = 0; i < nVars; i++) {
                 // Firstly, arrange the sign of delta[].
                 if (newX[i] <= xBefore[i]) {
-                    delta[i] = 0.0 - fabs(delta[i]);
+                    delta[i] = 0.0 - std::fabs(delta[i]);
                 } else {
-                    delta[i] = fabs(delta[i]);
+                    delta[i] = std::fabs(delta[i]);
                 }
 
                 // Now, move further in this direction.
@@ -239,8 +242,8 @@ unsigned int Hooke::hooke(const unsigned int nVars,
             for (i = 0; i < nVars; i++) {
                 keep = 1;
 
-                if (fabs(newX[i] - xBefore[i])
-                    > (ZERO_POINT_FIVE * fabs(delta[i]))) {
+                if (std::fabs(newX[i] - xBefore[i])
+                    > (ZERO_POINT_FIVE * std::fabs(delta[i]))) {
 
                     break;
                 } else {
@@ -314,14 +317,15 @@ int main(void) {
 
     jj = h->hooke(nVars, startPt, endPt, rho, epsilon, iterMax);
 
-    printf("\n\n\nHOOKE USED %d ITERATIONS, AND RETURNED\n", jj);
+    std::cout << "\n\n\nHOOKE USED " << jj << " ITERATIONS, AND RETURNED\n";
 
     for (i = 0; i < nVars; i++) {
-        printf("x[%3d] = %15.7le \n", i, endPt[i]);
+        std::cout << "x[" << std::setw(3) << i << "] = " << std::setw(15)
+                  << std::setprecision(7) << endPt[i] << " \n";
     }
 
 #ifdef WOODS
-    printf("True answer: f(1, 1, 1, 1) = 0.\n");
+    std::cout << "True answer: f(1, 1, 1, 1) = 0." << std::endl;
 #endif
 
     // Destructing the Hooke class instance.

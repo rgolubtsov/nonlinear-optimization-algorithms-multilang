@@ -12,8 +12,9 @@
  */
 
 #include <cstdlib>
+#include <iostream>
+#include <iomanip>
 #include <cmath>
-#include <cstdio>
 
 /**
  * The <code>NLPUCCoreHooke</code> namespace is used as a container
