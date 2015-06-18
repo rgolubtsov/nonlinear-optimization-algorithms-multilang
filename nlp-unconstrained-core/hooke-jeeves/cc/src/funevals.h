@@ -11,6 +11,9 @@
  * ============================================================================
  */
 
+#ifndef __CC__FUNEVALS_H
+#define __CC__FUNEVALS_H
+
 /**
  * The <code>NLPUCCoreHooke</code> namespace is used as a container
  * for the <code>FunEvals</code> class.
@@ -55,6 +58,8 @@ public:
 };
 
 } // namespace NLPUCCoreHooke
+
+#endif // __CC__FUNEVALS_H
 
 // ============================================================================
 // vim:set nu:et:ts=4:sw=4:

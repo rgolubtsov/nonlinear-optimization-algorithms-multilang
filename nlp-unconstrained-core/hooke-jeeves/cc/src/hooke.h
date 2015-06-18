@@ -11,6 +11,9 @@
  * ============================================================================
  */
 
+#ifndef __CC__HOOKE_H
+#define __CC__HOOKE_H
+
 #include <cstdlib>
 #include <iostream>
 #include <iomanip>
@@ -140,6 +143,8 @@ public:
 };
 
 } // namespace NLPUCCoreHooke
+
+#endif // __CC__HOOKE_H
 
 // ============================================================================
 // vim:set nu:et:ts=4:sw=4:
