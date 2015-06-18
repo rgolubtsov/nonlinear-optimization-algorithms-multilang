@@ -23,9 +23,15 @@ BIN_DIR = ../bin
 OBJ_DIR = ../obj
 
 # Specify flags and other vars here.
+# The following standards-compliance options work well with g++ 5.1.0.
 #CXX_STD = c++03 # Same as c++98, same as -ansi .
-CXX_STD = c++11
+#CXX_STD = c++11
 #CXX_STD = c++14
+
+# Travis CI g++ (4.6.3) doesn't know about the -std=c++14 (and c++11) option.
+# Using the following options instead.
+#CXX_STD = c++0x
+CXX_STD = c++1y
 
 CXXFLAGS = -Wall -pedantic -std=$(CXX_STD) -O2
 LDLIBS   = -lstdc++
