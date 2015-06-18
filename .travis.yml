@@ -71,7 +71,7 @@ script:
     ## Returning to the previous working dir.
     - cd - && ls -al
 
-    ## Building the Hooke and Jeeves alg as the ISO C++ (C++98/03/11) impl.
+    ## Building the Hooke and Jeeves alg as the ISO C++ (C++98/03/11/14) impl.
     - cd cc && ls -al
             && make clean
             && make clean
