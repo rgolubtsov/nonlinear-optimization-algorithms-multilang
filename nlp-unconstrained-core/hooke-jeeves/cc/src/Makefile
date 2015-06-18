@@ -24,8 +24,8 @@ OBJ_DIR = ../obj
 
 # Specify flags and other vars here.
 #CXX_STD = c++03 # Same as c++98, same as -ansi .
-#CXX_STD = c++11
-CXX_STD = c++14
+CXX_STD = c++11
+#CXX_STD = c++14
 
 CXXFLAGS = -Wall -pedantic -std=$(CXX_STD) -O2
 LDLIBS   = -lstdc++
