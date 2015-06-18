@@ -29,9 +29,8 @@ OBJ_DIR = ../obj
 #CXX_STD = c++14
 
 # Travis CI g++ (4.6.3) doesn't know about the -std=c++14 (and c++11) option.
-# Using the following options instead.
-#CXX_STD = c++0x
-CXX_STD = c++1y
+# Using the following option instead.
+CXX_STD = c++0x
 
 CXXFLAGS = -Wall -pedantic -std=$(CXX_STD) -O2
 LDLIBS   = -lstdc++
