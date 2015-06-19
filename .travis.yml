@@ -127,7 +127,7 @@ script:
     ## Returning to the previous working dir.
     - cd - && ls -al
 
-    ## Building the Hooke and Jeeves alg as the FORTRAN 77 impl.
+    ## Building the Hooke and Jeeves alg as the FORTRAN 77 (MIL-STD 1753) impl.
     - cd f77 && ls -al
              && make clean
              && make clean
@@ -141,7 +141,7 @@ script:
     ## Returning to the previous working dir.
     - cd - && ls -al
 
-    ## Building the Hooke and Jeeves alg as the Fortran 95 impl.
+    ## Building the Hooke and Jeeves alg as the ISO Fortran 95 impl.
     - cd f95 && ls -al
              && make clean
              && make clean

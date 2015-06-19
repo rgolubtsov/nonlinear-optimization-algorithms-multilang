@@ -21,7 +21,7 @@ OBJ_DIR = ../obj
 
 # Specify flags and other vars here.
 CC      = gfortran
-CFLAGS  = -Wall -cpp
+CFLAGS  = -Wall -cpp -pedantic -std=f95 -O2
 
 MV      = mv
 MVFLAGS = -v

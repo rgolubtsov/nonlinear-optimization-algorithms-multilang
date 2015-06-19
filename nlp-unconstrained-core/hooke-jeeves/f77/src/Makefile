@@ -20,7 +20,7 @@ OBJ_DIR = ../obj
 
 # Specify flags and other vars here.
 CC      = gfortran
-CFLAGS  = -Wall -cpp
+CFLAGS  = -Wall -cpp -ffixed-form -pedantic -std=legacy -O2
 
 MV      = mv
 MVFLAGS = -v

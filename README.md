@@ -7,8 +7,8 @@
 * The Hooke and Jeeves :small_blue_diamond: Perl 5 implementation
 * The Hooke and Jeeves :small_blue_diamond: JavaScript implementation
 * The Hooke and Jeeves :small_blue_diamond: Java implementation
-* The Hooke and Jeeves :small_blue_diamond: FORTRAN 77 implementation
-* The Hooke and Jeeves :small_blue_diamond: Fortran 95 implementation
+* The Hooke and Jeeves :small_blue_diamond: FORTRAN 77 (MIL-STD 1753) implementation
+* The Hooke and Jeeves :small_blue_diamond: ISO Fortran 95 implementation
 * The Hooke and Jeeves :small_blue_diamond: Objective-C 2.0 implementation
 
 ---
@@ -47,13 +47,13 @@ The project has the following directory structure and logical parts and items.
 |   |   |       |-- < sources >
 |   |   |       `-- Makefile
 |   |   |
-|   |   |-- f77                        <== FORTRAN 77 impl. container
+|   |   |-- f77                        <== FORTRAN 77 (MIL-STD 1753) impl. container
 |   |   |   |-- Makefile
 |   |   |   `-- src
 |   |   |       |-- < sources >
 |   |   |       `-- Makefile
 |   |   |
-|   |   |-- f95                        <== Fortran 95 impl. container
+|   |   |-- f95                        <== ISO Fortran 95 impl. container
 |   |   |   |-- Makefile
 |   |   |   `-- src
 |   |   |       |-- < sources >
