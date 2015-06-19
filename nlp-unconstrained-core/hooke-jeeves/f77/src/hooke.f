@@ -72,6 +72,11 @@ C     WOODS -- A LA MORE, GARBOW AND HILLSTROM (TOMS ALGORITHM 566).
      *       + 10 * (T4 * T4) + T5 * T5 / 10.
 #endif
 
+          IF (N .EQ. 0) THEN
+              PRINT 10
+10            FORMAT ('WARNING: THE NUMBER OF COORDINATES OF X = 0.')
+          END IF
+
           RETURN
       END
 

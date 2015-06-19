@@ -43,8 +43,8 @@ module proto__
     interface
         ! The objective function f(x,n).
         real(kind(1.d0)) function f(x, n)
-            real(kind(1.d0)), intent(in)     :: x(:)
-            integer, intent(inout), optional :: n
+            real(kind(1.d0)), intent(in) :: x(:)
+            integer, intent(in)          :: n
         end function f
 
         ! The helper function best_nearby(...).
@@ -79,7 +79,7 @@ real(DP) function f(x, n)
     real(DP), intent(in) :: x(:)
 
     ! Arg. The number of coordinates of x.
-    integer, intent(inout), optional :: n
+    integer, intent(in) :: n
 
 #ifndef WOODS
 ! Rosenbrock's classic parabolic valley ("banana") function.
@@ -121,6 +121,10 @@ real(DP) function f(x, n)
        + 90 * (t1 * t1) + t2 * t2 &
        + 10 * (t4 * t4) + t5 * t5 / 10.
 #endif
+
+    if (n == 0) then
+        write (*, '("Warning: The number of coordinates of x = 0.")')
+    end if
 end function f
 
 ! === Helper function.
@@ -159,7 +163,7 @@ real(DP) function best_nearby(delta, point, prevbest, nvars)
     do i = 1, nvars
         z(i) = point(i) + delta(i)
 
-        ftmp = f(z)
+        ftmp = f(z, nvars)
 
         if (ftmp < minf) then
             minf = ftmp
@@ -167,7 +171,7 @@ real(DP) function best_nearby(delta, point, prevbest, nvars)
             delta(i) = 0.0 - delta(i)
             z(i)     = point(i) + delta(i)
 
-            ftmp = f(z)
+            ftmp = f(z, nvars)
 
             if (ftmp < minf) then
                 minf = ftmp
@@ -240,7 +244,7 @@ integer function hooke(nvars, startpt, endpt, rho, epsilon, itermax)
     steplength = rho
     iters      = 0
 
-    fbefore = f(newx)
+    fbefore = f(newx, nvars)
 
     newf = fbefore
 
