@@ -2,7 +2,7 @@
 
 **Note:** The Travis CI build status badge above is applicable to the following packages ONLY (for the moment):
 * The (original) Hooke and Jeeves :small_blue_diamond: K&R C implementation
-* The Hooke and Jeeves :small_blue_diamond: ANSI C (C89/90/95) implementation
+* The Hooke and Jeeves :small_blue_diamond: ISO C (C99/11) implementation
 * The Hooke and Jeeves :small_blue_diamond: ISO C++ (C++98/03/11/14) implementation
 * The Hooke and Jeeves :small_blue_diamond: Perl 5 implementation
 * The Hooke and Jeeves :small_blue_diamond: JavaScript implementation
@@ -35,7 +35,7 @@ The project has the following directory structure and logical parts and items.
 |   |                                      (including test problems)
 |   |-- hooke-jeeves                   <== Hooke-Jeeves algorithm container
 |   |   |                                  (all implementations)
-|   |   |-- c                          <== ANSI C (C89/90/95) impl. container
+|   |   |-- c                          <== ISO C (C99/11) impl. container
 |   |   |   |-- Makefile
 |   |   |   `-- src
 |   |   |       |-- < sources >

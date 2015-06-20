@@ -57,7 +57,7 @@ script:
     ## Returning to the previous working dir.
     - cd - && ls -al
 
-    ## Building the Hooke and Jeeves alg as the ANSI C (C89/90/95) impl.
+    ## Building the Hooke and Jeeves alg as the ISO C (C99/11) impl.
     - cd c && ls -al
            && make clean
            && make clean
