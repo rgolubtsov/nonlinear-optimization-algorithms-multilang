@@ -28,9 +28,14 @@ OBJ_DIR = ../obj
 #       just like this: "#CC = tcc" - and it will be used automatically.
 #CC     = tcc
 
+# The following standards-compliance options work well with gcc 5.1.0.
 #C_STD = c90 # Same as c89, same as -ansi .
 #C_STD = c99
-C_STD = c11
+#C_STD = c11
+
+# Travis CI gcc (4.6.3) doesn't know about the -std=c11 option.
+# Using the following option instead.
+C_STD = c1x
 
 CFLAGS = -Wall -pedantic -O2 -std=$(C_STD) # The -std=XXX option is not allowed
                                            # when using tcc.
