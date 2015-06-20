@@ -20,12 +20,16 @@ const CGFloat ONE_HUNDRED_POINT_ZERO = 100.0;
 // The Rosenbrock class.
 @implementation Rosenbrock
 // The user-supplied objective function f(x,n).
-+ (CGFloat) f : (CGFloat *) x n__ : (NSUInteger) n fClsPtr__ : (id) fClsPtr {
++ (CGFloat) f : (CGFloat *) x
+          n__ : (NSUInteger) n
+  cFunEvals__ : (id) cFunEvals {
+
     CGFloat a;
     CGFloat b;
     CGFloat c;
 
-    [(FunEvals *) fClsPtr setFunEvals : [(FunEvals *) fClsPtr funEvals] + 1];
+    [(FunEvals *) cFunEvals setFunEvals :
+    [(FunEvals *) cFunEvals funEvals] + 1];
 
     a = x[INDEX_ZERO];
     b = x[INDEX_ONE];

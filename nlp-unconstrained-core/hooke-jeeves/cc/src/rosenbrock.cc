@@ -23,14 +23,14 @@ const double ONE_HUNDRED_POINT_ZERO = 100.0;
 // The user-supplied objective function f(x,n).
 double Rosenbrock::f(const double *x,
                      const unsigned int n,
-                     const void *fClsPtr) {
+                     const void *cFunEvals) {
 
     double a;
     double b;
     double c;
 
-    ((FunEvals *) fClsPtr)->setFunEvals(
-    ((FunEvals *) fClsPtr)->getFunEvals() + 1);
+    ((FunEvals *) cFunEvals)->setFunEvals(
+    ((FunEvals *) cFunEvals)->getFunEvals() + 1);
 
     a = x[INDEX_ZERO];
     b = x[INDEX_ONE];

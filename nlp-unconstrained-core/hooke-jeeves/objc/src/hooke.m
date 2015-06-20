@@ -55,7 +55,7 @@ const CGFloat    ZERO_POINT_FIVE     =  0.5;
                point__ : (CGFloat *) point
             prevBest__ : (CGFloat) prevBest
                nVars__ : (NSUInteger) nVars
-             fClsPtr__ : (id) fClsPtr {
+           cFunEvals__ : (id) cFunEvals {
 
     CGFloat minF;
     CGFloat z[VARS];
@@ -73,9 +73,9 @@ const CGFloat    ZERO_POINT_FIVE     =  0.5;
         z[i] = point[i] + delta[i];
 
 #ifndef WOODS
-        fTmp = [Rosenbrock f : z n__ : nVars fClsPtr__ : fClsPtr];
+        fTmp = [Rosenbrock f : z n__ : nVars cFunEvals__ : cFunEvals];
 #else
-        fTmp = [Woods      f : z n__ : nVars fClsPtr__ : fClsPtr];
+        fTmp = [Woods      f : z n__ : nVars cFunEvals__ : cFunEvals];
 #endif
 
         if (fTmp < minF) {
@@ -85,9 +85,9 @@ const CGFloat    ZERO_POINT_FIVE     =  0.5;
             z[i]     = point[i] + delta[i];
 
 #ifndef WOODS
-            fTmp = [Rosenbrock f : z n__ : nVars fClsPtr__ : fClsPtr];
+            fTmp = [Rosenbrock f : z n__ : nVars cFunEvals__ : cFunEvals];
 #else
-            fTmp = [Woods      f : z n__ : nVars fClsPtr__ : fClsPtr];
+            fTmp = [Woods      f : z n__ : nVars cFunEvals__ : cFunEvals];
 #endif
 
             if (fTmp < minF) {
@@ -145,9 +145,9 @@ const CGFloat    ZERO_POINT_FIVE     =  0.5;
     FunEvals *fe = [[FunEvals alloc] init];
 
 #ifndef WOODS
-    fBefore = [Rosenbrock f : newX n__ : nVars fClsPtr__ : fe];
+    fBefore = [Rosenbrock f : newX n__ : nVars cFunEvals__ : fe];
 #else
-    fBefore = [Woods      f : newX n__ : nVars fClsPtr__ : fe];
+    fBefore = [Woods      f : newX n__ : nVars cFunEvals__ : fe];
 #endif
 
     newF = fBefore;
@@ -174,7 +174,7 @@ const CGFloat    ZERO_POINT_FIVE     =  0.5;
                         point__ : newX
                      prevBest__ : fBefore
                         nVars__ : nVars
-                      fClsPtr__ : fe];
+                    cFunEvals__ : fe];
 
         // If we made some improvements, pursue that direction.
         keep = 1;
@@ -202,7 +202,7 @@ const CGFloat    ZERO_POINT_FIVE     =  0.5;
                             point__ : newX
                          prevBest__ : fBefore
                             nVars__ : nVars
-                          fClsPtr__ : fe];
+                        cFunEvals__ : fe];
 
             // If the further (optimistic) move was bad....
             if (newF >= fBefore) {

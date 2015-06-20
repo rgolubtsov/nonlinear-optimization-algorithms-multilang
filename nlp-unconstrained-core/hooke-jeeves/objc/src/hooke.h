@@ -72,20 +72,20 @@ extern const CGFloat    ZERO_POINT_FIVE;
  * <br />
  * <br />Given a point, look for a better one nearby, one coord at a time.
  *
- * @param delta    The delta between <code>prevBest</code>
- *                 and <code>point</code>.
- * @param point    The coordinate from where to begin.
- * @param prevBest The previous best-valued coordinate.
- * @param nVars    The number of variables.
- * @param fClsPtr  The class instance containing the objective function.
+ * @param delta     The delta between <code>prevBest</code>
+ *                  and <code>point</code>.
+ * @param point     The coordinate from where to begin.
+ * @param prevBest  The previous best-valued coordinate.
+ * @param nVars     The number of variables.
+ * @param cFunEvals The number of function evaluations container (FunEvals *).
  *
- * @returns The objective function value at a nearby.
+ * @return The objective function value at a nearby.
  */
 - (CGFloat) bestNearby : (CGFloat *) delta
                point__ : (CGFloat *) point
             prevBest__ : (CGFloat) prevBest
                nVars__ : (NSUInteger) nVars
-             fClsPtr__ : (id) fClsPtr;
+           cFunEvals__ : (id) cFunEvals;
 
 /**
  * Main optimization method.
@@ -99,7 +99,7 @@ extern const CGFloat    ZERO_POINT_FIVE;
  * @param epsilon The epsilon value.
  * @param iterMax The maximum number of iterations.
  *
- * @returns The number of iterations used to find the local minimum.
+ * @return The number of iterations used to find the local minimum.
  */
 - (NSUInteger) hooke : (NSUInteger) nVars
            startPt__ : (CGFloat *) startPt

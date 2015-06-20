@@ -48,11 +48,12 @@ public:
      * <br />Woods &ndash; a la More, Garbow &amp; Hillstrom
      * (TOMS algorithm 566).
      *
-     * @param x       The point at which f(x) should be evaluated.
-     * @param n       The number of coordinates of <code>x</code>.
-     * @param fClsPtr The class instance containing the objective function.
+     * @param x         The point at which f(x) should be evaluated.
+     * @param n         The number of coordinates of <code>x</code>.
+     * @param cFunEvals The number of function evaluations container
+     *                  (FunEvals *).
      *
-     * @returns The objective function value.
+     * @return The objective function value.
      */
     static double f(const double *, const unsigned int, const void *);
 

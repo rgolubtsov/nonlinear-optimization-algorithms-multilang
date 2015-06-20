@@ -24,7 +24,7 @@ const unsigned int TEN         = 10;
 const double       TEN_POINT   = 10.;
 
 // The user-supplied objective function f(x,n).
-double Woods::f(const double *x, const unsigned int n, const void *fClsPtr) {
+double Woods::f(const double *x, const unsigned int n, const void *cFunEvals) {
     double s1;
     double s2;
     double s3;
@@ -34,8 +34,8 @@ double Woods::f(const double *x, const unsigned int n, const void *fClsPtr) {
     double t4;
     double t5;
 
-    ((FunEvals *) fClsPtr)->setFunEvals(
-    ((FunEvals *) fClsPtr)->getFunEvals() + 1);
+    ((FunEvals *) cFunEvals)->setFunEvals(
+    ((FunEvals *) cFunEvals)->getFunEvals() + 1);
 
     s1 = x[INDEX_ONE] - x[INDEX_ZERO] * x[INDEX_ZERO];
     s2 = 1 - x[INDEX_ZERO];

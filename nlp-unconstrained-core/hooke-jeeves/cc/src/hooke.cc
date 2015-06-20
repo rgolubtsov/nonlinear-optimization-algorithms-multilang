@@ -55,7 +55,7 @@ double Hooke::bestNearby(double *delta,
                          double *point,
                          const double prevBest,
                          const unsigned int nVars,
-                         const void *fClsPtr) {
+                         const void *cFunEvals) {
 
     double minF;
     double z[VARS];
@@ -75,11 +75,11 @@ double Hooke::bestNearby(double *delta,
 #ifndef WOODS
         Rosenbrock r;
 
-        fTmp = r.f(z, nVars, fClsPtr);
+        fTmp = r.f(z, nVars, cFunEvals);
 #else
         Woods w;
 
-        fTmp = w.f(z, nVars, fClsPtr);
+        fTmp = w.f(z, nVars, cFunEvals);
 #endif
 
         if (fTmp < minF) {
@@ -89,9 +89,9 @@ double Hooke::bestNearby(double *delta,
             z[i]     = point[i] + delta[i];
 
 #ifndef WOODS
-            fTmp = r.f(z, nVars, fClsPtr);
+            fTmp = r.f(z, nVars, cFunEvals);
 #else
-            fTmp = w.f(z, nVars, fClsPtr);
+            fTmp = w.f(z, nVars, cFunEvals);
 #endif
 
             if (fTmp < minF) {
@@ -245,7 +245,7 @@ unsigned int Hooke::hooke(const unsigned int nVars,
         endPt[i] = xBefore[i];
     }
 
-    // Destructing the FunEvals class instance.
+    // Destroying the FunEvals class instance.
     delete fe;
 
     return iters;
@@ -308,7 +308,7 @@ int main(void) {
     std::cout << "True answer: f(1, 1, 1, 1) = 0." << std::endl;
 #endif
 
-    // Destructing the Hooke class instance.
+    // Destroying the Hooke class instance.
     delete h;
 
     return EXIT_SUCCESS;

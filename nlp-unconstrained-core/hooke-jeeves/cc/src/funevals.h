@@ -39,7 +39,7 @@ public:
     /**
      * Getter for <code>funEvals</code>.
      *
-     * @returns The number of function evaluations.
+     * @return The number of function evaluations.
      */
     unsigned int getFunEvals();
 
