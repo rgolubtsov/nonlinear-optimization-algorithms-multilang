@@ -22,17 +22,11 @@
  */
 namespace NLPUCCoreHooke {
 
-/** Helper constant. */
+/** Helper constants. */
 extern const unsigned int ONE_HUNDRED;
-
-/** Helper constant. */
 extern const unsigned int NINETY;
-
-/** Helper constant. */
 extern const unsigned int TEN;
-
-/** Helper constant. */
-extern const double TEN_POINT;
+extern const double       TEN_POINT;
 
 /**
  * The <code>Woods</code> class is responsible for solving a nonlinear

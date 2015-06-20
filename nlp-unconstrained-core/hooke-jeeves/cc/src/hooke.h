@@ -48,38 +48,18 @@ extern const double EPSMIN;
 /** Constant. The maximum number of iterations. */
 extern const unsigned int IMAX;
 
-/** Helper constant. */
+/** Helper constants. */
 extern const unsigned int INDEX_ZERO;
-
-/** Helper constant. */
 extern const unsigned int INDEX_ONE;
-
-/** Helper constant. */
 extern const unsigned int INDEX_TWO;
-
-/** Helper constant. */
 extern const unsigned int INDEX_THREE;
-
-/** Helper constant. */
 extern const unsigned int TWO;
-
-/** Helper constant. */
 extern const unsigned int FOUR;
-
-/** Helper constant. */
-extern const double MINUS_ONE_POINT_TWO;
-
-/** Helper constant. */
-extern const double ONE_POINT_ZERO;
-
-/** Helper constant. */
-extern const int MINUS_THREE;
-
-/** Helper constant. */
-extern const int MINUS_ONE;
-
-/** Helper constant. */
-extern const double ZERO_POINT_FIVE;
+extern const double       MINUS_ONE_POINT_TWO;
+extern const double       ONE_POINT_ZERO;
+extern const int          MINUS_THREE;
+extern const int          MINUS_ONE;
+extern const double       ZERO_POINT_FIVE;
 
 /**
  * The <code>Hooke</code> class contains methods for solving a nonlinear

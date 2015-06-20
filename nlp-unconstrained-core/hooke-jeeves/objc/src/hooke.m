@@ -35,38 +35,18 @@ const CGFloat EPSMIN = 1E-6;
 // Constant. The maximum number of iterations.
 const NSUInteger IMAX = 5000;
 
-// Helper constant.
-const NSUInteger INDEX_ZERO = 0;
-
-// Helper constant.
-const NSUInteger INDEX_ONE = 1;
-
-// Helper constant.
-const NSUInteger INDEX_TWO = 2;
-
-// Helper constant.
-const NSUInteger INDEX_THREE = 3;
-
-// Helper constant.
-const NSUInteger TWO = 2;
-
-// Helper constant.
-const NSUInteger FOUR = 4;
-
-// Helper constant.
-const CGFloat MINUS_ONE_POINT_TWO = -1.2;
-
-// Helper constant.
-const CGFloat ONE_POINT_ZERO = 1.0;
-
-// Helper constant.
-const NSInteger MINUS_THREE = -3;
-
-// Helper constant.
-const NSInteger MINUS_ONE = -1;
-
-// Helper constant.
-const CGFloat ZERO_POINT_FIVE = 0.5;
+// Helper constants.
+const NSUInteger INDEX_ZERO          =  0;
+const NSUInteger INDEX_ONE           =  1;
+const NSUInteger INDEX_TWO           =  2;
+const NSUInteger INDEX_THREE         =  3;
+const NSUInteger TWO                 =  2;
+const NSUInteger FOUR                =  4;
+const CGFloat    MINUS_ONE_POINT_TWO = -1.2;
+const CGFloat    ONE_POINT_ZERO      =  1.0;
+const NSInteger  MINUS_THREE         = -3;
+const NSInteger  MINUS_ONE           = -1;
+const CGFloat    ZERO_POINT_FIVE     =  0.5;
 
 // The Hooke class.
 @implementation Hooke

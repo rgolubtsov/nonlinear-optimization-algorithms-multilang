@@ -43,38 +43,18 @@ extern const CGFloat EPSMIN;
 /** Constant. The maximum number of iterations. */
 extern const NSUInteger IMAX;
 
-/** Helper constant. */
+/** Helper constants. */
 extern const NSUInteger INDEX_ZERO;
-
-/** Helper constant. */
 extern const NSUInteger INDEX_ONE;
-
-/** Helper constant. */
 extern const NSUInteger INDEX_TWO;
-
-/** Helper constant. */
 extern const NSUInteger INDEX_THREE;
-
-/** Helper constant. */
 extern const NSUInteger TWO;
-
-/** Helper constant. */
 extern const NSUInteger FOUR;
-
-/** Helper constant. */
-extern const CGFloat MINUS_ONE_POINT_TWO;
-
-/** Helper constant. */
-extern const CGFloat ONE_POINT_ZERO;
-
-/** Helper constant. */
-extern const NSInteger MINUS_THREE;
-
-/** Helper constant. */
-extern const NSInteger MINUS_ONE;
-
-/** Helper constant. */
-extern const CGFloat ZERO_POINT_FIVE;
+extern const CGFloat    MINUS_ONE_POINT_TWO;
+extern const CGFloat    ONE_POINT_ZERO;
+extern const NSInteger  MINUS_THREE;
+extern const NSInteger  MINUS_ONE;
+extern const CGFloat    ZERO_POINT_FIVE;
 
 /**
  * The <code>Hooke</code> class contains methods for solving a nonlinear

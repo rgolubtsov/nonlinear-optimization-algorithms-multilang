@@ -13,17 +13,11 @@
 
 #import "hooke.h"
 
-/** Helper constant. */
+/** Helper constants. */
 extern const NSUInteger ONE_HUNDRED;
-
-/** Helper constant. */
 extern const NSUInteger NINETY;
-
-/** Helper constant. */
 extern const NSUInteger TEN;
-
-/** Helper constant. */
-extern const CGFloat TEN_POINT;
+extern const CGFloat    TEN_POINT;
 
 /**
  * The <code>Woods</code> class is responsible for solving a nonlinear

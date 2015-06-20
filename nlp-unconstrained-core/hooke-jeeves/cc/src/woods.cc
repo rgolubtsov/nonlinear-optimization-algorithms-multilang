@@ -17,17 +17,11 @@
 // The NLPUCCoreHooke namespace.
 namespace NLPUCCoreHooke {
 
-// Helper constant.
+// Helper constants.
 const unsigned int ONE_HUNDRED = 100;
-
-// Helper constant.
-const unsigned int NINETY = 90;
-
-// Helper constant.
-const unsigned int TEN = 10;
-
-// Helper constant.
-const double TEN_POINT = 10.;
+const unsigned int NINETY      = 90;
+const unsigned int TEN         = 10;
+const double       TEN_POINT   = 10.;
 
 // The user-supplied objective function f(x,n).
 double Woods::f(const double *x, const unsigned int n, const void *fClsPtr) {

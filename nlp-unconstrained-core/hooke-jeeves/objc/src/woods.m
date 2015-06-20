@@ -14,17 +14,11 @@
 #import "woods.h"
 #import "funevals.h"
 
-// Helper constant.
+// Helper constants.
 const NSUInteger ONE_HUNDRED = 100;
-
-// Helper constant.
-const NSUInteger NINETY = 90;
-
-// Helper constant.
-const NSUInteger TEN = 10;
-
-// Helper constant.
-const CGFloat TEN_POINT = 10.;
+const NSUInteger NINETY      = 90;
+const NSUInteger TEN         = 10;
+const CGFloat    TEN_POINT   = 10.;
 
 // The Woods class.
 @implementation Woods

@@ -37,38 +37,18 @@ const double EPSMIN = 1E-6;
 // Constant. The maximum number of iterations.
 const unsigned int IMAX = 5000;
 
-// Helper constant.
-const unsigned int INDEX_ZERO = 0;
-
-// Helper constant.
-const unsigned int INDEX_ONE = 1;
-
-// Helper constant.
-const unsigned int INDEX_TWO = 2;
-
-// Helper constant.
-const unsigned int INDEX_THREE = 3;
-
-// Helper constant.
-const unsigned int TWO = 2;
-
-// Helper constant.
-const unsigned int FOUR = 4;
-
-// Helper constant.
-const double MINUS_ONE_POINT_TWO = -1.2;
-
-// Helper constant.
-const double ONE_POINT_ZERO = 1.0;
-
-// Helper constant.
-const int MINUS_THREE = -3;
-
-// Helper constant.
-const int MINUS_ONE = -1;
-
-// Helper constant.
-const double ZERO_POINT_FIVE = 0.5;
+// Helper constants.
+const unsigned int INDEX_ZERO          =  0;
+const unsigned int INDEX_ONE           =  1;
+const unsigned int INDEX_TWO           =  2;
+const unsigned int INDEX_THREE         =  3;
+const unsigned int TWO                 =  2;
+const unsigned int FOUR                =  4;
+const double       MINUS_ONE_POINT_TWO = -1.2;
+const double       ONE_POINT_ZERO      =  1.0;
+const int          MINUS_THREE         = -3;
+const int          MINUS_ONE           = -1;
+const double       ZERO_POINT_FIVE     =  0.5;
 
 // Helper method bestNearby(...).
 double Hooke::bestNearby(double *delta,
