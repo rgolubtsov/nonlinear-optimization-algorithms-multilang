@@ -36,8 +36,11 @@ const CGFloat    TEN_POINT   = 10.;
     CGFloat t4;
     CGFloat t5;
 
-    [(FunEvals *) cFunEvals setFunEvals :
-    [(FunEvals *) cFunEvals funEvals] + 1];
+    // Note: Since we're on Objective-C 2.0,
+    //       using a "dot syntax" to access props.
+//    [(FunEvals *) cFunEvals setFunEvals  :
+//    [(FunEvals *) cFunEvals    funEvals] + 1];
+    ((FunEvals *) cFunEvals).funEvals++;
 
     s1 = x[INDEX_ONE] - x[INDEX_ZERO] * x[INDEX_ZERO];
     s2 = 1 - x[INDEX_ZERO];

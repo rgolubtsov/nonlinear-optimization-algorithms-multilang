@@ -28,8 +28,11 @@ const CGFloat ONE_HUNDRED_POINT_ZERO = 100.0;
     CGFloat b;
     CGFloat c;
 
-    [(FunEvals *) cFunEvals setFunEvals :
-    [(FunEvals *) cFunEvals funEvals] + 1];
+    // Note: Since we're on Objective-C 2.0,
+    //       using a "dot syntax" to access props.
+//    [(FunEvals *) cFunEvals setFunEvals  :
+//    [(FunEvals *) cFunEvals    funEvals] + 1];
+    ((FunEvals *) cFunEvals).funEvals++;
 
     a = x[INDEX_ZERO];
     b = x[INDEX_ONE];

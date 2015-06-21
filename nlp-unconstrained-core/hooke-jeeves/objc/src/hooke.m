@@ -142,7 +142,10 @@ const CGFloat    ZERO_POINT_FIVE     =  0.5;
     iters      = 0;
 
     // Instantiating the FunEvals class.
-    FunEvals *fe = [[FunEvals alloc] init];
+    // Note: Since there are no init args,
+    //       (simplier) instantiating the class through "new".
+//    FunEvals *fe = [[FunEvals alloc] init];
+    FunEvals *fe = [FunEvals new];
 
 #ifndef WOODS
     fBefore = [Rosenbrock f : newX n__ : nVars cFunEvals__ : fe];
@@ -152,13 +155,20 @@ const CGFloat    ZERO_POINT_FIVE     =  0.5;
 
     newF = fBefore;
 
+    NSUInteger funEvals__;
+
     while ((iters < iterMax) && (stepLength > epsilon)) {
         iters++;
         iAdj++;
 
+        // Note: Since we're on Objective-C 2.0,
+        //       using a "dot syntax" to access props.
+//        funEvals__ = [fe funEvals];
+        funEvals__ = fe.funEvals;
+
         printf(
             "\nAfter %5d funevals, f(x) =  %.4le at\n",
-            (unsigned int) [fe funEvals], fBefore
+            (unsigned int) funEvals__, fBefore
         );
 
         for (j = 0; j < nVars; j++) {
@@ -279,7 +289,10 @@ int main(void) {
     epsilon = EPSMIN;
 
     // Instantiating the Hooke class.
-    Hooke *h = [[Hooke alloc] init];
+    // Note: Since there are no init args,
+    //       (simplier) instantiating the class through "new".
+//    Hooke *h = [[Hooke alloc] init];
+    Hooke *h = [Hooke new];
 
     jj = [h hooke : nVars
         startPt__ : startPt
