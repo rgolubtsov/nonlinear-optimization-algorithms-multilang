@@ -19,12 +19,14 @@ BIN_DIR = ../bin
 OBJ_DIR = ../obj
 
 # Specify flags and other vars here.
-# Note: To use the default system C compiler (likely gcc, the GNU C Compiler)
-#       instead of tcc, simply comment out next line, just like this:
-#       "#CC = tcc" - and it will be used automatically.
+# Note: To use the system default C compiler (likely gcc, the GNU C Compiler)
+#       instead of tcc (Tiny C Compiler), simply comment out the next line,
+#       just like this: "#CC = tcc" - and it will be used automatically.
 #CC     = tcc
-CFLAGS = -Wall
-LDLIBS = -lm
+
+CFLAGS = -Wall -pedantic -O2 -Wtraditional
+#LDLIBS = -lm                                     # <== Needs only when linking
+                                                  #     through tcc.
 
 MV      = mv
 MVFLAGS = -v
