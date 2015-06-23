@@ -143,8 +143,8 @@
  * PARTICULAR PURPOSE.                                                       *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-#include <math.h>
 #include <stdio.h>
+#include <math.h>
 
 /** Constant. The maximum number of variables. */
 #define VARS 250
@@ -172,39 +172,11 @@
 #define IMAX 5000
 
 /** The number of function evaluations. */
-int funevals = 0;
+int FUNEVALS = 0;
 
-#ifdef WOODS
-    double f();
-#else
-    /**
-     * The user-supplied objective function f(x,n).
-     * <br />
-     * <br />Represents here the Rosenbrock's classic parabolic valley
-     * (&quot;banana&quot;) function.
-     *
-     * @param x The point at which f(x) should be evaluated.
-     * @param n The number of coordinates of <code>x</code>.
-     *
-     * @return The objective function value.
-     */
-    double f(x, n)
-    double x[VARS];
-    int    n; {
-        double a;
-        double b;
-        double c;
-
-        funevals++;
-
-        a = x[0];
-        b = x[1];
-
-        c = 100.0 * (b - (a * a)) * (b - (a * a));
-
-        return (c + ((1.0 - a) * (1.0 - a)));
-    }
-#endif
+/* Forward declaration for the objective function. */
+double
+f();
 
 /**
  * Helper function.
@@ -219,11 +191,12 @@ int funevals = 0;
  *
  * @return The objective function value at a nearby.
  */
-double best_nearby(delta, point, prevbest, nvars)
+double
+best_nearby(delta, point, prevbest, nvars)
 double delta[VARS];
 double point[VARS];
 double prevbest;
-int    nvars; {
+{
     double minf;
     double z[VARS];
     double ftmp;
@@ -232,32 +205,41 @@ int    nvars; {
 
     minf = prevbest;
 
-    for (i = 0; i < nvars; i++) {
+    for (i = 0; i < nvars; i++)
+    {
         z[i] = point[i];
     }
 
-    for (i = 0; i < nvars; i++) {
+    for (i = 0; i < nvars; i++)
+    {
         z[i] = point[i] + delta[i];
 
         ftmp = f(z, nvars);
 
-        if (ftmp < minf) {
+        if (ftmp < minf)
+        {
             minf = ftmp;
-        } else {
+        }
+        else
+        {
             delta[i] = 0.0 - delta[i];
             z[i]     = point[i] + delta[i];
 
             ftmp = f(z, nvars);
 
-            if (ftmp < minf) {
+            if (ftmp < minf)
+            {
                 minf = ftmp;
-            } else {
+            }
+            else
+            {
                 z[i] = point[i];
             }
         }
     }
 
-    for (i = 0; i < nvars; i++) {
+    for (i = 0; i < nvars; i++)
+    {
         point[i] = z[i];
     }
 
@@ -278,13 +260,12 @@ int    nvars; {
  *
  * @return The number of iterations used to find the local minimum.
  */
-int hooke(nvars, startpt, endpt, rho, epsilon, itermax)
-int    nvars;
+hooke(nvars, startpt, endpt, rho, epsilon, itermax)
 double startpt[VARS];
 double endpt[VARS];
 double rho;
 double epsilon;
-int    itermax; {
+{
     int i;
     int iadj;
     int iters;
@@ -299,12 +280,14 @@ int    itermax; {
     double newf;
     double tmp;
 
-    for (i = 0; i < nvars; i++) {
+    for (i = 0; i < nvars; i++)
+    {
         newx[i] = xbefore[i] = startpt[i];
 
         delta[i] = fabs(startpt[i] * rho);
 
-        if (delta[i] == 0.0) {
+        if (delta[i] == 0.0)
+        {
             delta[i] = rho;
         }
     }
@@ -317,18 +300,21 @@ int    itermax; {
 
     newf = fbefore;
 
-    while ((iters < itermax) && (steplength > epsilon)) {
+    while ((iters < itermax) && (steplength > epsilon))
+    {
         iters++;
         iadj++;
 
-        printf("\nAfter %5d funevals, f(x) =  %.4le at\n", funevals, fbefore);
+        printf("\nAfter %5d funevals, f(x) =  %.4le at\n", FUNEVALS, fbefore);
 
-        for (j = 0; j < nvars; j++) {
+        for (j = 0; j < nvars; j++)
+        {
             printf("   x[%2d] = %.4le\n", j, xbefore[j]);
         }
 
         /* Find best new point, one coord at a time. */
-        for (i = 0; i < nvars; i++) {
+        for (i = 0; i < nvars; i++)
+        {
             newx[i] = xbefore[i];
         }
 
@@ -337,14 +323,19 @@ int    itermax; {
         /* If we made some improvements, pursue that direction. */
         keep = 1;
 
-        while ((newf < fbefore) && (keep == 1)) {
+        while ((newf < fbefore) && (keep == 1))
+        {
             iadj = 0;
 
-            for (i = 0; i < nvars; i++) {
+            for (i = 0; i < nvars; i++)
+            {
                 /* Firstly, arrange the sign of delta[]. */
-                if (newx[i] <= xbefore[i]) {
+                if (newx[i] <= xbefore[i])
+                {
                     delta[i] = 0.0 - fabs(delta[i]);
-                } else {
+                }
+                else
+                {
                     delta[i] = fabs(delta[i]);
                 }
 
@@ -359,7 +350,8 @@ int    itermax; {
             newf = best_nearby(delta, newx, fbefore, nvars);
 
             /* If the further (optimistic) move was bad.... */
-            if (newf >= fbefore) {
+            if (newf >= fbefore)
+            {
                 break;
             }
 
@@ -370,135 +362,145 @@ int    itermax; {
              */
             keep = 0;
 
-            for (i = 0; i < nvars; i++) {
+            for (i = 0; i < nvars; i++)
+            {
                 keep = 1;
 
-                if (fabs(newx[i] - xbefore[i]) > (0.5 * fabs(delta[i]))) {
+                if (fabs(newx[i] - xbefore[i]) > (0.5 * fabs(delta[i])))
+                {
                     break;
-                } else {
+                }
+                else
+                {
                     keep = 0;
                 }
             }
         }
 
-        if ((steplength >= epsilon) && (newf >= fbefore)) {
+        if ((steplength >= epsilon) && (newf >= fbefore))
+        {
             steplength = steplength * rho;
 
-            for (i = 0; i < nvars; i++) {
+            for (i = 0; i < nvars; i++)
+            {
                 delta[i] *= rho;
             }
         }
     }
 
-    for (i = 0; i < nvars; i++) {
+    for (i = 0; i < nvars; i++)
+    {
         endpt[i] = xbefore[i];
     }
 
     return iters;
 }
 
+/**
+ * The user-supplied objective function f(x,n).
+ * <br />
+ * <br />Represents either the Rosenbrock's classic
+ * parabolic valley (&quot;banana&quot;) function
+ * or the so-called &quot;Woods&quot; function.
+ *
+ * @param x The point at which f(x) should be evaluated.
+ * @param n The number of coordinates of <code>x</code>.
+ *
+ * @return The objective function value.
+ */
+double
+f(x, n)
+double x[VARS];
+{
 #ifndef WOODS
-    /* Main program function main() :-). */
-    main() {
-        int nvars;
-        int itermax;
-        int jj;
-        int i;
+    /* Rosenbrock's classic parabolic valley ("banana") function. */
+    double a;
+    double b;
+    double c;
 
-        double startpt[VARS];
-        double rho;
-        double epsilon;
-        double endpt[VARS];
+    FUNEVALS++;
 
-        /* Starting guess for Rosenbrock's test function. */
-        nvars      = 2;
-        startpt[0] = -1.2;
-        startpt[1] = 1.0;
-        itermax    = IMAX;
-        rho        = RHO_BEGIN;
-        epsilon    = EPSMIN;
+    a = x[0];
+    b = x[1];
 
-        jj = hooke(nvars, startpt, endpt, rho, epsilon, itermax);
+    c = 100.0 * (b - (a * a)) * (b - (a * a));
 
-        printf("\n\n\nHOOKE USED %d ITERATIONS, AND RETURNED\n", jj);
-
-        for (i = 0; i < nvars; i++) {
-            printf("x[%3d] = %15.7le \n", i, endpt[i]);
-        }
-    }
+    return (c + ((1.0 - a) * (1.0 - a)));
 #else
-    /**
-     * The user-supplied objective function f(x,n).
-     * <br />
-     * <br />Woods &ndash; a la More, Garbow &amp; Hillstrom
-     * (TOMS algorithm 566).
-     *
-     * @param x The point at which f(x) should be evaluated.
-     * @param n The number of coordinates of <code>x</code>.
-     *
-     * @return The objective function value.
-     */
-    double f(x, n)
-    double x[VARS];
-    int    n; {
-        double s1;
-        double s2;
-        double s3;
-        double t1;
-        double t2;
-        double t3;
-        double t4;
-        double t5;
+    /* Woods -- a la More, Garbow & Hillstrom (TOMS algorithm 566). */
+    double s1;
+    double s2;
+    double s3;
+    double t1;
+    double t2;
+    double t3;
+    double t4;
+    double t5;
 
-        funevals++;
+    FUNEVALS++;
 
-        s1 = x[1] - x[0] * x[0];
-        s2 = 1 - x[0];
-        s3 = x[1] - 1;
-        t1 = x[3] - x[2] * x[2];
-        t2 = 1 - x[2];
-        t3 = x[3] - 1;
-        t4 = s3 + t3;
-        t5 = s3 - t3;
+    s1 = x[1] - x[0] * x[0];
+    s2 = 1    - x[0];
+    s3 = x[1] - 1;
 
-        return (100 * (s1 * s1) + s2 * s2
-               + 90 * (t1 * t1) + t2 * t2
-               + 10 * (t4 * t4) + t5 * t5 / 10.);
-    }
+    t1 = x[3] - x[2] * x[2];
+    t2 = 1    - x[2];
+    t3 = x[3] - 1;
 
-    /* Main program function main() :-). */
-    main() {
-        int nvars;
-        int itermax;
-        int jj;
-        int i;
+    t4 = s3 + t3;
+    t5 = s3 - t3;
 
-        double startpt[VARS];
-        double rho;
-        double epsilon;
-        double endpt[VARS];
-
-        /* Starting guess test problem "Woods". */
-        nvars      = 4;
-        startpt[0] = -3;
-        startpt[1] = -1;
-        startpt[2] = -3;
-        startpt[3] = -1;
-        itermax    = IMAX;
-        rho        = RHO_WOODS;
-        epsilon    = EPSMIN;
-
-        jj = hooke(nvars, startpt, endpt, rho, epsilon, itermax);
-
-        printf("\n\n\nHOOKE USED %d ITERATIONS, AND RETURNED\n", jj);
-
-        for (i = 0; i < nvars; i++) {
-            printf("x[%3d] = %15.7le \n", i, endpt[i]);
-        }
-
-        printf("True answer: f(1, 1, 1, 1) = 0.\n");
-    }
+    return (100 * (s1 * s1) + s2 * s2
+           + 90 * (t1 * t1) + t2 * t2
+           + 10 * (t4 * t4) + t5 * t5 / 10.);
 #endif
+}
+
+/* Main program function main() :-). */
+main()
+{
+    int nvars;
+    int itermax;
+    int jj;
+    int i;
+
+    double startpt[VARS];
+    double rho;
+    double epsilon;
+    double endpt[VARS];
+
+#ifndef WOODS
+    /* Starting guess for Rosenbrock's test function. */
+    nvars      =  2;
+    startpt[0] = -1.2;
+    startpt[1] =  1.0;
+    rho        =  RHO_BEGIN;
+#else
+    /* Starting guess test problem "Woods". */
+    nvars      =  4;
+    startpt[0] = -3;
+    startpt[1] = -1;
+    startpt[2] = -3;
+    startpt[3] = -1;
+    rho        =  RHO_WOODS;
+#endif
+
+    itermax = IMAX;
+    epsilon = EPSMIN;
+
+    jj = hooke(nvars, startpt, endpt, rho, epsilon, itermax);
+
+    printf("\n\n\nHOOKE USED %d ITERATIONS, AND RETURNED\n", jj);
+
+    for (i = 0; i < nvars; i++)
+    {
+        printf("x[%3d] = %15.7le \n", i, endpt[i]);
+    }
+
+#ifdef WOODS
+    puts("True answer: f(1, 1, 1, 1) = 0.");
+#endif
+}
 
 /* ========================================================================= */
 /* vim:set nu:et:ts=4:sw=4:                                                  */

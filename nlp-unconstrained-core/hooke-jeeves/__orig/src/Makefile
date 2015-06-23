@@ -23,10 +23,11 @@ OBJ_DIR = ../obj
 #       instead of tcc (Tiny C Compiler), simply comment out the next line,
 #       just like this: "#CC = tcc" - and it will be used automatically.
 #CC     = tcc
+CFLAGS = -Wall -pedantic -O3 -Wtraditional
 
-CFLAGS = -Wall -pedantic -O2 -Wtraditional
-#LDLIBS = -lm                                     # <== Needs only when linking
-                                                  #     through tcc.
+# -lm - (Math library) - Needs to be specified explicitly
+#                        only when linking through tcc.
+#LDLIBS = -lm
 
 MV      = mv
 MVFLAGS = -v
