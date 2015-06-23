@@ -150,19 +150,19 @@
 #define VARS 250
 
 #ifndef WOODS
-    /** Constant. The stepsize geometric shrink. */
-    #define RHO_BEGIN 0.5
+/** Constant. The stepsize geometric shrink. */
+#define RHO_BEGIN 0.5
 #else
-    /**
-     * Constant. The stepsize geometric shrink.
-     * <br />
-     * <br />The Hooke &amp; Jeeves algorithm works reasonably well
-     * on Rosenbrock's function, but can fare worse on some standard
-     * test functions, depending on rho. Here is an example that works well
-     * when rho = 0.5, but fares poorly with rho = 0.6, and better again
-     * with rho = 0.8.
-     */
-    #define RHO_WOODS 0.6
+/**
+ * Constant. The stepsize geometric shrink.
+ * <br />
+ * <br />The Hooke &amp; Jeeves algorithm works reasonably well
+ * on Rosenbrock's function, but can fare worse on some standard
+ * test functions, depending on rho. Here is an example that works well
+ * when rho = 0.5, but fares poorly with rho = 0.6, and better again
+ * with rho = 0.8.
+ */
+#define RHO_WOODS 0.6
 #endif
 
 /** Constant. The ending value of stepsize. */
