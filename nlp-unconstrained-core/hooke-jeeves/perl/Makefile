@@ -96,7 +96,7 @@ endef
 # Making the target.
 $(BIN_DIR) $(LIB_DIR):
 	$(CD) $(SRC_DIR); \
-	if [ -n "$$($(PERL) $(PERLFLAGS) $(BASE_CLASS) |& $(GREP) 'failed')" ]; then \
+	if [ -n "$$($(PERL) $(PERLFLAGS) $(BASE_CLASS) 2>&1 | $(GREP) 'failed')" ]; then \
 		$(ECHO) "Error: Something gets wrong... Exiting..."; \
 		$(EXIT) $(EXIT_FAILURE); \
 	fi; \
