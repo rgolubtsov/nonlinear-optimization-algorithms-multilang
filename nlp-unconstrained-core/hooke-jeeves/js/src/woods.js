@@ -26,7 +26,7 @@ var NLPUCCoreHooke = NLPUCCoreHooke || {};
  * optimization problem using the algorithm of Hooke and Jeeves.
  * <br />
  * <br />The objective function in this case
- * is so called &quot;Woods&quot; function.
+ * is the so-called &quot;Woods&quot; function.
  *
  * @class    Woods
  * @memberof NLPUCCoreHooke

@@ -19,7 +19,7 @@ package optimization.nonlinear.unconstrained.core;
  * optimization problem using the algorithm of Hooke and Jeeves.
  * <br />
  * <br />The objective function in this case
- * is so called &quot;Woods&quot; function.
+ * is the so-called &quot;Woods&quot; function.
  *
  * @author  Radislav (Radic) Golubtsov
  * @version 0.1
