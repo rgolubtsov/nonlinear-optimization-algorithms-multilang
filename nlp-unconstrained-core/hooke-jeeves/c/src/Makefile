@@ -37,10 +37,12 @@ OBJ_DIR = ../obj
 # Using the following option instead.
 C_STD = c1x
 
-CFLAGS = -Wall -pedantic -O2 -std=$(C_STD) # The -std=XXX option is not allowed
-                                           # when using tcc.
-#LDLIBS = -lm                              # <== Needs only when linking
-                                           #     through tcc.
+# The -std=XXX option is not allowed when using tcc.
+CFLAGS = -Wall -pedantic -O3 -std=$(C_STD)
+
+# -lm - (Math library) - Needs to be specified explicitly
+#                        only when linking through tcc.
+#LDLIBS = -lm
 
 MV      = mv
 MVFLAGS = -v

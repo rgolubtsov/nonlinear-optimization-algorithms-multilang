@@ -24,10 +24,7 @@ BIN_DIR = ../bin
 OBJ_DIR = ../obj
 
 # Specify flags and other vars here.
-CFLAGS = -Wall `gnustep-config --objc-flags` -O3 # <== -O2 is already included;
-                                                 #     increasing optimization
-                                                 #     level.
-
+CFLAGS = -Wall `gnustep-config --objc-flags` -O3
 LDLIBS = -lobjc -lgnustep-base
 
 MV      = mv

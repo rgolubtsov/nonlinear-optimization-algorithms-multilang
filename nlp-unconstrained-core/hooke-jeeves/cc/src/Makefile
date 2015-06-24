@@ -32,7 +32,7 @@ OBJ_DIR = ../obj
 # Using the following option instead.
 CXX_STD = c++0x
 
-CXXFLAGS = -Wall -pedantic -std=$(CXX_STD) -O2
+CXXFLAGS = -Wall -pedantic -std=$(CXX_STD) -O3
 LDLIBS   = -lstdc++
 
 MV      = mv
