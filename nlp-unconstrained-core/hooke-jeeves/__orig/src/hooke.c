@@ -305,11 +305,11 @@ double epsilon;
         iters++;
         iadj++;
 
-        printf("\nAfter %5d funevals, f(x) =  %.4le at\n", FUNEVALS, fbefore);
+        printf("\nAfter %5d funevals, f(x) =  %.4e at\n", FUNEVALS, fbefore);
 
         for (j = 0; j < nvars; j++)
         {
-            printf("   x[%2d] = %.4le\n", j, xbefore[j]);
+            printf("   x[%2d] = %.4e\n", j, xbefore[j]);
         }
 
         /* Find best new point, one coord at a time. */
@@ -494,7 +494,7 @@ main()
 
     for (i = 0; i < nvars; i++)
     {
-        printf("x[%3d] = %15.7le \n", i, endpt[i]);
+        printf("x[%3d] = %15.7e \n", i, endpt[i]);
     }
 
 #ifdef WOODS
