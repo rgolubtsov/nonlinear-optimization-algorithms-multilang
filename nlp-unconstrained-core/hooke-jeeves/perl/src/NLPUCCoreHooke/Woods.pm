@@ -154,13 +154,13 @@ sub main {
 
     $jj = $h->hooke($nvars, \@startpt, \@endpt, $rho, $epsilon, $itermax, \&f);
 
-    print("\n\n\nHOOKE USED $jj ITERATIONS, AND RETURNED\n");
+    say("\n\n\nHOOKE USED $jj ITERATIONS, AND RETURNED");
 
     for ($i = 0; $i < $nvars; $i++) {
         printf("x[%3d] = %15.7le \n", $i, $endpt[$i]);
     }
 
-    print("True answer: f(1, 1, 1, 1) = 0.\n");
+    say("True answer: f(1, 1, 1, 1) = 0.");
 
     return 1;
 }
