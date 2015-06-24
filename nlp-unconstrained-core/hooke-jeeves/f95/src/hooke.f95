@@ -37,7 +37,7 @@ module proto__
     integer, parameter :: IMAX = 5000
 
     ! The number of function evaluations.
-    integer :: funevals = 0
+    integer :: FUNEVALS = 0
 
     ! Function prototypes.
     interface
@@ -69,7 +69,7 @@ end module proto__
 
 ! === The user-supplied objective function f(x,n).
 real(DP) function f(x, n)
-    use proto__, only: DP, funevals
+    use proto__, only: DP, FUNEVALS
 
     implicit none
 
@@ -82,12 +82,12 @@ real(DP) function f(x, n)
     integer, intent(in) :: n
 
 #ifndef WOODS
-! Rosenbrock's classic parabolic valley ("banana") function.
+    ! Rosenbrock's classic parabolic valley ("banana") function.
     real(DP) :: a
     real(DP) :: b
     real(DP) :: c
 
-    funevals = funevals + 1
+    FUNEVALS = FUNEVALS + 1
 
     a = x(1)
     b = x(2)
@@ -96,7 +96,7 @@ real(DP) function f(x, n)
 
     f = c + ((1.0 - a) * (1.0 - a))
 #else
-! Woods -- a la More, Garbow & Hillstrom (TOMS algorithm 566).
+    ! Woods -- a la More, Garbow & Hillstrom (TOMS algorithm 566).
     real(DP) :: s1
     real(DP) :: s2
     real(DP) :: s3
@@ -106,14 +106,16 @@ real(DP) function f(x, n)
     real(DP) :: t4
     real(DP) :: t5
 
-    funevals = funevals + 1
+    FUNEVALS = FUNEVALS + 1
 
     s1 = x(2) - x(1) * x(1)
-    s2 = 1 - x(1)
+    s2 = 1    - x(1)
     s3 = x(2) - 1
+
     t1 = x(4) - x(3) * x(3)
-    t2 = 1 - x(3)
+    t2 = 1    - x(3)
     t3 = x(4) - 1
+
     t4 = s3 + t3
     t5 = s3 - t3
 
@@ -191,7 +193,7 @@ end function best_nearby
 ! === Main optimization function.
 ! The hooke subroutine itself.
 integer function hooke(nvars, startpt, endpt, rho, epsilon, itermax)
-    use proto__, only: DP, VARS, funevals, f, best_nearby
+    use proto__, only: DP, VARS, FUNEVALS, f, best_nearby
 
     implicit none
 
@@ -254,7 +256,7 @@ integer function hooke(nvars, startpt, endpt, rho, epsilon, itermax)
 
         write ( &
             *, '(/, "After ", i5, " funevals, f(x) =  ", 1pe10.4e2, " at")' &
-        ) funevals, fbefore
+        ) FUNEVALS, fbefore
 
         do j = 1, nvars
             write (*, '("   x[", i2, "] = ", 1pe11.4e2)') j - 1, xbefore(j)
@@ -346,18 +348,18 @@ program hooke__
 
 #ifndef WOODS
     ! Starting guess for Rosenbrock's test function.
-    nvars      = 2
+    nvars      =  2
     startpt(1) = -1.2
-    startpt(2) = 1.0
-    rho        = RHO_BEGIN
+    startpt(2) =  1.0
+    rho        =  RHO_BEGIN
 #else
     ! Starting guess test problem "Woods".
-    nvars      = 4
+    nvars      =  4
     startpt(1) = -3
     startpt(2) = -1
     startpt(3) = -3
     startpt(4) = -1
-    rho        = RHO_WOODS
+    rho        =  RHO_WOODS
 #endif
 
     itermax = IMAX

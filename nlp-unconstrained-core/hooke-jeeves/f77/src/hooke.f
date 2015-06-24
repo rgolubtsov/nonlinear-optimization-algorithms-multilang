@@ -59,11 +59,13 @@ C     WOODS -- A LA MORE, GARBOW AND HILLSTROM (TOMS ALGORITHM 566).
           FUNEVA = FUNEVA + 1
 
           S1 = X(2) - X(1) * X(1)
-          S2 = 1 - X(1)
+          S2 = 1    - X(1)
           S3 = X(2) - 1
+
           T1 = X(4) - X(3) * X(3)
-          T2 = 1 - X(3)
+          T2 = 1    - X(3)
           T3 = X(4) - 1
+
           T4 = S3 + T3
           T5 = S3 - T3
 
@@ -362,18 +364,18 @@ C         PROTO REF. THE MAIN OPTIMIZATION FUNCTION HOOKE(...).
 
 #ifndef WOODS
 C     STARTING GUESS FOR ROSENBROCK'S TEST FUNCTION.
-          NVARS     = 2
+          NVARS     =  2
           STARTP(1) = -1.2
-          STARTP(2) = 1.0
-          RHO       = RHO_BE
+          STARTP(2) =  1.0
+          RHO       =  RHO_BE
 #else
 C     STARTING GUESS TEST PROBLEM 'WOODS'.
-          NVARS     = 4
+          NVARS     =  4
           STARTP(1) = -3
           STARTP(2) = -1
           STARTP(3) = -3
           STARTP(4) = -1
-          RHO       = RHO_WO
+          RHO       =  RHO_WO
 #endif
 
           ITERMA = IMAX

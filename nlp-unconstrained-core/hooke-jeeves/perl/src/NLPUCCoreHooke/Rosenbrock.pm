@@ -33,17 +33,11 @@ use v5.10;
 
 use NLPUCCoreHooke::Hooke;
 
-## Helper constant.
-use constant ONE_HUNDRED_POINT_ZERO => 100.0;
-
-## Helper constant.
-use constant ONE_POINT_ZERO => 1.0;
-
-## Helper constant.
-use constant TWO => 2;
-
-## Helper constant.
-use constant MINUS_ONE_POINT_TWO => -1.2;
+## Helper constants.
+use constant ONE_HUNDRED_POINT_ZERO =>  100.0;
+use constant ONE_POINT_ZERO         =>  1.0;
+use constant TWO                    =>  2;
+use constant MINUS_ONE_POINT_TWO    => -1.2;
 
 =head1 ATTRIBUTES
 

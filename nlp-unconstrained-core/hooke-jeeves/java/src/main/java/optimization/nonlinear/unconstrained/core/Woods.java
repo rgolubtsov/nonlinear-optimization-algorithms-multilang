@@ -38,32 +38,16 @@ public final class Woods {
      */
     private static final double RHO_WOODS = 0.6;
 
-    /** Helper constant. */
-    private static final int INDEX_TWO = 2;
-
-    /** Helper constant. */
-    private static final int INDEX_THREE = 3;
-
-    /** Helper constant. */
-    private static final int ONE_HUNDRED = 100;
-
-    /** Helper constant. */
-    private static final int NINETY = 90;
-
-    /** Helper constant. */
-    private static final int TEN = 10;
-
-    /** Helper constant. */
-    private static final double TEN_POINT = 10.;
-
-    /** Helper constant. */
-    private static final int FOUR = 4;
-
-    /** Helper constant. */
-    private static final int MINUS_THREE = -3;
-
-    /** Helper constant. */
-    private static final int MINUS_ONE = -1;
+    /** Helper constants. */
+    private static final int    INDEX_TWO   =  2;
+    private static final int    INDEX_THREE =  3;
+    private static final int    ONE_HUNDRED =  100;
+    private static final int    NINETY      =  90;
+    private static final int    TEN         =  10;
+    private static final double TEN_POINT   =  10.;
+    private static final int    FOUR        =  4;
+    private static final int    MINUS_THREE = -3;
+    private static final int    MINUS_ONE   = -1;
 
     /**
      * The user-supplied objective function f(x,n).
@@ -89,11 +73,13 @@ public final class Woods {
         Hooke.setFunEvals(Hooke.getFunEvals() + 1);
 
         s1 = x[Hooke.INDEX_ONE] - x[Hooke.INDEX_ZERO] * x[Hooke.INDEX_ZERO];
-        s2 = 1 - x[Hooke.INDEX_ZERO];
+        s2 = 1                  - x[Hooke.INDEX_ZERO];
         s3 = x[Hooke.INDEX_ONE] - 1;
-        t1 = x[INDEX_THREE] - x[INDEX_TWO] * x[INDEX_TWO];
-        t2 = 1 - x[INDEX_TWO];
-        t3 = x[INDEX_THREE] - 1;
+
+        t1 = x[INDEX_THREE]     - x[INDEX_TWO]        * x[INDEX_TWO];
+        t2 = 1                  - x[INDEX_TWO];
+        t3 = x[INDEX_THREE]     - 1;
+
         t4 = s3 + t3;
         t5 = s3 - t3;
 

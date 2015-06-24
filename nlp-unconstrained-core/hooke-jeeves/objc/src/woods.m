@@ -42,12 +42,14 @@ const CGFloat    TEN_POINT   = 10.;
 //    [(FunEvals *) cFunEvals    funEvals] + 1];
     ((FunEvals *) cFunEvals).funEvals++;
 
-    s1 = x[INDEX_ONE] - x[INDEX_ZERO] * x[INDEX_ZERO];
-    s2 = 1 - x[INDEX_ZERO];
-    s3 = x[INDEX_ONE] - 1;
-    t1 = x[INDEX_THREE] - x[INDEX_TWO] * x[INDEX_TWO];
-    t2 = 1 - x[INDEX_TWO];
+    s1 = x[INDEX_ONE]   - x[INDEX_ZERO] * x[INDEX_ZERO];
+    s2 = 1              - x[INDEX_ZERO];
+    s3 = x[INDEX_ONE]   - 1;
+
+    t1 = x[INDEX_THREE] - x[INDEX_TWO]  * x[INDEX_TWO];
+    t2 = 1              - x[INDEX_TWO];
     t3 = x[INDEX_THREE] - 1;
+
     t4 = s3 + t3;
     t5 = s3 - t3;
 

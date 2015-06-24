@@ -41,59 +41,16 @@ var Woods = function() {
 
 // === Private properties =====================================================
 
-    /**
-     * Helper constant.
-     * @constant {Number} INDEX_TWO
-     */
-    var INDEX_TWO = 2;
-
-    /**
-     * Helper constant.
-     * @constant {Number} INDEX_THREE
-     */
-    var INDEX_THREE = 3;
-
-    /**
-     * Helper constant.
-     * @constant {Number} ONE_HUNDRED
-     */
-    var ONE_HUNDRED = 100;
-
-    /**
-     * Helper constant.
-     * @constant {Number} NINETY
-     */
-    var NINETY = 90;
-
-    /**
-     * Helper constant.
-     * @constant {Number} TEN
-     */
-    var TEN = 10;
-
-    /**
-     * Helper constant.
-     * @constant {Number} TEN_POINT
-     */
-    var TEN_POINT = 10.;
-
-    /**
-     * Helper constant.
-     * @constant {Number} FOUR
-     */
-    var FOUR = 4;
-
-    /**
-     * Helper constant.
-     * @constant {Number} MINUS_THREE
-     */
+    /** Helper constants. */
+    var INDEX_TWO   =  2;
+    var INDEX_THREE =  3;
+    var ONE_HUNDRED =  100;
+    var NINETY      =  90;
+    var TEN         =  10;
+    var TEN_POINT   =  10.;
+    var FOUR        =  4;
     var MINUS_THREE = -3;
-
-    /**
-     * Helper constant.
-     * @constant {Number} MINUS_ONE
-     */
-    var MINUS_ONE = -1;
+    var MINUS_ONE   = -1;
 
     /**
      * Constant. The stepsize geometric shrink.
@@ -135,11 +92,13 @@ var Woods = function() {
         h.funEvals++;
 
         s1 = x[h.INDEX_ONE] - x[h.INDEX_ZERO] * x[h.INDEX_ZERO];
-        s2 = 1 - x[h.INDEX_ZERO];
+        s2 = 1              - x[h.INDEX_ZERO];
         s3 = x[h.INDEX_ONE] - 1;
-        t1 = x[INDEX_THREE] - x[INDEX_TWO] * x[INDEX_TWO];
-        t2 = 1 - x[INDEX_TWO];
+
+        t1 = x[INDEX_THREE] - x[INDEX_TWO]    * x[INDEX_TWO];
+        t2 = 1              - x[INDEX_TWO];
         t3 = x[INDEX_THREE] - 1;
+
         t4 = s3 + t3;
         t5 = s3 - t3;
 

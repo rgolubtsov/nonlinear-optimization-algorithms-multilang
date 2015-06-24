@@ -32,32 +32,16 @@ use v5.10;
 
 use NLPUCCoreHooke::Hooke;
 
-## Helper constant.
-use constant INDEX_TWO => 2;
-
-## Helper constant.
-use constant INDEX_THREE => 3;
-
-## Helper constant.
-use constant ONE_HUNDRED => 100;
-
-## Helper constant.
-use constant NINETY => 90;
-
-## Helper constant.
-use constant TEN => 10;
-
-## Helper constant.
-use constant TEN_POINT => 10.;
-
-## Helper constant.
-use constant FOUR => 4;
-
-## Helper constant.
+## Helper constants.
+use constant INDEX_TWO   =>  2;
+use constant INDEX_THREE =>  3;
+use constant ONE_HUNDRED =>  100;
+use constant NINETY      =>  90;
+use constant TEN         =>  10;
+use constant TEN_POINT   =>  10.;
+use constant FOUR        =>  4;
 use constant MINUS_THREE => -3;
-
-## Helper constant.
-use constant MINUS_ONE => -1;
+use constant MINUS_ONE   => -1;
 
 =head1 ATTRIBUTES
 
@@ -103,12 +87,14 @@ sub f {
 
     $NLPUCCoreHooke::Hooke::FUNEVALS++;
 
-    $s1 = $x->[INDEX_ONE] - $x->[INDEX_ZERO] * $x->[INDEX_ZERO];
-    $s2 = 1 - $x->[INDEX_ZERO];
-    $s3 = $x->[INDEX_ONE] - 1;
-    $t1 = $x->[INDEX_THREE] - $x->[INDEX_TWO] * $x->[INDEX_TWO];
-    $t2 = 1 - $x->[INDEX_TWO];
+    $s1 = $x->[INDEX_ONE]   - $x->[INDEX_ZERO] * $x->[INDEX_ZERO];
+    $s2 = 1                 - $x->[INDEX_ZERO];
+    $s3 = $x->[INDEX_ONE]   - 1;
+
+    $t1 = $x->[INDEX_THREE] - $x->[INDEX_TWO]  * $x->[INDEX_TWO];
+    $t2 = 1                 - $x->[INDEX_TWO];
     $t3 = $x->[INDEX_THREE] - 1;
+
     $t4 = $s3 + $t3;
     $t5 = $s3 - $t3;
 

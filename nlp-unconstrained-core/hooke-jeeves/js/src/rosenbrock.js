@@ -41,29 +41,11 @@ var Rosenbrock = function() {
 
 // === Private properties =====================================================
 
-    /**
-     * Helper constant.
-     * @constant {Number} ONE_HUNDRED_POINT_ZERO
-     */
-    var ONE_HUNDRED_POINT_ZERO = 100.0;
-
-    /**
-     * Helper constant.
-     * @constant {Number} ONE_POINT_ZERO
-     */
-    var ONE_POINT_ZERO = 1.0;
-
-    /**
-     * Helper constant.
-     * @constant {Number} TWO
-     */
-    var TWO = 2;
-
-    /**
-     * Helper constant.
-     * @constant {Number} MINUS_ONE_POINT_TWO
-     */
-    var MINUS_ONE_POINT_TWO = -1.2;
+    /** Helper constants. */
+    var ONE_HUNDRED_POINT_ZERO =  100.0;
+    var ONE_POINT_ZERO         =  1.0;
+    var TWO                    =  2;
+    var MINUS_ONE_POINT_TWO    = -1.2;
 
     /**
      * Constant. The stepsize geometric shrink.

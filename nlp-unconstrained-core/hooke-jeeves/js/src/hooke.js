@@ -35,29 +35,12 @@ var NLPUCCoreHooke = NLPUCCoreHooke || {};
  */
 var Hooke = function() {
 
-// === Private properties =====================================================
-
-    /**
-     * Helper constant.
-     * @constant {Number} ZERO_POINT_FIVE
-     */
-    var ZERO_POINT_FIVE = 0.5;
-
 // === Public properties ======================================================
 
-    /**
-     * Helper constant.
-     * @constant {Number} INDEX_ZERO
-     * @public
-     */
-    this.INDEX_ZERO = 0;
-
-    /**
-     * Helper constant.
-     * @constant {Number} INDEX_ONE
-     * @public
-     */
-    this.INDEX_ONE = 1;
+    /** Helper constants. */
+    this.INDEX_ZERO      = 0;
+    this.INDEX_ONE       = 1;
+    var  ZERO_POINT_FIVE = 0.5; // <== Private.
 
     /**
      * Constant. The maximum number of variables.

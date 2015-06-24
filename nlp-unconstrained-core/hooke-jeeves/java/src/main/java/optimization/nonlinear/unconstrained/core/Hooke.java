@@ -34,13 +34,9 @@ public class Hooke {
     /** Constant. The maximum number of iterations. */
     public static final int IMAX = 5000;
 
-    /** Helper constant. */
-    public static final int INDEX_ZERO = 0;
-
-    /** Helper constant. */
-    public static final int INDEX_ONE = 1;
-
-    /** Helper constant. */
+    /** Helper constants. */
+    public  static final int    INDEX_ZERO      = 0;
+    public  static final int    INDEX_ONE       = 1;
     private static final double ZERO_POINT_FIVE = 0.5;
 
     /** The number of function evaluations. */

@@ -37,12 +37,14 @@ double Woods::f(const double *x, const unsigned int n, const void *cFunEvals) {
     ((FunEvals *) cFunEvals)->setFunEvals(
     ((FunEvals *) cFunEvals)->getFunEvals() + 1);
 
-    s1 = x[INDEX_ONE] - x[INDEX_ZERO] * x[INDEX_ZERO];
-    s2 = 1 - x[INDEX_ZERO];
-    s3 = x[INDEX_ONE] - 1;
-    t1 = x[INDEX_THREE] - x[INDEX_TWO] * x[INDEX_TWO];
-    t2 = 1 - x[INDEX_TWO];
+    s1 = x[INDEX_ONE]   - x[INDEX_ZERO] * x[INDEX_ZERO];
+    s2 = 1              - x[INDEX_ZERO];
+    s3 = x[INDEX_ONE]   - 1;
+
+    t1 = x[INDEX_THREE] - x[INDEX_TWO]  * x[INDEX_TWO];
+    t2 = 1              - x[INDEX_TWO];
     t3 = x[INDEX_THREE] - 1;
+
     t4 = s3 + t3;
     t5 = s3 - t3;
 

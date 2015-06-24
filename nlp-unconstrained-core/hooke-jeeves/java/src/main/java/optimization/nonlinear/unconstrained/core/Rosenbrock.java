@@ -30,17 +30,11 @@ public final class Rosenbrock {
     /** Constant. The stepsize geometric shrink. */
     private static final double RHO_BEGIN = 0.5;
 
-    /** Helper constant. */
-    private static final double ONE_HUNDRED_POINT_ZERO = 100.0;
-
-    /** Helper constant. */
-    private static final double ONE_POINT_ZERO = 1.0;
-
-    /** Helper constant. */
-    private static final int TWO = 2;
-
-    /** Helper constant. */
-    private static final double MINUS_ONE_POINT_TWO = -1.2;
+    /** Helper constants. */
+    private static final double ONE_HUNDRED_POINT_ZERO =  100.0;
+    private static final double ONE_POINT_ZERO         =  1.0;
+    private static final int    TWO                    =  2;
+    private static final double MINUS_ONE_POINT_TWO    = -1.2;
 
     /**
      * The user-supplied objective function f(x,n).

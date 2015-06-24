@@ -29,13 +29,9 @@ use v5.10;
 
 use Exporter "import";
 
-## Helper constant.
-use constant INDEX_ZERO => 0;
-
-## Helper constant.
-use constant INDEX_ONE => 1;
-
-## Helper constant.
+## Helper constants.
+use constant INDEX_ZERO      => 0;
+use constant INDEX_ONE       => 1;
 use constant ZERO_POINT_FIVE => 0.5;
 
 =head1 ATTRIBUTES
