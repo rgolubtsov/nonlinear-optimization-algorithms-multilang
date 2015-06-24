@@ -1,15 +1,15 @@
 # Nonlinear Optimization Algorithms Multilang [![Build Status](https://travis-ci.org/rgolubtsov/nonlinear-optimization-algorithms-multilang.svg?branch=master)](https://travis-ci.org/rgolubtsov/nonlinear-optimization-algorithms-multilang)
 
 **Note:** The Travis CI build status badge above is applicable to the following packages ONLY (for the moment):
-* The (original) Hooke and Jeeves :small_blue_diamond: K&R C implementation
+* The (original) Hooke and Jeeves :small_blue_diamond: Traditional (K&R) C implementation
 * The Hooke and Jeeves :small_blue_diamond: ISO C (C99/11) implementation
 * The Hooke and Jeeves :small_blue_diamond: ISO C++ (C++98/03/11/14) implementation
-* The Hooke and Jeeves :small_blue_diamond: Perl 5 implementation
-* The Hooke and Jeeves :small_blue_diamond: JavaScript implementation
-* The Hooke and Jeeves :small_blue_diamond: Java implementation
+* The Hooke and Jeeves :small_blue_diamond: Objective-C 2.0 implementation
 * The Hooke and Jeeves :small_blue_diamond: FORTRAN 77 (MIL-STD 1753) implementation
 * The Hooke and Jeeves :small_blue_diamond: ISO Fortran 95 implementation
-* The Hooke and Jeeves :small_blue_diamond: Objective-C 2.0 implementation
+* The Hooke and Jeeves :small_blue_diamond: Perl 5 (5.10+) implementation
+* The Hooke and Jeeves :small_blue_diamond: JavaScript implementation
+* The Hooke and Jeeves :small_blue_diamond: Java (Java SE 7) implementation
 
 ---
 
@@ -59,7 +59,7 @@ The project has the following directory structure and logical parts and items.
 |   |   |       |-- < sources >
 |   |   |       `-- Makefile
 |   |   |
-|   |   |-- java                       <== Java impl. container
+|   |   |-- java                       <== Java (Java SE 7) impl. container
 |   |   |   |-- Makefile
 |   |   |   |-- pom.xml
 |   |   |   `-- src
@@ -82,13 +82,13 @@ The project has the following directory structure and logical parts and items.
 |   |   |       |-- < sources >
 |   |   |       `-- Makefile
 |   |   |
-|   |   |-- __orig                     <== K&R C impl. container
+|   |   |-- __orig                     <== Traditional (K&R) C impl. container
 |   |   |   |-- Makefile                   (This is the original impl.)
 |   |   |   `-- src
 |   |   |       |-- < sources >
 |   |   |       `-- Makefile
 |   |   |
-|   |   `-- perl                       <== Perl 5 impl. container
+|   |   `-- perl                       <== Perl 5 (5.10+) impl. container
 |   |       |-- Makefile
 |   |       `-- src
 |   |           |-- NLPUCCoreHooke

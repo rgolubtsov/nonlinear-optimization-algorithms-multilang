@@ -27,14 +27,14 @@ before_install:
     - sudo apt-get update
 
     ##
-    # Installing the GNU Fortran 95 compiler
-    # to build FORTRAN 77 and Fortran 95 impls.
-    - sudo apt-get install gfortran
-
-    ##
     # Installing the GNUstep Base-dev package and deps
     # to build the Objective-C 2.0 impl.
     - sudo apt-get install libgnustep-base-dev
+
+    ##
+    # Installing the GNU Fortran 95 compiler
+    # to build FORTRAN 77 and Fortran 95 impls.
+    - sudo apt-get install gfortran
 
 script:
     ## TODO: Building all the packages under unconstrained-core.
@@ -43,7 +43,9 @@ script:
     ## TODO: Building all the packages for hooke-jeeves.
     - cd hooke-jeeves && ls -al
 
-    ## Building the original Hooke and Jeeves alg as the K&R C impl.
+    ##
+    # Building the original Hooke and Jeeves alg
+    # as the traditional (K&R) C impl.
     - cd __orig && ls -al
                 && make clean
                 && make clean
@@ -85,43 +87,15 @@ script:
     ## Returning to the previous working dir.
     - cd - && ls -al
 
-    ## Building the Hooke and Jeeves alg as the Perl 5 impl.
-    - cd perl && ls -al
+    ## Building the Hooke and Jeeves alg as the Objective-C 2.0 impl.
+    - cd objc && ls -al
               && make clean
               && make clean
               && ls -al
               && make all
               && make all
               && ls -al
-              && ls -al bin lib src
-              && ls -al
-
-    ## Returning to the previous working dir.
-    - cd - && ls -al
-
-    ## Building the Hooke and Jeeves alg as the JavaScript impl.
-    - cd js && ls -al
-            && make clean
-            && make clean
-            && ls -al
-            && make all
-            && make all
-            && ls -al
-            && ls -al bin lib src
-            && ls -al
-
-    ## Returning to the previous working dir.
-    - cd - && ls -al
-
-    ## Building the Hooke and Jeeves alg as the Java impl.
-    - cd java && ls -al
-              && make clean
-              && make clean
-              && ls -al
-              && make all
-              && make all
-              && ls -al
-              && ls -al bin lib src
+              && ls -al bin obj src
               && ls -al
 
     ## Returning to the previous working dir.
@@ -155,16 +129,43 @@ script:
     ## Returning to the previous working dir.
     - cd - && ls -al
 
-    ## Building the Hooke and Jeeves alg as the Objective-C 2.0 impl.
+    ## Building the Hooke and Jeeves alg as the Perl 5 (5.10+) impl.
+    - cd perl && ls -al
+              && make clean
+              && make clean
+              && ls -al
+              && make all
+              && make all
+              && ls -al
+              && ls -al bin lib src
+              && ls -al
 
-    - cd objc && ls -al
+    ## Returning to the previous working dir.
+    - cd - && ls -al
+
+    ## Building the Hooke and Jeeves alg as the JavaScript impl.
+    - cd js && ls -al
+            && make clean
+            && make clean
+            && ls -al
+            && make all
+            && make all
+            && ls -al
+            && ls -al bin lib src
+            && ls -al
+
+    ## Returning to the previous working dir.
+    - cd - && ls -al
+
+    ## Building the Hooke and Jeeves alg as the Java (Java SE 7) impl.
+    - cd java && ls -al
               && make clean
               && make clean
               && ls -al
               && make all
               && make all
               && ls -al
-              && ls -al bin obj src
+              && ls -al bin lib src
               && ls -al
 
     ## Returning to the previous working dir.
