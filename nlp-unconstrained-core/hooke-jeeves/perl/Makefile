@@ -21,18 +21,26 @@ SCRIPT2S     = -woods
 SCRIPT2      = $(SCRIPT1)$(SCRIPT2S)
 
 # Specify flags and other vars here.
-MKDIR      = mkdir
-ECHO       = echo
-ECHOFLAGS  = -e
-SED        = sed
-SEDFLAGS   = -i -e
-SEDREGEX   = "s/^\ //g"
-CHMOD      = chmod
-CHMODFLAGS = -v
-CHMODMODE  = 755
-CP         = cp
-CPFLAGS    = -vR
-RMFLAGS    = -vR
+PERL      = perl
+PERLFLAGS = -c
+
+CD           = cd
+GREP         = grep
+EXIT         = exit
+EXIT_FAILURE = 1
+EXIT_SUCCESS = 0
+MKDIR        = mkdir
+ECHO         = echo
+ECHOFLAGS    = -e
+SED          = sed
+SEDFLAGS     = -i -e
+SEDREGEX     = "s/^\ //g"
+CHMOD        = chmod
+CHMODFLAGS   = -v
+CHMODMODE    = 755
+CP           = cp
+CPFLAGS      = -vR
+RMFLAGS      = -vR
 
 # Startup scripts for Rosenbrock and Woods test problems like here documents.
 # Rosenbrock:
@@ -87,6 +95,13 @@ endef
 
 # Making the target.
 $(BIN_DIR) $(LIB_DIR):
+	$(CD) $(SRC_DIR); \
+	if [ -n "$$($(PERL) $(PERLFLAGS) $(BASE_CLASS) |& $(GREP) 'failed')" ]; then \
+		$(ECHO) "Error: Something gets wrong... Exiting..."; \
+		$(EXIT) $(EXIT_FAILURE); \
+	fi; \
+	$(CD) -
+
 	if [ ! -d "$(BIN_DIR)" ]; then \
 		$(MKDIR) $(BIN_DIR); \
 		if [ ! -d "$(LIB_DIR)" ]; then \
