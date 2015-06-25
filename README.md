@@ -8,7 +8,7 @@
 * The Hooke and Jeeves :small_blue_diamond: FORTRAN 77 (MIL-STD 1753) implementation
 * The Hooke and Jeeves :small_blue_diamond: ISO Fortran 95 implementation
 * The Hooke and Jeeves :small_blue_diamond: Perl 5 (5.10+) implementation
-* The Hooke and Jeeves :small_blue_diamond: JavaScript implementation
+* The Hooke and Jeeves :small_blue_diamond: JavaScript (ECMA-262 5.1) implementation
 * The Hooke and Jeeves :small_blue_diamond: Java (Java SE 7) implementation
 
 ---
@@ -71,7 +71,7 @@ The project has the following directory structure and logical parts and items.
 |   |   |                           `-- core
 |   |   |                               `-- < sources >
 |   |   |
-|   |   |-- js                         <== JavaScript impl. container
+|   |   |-- js                         <== JavaScript (ECMA-262 5.1) impl. container
 |   |   |   |-- Makefile
 |   |   |   `-- src
 |   |   |       `-- < sources >
