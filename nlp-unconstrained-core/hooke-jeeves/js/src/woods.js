@@ -11,7 +11,7 @@
  * ============================================================================
  */
 
-//"use strict";
+"use strict";
 
 /**
  * The <code>NLPUCCoreHooke</code> namespace is used as a container

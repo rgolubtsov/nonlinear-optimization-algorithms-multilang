@@ -11,7 +11,7 @@
  * ============================================================================
  */
 
-//"use strict";
+"use strict";
 
 /**
  * The <code>NLPUCCoreHooke</code> namespace is used as a container
@@ -91,7 +91,7 @@ var Hooke = function() {
      */
     var bestNearby = function(delta, point, prevBest, nVars, f) {
         var minF;
-        var z = new Array(this.VARS);
+        var z = new Array(h.VARS);
         var fTmp;
 
         var i;
