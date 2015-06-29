@@ -44,10 +44,9 @@
 *.i*86
 *.x86_64
 *.hex
-hooke
-hooke-woods
-target/
+bin/
 lib/
+target/
 
 # === Debug files =============================================================
 *.dSYM/
