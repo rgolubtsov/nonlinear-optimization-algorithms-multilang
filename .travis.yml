@@ -171,6 +171,28 @@ script:
     ## Returning to the previous working dir.
     - cd - && ls -al
 
+    ## Going one level up.
+    - cd .. && ls -al
+
+    ## TODO: Building all the packages for nelder-mead.
+    - cd nelder-mead && ls -al
+
+    ##
+    # Building the original Nelder-Mead alg
+    # as the FORTRAN 77 (MIL-STD 1753) impl.
+    - cd __orig && ls -al
+                && make clean
+                && make clean
+                && ls -al
+                && make all
+                && make all
+                && ls -al
+                && ls -al bin obj src
+                && ls -al
+
+    ## Returning to the previous working dir.
+    - cd - && ls -al
+
 ...
 
 # =============================================================================
