@@ -10,6 +10,12 @@ C
 C THIS IS THE NELDER-MEAD NONLINEAR UNCONSTRAINED MINIMIZATION ALGORITHM.
 C =============================================================================
 
+C * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+C *                                                                           *
+C *             SEE THE NELMIN.TXT.C FILE FOR DETAILS DESCRIPTION.            *
+C *                                                                           *
+C * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+
 C     === THE USER-SUPPLIED OBJECTIVE FUNCTION F(X).
       FUNCTION F(X)
           IMPLICIT NONE

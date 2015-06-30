@@ -11,6 +11,8 @@
 * The Hooke and Jeeves :small_blue_diamond: JavaScript (ECMA-262 5.1) implementation
 * The Hooke and Jeeves :small_blue_diamond: Java (Java SE 7) implementation
 
+* The (original) Nelder-Mead :small_blue_diamond: FORTRAN 77 (MIL-STD 1753) implementation
+
 ---
 
 This project is aimed at implementing nonlinear programming algorithms as the (un-)constrained minimization problems with the focus on their numerical expression using various programming languages.
@@ -95,8 +97,14 @@ The project has the following directory structure and logical parts and items.
 |   |           |   `-- < sources >
 |   |           `-- < sources >
 |   |
-|   `-- [ nelder-mead ]                <== [TODO] Nelder-Mead algorithm container
-|                                                 (all implementations)
+|   `-- nelder-mead                    <== Nelder-Mead algorithm container
+|       |                                  (all implementations)
+|       `-- __orig                     <== FORTRAN 77 (MIL-STD 1753) impl. container
+|           |-- Makefile                   (This is the original impl.)
+|           `-- src
+|               |-- < sources >
+|               `-- Makefile
+|
 |-- [ nlp-unconstrained-api ]          <== [TODO] Unconstrained methods impl. container
 |                                                 (API only)
 |-- [ nlp-constrained-core ]           <== [TODO] Constrained methods impl. container
@@ -105,4 +113,4 @@ The project has the following directory structure and logical parts and items.
                                                   (API only)
 ```
 
-As shown above, the directories that should contain stuff for the Nelder-Mead algorithm implementations as well as other three ones (`nlp-unconstrained-api`, `nlp-constrained-core`, and `nlp-constrained-api`) are not yet exist. But it's planned they have to be created and populated accordingly somewhen during development process.
+As shown above, the directories that should contain ~~stuff for the Nelder-Mead algorithm implementations~~ as well as other three ones (`nlp-unconstrained-api`, `nlp-constrained-core`, and `nlp-constrained-api`) are not yet exist. But it's planned they have to be created and populated accordingly somewhen during development process.
