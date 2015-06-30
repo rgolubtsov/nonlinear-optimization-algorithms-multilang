@@ -29,10 +29,10 @@ C     ROSENBROCK'S CLASSIC PARABOLIC VALLEY ('BANANA') FUNCTION.
           DOUBLE PRECISION A
           DOUBLE PRECISION B
 
-          A = X(2) - X(1) * X(1)
+          A = X(2) - X(1) ** 2
           B = 1    - X(1)
 
-          F = 100 * (A * A) + (B * B)
+          F = 100 * (A ** 2) + (B ** 2)
 #else
 C     WOODS -- A LA MORE, GARBOW AND HILLSTROM (TOMS ALGORITHM 566).
           DOUBLE PRECISION S1
@@ -44,20 +44,20 @@ C     WOODS -- A LA MORE, GARBOW AND HILLSTROM (TOMS ALGORITHM 566).
           DOUBLE PRECISION T4
           DOUBLE PRECISION T5
 
-          S1 = X(2) - X(1) * X(1)
+          S1 = X(2) - X(1) ** 2
           S2 = 1    - X(1)
           S3 = X(2) - 1
 
-          T1 = X(4) - X(3) * X(3)
+          T1 = X(4) - X(3) ** 2
           T2 = 1    - X(3)
           T3 = X(4) - 1
 
           T4 = S3 + T3
           T5 = S3 - T3
 
-          F = 100 * (S1 * S1) + (S2 * S2)
-     *       + 90 * (T1 * T1) + (T2 * T2)
-     *       + 10 * (T4 * T4) + (T5 * T5) / 10
+          F = 100 * (S1 ** 2) + (S2 ** 2)
+     *       + 90 * (T1 ** 2) + (T2 ** 2)
+     *       + 10 * (T4 ** 2) + (T5 ** 2) / 10
 #endif
           RETURN
       END
