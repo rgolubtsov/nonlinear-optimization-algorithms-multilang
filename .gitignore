@@ -30,6 +30,8 @@
 *.a
 *.la
 *.lo
+lib/
+target/
 
 # === Shared objects (inc. Windows DLLs) ======================================
 *.dll
@@ -44,10 +46,7 @@
 *.i*86
 *.x86_64
 *.hex
-hooke
-hooke-woods
-target/
-lib/
+bin/
 
 # === Debug files =============================================================
 *.dSYM/
