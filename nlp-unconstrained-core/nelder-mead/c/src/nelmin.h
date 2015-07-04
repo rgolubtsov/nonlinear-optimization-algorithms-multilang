@@ -44,6 +44,30 @@
 #define EPS 0.001E+00
 
 /**
+ * The structure to hold the optimum data (and metadata)
+ * as the result of performing the optimization procedure.
+ */
+struct optimum {
+    /**
+     * The coordinates of the point which is estimated
+     * to minimize the function.
+     */
+    double xmin[VARS];
+
+    /** The minimum value of the function. */
+    double ynewlo;
+
+    /**
+     * The array containing the following indicators (metadata):
+     * <ul><li>The number of function evaluations used
+     *                                (<code>icount</code>).</li>
+     *     <li>The number of restarts (<code>numres</code>).</li>
+     *     <li>The error indicator    (<code>ifault</code>).</li></ul>
+     */
+    unsigned int indics[3];
+};
+
+/**
  * Main optimization function.
  * <br />
  * <br />The nelmin subroutine itself (Nelder-Mead minimization).
@@ -51,28 +75,21 @@
  * @param f      The objective function f(x).
  * @param n      The number of variables.
  * @param start  The starting point for the iteration.
- * @param xmin   The coordinates of the point which is estimated
- *               to minimize the function.
- * @param ynewlo The minimum value of the function.
  * @param reqmin The terminating limit for the variance of function values.
  * @param step   The size and shape of the initial simplex.
  * @param konvge The convergence check.
  * @param kcount The maximum number of function evaluations.
  *
- * @return The array containing the following indicators:
- *         <ul><li>The number of function evaluations used.</li>
- *             <li>The number of restarts.</li>
- *             <li>The error indicator.</li></ul>
+ * @return The structure to hold the optimum data (and metadata)
+ *         as the result of performing the optimization procedure.
  */
-extern unsigned int *nelmin(      double (*)(const double *),
-                            const unsigned int,
-                            const double *,
-                            const double *,
-                            const double,
-                            const double,
-                            const double *,
-                            const          int,
-                            const unsigned int);
+extern struct optimum *nelmin(      double (*)(const double *),
+                              const unsigned int,
+                                    double *,
+                              const double,
+                              const double *,
+                              const          int,
+                              const unsigned int);
 
 #endif /* __C__NELMIN_H */
 
