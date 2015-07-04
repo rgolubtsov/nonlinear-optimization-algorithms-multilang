@@ -193,6 +193,20 @@ script:
     ## Returning to the previous working dir.
     - cd - && ls -al
 
+    ## Building the Nelder-Mead alg as the ISO C (C99/11) impl.
+    - cd c && ls -al
+           && make clean
+           && make clean
+           && ls -al
+           && make all
+           && make all
+           && ls -al
+           && ls -al bin obj src
+           && ls -al
+
+    ## Returning to the previous working dir.
+    - cd - && ls -al
+
 ...
 
 # =============================================================================
