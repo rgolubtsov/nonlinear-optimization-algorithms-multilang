@@ -22,7 +22,7 @@ struct optimum *nelmin(const unsigned int  n,
                              double       *start,
                        const double        reqmin,
                        const double       *step,
-                       const          int  konvge,
+                       const unsigned int  konvge,
                        const unsigned int  kcount) {
 
     struct optimum *opt; /* The structure to hold the optimum data          */

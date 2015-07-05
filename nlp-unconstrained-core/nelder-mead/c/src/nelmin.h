@@ -86,7 +86,7 @@ extern struct optimum *nelmin(const unsigned int,
                                     double *,
                               const double,
                               const double *,
-                              const          int,
+                              const unsigned int,
                               const unsigned int);
 
 #endif /* __C__NELMIN_H */
