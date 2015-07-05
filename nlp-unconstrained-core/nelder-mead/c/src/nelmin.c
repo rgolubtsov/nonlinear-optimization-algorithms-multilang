@@ -69,38 +69,38 @@ struct optimum *nelmin(const unsigned int  n,
 
     opt->ynewlo = icount = numres = 0;
 
-    opt->indics[0] = icount;
-    opt->indics[1] = numres;
+    opt->indics[INDEX_0] = icount;
+    opt->indics[INDEX_1] = numres;
 
     /* Check the input parameters. */
     if (reqmin <= 0) {
-        ifault = 1;
+        ifault = IFAULT_1;
 
-        opt->indics[2] = ifault;
+        opt->indics[INDEX_2] = ifault;
 
         return (opt);
     }
 
     if (n < 1) {
-        ifault = 1;
+        ifault = IFAULT_1;
 
-        opt->indics[2] = ifault;
+        opt->indics[INDEX_2] = ifault;
 
         return (opt);
     }
 
     if (VARS < n) {
-        ifault = 1;
+        ifault = IFAULT_1;
 
-        opt->indics[2] = ifault;
+        opt->indics[INDEX_2] = ifault;
 
         return (opt);
     }
 
     if (konvge < 1) {
-        ifault = 1;
+        ifault = IFAULT_1;
 
-        opt->indics[2] = ifault;
+        opt->indics[INDEX_2] = ifault;
 
         return (opt);
     }
@@ -143,8 +143,8 @@ struct optimum *nelmin(const unsigned int  n,
      * ynewlo = y[ihi] indicates the vertex of the simplex
      * to be replaced.
      */
-    ylo = y[0];
-    ilo = 0;
+    ylo = y[INDEX_0];
+    ilo =   INDEX_0;
 
     for (i = 1; i < nn; i++) {
         if (y[i] < ylo) {
@@ -155,8 +155,8 @@ struct optimum *nelmin(const unsigned int  n,
 
     L2000:;
 
-    ynewlo = y[0];
-    ihi    = 0;
+    ynewlo = y[INDEX_0];
+    ihi    =   INDEX_0;
 
     for (i = 1; i < nn; i++) {
         if (ynewlo < y[i]) {
@@ -257,8 +257,8 @@ struct optimum *nelmin(const unsigned int  n,
                     goto L3000;
                 }
 
-                ylo = y[0];
-                ilo = 0;
+                ylo = y[INDEX_0];
+                ilo =   INDEX_0;
 
                 for (i = 1; i < nn; i++) {
                     if (y[i] < ylo) {
@@ -328,7 +328,7 @@ struct optimum *nelmin(const unsigned int  n,
         z = 0;
 
         for (i = 0; i < nn; i++) {
-            z += pow((y[i] - x), 2);
+            z += pow((y[i] - x), SQUARE);
         }
 
         if (rq < z) {
@@ -346,7 +346,7 @@ L3000:;
     ynewlo = y[ilo];
 
     if (kcount < icount) {
-        ifault = 2;
+        ifault = IFAULT_2;
 
         for (i = 0; i < n; i++) {
             opt->xmin[i] = xmin[i];
@@ -354,17 +354,17 @@ L3000:;
 
         opt->ynewlo = ynewlo;
 
-        opt->indics[0] = icount;
-        opt->indics[1] = numres;
-        opt->indics[2] = ifault;
+        opt->indics[INDEX_0] = icount;
+        opt->indics[INDEX_1] = numres;
+        opt->indics[INDEX_2] = ifault;
 
         return (opt);
     }
 
-    ifault = 0;
+    ifault = IFAULT_0;
 
     for (i = 0; i < n; i++) {
-        del     = step[i] * EPS;
+        del      = step[i] * EPS;
         xmin[i] += del;
 
         z = f(xmin);
@@ -372,7 +372,7 @@ L3000:;
         icount++;
 
         if (z < ynewlo) {
-            ifault = 2;
+            ifault = IFAULT_2;
 
             goto L4000;
         }
@@ -384,7 +384,7 @@ L3000:;
         icount++;
 
         if (z < ynewlo) {
-            ifault = 2;
+            ifault = IFAULT_2;
 
             goto L4000;
         }
@@ -401,9 +401,9 @@ L4000:;
 
         opt->ynewlo = ynewlo;
 
-        opt->indics[0] = icount;
-        opt->indics[1] = numres;
-        opt->indics[2] = ifault;
+        opt->indics[INDEX_0] = icount;
+        opt->indics[INDEX_1] = numres;
+        opt->indics[INDEX_2] = ifault;
 
         return (opt);
     }
@@ -442,25 +442,25 @@ int main(void) {
     /* Starting guess for Rosenbrock's test function. */
     puts("\nTEST01\n  Apply NELMIN to ROSENBROCK function.");
 
-    n        =  2;
-    start[0] = -1.2;
-    start[1] =  1;
+    n              = ROSEN_GUESS_N;
+    start[INDEX_0] = ROSEN_GUESS_1;
+    start[INDEX_1] = ROSEN_GUESS_2;
 #else
     /* Starting guess test problem "Woods". */
     puts("\nTEST05\n  Apply NELMIN to WOODS function.");
 
-    n        =  4;
-    start[0] = -3;
-    start[1] = -1;
-    start[2] = -3;
-    start[3] = -1;
+    n              = WOODS_GUESS_N;
+    start[INDEX_0] = WOODS_GUESS_1;
+    start[INDEX_1] = WOODS_GUESS_2;
+    start[INDEX_2] = WOODS_GUESS_1;
+    start[INDEX_3] = WOODS_GUESS_2;
 #endif
 
-    reqmin  = 1e-08;
-    step[0] = 1;
-    step[1] = 1;
-    konvge  = 10;
-    kcount  = 500;
+    reqmin        = REQMIN_GUESS;
+    step[INDEX_0] = STEP_GUESS_1;
+    step[INDEX_1] = STEP_GUESS_2;
+    konvge        = KONVGE_GUESS;
+    kcount        = KCOUNT_GUESS;
 
     puts(  "\n  Starting point X:\n");
 
@@ -480,9 +480,9 @@ int main(void) {
 
     ynewlo = opt->ynewlo;
 
-    icount = opt->indics[0];
-    numres = opt->indics[1];
-    ifault = opt->indics[2];
+    icount = opt->indics[INDEX_0];
+    numres = opt->indics[INDEX_1];
+    ifault = opt->indics[INDEX_2];
 
     free(opt);
 

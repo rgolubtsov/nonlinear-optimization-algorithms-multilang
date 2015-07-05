@@ -24,20 +24,20 @@ double f(const double *x) {
     double t4;
     double t5;
 
-    s1 = x[1] - pow(x[0], 2);
-    s2 = 1    -     x[0];
-    s3 = x[1] -     1;
+    s1 = x[INDEX_1] - pow(x[INDEX_0], SQUARE);
+    s2 = ACOEFF     -     x[INDEX_0];
+    s3 = x[INDEX_1] -     ACOEFF;
 
-    t1 = x[3] - pow(x[2], 2);
-    t2 = 1    -     x[2];
-    t3 = x[3] -     1;
+    t1 = x[INDEX_3] - pow(x[INDEX_2], SQUARE);
+    t2 = ACOEFF     -     x[INDEX_2];
+    t3 = x[INDEX_3] -     ACOEFF;
 
     t4 = s3 + t3;
     t5 = s3 - t3;
 
-    return (100 * pow(s1, 2) + pow(s2, 2)
-           + 90 * pow(t1, 2) + pow(t2, 2)
-           + 10 * pow(t4, 2) + pow(t5, 2) / 10);
+    return (SCOEFF * pow(s1, SQUARE) + pow(s2, SQUARE)
+          + TCOEFF * pow(t1, SQUARE) + pow(t2, SQUARE)
+          + DCOEFF * pow(t4, SQUARE) + pow(t5, SQUARE) / DCOEFF);
 }
 
 /* ========================================================================= */

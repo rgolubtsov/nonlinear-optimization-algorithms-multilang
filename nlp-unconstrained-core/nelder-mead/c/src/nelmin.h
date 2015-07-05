@@ -43,6 +43,34 @@
 /** Constant. The optimality factor. */
 #define EPS .001
 
+/** Helper constants. */
+#define INDICS_N       3
+
+#define INDEX_0        0
+#define INDEX_1        1
+#define INDEX_2        2
+#define INDEX_3        3
+
+#define IFAULT_0       0
+#define IFAULT_1       1
+#define IFAULT_2       2
+
+#define SQUARE         2
+
+#define ROSEN_GUESS_N  2
+#define ROSEN_GUESS_1 -1.2
+#define ROSEN_GUESS_2  1
+
+#define WOODS_GUESS_N  4
+#define WOODS_GUESS_1 -3
+#define WOODS_GUESS_2 -1
+
+#define REQMIN_GUESS   1e-8
+#define STEP_GUESS_1   1
+#define STEP_GUESS_2   1
+#define KONVGE_GUESS   10
+#define KCOUNT_GUESS   500
+
 /**
  * The structure to hold the optimum data (and metadata)
  * as the result of performing the optimization procedure.
@@ -64,7 +92,7 @@ struct optimum {
      *     <li>The number of restarts (<code>numres</code>).</li>
      *     <li>The error indicator    (<code>ifault</code>).</li></ul>
      */
-    unsigned int indics[3];
+    unsigned int indics[INDICS_N];
 };
 
 /**

@@ -18,10 +18,10 @@ double f(const double *x) {
     double a;
     double b;
 
-    a = x[1] - pow(x[0], 2);
-    b = 1    -     x[0];
+    a = ACOEFF     -     x[INDEX_0];
+    b = x[INDEX_1] - pow(x[INDEX_0], SQUARE);
 
-    return (100 * pow(a, 2) + pow(b, 2));
+    return (pow(a, SQUARE) + BCOEFF * pow(b, SQUARE));
 }
 
 /* ========================================================================= */
