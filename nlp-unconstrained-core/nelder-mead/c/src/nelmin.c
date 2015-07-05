@@ -459,18 +459,24 @@ int main(void) {
     reqmin        = REQMIN_GUESS;
     step[INDEX_0] = STEP_GUESS_1;
     step[INDEX_1] = STEP_GUESS_2;
+
+#ifdef WOODS
+    step[INDEX_2] = STEP_GUESS_1;
+    step[INDEX_3] = STEP_GUESS_2;
+#endif
+
     konvge        = KONVGE_GUESS;
     kcount        = KCOUNT_GUESS;
 
     puts(  "\n  Starting point X:\n");
 
     for (i = 0; i < n; i++) {
-        printf("  %14.6E\n", start[i]);
+        printf("  %14.6E            ->    %.12f\n", start[i], start[i]);
     }
 
     ynewlo = f(start);
 
-    printf("\n  F(X) = %14.6E\n", ynewlo);
+    printf(  "\n  F(X)  = %14.6E    ->    %.12f\n", ynewlo, ynewlo);
 
     opt = nelmin(n, start, reqmin, step, konvge, kcount);
 
@@ -486,15 +492,15 @@ int main(void) {
 
     free(opt);
 
-    printf("\n  Return code IFAULT = %8i\n", ifault);
+    printf("\n  Return code IFAULT   = %8i\n", ifault);
 
     puts(  "\n  Estimate of minimizing value X*:\n");
 
     for (i = 0; i < n; i++) {
-        printf("  %14.6E\n", xmin[i]);
+        printf("  %14.6E            ->    %.12f\n", xmin[i], xmin[i]);
     }
 
-    printf("\n  F(X*) = %14.6E\n", ynewlo);
+    printf(  "\n  F(X*) = %14.6E    ->    %.12f\n", ynewlo, ynewlo);
 
     printf("\n  Number of iterations = %8i\n", icount);
 
