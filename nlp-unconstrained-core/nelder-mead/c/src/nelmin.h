@@ -32,16 +32,16 @@
 #define VARS 20
 
 /** Constant. The reflection coefficient. */
-#define RCOEFF 1.0E+00
+#define RCOEFF 1
 
 /** Constant. The extension coefficient. */
-#define ECOEFF 2.0E+00
+#define ECOEFF 2
 
 /** Constant. The contraction coefficient. */
-#define CCOEFF 0.5E+00
+#define CCOEFF .5
 
 /** Constant. The optimality factor. */
-#define EPS 0.001E+00
+#define EPS .001
 
 /**
  * The structure to hold the optimum data (and metadata)

@@ -73,7 +73,7 @@ struct optimum *nelmin(const unsigned int  n,
     opt->indics[1] = numres;
 
     /* Check the input parameters. */
-    if (reqmin <= 0.0E+00) {
+    if (reqmin <= 0) {
         ifault = 1;
 
         opt->indics[2] = ifault;
@@ -109,7 +109,7 @@ struct optimum *nelmin(const unsigned int  n,
     dn     = n;
     nn     = n + 1;
     dnn    = nn;
-    del    = 1.0E+00;
+    del    = 1;
     rq     = reqmin * dn;
 
     /* Construction of initial simplex. */
@@ -170,7 +170,7 @@ struct optimum *nelmin(const unsigned int  n,
      * excepting the vertex with y value ynewlo.
      */
     for (i = 0; i < n; i++) {
-        z = 0.0E+00;
+        z = 0;
 
         for (j = 0; j < nn; j++) {
             z += p[i][j];
@@ -244,7 +244,7 @@ struct optimum *nelmin(const unsigned int  n,
             if (y[ihi] < y2star) {
                 for (j = 0; j < nn; j++) {
                     for (i = 0; i < n; i++) {
-                        p[i][j] = (p[i][j] + p[i][ilo]) * 0.5E+00;
+                        p[i][j] = (p[i][j] + p[i][ilo]) * CCOEFF;
                         xmin[i] =  p[i][j];
                     }
 
@@ -318,14 +318,14 @@ struct optimum *nelmin(const unsigned int  n,
     /* Check to see if minimum reached. */
     if (icount <= kcount) {
         jcount = konvge;
-        z      = 0.0E+00;
+        z      = 0;
 
         for (i = 0; i < nn; i++) {
             z += y[i];
         }
 
         x = z / dnn;
-        z = 0.0E+00;
+        z = 0;
 
         for (i = 0; i < nn; i++) {
             z += pow((y[i] - x), 2);
@@ -444,21 +444,21 @@ int main(void) {
 
     n        =  2;
     start[0] = -1.2;
-    start[1] =  1.0;
+    start[1] =  1;
 #else
     /* Starting guess test problem "Woods". */
     puts("\nTEST05\n  Apply NELMIN to WOODS function.");
 
     n        =  4;
-    start[0] = -3.0;
-    start[1] = -1.0;
-    start[2] = -3.0;
-    start[3] = -1.0;
+    start[0] = -3;
+    start[1] = -1;
+    start[2] = -3;
+    start[3] = -1;
 #endif
 
-    reqmin  = 1.0E-08;
-    step[0] = 1.0;
-    step[1] = 1.0;
+    reqmin  = 1e-08;
+    step[0] = 1;
+    step[1] = 1;
     konvge  = 10;
     kcount  = 500;
 
