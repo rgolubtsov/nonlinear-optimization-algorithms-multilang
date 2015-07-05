@@ -18,12 +18,11 @@
 #endif
 
 /* Main optimization function nelmin(...). */
-struct optimum *nelmin(      double      (*f)(const double *),
-                       const unsigned int  n,
+struct optimum *nelmin(const unsigned int  n,
                              double       *start,
                        const double        reqmin,
                        const double       *step,
-                       const          int  konvge,
+                       const unsigned int  konvge,
                        const unsigned int  kcount) {
 
     struct optimum *opt; /* The structure to hold the optimum data          */
@@ -70,38 +69,38 @@ struct optimum *nelmin(      double      (*f)(const double *),
 
     opt->ynewlo = icount = numres = 0;
 
-    opt->indics[0] = icount;
-    opt->indics[1] = numres;
+    opt->indics[INDEX_0] = icount;
+    opt->indics[INDEX_1] = numres;
 
     /* Check the input parameters. */
-    if (reqmin <= 0.0E+00) {
-        ifault = 1;
+    if (reqmin <= 0) {
+        ifault = IFAULT_1;
 
-        opt->indics[2] = ifault;
+        opt->indics[INDEX_2] = ifault;
 
         return (opt);
     }
 
     if (n < 1) {
-        ifault = 1;
+        ifault = IFAULT_1;
 
-        opt->indics[2] = ifault;
+        opt->indics[INDEX_2] = ifault;
 
         return (opt);
     }
 
     if (VARS < n) {
-        ifault = 1;
+        ifault = IFAULT_1;
 
-        opt->indics[2] = ifault;
+        opt->indics[INDEX_2] = ifault;
 
         return (opt);
     }
 
     if (konvge < 1) {
-        ifault = 1;
+        ifault = IFAULT_1;
 
-        opt->indics[2] = ifault;
+        opt->indics[INDEX_2] = ifault;
 
         return (opt);
     }
@@ -110,7 +109,7 @@ struct optimum *nelmin(      double      (*f)(const double *),
     dn     = n;
     nn     = n + 1;
     dnn    = nn;
-    del    = 1.0E+00;
+    del    = 1;
     rq     = reqmin * dn;
 
     /* Construction of initial simplex. */
@@ -144,8 +143,8 @@ struct optimum *nelmin(      double      (*f)(const double *),
      * ynewlo = y[ihi] indicates the vertex of the simplex
      * to be replaced.
      */
-    ylo = y[0];
-    ilo = 1;
+    ylo = y[INDEX_0];
+    ilo =   INDEX_0;
 
     for (i = 1; i < nn; i++) {
         if (y[i] < ylo) {
@@ -156,8 +155,8 @@ struct optimum *nelmin(      double      (*f)(const double *),
 
     L2000:;
 
-    ynewlo = y[0];
-    ihi    = 1;
+    ynewlo = y[INDEX_0];
+    ihi    =   INDEX_0;
 
     for (i = 1; i < nn; i++) {
         if (ynewlo < y[i]) {
@@ -171,7 +170,7 @@ struct optimum *nelmin(      double      (*f)(const double *),
      * excepting the vertex with y value ynewlo.
      */
     for (i = 0; i < n; i++) {
-        z = 0.0E+00;
+        z = 0;
 
         for (j = 0; j < nn; j++) {
             z += p[i][j];
@@ -245,7 +244,7 @@ struct optimum *nelmin(      double      (*f)(const double *),
             if (y[ihi] < y2star) {
                 for (j = 0; j < nn; j++) {
                     for (i = 0; i < n; i++) {
-                        p[i][j] = (p[i][j] + p[i][ilo]) * 0.5E+00;
+                        p[i][j] = (p[i][j] + p[i][ilo]) * CCOEFF;
                         xmin[i] =  p[i][j];
                     }
 
@@ -258,8 +257,8 @@ struct optimum *nelmin(      double      (*f)(const double *),
                     goto L3000;
                 }
 
-                ylo = y[0];
-                ilo = 1;
+                ylo = y[INDEX_0];
+                ilo =   INDEX_0;
 
                 for (i = 1; i < nn; i++) {
                     if (y[i] < ylo) {
@@ -319,17 +318,17 @@ struct optimum *nelmin(      double      (*f)(const double *),
     /* Check to see if minimum reached. */
     if (icount <= kcount) {
         jcount = konvge;
-        z      = 0.0E+00;
+        z      = 0;
 
         for (i = 0; i < nn; i++) {
             z += y[i];
         }
 
         x = z / dnn;
-        z = 0.0E+00;
+        z = 0;
 
         for (i = 0; i < nn; i++) {
-            z += pow((y[i] - x), 2);
+            z += pow((y[i] - x), SQUARE);
         }
 
         if (rq < z) {
@@ -347,7 +346,7 @@ L3000:;
     ynewlo = y[ilo];
 
     if (kcount < icount) {
-        ifault = 2;
+        ifault = IFAULT_2;
 
         for (i = 0; i < n; i++) {
             opt->xmin[i] = xmin[i];
@@ -355,17 +354,17 @@ L3000:;
 
         opt->ynewlo = ynewlo;
 
-        opt->indics[0] = icount;
-        opt->indics[1] = numres;
-        opt->indics[2] = ifault;
+        opt->indics[INDEX_0] = icount;
+        opt->indics[INDEX_1] = numres;
+        opt->indics[INDEX_2] = ifault;
 
         return (opt);
     }
 
-    ifault = 0;
+    ifault = IFAULT_0;
 
     for (i = 0; i < n; i++) {
-        del     = step[i] * EPS;
+        del      = step[i] * EPS;
         xmin[i] += del;
 
         z = f(xmin);
@@ -373,7 +372,7 @@ L3000:;
         icount++;
 
         if (z < ynewlo) {
-            ifault = 2;
+            ifault = IFAULT_2;
 
             goto L4000;
         }
@@ -385,7 +384,7 @@ L3000:;
         icount++;
 
         if (z < ynewlo) {
-            ifault = 2;
+            ifault = IFAULT_2;
 
             goto L4000;
         }
@@ -402,9 +401,9 @@ L4000:;
 
         opt->ynewlo = ynewlo;
 
-        opt->indics[0] = icount;
-        opt->indics[1] = numres;
-        opt->indics[2] = ifault;
+        opt->indics[INDEX_0] = icount;
+        opt->indics[INDEX_1] = numres;
+        opt->indics[INDEX_2] = ifault;
 
         return (opt);
     }
@@ -443,25 +442,25 @@ int main(void) {
     /* Starting guess for Rosenbrock's test function. */
     puts("\nTEST01\n  Apply NELMIN to ROSENBROCK function.");
 
-    n        =  2;
-    start[0] = -1.2;
-    start[1] =  1.0;
+    n              = ROSEN_GUESS_N;
+    start[INDEX_0] = ROSEN_GUESS_1;
+    start[INDEX_1] = ROSEN_GUESS_2;
 #else
     /* Starting guess test problem "Woods". */
     puts("\nTEST05\n  Apply NELMIN to WOODS function.");
 
-    n        =  4;
-    start[0] = -3.0;
-    start[1] = -1.0;
-    start[2] = -3.0;
-    start[3] = -1.0;
+    n              = WOODS_GUESS_N;
+    start[INDEX_0] = WOODS_GUESS_1;
+    start[INDEX_1] = WOODS_GUESS_2;
+    start[INDEX_2] = WOODS_GUESS_1;
+    start[INDEX_3] = WOODS_GUESS_2;
 #endif
 
-    reqmin  = 1.0E-08;
-    step[0] = 1.0;
-    step[1] = 1.0;
-    konvge  = 10;
-    kcount  = 500;
+    reqmin        = REQMIN_GUESS;
+    step[INDEX_0] = STEP_GUESS_1;
+    step[INDEX_1] = STEP_GUESS_2;
+    konvge        = KONVGE_GUESS;
+    kcount        = KCOUNT_GUESS;
 
     puts(  "\n  Starting point X:\n");
 
@@ -473,7 +472,7 @@ int main(void) {
 
     printf("\n  F(X) = %14.6E\n", ynewlo);
 
-    opt = nelmin(f, n, start, reqmin, step, konvge, kcount);
+    opt = nelmin(n, start, reqmin, step, konvge, kcount);
 
     for (i = 0; i < n; i++) {
         xmin[i] = opt->xmin[i];
@@ -481,9 +480,9 @@ int main(void) {
 
     ynewlo = opt->ynewlo;
 
-    icount = opt->indics[0];
-    numres = opt->indics[1];
-    ifault = opt->indics[2];
+    icount = opt->indics[INDEX_0];
+    numres = opt->indics[INDEX_1];
+    ifault = opt->indics[INDEX_2];
 
     free(opt);
 

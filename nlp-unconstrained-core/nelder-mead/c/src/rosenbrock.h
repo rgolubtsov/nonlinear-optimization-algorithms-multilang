@@ -29,6 +29,10 @@
 
 #include "nelmin.h"
 
+/** Helper constants. */
+#define ACOEFF 1
+#define BCOEFF 100
+
 /**
  * The user-supplied objective function f(x).
  * <br />

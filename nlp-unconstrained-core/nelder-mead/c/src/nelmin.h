@@ -32,16 +32,44 @@
 #define VARS 20
 
 /** Constant. The reflection coefficient. */
-#define RCOEFF 1.0E+00
+#define RCOEFF 1
 
 /** Constant. The extension coefficient. */
-#define ECOEFF 2.0E+00
+#define ECOEFF 2
 
 /** Constant. The contraction coefficient. */
-#define CCOEFF 0.5E+00
+#define CCOEFF .5
 
 /** Constant. The optimality factor. */
-#define EPS 0.001E+00
+#define EPS .001
+
+/** Helper constants. */
+#define INDICS_N       3
+
+#define INDEX_0        0
+#define INDEX_1        1
+#define INDEX_2        2
+#define INDEX_3        3
+
+#define IFAULT_0       0
+#define IFAULT_1       1
+#define IFAULT_2       2
+
+#define SQUARE         2
+
+#define ROSEN_GUESS_N  2
+#define ROSEN_GUESS_1 -1.2
+#define ROSEN_GUESS_2  1
+
+#define WOODS_GUESS_N  4
+#define WOODS_GUESS_1 -3
+#define WOODS_GUESS_2 -1
+
+#define REQMIN_GUESS   1e-8
+#define STEP_GUESS_1   1
+#define STEP_GUESS_2   1
+#define KONVGE_GUESS   10
+#define KCOUNT_GUESS   500
 
 /**
  * The structure to hold the optimum data (and metadata)
@@ -64,7 +92,7 @@ struct optimum {
      *     <li>The number of restarts (<code>numres</code>).</li>
      *     <li>The error indicator    (<code>ifault</code>).</li></ul>
      */
-    unsigned int indics[3];
+    unsigned int indics[INDICS_N];
 };
 
 /**
@@ -72,7 +100,6 @@ struct optimum {
  * <br />
  * <br />The nelmin subroutine itself (Nelder-Mead minimization).
  *
- * @param f      The objective function f(x).
  * @param n      The number of variables.
  * @param start  The starting point for the iteration.
  * @param reqmin The terminating limit for the variance of function values.
@@ -83,12 +110,11 @@ struct optimum {
  * @return The structure to hold the optimum data (and metadata)
  *         as the result of performing the optimization procedure.
  */
-extern struct optimum *nelmin(      double (*)(const double *),
-                              const unsigned int,
+extern struct optimum *nelmin(const unsigned int,
                                     double *,
                               const double,
                               const double *,
-                              const          int,
+                              const unsigned int,
                               const unsigned int);
 
 #endif /* __C__NELMIN_H */
