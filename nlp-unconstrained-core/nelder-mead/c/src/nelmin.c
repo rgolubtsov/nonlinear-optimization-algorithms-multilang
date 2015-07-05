@@ -144,7 +144,7 @@ struct optimum *nelmin(const unsigned int  n,
      * to be replaced.
      */
     ylo = y[0];
-    ilo = 1;
+    ilo = 0;
 
     for (i = 1; i < nn; i++) {
         if (y[i] < ylo) {
@@ -156,7 +156,7 @@ struct optimum *nelmin(const unsigned int  n,
     L2000:;
 
     ynewlo = y[0];
-    ihi    = 1;
+    ihi    = 0;
 
     for (i = 1; i < nn; i++) {
         if (ynewlo < y[i]) {
@@ -258,7 +258,7 @@ struct optimum *nelmin(const unsigned int  n,
                 }
 
                 ylo = y[0];
-                ilo = 1;
+                ilo = 0;
 
                 for (i = 1; i < nn; i++) {
                     if (y[i] < ylo) {
