@@ -459,6 +459,12 @@ int main(void) {
     reqmin        = REQMIN_GUESS;
     step[INDEX_0] = STEP_GUESS_1;
     step[INDEX_1] = STEP_GUESS_2;
+
+#ifdef WOODS
+    step[INDEX_2] = STEP_GUESS_1;
+    step[INDEX_3] = STEP_GUESS_2;
+#endif
+
     konvge        = KONVGE_GUESS;
     kcount        = KCOUNT_GUESS;
 
