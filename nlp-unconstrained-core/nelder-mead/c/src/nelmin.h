@@ -72,7 +72,6 @@ struct optimum {
  * <br />
  * <br />The nelmin subroutine itself (Nelder-Mead minimization).
  *
- * @param f      The objective function f(x).
  * @param n      The number of variables.
  * @param start  The starting point for the iteration.
  * @param reqmin The terminating limit for the variance of function values.
@@ -83,8 +82,7 @@ struct optimum {
  * @return The structure to hold the optimum data (and metadata)
  *         as the result of performing the optimization procedure.
  */
-extern struct optimum *nelmin(      double (*)(const double *),
-                              const unsigned int,
+extern struct optimum *nelmin(const unsigned int,
                                     double *,
                               const double,
                               const double *,

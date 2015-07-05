@@ -18,8 +18,7 @@
 #endif
 
 /* Main optimization function nelmin(...). */
-struct optimum *nelmin(      double      (*f)(const double *),
-                       const unsigned int  n,
+struct optimum *nelmin(const unsigned int  n,
                              double       *start,
                        const double        reqmin,
                        const double       *step,
@@ -473,7 +472,7 @@ int main(void) {
 
     printf("\n  F(X) = %14.6E\n", ynewlo);
 
-    opt = nelmin(f, n, start, reqmin, step, konvge, kcount);
+    opt = nelmin(n, start, reqmin, step, konvge, kcount);
 
     for (i = 0; i < n; i++) {
         xmin[i] = opt->xmin[i];
