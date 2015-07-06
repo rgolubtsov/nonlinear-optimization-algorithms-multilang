@@ -196,7 +196,7 @@ C         CONSTRUCTION OF INITIAL SIMPLEX.
 1000      CONTINUE
 
           DO 10 I = 1, N
-              P(I,NN) = START(I)
+              P(I, NN) = START(I)
 10        CONTINUE
 
           Y(NN) = F(START)
@@ -222,7 +222,7 @@ C         FIND HIGHEST AND LOWEST Y VALUES.
 C         YNEWLO = Y(IHI) INDICATES THE VERTEX OF THE SIMPLEX
 C         TO BE REPLACED.
           YLO = Y(1)
-          ILO = 1
+          ILO =   1
 
           DO 40 I = 2, NN
               IF (Y(I) .LT. YLO) THEN
@@ -234,7 +234,7 @@ C         TO BE REPLACED.
 2000      CONTINUE
 
           YNEWLO = Y(1)
-          IHI    = 1
+          IHI    =   1
 
           DO 50 I = 2, NN
               IF (YNEWLO .LT. Y(I)) THEN
@@ -321,7 +321,7 @@ C                 CONTRACT THE WHOLE SIMPLEX.
                   IF (Y(IHI) .LT. Y2STAR) THEN
                       DO 150 J = 1, NN
                           DO 160 I = 1, N
-                              P(I, J) = (P(I, J) + P(I, ILO)) * 0.5D+00
+                              P(I, J) = (P(I, J) + P(I, ILO)) * CCOEFF
                               XMIN(I) =  P(I, J)
 160                       CONTINUE
 
@@ -335,7 +335,7 @@ C                 CONTRACT THE WHOLE SIMPLEX.
                       END IF
 
                       YLO = Y(1)
-                      ILO = 1
+                      ILO =   1
 
                       DO 170 I = 2, NN
                           IF (Y(I) .LT. YLO) THEN
@@ -506,7 +506,7 @@ C         PROTO REF. THE OBJECTIVE FUNCTION F(X).
 C     STARTING GUESS FOR ROSENBROCK'S TEST FUNCTION.
           PRINT 10
 10        FORMAT (/,   'TEST01',
-     *            /2x, 'Apply NELMIN to ROSENBROCK function.')
+     *            /2X, 'Apply NELMIN to ROSENBROCK function.')
 
           N        =  2
           START(1) = -1.2
@@ -515,7 +515,7 @@ C     STARTING GUESS FOR ROSENBROCK'S TEST FUNCTION.
 C     STARTING GUESS TEST PROBLEM 'WOODS'.
           PRINT 50
 50        FORMAT (/,   'TEST05',
-     *            /2x, 'Apply NELMIN to WOODS function.')
+     *            /2X, 'Apply NELMIN to WOODS function.')
 
           N        =  4
           START(1) = -3.0
@@ -527,44 +527,50 @@ C     STARTING GUESS TEST PROBLEM 'WOODS'.
           REQMIN  = 1.0D-08
           STEP(1) = 1.0
           STEP(2) = 1.0
+
+#ifdef WOODS
+          STEP(3) = 1.0
+          STEP(4) = 1.0
+#endif
+
           KONVGE  = 10
           KCOUNT  = 500
 
           PRINT 60
-60        FORMAT (/2x, 'Starting point X:', /)
+60        FORMAT (/2X, 'Starting point X:', /)
 
           DO 70 I = 1, N
-              PRINT 80, START(I)
-80            FORMAT (2x, g14.6)
+              PRINT 80, START(I), START(I)
+80            FORMAT (            2X, G14.6, 12X, '->', 4X, F20.12)
 70        CONTINUE
 
           YNEWLO = F(START)
 
-          PRINT 90, YNEWLO
-90        FORMAT (/2x, 'F(X) =', 1x, g14.6)
+          PRINT 90, YNEWLO, YNEWLO
+90        FORMAT (/2X, 'F(X)  =', 1X, G14.6,  4X, '->', 4X, F20.12)
 
           CALL NELMIN(   F,      N,  START,   XMIN, YNEWLO, REQMIN,
      *                STEP, KONVGE, KCOUNT, ICOUNT, NUMRES, IFAULT)
 
           PRINT 100, IFAULT
-100       FORMAT (/2x, 'Return code IFAULT =', 1x, i8)
+100       FORMAT (/2X, 'Return code IFAULT   =', 1X, I8)
 
           PRINT 110
-110       FORMAT (/2x, 'Estimate of minimizing value X*:', /)
+110       FORMAT (/2X, 'Estimate of minimizing value X*:', /)
 
           DO 120 I = 1, N
-              PRINT 130, XMIN(I)
-130           FORMAT (2x, g14.6)
+              PRINT 130, XMIN(I), XMIN(I)
+130           FORMAT (            2X, G14.6, 12X, '->', 4X, F20.12)
 120       CONTINUE
 
-          PRINT 140, YNEWLO
-140       FORMAT (/2x, 'F(X*) =', 1x, g14.6)
+          PRINT 140, YNEWLO, YNEWLO
+140       FORMAT (/2X, 'F(X*) =', 1X, G14.6,  4X, '->', 4X, F20.12)
 
           PRINT 150, ICOUNT
-150       FORMAT (/2x, 'Number of iterations =', 1x, i8)
+150       FORMAT (/2X, 'Number of iterations =', 1X, I8)
 
           PRINT 160, NUMRES
-160       FORMAT (2x, 'Number of restarts   =', 1x, i8)
+160       FORMAT ( 2X, 'Number of restarts   =', 1X, I8)
       END
 
 C =============================================================================
