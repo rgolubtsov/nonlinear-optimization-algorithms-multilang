@@ -445,7 +445,7 @@ C         FACTORIAL TESTS TO CHECK THAT YNEWLO IS A LOCAL MINIMUM.
                   GO TO 4000
               END IF
 
-              XMIN(I) = XMIN(I) - DEL - DEL
+              XMIN(I) = XMIN(I) - (DEL * 2)
 
               Z = F(XMIN)
 
