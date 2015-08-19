@@ -377,7 +377,8 @@ L3000:;
             goto L4000;
         }
 
-        xmin[i] -= del * 2;
+/*        xmin[i] -= del * 2;*/
+        xmin[i] = xmin[i] - del - del;
 
         z = f(xmin);
 
