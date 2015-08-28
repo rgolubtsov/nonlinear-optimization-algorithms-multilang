@@ -465,6 +465,10 @@ int main(void) {
     step[INDEX_3] = STEP_GUESS_2;
 #endif
 
+    /*
+     * konvge and kcount have same values for all test prbms:
+     * should they be varied?
+     */
     konvge        = KONVGE_GUESS;
     kcount        = KCOUNT_GUESS;
 
