@@ -14,6 +14,7 @@
 ---
 
 * The (original) Nelder-Mead :small_blue_diamond: FORTRAN 77 (MIL-STD 1753) implementation
+* The Nelder-Mead :small_blue_diamond: ISO C (C99/11) implementation
 
 ---
 
@@ -101,6 +102,12 @@ The project has the following directory structure and logical parts and items.
 |   |
 |   `-- nelder-mead                    <== Nelder-Mead algorithm container
 |       |                                  (all implementations)
+|       |-- c                          <== ISO C (C99/11) impl. container
+|       |   |-- Makefile
+|       |   `-- src
+|       |       |-- < sources >
+|       |       `-- Makefile
+|       |
 |       `-- __orig                     <== FORTRAN 77 (MIL-STD 1753) impl. container
 |           |-- Makefile                   (This is the original impl.)
 |           `-- src
