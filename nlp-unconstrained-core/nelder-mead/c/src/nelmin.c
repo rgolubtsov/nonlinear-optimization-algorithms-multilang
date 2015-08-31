@@ -113,7 +113,7 @@ struct optimum *nelmin(const unsigned int  n,
     rq     = reqmin * dn;
 
     /* Construction of initial simplex. */
-    L1000:;
+L1000:;
 
     for (i = 0; i < n; i++) {
         p[i][nn] = start[i];
@@ -153,7 +153,7 @@ struct optimum *nelmin(const unsigned int  n,
         }
     }
 
-    L2000:;
+L2000:;
 
     ynewlo = y[INDEX_0];
     ihi    =   INDEX_0;
@@ -465,6 +465,10 @@ int main(void) {
     step[INDEX_3] = STEP_GUESS_2;
 #endif
 
+    /*
+     * konvge and kcount have same values for all test prbms:
+     * should they be varied?
+     */
     konvge        = KONVGE_GUESS;
     kcount        = KCOUNT_GUESS;
 
