@@ -31,7 +31,10 @@ MVFLAGS = -v
 # Making the first target (rosenbrock).
 $(DEPS1): CFLAGS += -o
 $(DEPS1): %.o: %.go
-	$(CC) $(CFLAGS) $@ $<
+	$(if $(findstring $(EXEC1),$@),$(info )$(info === Making the FIRST \
+	target (rosenbrock) ======================================))
+
+	$(CC) $(CFLAGS) $@ $< $(if $(findstring $(EXEC1),$<),,$(EXEC1).go)
 
 $(EXEC1): LDFLAGS += -o
 $(EXEC1): $(DEPS1)
@@ -40,7 +43,10 @@ $(EXEC1): $(DEPS1)
 # Making the second target (woods).
 $(DEPS2): CFLAGS += -o
 $(DEPS2): %$(EXEC2S).o: %.go
-	$(CC) $(CFLAGS) $@ $<
+	$(if $(findstring $(EXEC2),$@),$(info )$(info === Making the SECOND \
+	target (woods) ==========================================))
+
+	$(CC) $(CFLAGS) $@ $< $(if $(findstring $(EXEC1),$<),,$(EXEC1).go)
 
 $(EXEC2): LDFLAGS += -o
 $(EXEC2): $(DEPS2)
