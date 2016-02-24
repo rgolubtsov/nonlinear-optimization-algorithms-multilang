@@ -22,33 +22,29 @@ OBJ_DIR = ../obj
 
 # Specify flags and other vars here.
 CC      = go tool
-CFLAGS  = compile -complete
-LDFLAGS = link
+CFLAGS  = compile -complete -o
+LDFLAGS = link -o
 
 MV      = mv
 MVFLAGS = -v
 
 # Making the first target (rosenbrock).
-$(DEPS1): CFLAGS += -o
 $(DEPS1): %.o: %.go
 	$(if $(findstring $(EXEC1),$@),$(info )$(info === Making the FIRST \
 	target (rosenbrock) ======================================))
 
 	$(CC) $(CFLAGS) $@ $< $(if $(findstring $(EXEC1),$<),,$(EXEC1).go)
 
-$(EXEC1): LDFLAGS += -o
 $(EXEC1): $(DEPS1)
 	$(CC) $(LDFLAGS) $(EXEC1) $(DEPS1S).o
 
 # Making the second target (woods).
-$(DEPS2): CFLAGS += -o
 $(DEPS2): %$(EXEC2S).o: %.go
 	$(if $(findstring $(EXEC2),$@),$(info )$(info === Making the SECOND \
 	target (woods) ==========================================))
 
 	$(CC) $(CFLAGS) $@ $< $(if $(findstring $(EXEC1),$<),,$(EXEC1).go)
 
-$(EXEC2): LDFLAGS += -o
 $(EXEC2): $(DEPS2)
 	$(CC) $(LDFLAGS) $(EXEC2) $(DEPS2S)$(EXEC2S).o
 
