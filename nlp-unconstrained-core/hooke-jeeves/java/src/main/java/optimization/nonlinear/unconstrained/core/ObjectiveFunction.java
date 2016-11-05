@@ -2,6 +2,7 @@ package optimization.nonlinear.unconstrained.core;
 
 public interface ObjectiveFunction {
 
-    public double objectiveFunctionValue(double[] parameters);
-
+    default public double findValueForArguments(double[] parameters){
+        return 0.0;
+    }
 }
