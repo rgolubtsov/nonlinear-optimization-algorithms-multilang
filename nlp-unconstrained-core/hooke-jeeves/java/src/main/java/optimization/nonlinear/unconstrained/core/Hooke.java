@@ -22,7 +22,7 @@ package optimization.nonlinear.unconstrained.core;
  * @version 0.1
  * @see     optimization.nonlinear.unconstrained.core.Rosenbrock
  * @see     optimization.nonlinear.unconstrained.core.Woods
- * @since   hooke-jeeves 0.1
+ * @since   findMinimum-jeeves 0.1
  */
 public class Hooke {
     /** Constant. The maximum number of variables. */
@@ -78,55 +78,49 @@ public class Hooke {
                               final double[] point,
                               final double prevBest,
                               final int nVars,
-                              final Class objFunCls) {
+                              final ObjectiveFunction objFunCls) {
 
         double minF;
         double[] z = new double[VARS];
-        double fTmp;
+        double currentFunctionValue;
 
-        int i;
+        int iterationNumber;
 
         minF = prevBest;
 
-        for (i = 0; i < nVars; i++) {
-            z[i] = point[i];
+        for (iterationNumber = 0; iterationNumber < nVars; iterationNumber++) {
+            z[iterationNumber] = point[iterationNumber];
         }
 
-        for (i = 0; i < nVars; i++) {
-            z[i] = point[i] + delta[i];
+        for (iterationNumber = 0; iterationNumber < nVars; iterationNumber++) {
+            z[iterationNumber] = point[iterationNumber] + delta[iterationNumber];
+            currentFunctionValue = objFunCls.objectiveFunctionValue(z);
+//            is this necessary ? Maybe use Java 8 default method returning 0 then?
+//        } else {
+//            fBefore = 0;
+//        }
 
-            if (objFunCls.equals(Rosenbrock.class)) {
-                fTmp = Rosenbrock.f(z, nVars);
-            } else if (objFunCls.equals(Woods.class)) {
-                fTmp = Woods.f(z, nVars);
+            if (currentFunctionValue < minF) {
+                minF = currentFunctionValue;
             } else {
-                fTmp = 0;
-            }
+                delta[iterationNumber] = 0.0 - delta[iterationNumber];
+                z[iterationNumber]     = point[iterationNumber] + delta[iterationNumber];
+                currentFunctionValue = objFunCls.objectiveFunctionValue(z);
+//            is this necessary ? Maybe use Java 8 default method returning 0 then?
+//        } else {
+//            fBefore = 0;
+//        }
 
-            if (fTmp < minF) {
-                minF = fTmp;
-            } else {
-                delta[i] = 0.0 - delta[i];
-                z[i]     = point[i] + delta[i];
-
-                if (objFunCls.equals(Rosenbrock.class)) {
-                    fTmp = Rosenbrock.f(z, nVars);
-                } else if (objFunCls.equals(Woods.class)) {
-                    fTmp = Woods.f(z, nVars);
+                if (currentFunctionValue < minF) {
+                    minF = currentFunctionValue;
                 } else {
-                    fTmp = 0;
-                }
-
-                if (fTmp < minF) {
-                    minF = fTmp;
-                } else {
-                    z[i] = point[i];
+                    z[iterationNumber] = point[iterationNumber];
                 }
             }
         }
 
-        for (i = 0; i < nVars; i++) {
-            point[i] = z[i];
+        for (iterationNumber = 0; iterationNumber < nVars; iterationNumber++) {
+            point[iterationNumber] = z[iterationNumber];
         }
 
         return minF;
@@ -135,7 +129,7 @@ public class Hooke {
     /**
      * Main optimization method.
      * <br />
-     * <br />The hooke subroutine itself.
+     * <br />The findMinimum subroutine itself.
      *
      * @param nVars     The number of variables.
      * @param startPt   The starting point coordinates.
@@ -147,13 +141,13 @@ public class Hooke {
      *
      * @return The number of iterations used to find the local minimum.
      */
-    public int hooke(final int nVars,
-                     final double[] startPt,
-                     final double[] endPt,
-                     final double rho,
-                     final double epsilon,
-                     final int iterMax,
-                     final Class objFunCls) {
+    public int findMinimum(int nVars,
+                           double[] startPt,
+                           double[] endPt,
+                           double rho,
+                           double epsilon,
+                           int iterMax,
+                           ObjectiveFunction objFunCls) {
 
         int i;
         int iAdj;
@@ -184,13 +178,11 @@ public class Hooke {
         stepLength = rho;
         iters      = 0;
 
-        if (objFunCls.equals(Rosenbrock.class)) {
-            fBefore = Rosenbrock.f(newX, nVars);
-        } else if (objFunCls.equals(Woods.class)) {
-            fBefore = Woods.f(newX, nVars);
-        } else {
-            fBefore = 0;
-        }
+        fBefore=objFunCls.objectiveFunctionValue(newX);
+//            is this necessary ? Maybe use Java 8 default method returning 0 then?
+//        } else {
+//            fBefore = 0;
+//        }
 
         newF = fBefore;
 
