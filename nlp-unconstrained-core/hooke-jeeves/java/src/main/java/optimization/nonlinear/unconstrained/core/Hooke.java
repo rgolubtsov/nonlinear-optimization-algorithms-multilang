@@ -14,238 +14,222 @@
 
 package optimization.nonlinear.unconstrained.core;
 
-/**
- * The <code>Hooke</code> class contains methods for solving a nonlinear
- * optimization problem using the algorithm of Hooke and Jeeves.
- *
- * @author  Radislav (Radic) Golubtsov
- * @version 0.1
- * @see     optimization.nonlinear.unconstrained.core.Rosenbrock
- * @see     optimization.nonlinear.unconstrained.core.Woods
- * @since   findMinimum-jeeves 0.1
- */
 public class Hooke {
-    /** Constant. The maximum number of variables. */
-    public static final int VARS = 250;
+    public static final int MAXIMUM_NUMBER_OF_VARIABLES = 250;
 
-    /** Constant. The ending value of stepsize. */
-    public static final double EPSMIN = 1E-6;
+    public static final double ENDING_VALUE_OF_STEPSIZE = 1E-6;
 
-    /** Constant. The maximum number of iterations. */
-    public static final int IMAX = 5000;
+    public static final int MAXIMUM_NUMBER_OF_ITERATIONS = 5000;
 
-    /** Helper constants. */
-    public  static final int    INDEX_ZERO      = 0;
-    public  static final int    INDEX_ONE       = 1;
+    public static final int INDEX_ZERO = 0;
+    public static final int INDEX_ONE = 1;
     private static final double ZERO_POINT_FIVE = 0.5;
 
-    /** The number of function evaluations. */
-    private static int funEvals = 0;
-
-    /**
-     * Getter for <code>funEvals</code>.
-     *
-     * @return The number of function evaluations.
-     */
-    public static int getFunEvals() {
-        return funEvals;
-    }
-
-    /**
-     * Setter for <code>funEvals</code>.
-     *
-     * @param __funEvals The number of function evaluations.
-     */
-    public static void setFunEvals(final int __funEvals) {
-        funEvals = __funEvals;
-    }
+    private int numberOfFunctionEvaluations = 0;
 
     /**
      * Helper method.
      * <br />
      * <br />Given a point, look for a better one nearby, one coord at a time.
      *
-     * @param delta     The delta between <code>prevBest</code>
-     *                  and <code>point</code>.
-     * @param point     The coordinate from where to begin.
-     * @param prevBest  The previous best-valued coordinate.
-     * @param nVars     The number of variables.
-     * @param objFunCls The class in which the objective function is defined.
-     *
+     * @param delta                        The delta between <code>previousBestValuedCoordinate</code>
+     *                                     and <code>point</code>.
+     * @param point                        The coordinate from where to begin.
+     * @param previousBestValuedCoordinate The previous best-valued coordinate.
+     * @param numberOfVariables            The number of variables.
+     * @param objFunCls                    The class in which the objective function is defined.
      * @return The objective function value at a nearby.
      */
-    private double bestNearby(final double[] delta,
-                              final double[] point,
-                              final double prevBest,
-                              final int nVars,
-                              final ObjectiveFunction objFunCls) {
+    private double bestNearby(double[] delta,
+                              double[] point,
+                              double previousBestValuedCoordinate,
+                              int numberOfVariables,
+                              ObjectiveFunction objFunCls) {
 
-        double minF;
-        double[] z = new double[VARS];
+        double minumuValueOfFunction;
+        double[] currentSearchPoint = new double[MAXIMUM_NUMBER_OF_VARIABLES];
         double currentFunctionValue;
 
         int iterationNumber;
 
-        minF = prevBest;
+        minumuValueOfFunction = previousBestValuedCoordinate;
 
-        for (iterationNumber = 0; iterationNumber < nVars; iterationNumber++) {
-            z[iterationNumber] = point[iterationNumber];
+        for (iterationNumber = 0; iterationNumber < numberOfVariables; iterationNumber++) {
+            currentSearchPoint[iterationNumber] = point[iterationNumber];
         }
 
-        for (iterationNumber = 0; iterationNumber < nVars; iterationNumber++) {
-            z[iterationNumber] = point[iterationNumber] + delta[iterationNumber];
-            currentFunctionValue = objFunCls.objectiveFunctionValue(z);
-//            is this necessary ? Maybe use Java 8 default method returning 0 then?
-//        } else {
-//            fBefore = 0;
-//        }
+        for (iterationNumber = 0; iterationNumber < numberOfVariables; iterationNumber++) {
+            currentSearchPoint[iterationNumber] = point[iterationNumber] + delta[iterationNumber];
+            currentFunctionValue = objFunCls.findValueForArguments(currentSearchPoint);
+            numberOfFunctionEvaluations++;
 
-            if (currentFunctionValue < minF) {
-                minF = currentFunctionValue;
+            if (currentFunctionValue < minumuValueOfFunction) {
+                minumuValueOfFunction = currentFunctionValue;
             } else {
                 delta[iterationNumber] = 0.0 - delta[iterationNumber];
-                z[iterationNumber]     = point[iterationNumber] + delta[iterationNumber];
-                currentFunctionValue = objFunCls.objectiveFunctionValue(z);
-//            is this necessary ? Maybe use Java 8 default method returning 0 then?
-//        } else {
-//            fBefore = 0;
-//        }
+                currentSearchPoint[iterationNumber] = point[iterationNumber] + delta[iterationNumber];
+                currentFunctionValue = objFunCls.findValueForArguments(currentSearchPoint);
+                numberOfFunctionEvaluations++;
 
-                if (currentFunctionValue < minF) {
-                    minF = currentFunctionValue;
+                if (currentFunctionValue < minumuValueOfFunction) {
+                    minumuValueOfFunction = currentFunctionValue;
                 } else {
-                    z[iterationNumber] = point[iterationNumber];
+                    currentSearchPoint[iterationNumber] = point[iterationNumber];
                 }
             }
         }
 
-        for (iterationNumber = 0; iterationNumber < nVars; iterationNumber++) {
-            point[iterationNumber] = z[iterationNumber];
+        for (iterationNumber = 0; iterationNumber < numberOfVariables; iterationNumber++) {
+            point[iterationNumber] = currentSearchPoint[iterationNumber];
         }
 
-        return minF;
+        return minumuValueOfFunction;
     }
 
-    /**
-     * Main optimization method.
-     * <br />
-     * <br />The findMinimum subroutine itself.
-     *
-     * @param nVars     The number of variables.
-     * @param startPt   The starting point coordinates.
-     * @param endPt     The ending point coordinates.
-     * @param rho       The rho value.
-     * @param epsilon   The epsilon value.
-     * @param iterMax   The maximum number of iterations.
-     * @param objFunCls The class in which the objective function is defined.
-     *
-     * @return The number of iterations used to find the local minimum.
-     */
-    public int findMinimum(int nVars,
-                           double[] startPt,
-                           double[] endPt,
-                           double rho,
-                           double epsilon,
-                           int iterMax,
-                           ObjectiveFunction objFunCls) {
+    public int findMinimum(int numberOfVariables,
+                           double[] startingPointCoordinates,
+                           double[] endingPointCoordinates,
+                           double rhoStepsizeGeometricShrink,
+                           double epsilonEndingValueOfStepsize,
+                           int maximumNumberOfIterations,
+                           ObjectiveFunction objectiveFunction) {
 
-        int i;
-        int iAdj;
-        int iters;
-        int j;
-        int keep;
 
-        double[] newX    = new double[VARS];
-        double[] xBefore = new double[VARS];
-        double[] delta   = new double[VARS];
-        double stepLength;
-        double fBefore;
-        double newF;
-        double tmp;
+        double[] newFunctionArguments = new double[MAXIMUM_NUMBER_OF_VARIABLES];
+        double[] previousFunctionArguments = new double[MAXIMUM_NUMBER_OF_VARIABLES];
+        double[] delta = new double[MAXIMUM_NUMBER_OF_VARIABLES];
+        double previousFunctionValue;
 
-        for (i = 0; i < nVars; i++) {
-            xBefore[i] = startPt[i];
-            newX[i]    = xBefore[i];
+        for (int currentCoordinateNumber = 0; currentCoordinateNumber < numberOfVariables; currentCoordinateNumber++) {
+            previousFunctionArguments[currentCoordinateNumber] = startingPointCoordinates[currentCoordinateNumber];
+            newFunctionArguments[currentCoordinateNumber] = previousFunctionArguments[currentCoordinateNumber];
 
-            delta[i] = Math.abs(startPt[i] * rho);
+            delta[currentCoordinateNumber] = Math.abs(startingPointCoordinates[currentCoordinateNumber] * rhoStepsizeGeometricShrink);
 
-            if (delta[i] == 0.0) {
-                delta[i] = rho;
+            if (delta[currentCoordinateNumber] == 0.0) {
+                delta[currentCoordinateNumber] = rhoStepsizeGeometricShrink;
             }
         }
 
-        iAdj       = 0;
-        stepLength = rho;
-        iters      = 0;
 
-        fBefore=objFunCls.objectiveFunctionValue(newX);
-//            is this necessary ? Maybe use Java 8 default method returning 0 then?
-//        } else {
-//            fBefore = 0;
-//        }
 
-        newF = fBefore;
+        int numberOfIterations = 0;
 
-        while ((iters < iterMax) && (stepLength > epsilon)) {
-            iters++;
-            iAdj++;
+        previousFunctionValue = objectiveFunction.findValueForArguments(newFunctionArguments);
+        numberOfFunctionEvaluations++;
+
+        double newFunctionValue = previousFunctionValue;
+        double stepLength = rhoStepsizeGeometricShrink;
+        while ((numberOfIterations < maximumNumberOfIterations) && (stepLength > epsilonEndingValueOfStepsize)) {
+            numberOfIterations++;
 
             System.out.printf(
-                "\nAfter %5d funevals, f(x) =  %.4e at\n", funEvals, fBefore
+                    "\nAfter %5d funevals, f(x) =  %.4e at\n", numberOfFunctionEvaluations, previousFunctionValue
             );
 
-            for (j = 0; j < nVars; j++) {
-                System.out.printf("   x[%2d] = %.4e\n", j, xBefore[j]);
+            for (int  currentNumberOfVariable = 0; currentNumberOfVariable < numberOfVariables; currentNumberOfVariable++) {
+                System.out.printf("   x[%2d] = %.4e\n", currentNumberOfVariable, previousFunctionArguments[currentNumberOfVariable]);
             }
 
-            // Find best new point, one coord at a time.
-            for (i = 0; i < nVars; i++) {
-                newX[i] = xBefore[i];
-            }
+            findBestNewPoint(numberOfVariables, newFunctionArguments, previousFunctionArguments);
 
-            newF = bestNearby(delta, newX, fBefore, nVars, objFunCls);
+            newFunctionValue = bestNearby(delta, newFunctionArguments, previousFunctionValue, numberOfVariables, objectiveFunction);
 
             // If we made some improvements, pursue that direction.
-            keep = 1;
+            int keep = 1;
 
-            while ((newF < fBefore) && (keep == 1)) {
-                iAdj = 0;
+            NewDirectionPursuer newDirectionPursuer = new NewDirectionPursuer(numberOfVariables, objectiveFunction, newFunctionArguments, previousFunctionArguments, delta, previousFunctionValue, newFunctionValue, keep).invoke();
+            newFunctionValue = newDirectionPursuer.getNewFunctionValue();
+            previousFunctionValue = newDirectionPursuer.getPreviousFunctionValue();
 
-                for (i = 0; i < nVars; i++) {
+            if ((stepLength >= epsilonEndingValueOfStepsize) && (newFunctionValue >= previousFunctionValue)) {
+                stepLength = stepLength * rhoStepsizeGeometricShrink;
+
+                for (int currentVariableIndex = 0; currentVariableIndex < numberOfVariables; currentVariableIndex++) {
+                    delta[currentVariableIndex] *= rhoStepsizeGeometricShrink;
+                }
+            }
+        }
+
+        findBestNewPoint(numberOfVariables, endingPointCoordinates, previousFunctionArguments);
+
+        return numberOfIterations;
+    }
+
+    private void findBestNewPoint(int numberOfVariables, double[] newFunctionArguments, double[] previousFunctionArguments) {
+        for (int newPointCoordinates = 0; newPointCoordinates < numberOfVariables; newPointCoordinates++) {
+            newFunctionArguments[newPointCoordinates] = previousFunctionArguments[newPointCoordinates];
+        }
+    }
+
+    private class NewDirectionPursuer {
+        private int numberOfVariables;
+        private ObjectiveFunction objectiveFunction;
+        private double[] newFunctionArguments;
+        private double[] previousFunctionArguments;
+        private double[] delta;
+        private double previousFunctionValue;
+        private double newFunctionValue;
+        private int keep;
+
+        public NewDirectionPursuer(int numberOfVariables, ObjectiveFunction objectiveFunction, double[] newFunctionArguments, double[] previousFunctionArguments, double[] delta, double previousFunctionValue, double newFunctionValue, int keep) {
+            this.numberOfVariables = numberOfVariables;
+            this.objectiveFunction = objectiveFunction;
+            this.newFunctionArguments = newFunctionArguments;
+            this.previousFunctionArguments = previousFunctionArguments;
+            this.delta = delta;
+            this.previousFunctionValue = previousFunctionValue;
+            this.newFunctionValue = newFunctionValue;
+            this.keep = keep;
+        }
+
+        public double getPreviousFunctionValue() {
+            return previousFunctionValue;
+        }
+
+        public double getNewFunctionValue() {
+            return newFunctionValue;
+        }
+
+        public NewDirectionPursuer invoke() {
+            double tmp;
+            while ((newFunctionValue < previousFunctionValue) && (keep == 1)) {
+
+                for (int i = 0; i < numberOfVariables; i++) {
                     // Firstly, arrange the sign of delta[].
-                    if (newX[i] <= xBefore[i]) {
+                    if (newFunctionArguments[i] <= previousFunctionArguments[i]) {
                         delta[i] = 0.0 - Math.abs(delta[i]);
                     } else {
                         delta[i] = Math.abs(delta[i]);
                     }
 
                     // Now, move further in this direction.
-                    tmp        = xBefore[i];
-                    xBefore[i] = newX[i];
-                    newX[i]    = newX[i] + newX[i] - tmp;
+                    tmp = previousFunctionArguments[i];
+                    previousFunctionArguments[i] = newFunctionArguments[i];
+                    newFunctionArguments[i] = newFunctionArguments[i] + newFunctionArguments[i] - tmp;
                 }
 
-                fBefore = newF;
+                previousFunctionValue = newFunctionValue;
 
-                newF = bestNearby(delta, newX, fBefore, nVars, objFunCls);
+                newFunctionValue = bestNearby(delta, newFunctionArguments, previousFunctionValue, numberOfVariables, objectiveFunction);
 
                 // If the further (optimistic) move was bad....
-                if (newF >= fBefore) {
+                if (newFunctionValue >= previousFunctionValue) {
                     break;
                 }
 
                 /*
                  * Make sure that the differences between the new and the old
                  * points are due to actual displacements; beware of roundoff
-                 * errors that might cause newF < fBefore.
+                 * errors that might cause newFunctionValue < previousFunctionValue.
                  */
                 keep = 0;
 
-                for (i = 0; i < nVars; i++) {
+                for (int i = 0; i < numberOfVariables; i++) {
                     keep = 1;
 
-                    if (Math.abs(newX[i] - xBefore[i])
-                        > (ZERO_POINT_FIVE * Math.abs(delta[i]))) {
+                    if (Math.abs(newFunctionArguments[i] - previousFunctionArguments[i])
+                            > (ZERO_POINT_FIVE * Math.abs(delta[i]))) {
 
                         break;
                     } else {
@@ -253,27 +237,7 @@ public class Hooke {
                     }
                 }
             }
-
-            if ((stepLength >= epsilon) && (newF >= fBefore)) {
-                stepLength = stepLength * rho;
-
-                for (i = 0; i < nVars; i++) {
-                    delta[i] *= rho;
-                }
-            }
+            return this;
         }
-
-        for (i = 0; i < nVars; i++) {
-            endPt[i] = xBefore[i];
-        }
-
-        return iters;
     }
-
-    /** Default constructor. */
-    public Hooke() {}
 }
-
-// ============================================================================
-// vim:set nu:et:ts=4:sw=4:
-// ============================================================================
