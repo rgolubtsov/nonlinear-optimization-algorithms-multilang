@@ -46,12 +46,10 @@ public final class Rosenbrock implements ObjectiveFunction{
      *
      * @return The objective function value.
      */
-    public double objectiveFunctionValue(final double[] x) {
+    public double findValueForArguments(final double[] x) {
         double a;
         double b;
         double c;
-
-        Hooke.setFunEvals(Hooke.getFunEvals() + 1);
 
         a = x[Hooke.INDEX_ZERO];
         b = x[Hooke.INDEX_ONE];
@@ -72,21 +70,20 @@ public final class Rosenbrock implements ObjectiveFunction{
         int numberOfIterations;
         int i;
 
-        double[] startPt = new double[Hooke.VARS];
+        double[] startPt = new double[Hooke.MAXIMUM_NUMBER_OF_VARIABLES];
         double rho;
         double epsilon;
-        double[] endPt   = new double[Hooke.VARS];
+        double[] endPt   = new double[Hooke.MAXIMUM_NUMBER_OF_VARIABLES];
 
         nVars                     = TWO;
         startPt[Hooke.INDEX_ZERO] = MINUS_ONE_POINT_TWO;
         startPt[Hooke.INDEX_ONE]  = ONE_POINT_ZERO;
-        iterMax                   = Hooke.IMAX;
+        iterMax                   = Hooke.MAXIMUM_NUMBER_OF_ITERATIONS;
         rho                       = RHO_BEGIN;
-        epsilon                   = Hooke.EPSMIN;
+        epsilon                   = Hooke.ENDING_VALUE_OF_STEPSIZE;
 
         Hooke hooke = new Hooke();
 
-        //what did variable name "jj" standed for anyway?
         numberOfIterations = hooke.findMinimum(
                 nVars, startPt, endPt, rho, epsilon, iterMax, new Rosenbrock()
         );
