@@ -59,7 +59,7 @@ public final class Woods implements ObjectiveFunction {
      *
      * @return The objective function value.
      */
-    public double objectiveFunctionValue(final double[] x) {
+    public double findValueForArguments(final double[] x) {
         double s1;
         double s2;
         double s3;
@@ -68,8 +68,6 @@ public final class Woods implements ObjectiveFunction {
         double t3;
         double t4;
         double t5;
-
-        Hooke.setFunEvals(Hooke.getFunEvals() + 1);
 
         s1 = x[Hooke.INDEX_ONE] - x[Hooke.INDEX_ZERO] * x[Hooke.INDEX_ZERO];
         s2 = 1                  - x[Hooke.INDEX_ZERO];
@@ -98,10 +96,10 @@ public final class Woods implements ObjectiveFunction {
         int numberOfIterations;
         int i;
 
-        double[] startPt = new double[Hooke.VARS];
+        double[] startPt = new double[Hooke.MAXIMUM_NUMBER_OF_VARIABLES];
         double rho;
         double epsilon;
-        double[] endPt   = new double[Hooke.VARS];
+        double[] endPt   = new double[Hooke.MAXIMUM_NUMBER_OF_VARIABLES];
 
         // Starting guess test problem "Woods".
         nVars                     = FOUR;
@@ -109,11 +107,10 @@ public final class Woods implements ObjectiveFunction {
         startPt[Hooke.INDEX_ONE]  = MINUS_ONE;
         startPt[INDEX_TWO]        = MINUS_THREE;
         startPt[INDEX_THREE]      = MINUS_ONE;
-        iterMax                   = Hooke.IMAX;
+        iterMax                   = Hooke.MAXIMUM_NUMBER_OF_ITERATIONS;
         rho                       = RHO_WOODS;
-        epsilon                   = Hooke.EPSMIN;
+        epsilon                   = Hooke.ENDING_VALUE_OF_STEPSIZE;
 
-        // Instantiating the Hooke class.
         Hooke hooke = new Hooke();
 
         numberOfIterations = hooke.findMinimum(
