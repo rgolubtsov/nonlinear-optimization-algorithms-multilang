@@ -13,6 +13,8 @@
 
 package main
 
+import "reflect"
+
 /** Constant. The maximum number of variables. */
 const VARS uint = 250
 
@@ -46,6 +48,80 @@ func getFunEvals() uint {
  */
 func setFunEvals(__funEvals uint) {
     funEvals = __funEvals
+}
+
+/**
+ * Helper method.
+ * <br />
+ * <br />Given a point, look for a better one nearby, one coord at a time.
+ *
+ * @param delta     The delta between <code>prevBest</code>
+ *                  and <code>point</code>.
+ * @param point     The coordinate from where to begin.
+ * @param prevBest  The previous best-valued coordinate.
+ * @param nVars     The number of variables.
+ * @param objFunCls The class in which the objective function is defined.
+ *
+ * @return The objective function value at a nearby.
+ */
+func bestNearby(delta []float32, point []float32, prevBest float32, nVars uint, objFunCls struct{}) float32 {
+        var minF       float32
+        var z    [VARS]float32
+        var fTmp       float32
+
+        var i uint
+
+        var s_rosenbrock sRosenbrock
+        var s_woods      sWoods
+
+        minF = prevBest
+
+        for i = 0; i < nVars; i++ {
+            z[i] = point[i]
+        }
+
+        for i = 0; i < nVars; i++ {
+            z[i] = point[i] + delta[i]
+
+            if reflect.DeepEqual(objFunCls, s_rosenbrock) {
+//                fTmp = (*sRosenbrock)(nil).f(z[0:], nVars)
+                fTmp = s_rosenbrock.f(z[0:], nVars)
+            } else if reflect.DeepEqual(objFunCls, s_woods) {
+//                fTmp = (*sWoods)(nil).f(z[0:], nVars)
+                fTmp = s_woods.f(z[0:], nVars)
+            } else {
+                fTmp = 0
+            }
+
+            if fTmp < minF {
+                minF = fTmp
+            } else {
+                delta[i] = 0.0 - delta[i]
+                z[i]     = point[i] + delta[i]
+
+                if reflect.DeepEqual(objFunCls, s_rosenbrock) {
+//                    fTmp = (*sRosenbrock)(nil).f(z[0:], nVars)
+                    fTmp = s_rosenbrock.f(z[0:], nVars)
+                } else if reflect.DeepEqual(objFunCls, s_woods) {
+//                    fTmp = (*sWoods)(nil).f(z[0:], nVars)
+                    fTmp = s_woods.f(z[0:], nVars)
+                } else {
+                    fTmp = 0
+                }
+
+                if fTmp < minF {
+                    minF = fTmp
+                } else {
+                    z[i] = point[i]
+                }
+            }
+        }
+
+        for i = 0; i < nVars; i++ {
+            point[i] = z[i]
+        }
+
+        return minF
 }
 
 // ============================================================================
