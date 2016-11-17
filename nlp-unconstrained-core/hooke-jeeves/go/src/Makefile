@@ -32,8 +32,8 @@ MVFLAGS = -v
 $(DEPS1): %.o: %.go
 	$(if $(findstring $(EXEC1),$@),$(info )$(info === Making the FIRST \
 	target (rosenbrock) ======================================))
-
-	$(CC) $(CFLAGS) $@ $< $(if $(findstring $(EXEC1),$<),,$(EXEC1).go)
+	$(CC) $(CFLAGS) $@ $< $(if $(findstring $(EXEC1),$<),$(DEPS1S).go $(DEPS2S).go,$(EXEC1).go)
+#	$(CC) $(CFLAGS) $@ $< $(if $(findstring $(EXEC1),$<),$(DEPS1S).go,$(EXEC1).go)
 
 $(EXEC1): $(DEPS1)
 	$(CC) $(LDFLAGS) $(EXEC1) $(DEPS1S).o
@@ -42,8 +42,7 @@ $(EXEC1): $(DEPS1)
 $(DEPS2): %$(EXEC2S).o: %.go
 	$(if $(findstring $(EXEC2),$@),$(info )$(info === Making the SECOND \
 	target (woods) ==========================================))
-
-	$(CC) $(CFLAGS) $@ $< $(if $(findstring $(EXEC1),$<),,$(EXEC1).go)
+	$(CC) $(CFLAGS) $@ $< $(if $(findstring $(EXEC1),$<),$(DEPS2S).go,$(EXEC1).go)
 
 $(EXEC2): $(DEPS2)
 	$(CC) $(LDFLAGS) $(EXEC2) $(DEPS2S)$(EXEC2S).o
