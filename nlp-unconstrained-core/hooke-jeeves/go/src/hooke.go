@@ -13,10 +13,26 @@
 
 package main
 
-import "reflect"
+import "math"
+import "fmt"
+import "os"
 
 /** Constant. The maximum number of variables. */
 const VARS uint = 250
+
+/** Constant. The stepsize geometric shrink. */
+const RHO_BEGIN float32 = 0.5
+
+/**
+ * Constant. The stepsize geometric shrink.
+ * <br />
+ * <br />The Hooke &amp; Jeeves algorithm works reasonably well
+ * on Rosenbrock's function, but can fare worse on some standard
+ * test functions, depending on rho. Here is an example that works well
+ * when rho = 0.5, but fares poorly with rho = 0.6, and better again
+ * with rho = 0.8.
+ */
+const RHO_WOODS float32 = 0.6
 
 /** Constant. The ending value of stepsize. */
 const EPSMIN float32 = 1E-6
@@ -25,20 +41,40 @@ const EPSMIN float32 = 1E-6
 const IMAX uint = 5000
 
 /** Helper constants. */
-const INDEX_ZERO      uint    = 0
-const INDEX_ONE       uint    = 1
-const ZERO_POINT_FIVE float32 = 0.5
+const INDEX_ZERO          uint    =  0
+const INDEX_ONE           uint    =  1
+const INDEX_TWO           uint    =  2
+const INDEX_THREE         uint    =  3
+const TWO                 uint    =  2
+const FOUR                uint    =  4
+const MINUS_ONE_POINT_TWO float32 = -1.2
+const ONE_POINT_ZERO      float32 =  1.0
+const MINUS_THREE         int     = -3
+const MINUS_ONE           int     = -1
+const ZERO_POINT_FIVE     float32 =  0.5
 
-/** The number of function evaluations. */
-var funEvals uint = 0
+/**
+ * The <code>Hooke</code> structure contains methods for solving a nonlinear
+ * optimization problem using the algorithm of Hooke and Jeeves.
+ *
+ * @author  Radislav (Radic) Golubtsov
+ * @version 0.1
+ * @see     Rosenbrock (rosenbrock.go)
+ * @see     Woods           (woods.go)
+ * @since   hooke-jeeves 0.1
+ */
+type Hooke struct {
+    /** The number of function evaluations. */
+    funEvals uint
+}
 
 /**
  * Getter for <code>funEvals</code>.
  *
  * @return The number of function evaluations.
  */
-func getFunEvals() uint {
-    return funEvals
+func (h Hooke) GetFunEvals() uint {
+    return h.funEvals
 }
 
 /**
@@ -46,8 +82,8 @@ func getFunEvals() uint {
  *
  * @param __funEvals The number of function evaluations.
  */
-func setFunEvals(__funEvals uint) {
-    funEvals = __funEvals
+func (h Hooke) SetFunEvals(__funEvals uint) {
+    h.funEvals = __funEvals
 }
 
 /**
@@ -55,73 +91,264 @@ func setFunEvals(__funEvals uint) {
  * <br />
  * <br />Given a point, look for a better one nearby, one coord at a time.
  *
- * @param delta     The delta between <code>prevBest</code>
- *                  and <code>point</code>.
- * @param point     The coordinate from where to begin.
- * @param prevBest  The previous best-valued coordinate.
- * @param nVars     The number of variables.
- * @param objFunCls The class in which the objective function is defined.
+ * @param delta    The delta between <code>prevBest</code>
+ *                 and <code>point</code>.
+ * @param point    The coordinate from where to begin.
+ * @param prevBest The previous best-valued coordinate.
+ * @param nVars    The number of variables.
+ * @param woods    The class in which the objective function is defined.
  *
  * @return The objective function value at a nearby.
  */
-func bestNearby(delta []float32, point []float32, prevBest float32, nVars uint, objFunCls struct{}) float32 {
-        var minF       float32
-        var z    [VARS]float32
-        var fTmp       float32
+func (h Hooke) BestNearby(delta    []float32,
+                          point    []float32,
+                          prevBest   float32,
+                          nVars      uint,
+                          woods      string) float32 {
 
-        var i uint
+    var minF       float32
+    var z    [VARS]float32
+    var fTmp       float32
 
-        var s_rosenbrock sRosenbrock
-        var s_woods      sWoods
+    var i uint
 
-        minF = prevBest
+    minF = prevBest
 
-        for i = 0; i < nVars; i++ {
-            z[i] = point[i]
-        }
+    for i = 0; i < nVars; i++ {
+        z[i] = point[i]
+    }
 
-        for i = 0; i < nVars; i++ {
-            z[i] = point[i] + delta[i]
+    r := new (Rosenbrock)
+    w := new (Woods)
 
-            if reflect.DeepEqual(objFunCls, s_rosenbrock) {
-//                fTmp = (*sRosenbrock)(nil).f(z[0:], nVars)
-                fTmp = s_rosenbrock.f(z[0:], nVars)
-            } else if reflect.DeepEqual(objFunCls, s_woods) {
-//                fTmp = (*sWoods)(nil).f(z[0:], nVars)
-                fTmp = s_woods.f(z[0:], nVars)
-            } else {
-                fTmp = 0
-            }
+    for i = 0; i < nVars; i++ {
+        z[i] = point[i] + delta[i]
+
+        if woods != "WOODS" {                                  // #ifndef WOODS
+            fTmp = r.F(z[0:], nVars)
+        } else {                                               // #else
+            fTmp = w.F(z[0:], nVars)
+        }                                                      // #endif
+
+        if fTmp < minF {
+            minF = fTmp
+        } else {
+            delta[i] = 0.0 - delta[i]
+            z[i]     = point[i] + delta[i]
+
+            if woods != "WOODS" {                              // #ifndef WOODS
+                fTmp = r.F(z[0:], nVars)
+            } else {                                           // #else
+                fTmp = w.F(z[0:], nVars)
+            }                                                  // #endif
 
             if fTmp < minF {
                 minF = fTmp
             } else {
-                delta[i] = 0.0 - delta[i]
-                z[i]     = point[i] + delta[i]
+                z[i] = point[i]
+            }
+        }
+    }
 
-                if reflect.DeepEqual(objFunCls, s_rosenbrock) {
-//                    fTmp = (*sRosenbrock)(nil).f(z[0:], nVars)
-                    fTmp = s_rosenbrock.f(z[0:], nVars)
-                } else if reflect.DeepEqual(objFunCls, s_woods) {
-//                    fTmp = (*sWoods)(nil).f(z[0:], nVars)
-                    fTmp = s_woods.f(z[0:], nVars)
+    for i = 0; i < nVars; i++ {
+        point[i] = z[i]
+    }
+
+    return minF
+}
+
+/**
+ * Main optimization method.
+ * <br />
+ * <br />The hooke subroutine itself.
+ *
+ * @param nVars   The number of variables.
+ * @param startPt The starting point coordinates.
+ * @param endPt   The ending point coordinates.
+ * @param rho     The rho value.
+ * @param epsilon The epsilon value.
+ * @param iterMax The maximum number of iterations.
+ * @param woods   The class in which the objective function is defined.
+ *
+ * @return The number of iterations used to find the local minimum.
+ */
+func (h Hooke) hooke(nVars     uint,
+                     startPt []float32,
+                     endPt   []float32,
+                     rho       float32,
+                     epsilon   float32,
+                     iterMax   uint,
+                     woods     string) uint {
+
+    var i     uint
+    var iAdj  uint
+    var iters uint
+    var j     uint
+    var keep  uint
+
+    var newX       [VARS]float32
+    var xBefore    [VARS]float32
+    var delta      [VARS]float32
+    var stepLength       float32
+    var fBefore          float32
+    var newF             float32
+    var tmp              float32
+
+    for i = 0; i < nVars; i++ {
+        xBefore[i] = startPt[i]
+        newX[i]    = xBefore[i]
+
+        delta[i] = float32(math.Abs(float64(startPt[i] * rho)))
+
+        if delta[i] == 0.0 {
+            delta[i] = rho
+        }
+    }
+
+    iAdj       = 0
+    stepLength = rho
+    iters      = 0
+
+    r := new (Rosenbrock)
+    w := new (Woods)
+
+    if woods != "WOODS" {                                      // #ifndef WOODS
+        fBefore = r.F(newX[0:], nVars)
+    } else {                                                   // #else
+        fBefore = w.F(newX[0:], nVars)
+    }                                                          // #endif
+
+    newF = fBefore
+
+    for (iters < iterMax) && (stepLength > epsilon) {
+        iters++
+        iAdj++
+
+        fmt.Printf(
+            "\nAfter %5d funevals, f(x) =  %.4e at\n", h.funEvals, fBefore)
+
+        for j = 0; j < nVars; j++ {
+            fmt.Printf("   x[%2d] = %.4e\n", j, xBefore[j])
+        }
+
+        // Find best new point, one coord at a time.
+        for i = 0; i < nVars; i++ {
+            newX[i] = xBefore[i]
+        }
+
+        newF = h.BestNearby(delta[0:], newX[0:], fBefore, nVars, woods)
+
+        // If we made some improvements, pursue that direction.
+        keep = 1
+
+        for (newF < fBefore) && (keep == 1) {
+            iAdj = 0
+
+            for i = 0; i < nVars; i++ {
+                // Firstly, arrange the sign of delta[].
+                if newX[i] <= xBefore[i] {
+                    delta[i] = float32(0.0 - math.Abs(float64(delta[i])))
                 } else {
-                    fTmp = 0
+                    delta[i] = float32(math.Abs(float64(delta[i])))
                 }
 
-                if fTmp < minF {
-                    minF = fTmp
+                // Now, move further in this direction.
+                tmp        = xBefore[i]
+                xBefore[i] = newX[i]
+                newX[i]    = newX[i] + newX[i] - tmp
+            }
+
+            fBefore = newF
+
+            newF = h.BestNearby(delta[0:], newX[0:], fBefore, nVars, woods)
+
+            // If the further (optimistic) move was bad....
+            if newF >= fBefore {
+                break
+            }
+
+            /*
+             * Make sure that the differences between the new and the old
+             * points are due to actual displacements; beware of roundoff
+             * errors that might cause newF < fBefore.
+             */
+            keep = 0
+
+            for i = 0; i < nVars; i++ {
+                keep = 1
+
+                if float32(math.Abs(float64(newX[i] - xBefore[i]))) >
+                    (ZERO_POINT_FIVE * float32(math.Abs(float64(delta[i])))) {
+
+                    break
                 } else {
-                    z[i] = point[i]
+                    keep = 0
                 }
             }
         }
 
-        for i = 0; i < nVars; i++ {
-            point[i] = z[i]
-        }
+        if (stepLength >= epsilon) && (newF >= fBefore) {
+            stepLength = stepLength * rho
 
-        return minF
+            for i = 0; i < nVars; i++ {
+                delta[i] *= rho
+            }
+        }
+    }
+
+    for i = 0; i < nVars; i++ {
+        endPt[i] = xBefore[i]
+    }
+
+    return iters
+}
+
+// Main program function main() :-).
+func main() {
+    var nVars   uint
+    var iterMax uint
+    var jj      uint
+    var i       uint
+
+    var startPt [VARS]float32
+    var rho           float32
+    var epsilon       float32
+    var endPt   [VARS]float32
+
+    var woods string = os.Args[1]
+
+    if woods != "WOODS" {                                      // #ifndef WOODS
+        // Starting guess for Rosenbrock's test function.
+        nVars                = TWO
+        startPt[INDEX_ZERO]  = MINUS_ONE_POINT_TWO
+        startPt[INDEX_ONE]   = ONE_POINT_ZERO
+        rho                  = RHO_BEGIN
+    } else {                                                   // #else
+        // Starting guess test problem "Woods".
+        nVars                = FOUR
+        startPt[INDEX_ZERO]  = float32(MINUS_THREE)
+        startPt[INDEX_ONE]   = float32(MINUS_ONE)
+        startPt[INDEX_TWO]   = float32(MINUS_THREE)
+        startPt[INDEX_THREE] = float32(MINUS_ONE)
+        rho                  = RHO_WOODS
+    }                                                          // #endif
+
+    iterMax = IMAX
+    epsilon = EPSMIN
+
+    h := new (Hooke)
+
+    jj = h.hooke(nVars, startPt[0:], endPt[0:], rho, epsilon, iterMax, woods)
+
+    fmt.Printf("\n\n\nHOOKE USED %d ITERATIONS, AND RETURNED\n", jj)
+
+    for i = 0; i < nVars; i++ {
+        fmt.Printf("x[%3d] = %15.7e \n", i, endPt[i])
+    }
+
+    if woods == "WOODS" {                                       // #ifdef WOODS
+        fmt.Println("True answer: f(1, 1, 1, 1) = 0.")
+    }                                                           // #endif
 }
 
 // ============================================================================

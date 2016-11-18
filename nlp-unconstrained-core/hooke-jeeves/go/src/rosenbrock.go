@@ -13,19 +13,11 @@
 
 package main
 
-import "fmt"
-
-/** Constant. The stepsize geometric shrink. */
-const RHO_BEGIN float32 = 0.5
-
-/** Helper constants. */
+/** Helper constant. */
 const ONE_HUNDRED_POINT_ZERO float32 = 100.0
-const ONE_POINT_ZERO         float32 =   1.0
-const TWO                    uint    =   2
-const MINUS_ONE_POINT_TWO    float32 =  -1.2
 
 /**
- * The <code>Rosenbrock</code> interface is responsible for solving a nonlinear
+ * The <code>Rosenbrock</code> structure is responsible for solving a nonlinear
  * optimization problem using the algorithm of Hooke and Jeeves.
  * <br />
  * <br />The objective function in this case
@@ -33,36 +25,30 @@ const MINUS_ONE_POINT_TWO    float32 =  -1.2
  *
  * @author  Radislav (Radic) Golubtsov
  * @version 0.1
- * @see     Hooke
+ * @see     Hooke (hooke.go)
  * @since   hooke-jeeves 0.1
  */
-type Rosenbrock interface {
-    // The user-supplied objective function f(x,n).
-    f() float32
-}
-
-type sRosenbrock struct { }
+type Rosenbrock struct { }
 
 /**
- * The user-supplied objective function f(x,n).
+ * The user-supplied objective function F(x,n).
  * <br />
  * <br />Represents here the Rosenbrock's classic parabolic valley
  * (&quot;banana&quot;) function.
  *
- * @param x The point at which f(x) should be evaluated.
+ * @param x The point at which F(x) should be evaluated.
  * @param n The number of coordinates of <code>x</code>.
  *
  * @return The objective function value.
  */
-func (s_rosenbrock sRosenbrock) f(x []float32, n uint) float32 {
-    const INDEX_ZERO uint = 0
-    const INDEX_ONE  uint = 1
-
+func (r Rosenbrock) F(x []float32, n uint) float32 {
     var a float32
     var b float32
     var c float32
 
-    setFunEvals(getFunEvals() + 1)
+    h := new (Hooke)
+
+    h.SetFunEvals(h.GetFunEvals() + 1)
 
     a = x[INDEX_ZERO]
     b = x[INDEX_ONE]
@@ -70,13 +56,6 @@ func (s_rosenbrock sRosenbrock) f(x []float32, n uint) float32 {
     c = ONE_HUNDRED_POINT_ZERO * (b - (a * a)) * (b - (a * a))
 
     return (c + ((ONE_POINT_ZERO - a) * (ONE_POINT_ZERO - a)))
-}
-
-// Main program function main() :-).
-func main() {
-    var jj uint
-
-    fmt.Printf("\n\n\nHOOKE USED %d ITERATIONS, AND RETURNED\n", jj)
 }
 
 // ============================================================================
