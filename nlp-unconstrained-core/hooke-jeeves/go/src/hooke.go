@@ -41,7 +41,7 @@ const EPSMIN float64 = 1E-6
 const IMAX uint = 5000
 
 /** Helper constants. */
-const WOODS               string  = "WOODS"
+const WOODS               string  = "woods"
 const INDEX_ZERO          uint    =  0
 const INDEX_ONE           uint    =  1
 const INDEX_TWO           uint    =  2
@@ -97,7 +97,8 @@ func (h Hooke) SetFunEvals(__funEvals uint) {
  * @param point    The coordinate from where to begin.
  * @param prevBest The previous best-valued coordinate.
  * @param nVars    The number of variables.
- * @param woods    The class in which the objective function is defined.
+ * @param woods    The cmd-line arg to indicate,
+ *                 which objective function to use.
  *
  * @return The objective function value at a nearby.
  */
@@ -169,7 +170,8 @@ func (h Hooke) BestNearby(delta    []float64,
  * @param rho     The rho value.
  * @param epsilon The epsilon value.
  * @param iterMax The maximum number of iterations.
- * @param woods   The class in which the objective function is defined.
+ * @param woods   The cmd-line arg to indicate,
+ *                which objective function to use.
  *
  * @return The number of iterations used to find the local minimum.
  */
@@ -307,14 +309,14 @@ func (h Hooke) hooke(nVars     uint,
 /*
  * Main program function main() :-).
  *
- * It looks for the presence of the WOODS cmd-line arg as the first arg,
+ * It looks for the presence of the 'woods' cmd-line arg as the first arg,
  * and might be run without any args -- Rosenbrock test problem will be solved:
  *
  *     $ ./nlp-unconstrained-core/hooke-jeeves/go/bin/hooke
  *
- * Or it might be run with the WOODS arg -- Woods test problem will be solved:
+ * Or it might be run with the 'woods' arg --Woods test problem will be solved:
  *
- *     $ ./nlp-unconstrained-core/hooke-jeeves/go/bin/hooke WOODS
+ *     $ ./nlp-unconstrained-core/hooke-jeeves/go/bin/hooke woods
  */
 func main() {
     var nVars   uint
