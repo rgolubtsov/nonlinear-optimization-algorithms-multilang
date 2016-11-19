@@ -54,7 +54,7 @@ func (w Woods) F(x []float32, n uint) float32 {
     var t4 float32
     var t5 float32
 
-    h := new (Hooke)
+    h := new(Hooke)
 
     h.SetFunEvals(h.GetFunEvals() + 1)
 
