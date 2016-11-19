@@ -41,6 +41,7 @@ const EPSMIN float32 = 1E-6
 const IMAX uint = 5000
 
 /** Helper constants. */
+const WOODS               string  = "WOODS"
 const INDEX_ZERO          uint    =  0
 const INDEX_ONE           uint    =  1
 const INDEX_TWO           uint    =  2
@@ -124,7 +125,7 @@ func (h Hooke) BestNearby(delta    []float32,
     for i = 0; i < nVars; i++ {
         z[i] = point[i] + delta[i]
 
-        if woods != "WOODS" {                                  // #ifndef WOODS
+        if woods != WOODS {                                    // #ifndef WOODS
             fTmp = r.F(z[0:], nVars)
         } else {                                               // #else
             fTmp = w.F(z[0:], nVars)
@@ -136,7 +137,7 @@ func (h Hooke) BestNearby(delta    []float32,
             delta[i] = 0.0 - delta[i]
             z[i]     = point[i] + delta[i]
 
-            if woods != "WOODS" {                              // #ifndef WOODS
+            if woods != WOODS {                                // #ifndef WOODS
                 fTmp = r.F(z[0:], nVars)
             } else {                                           // #else
                 fTmp = w.F(z[0:], nVars)
@@ -212,7 +213,7 @@ func (h Hooke) hooke(nVars     uint,
     r := new (Rosenbrock)
     w := new (Woods)
 
-    if woods != "WOODS" {                                      // #ifndef WOODS
+    if woods != WOODS {                                        // #ifndef WOODS
         fBefore = r.F(newX[0:], nVars)
     } else {                                                   // #else
         fBefore = w.F(newX[0:], nVars)
@@ -303,7 +304,18 @@ func (h Hooke) hooke(nVars     uint,
     return iters
 }
 
-// Main program function main() :-).
+/*
+ * Main program function main() :-).
+ *
+ * It looks for the presence of the WOODS cmd-line arg as the first arg,
+ * and might be run without any args -- Rosenbrock test problem will be solved:
+ *
+ *     $ ./nlp-unconstrained-core/hooke-jeeves/go/bin/hooke
+ *
+ * Or it might be run with the WOODS arg -- Woods test problem will be solved:
+ *
+ *     $ ./nlp-unconstrained-core/hooke-jeeves/go/bin/hooke WOODS
+ */
 func main() {
     var nVars   uint
     var iterMax uint
@@ -315,9 +327,15 @@ func main() {
     var epsilon       float32
     var endPt   [VARS]float32
 
-    var woods string = os.Args[1]
+    var argsLen uint = uint(len(os.Args) - 1)
 
-    if woods != "WOODS" {                                      // #ifndef WOODS
+    var woods string
+
+    if argsLen > 0 {
+        woods = os.Args[1]
+    }
+
+    if woods != WOODS {                                        // #ifndef WOODS
         // Starting guess for Rosenbrock's test function.
         nVars                = TWO
         startPt[INDEX_ZERO]  = MINUS_ONE_POINT_TWO
@@ -346,7 +364,7 @@ func main() {
         fmt.Printf("x[%3d] = %15.7e \n", i, endPt[i])
     }
 
-    if woods == "WOODS" {                                       // #ifdef WOODS
+    if woods == WOODS {                                         // #ifdef WOODS
         fmt.Println("True answer: f(1, 1, 1, 1) = 0.")
     }                                                           // #endif
 }
