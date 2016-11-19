@@ -8,57 +8,41 @@
 # programming languages.
 #
 # This is the Hooke and Jeeves nonlinear unconstrained minimization algorithm.
+#
+# (See outer Makefile to understand how this one is processed.)
 # =============================================================================
 
-EXEC1   = hooke
-EXEC2S  = -woods
-EXEC2   = $(EXEC1)$(EXEC2S)
-DEPS1S  = rosenbrock
-DEPS1   = $(EXEC1).o $(DEPS1S).o
-DEPS2S  = woods
-DEPS2   = $(EXEC2).o $(DEPS2S)$(EXEC2S).o
+EXEC    = hooke
+DEPS    = $(EXEC).o
+SRCS    = $(EXEC).go    \
+          rosenbrock.go \
+          woods.go
 BIN_DIR = ../bin
 OBJ_DIR = ../obj
 
 # Specify flags and other vars here.
-CC      = go tool
-CFLAGS  = compile -complete -o
-LDFLAGS = link -o
+GO            = go tool
+GO_COMP_FLAGS = compile -complete -o
+GO_LINK_FLAGS = link -o
 
 MV      = mv
 MVFLAGS = -v
 
-# Making the first target (rosenbrock).
-$(DEPS1): %.o: %.go
-	$(if $(findstring $(EXEC1),$@),$(info )$(info === Making the FIRST \
-	target (rosenbrock) ======================================))
-	$(CC) $(CFLAGS) $@ $< $(if $(findstring $(EXEC1),$<),$(DEPS1S).go $(DEPS2S).go,$(EXEC1).go)
-#	$(CC) $(CFLAGS) $@ $< $(if $(findstring $(EXEC1),$<),$(DEPS1S).go,$(EXEC1).go)
+# Making the target.
+$(DEPS): $(SRCS)
+	$(GO) $(GO_COMP_FLAGS) $(DEPS) $(SRCS)
 
-$(EXEC1): $(DEPS1)
-	$(CC) $(LDFLAGS) $(EXEC1) $(DEPS1S).o
+$(EXEC): $(DEPS)
+	$(GO) $(GO_LINK_FLAGS) $(EXEC) $(DEPS)
 
-# Making the second target (woods).
-$(DEPS2): %$(EXEC2S).o: %.go
-	$(if $(findstring $(EXEC2),$@),$(info )$(info === Making the SECOND \
-	target (woods) ==========================================))
-	$(CC) $(CFLAGS) $@ $< $(if $(findstring $(EXEC1),$<),$(DEPS2S).go,$(EXEC1).go)
+.PHONY: all clean
 
-$(EXEC2): $(DEPS2)
-	$(CC) $(LDFLAGS) $(EXEC2) $(DEPS2S)$(EXEC2S).o
-
-.PHONY: rosenbrock woods all clean
-
-rosenbrock: $(EXEC1)
-
-woods: $(EXEC2)
-
-all: rosenbrock woods
-	$(MV) $(MVFLAGS) $(EXEC1) $(EXEC2) $(BIN_DIR)
-	$(MV) $(MVFLAGS) $(DEPS1) $(DEPS2) $(OBJ_DIR)
+all: $(EXEC)
+	$(MV) $(MVFLAGS) $(EXEC) $(BIN_DIR)
+	$(MV) $(MVFLAGS) $(DEPS) $(OBJ_DIR)
 
 clean:
-	$(RM) $(EXEC1) $(DEPS1) $(EXEC2) $(DEPS2)
+	$(RM) $(EXEC) $(DEPS)
 
 # =============================================================================
 # vim:set nu:et:ts=4:sw=4:

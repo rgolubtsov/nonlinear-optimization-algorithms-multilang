@@ -8,6 +8,8 @@
 # programming languages.
 #
 # This is the Hooke and Jeeves nonlinear unconstrained minimization algorithm.
+#
+# (See inner Makefile to find out actual build rules.)
 # =============================================================================
 
 BIN_DIR    = bin
