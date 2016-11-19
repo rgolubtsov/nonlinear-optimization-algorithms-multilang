@@ -228,7 +228,7 @@ func (h Hooke) hooke(nVars     uint,
         iAdj++
 
         fmt.Printf(
-            "\nAfter %5d funevals, f(x) =  %.4e at\n", h.funEvals, fBefore)
+           "\nAfter %5d funevals, f(x) =  %.4e at\n", h.GetFunEvals(), fBefore)
 
         for j = 0; j < nVars; j++ {
             fmt.Printf("   x[%2d] = %.4e\n", j, xBefore[j])
