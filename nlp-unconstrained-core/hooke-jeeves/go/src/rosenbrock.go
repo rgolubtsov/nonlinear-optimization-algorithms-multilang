@@ -14,7 +14,7 @@
 package main
 
 /** Helper constant. */
-const ONE_HUNDRED_POINT_ZERO float32 = 100.0
+const ONE_HUNDRED_POINT_ZERO float64 = 100.0
 
 /**
  * The <code>Rosenbrock</code> structure is responsible for solving a nonlinear
@@ -41,10 +41,10 @@ type Rosenbrock struct { }
  *
  * @return The objective function value.
  */
-func (r Rosenbrock) F(x []float32, n uint) float32 {
-    var a float32
-    var b float32
-    var c float32
+func (r Rosenbrock) F(x []float64, n uint) float64 {
+    var a float64
+    var b float64
+    var c float64
 
     h := new(Hooke)
 

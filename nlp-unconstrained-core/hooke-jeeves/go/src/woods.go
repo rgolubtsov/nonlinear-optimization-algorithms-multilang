@@ -17,7 +17,7 @@ package main
 const ONE_HUNDRED uint    = 100
 const NINETY      uint    =  90
 const TEN         uint    =  10
-const TEN_POINT   float32 =  10.
+const TEN_POINT   float64 =  10.
 
 /**
  * The <code>Woods</code> structure is responsible for solving a nonlinear
@@ -44,15 +44,15 @@ type Woods struct { }
  *
  * @return The objective function value.
  */
-func (w Woods) F(x []float32, n uint) float32 {
-    var s1 float32
-    var s2 float32
-    var s3 float32
-    var t1 float32
-    var t2 float32
-    var t3 float32
-    var t4 float32
-    var t5 float32
+func (w Woods) F(x []float64, n uint) float64 {
+    var s1 float64
+    var s2 float64
+    var s3 float64
+    var t1 float64
+    var t2 float64
+    var t3 float64
+    var t4 float64
+    var t5 float64
 
     h := new(Hooke)
 
@@ -69,9 +69,9 @@ func (w Woods) F(x []float32, n uint) float32 {
     t4 = s3 + t3
     t5 = s3 - t3
 
-    return (float32(ONE_HUNDRED) * (s1 * s1) + s2 * s2 +
-                 float32(NINETY) * (t1 * t1) + t2 * t2 +
-                    float32(TEN) * (t4 * t4) + t5 * t5 / TEN_POINT)
+    return (float64(ONE_HUNDRED) * (s1 * s1) + s2 * s2 +
+                 float64(NINETY) * (t1 * t1) + t2 * t2 +
+                    float64(TEN) * (t4 * t4) + t5 * t5 / TEN_POINT)
 }
 
 // ============================================================================

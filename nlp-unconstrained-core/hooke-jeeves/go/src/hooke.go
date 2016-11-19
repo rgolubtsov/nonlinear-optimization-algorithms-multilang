@@ -21,7 +21,7 @@ import "os"
 const VARS uint = 250
 
 /** Constant. The stepsize geometric shrink. */
-const RHO_BEGIN float32 = 0.5
+const RHO_BEGIN float64 = 0.5
 
 /**
  * Constant. The stepsize geometric shrink.
@@ -32,10 +32,10 @@ const RHO_BEGIN float32 = 0.5
  * when rho = 0.5, but fares poorly with rho = 0.6, and better again
  * with rho = 0.8.
  */
-const RHO_WOODS float32 = 0.6
+const RHO_WOODS float64 = 0.6
 
 /** Constant. The ending value of stepsize. */
-const EPSMIN float32 = 1E-6
+const EPSMIN float64 = 1E-6
 
 /** Constant. The maximum number of iterations. */
 const IMAX uint = 5000
@@ -48,11 +48,11 @@ const INDEX_TWO           uint    =  2
 const INDEX_THREE         uint    =  3
 const TWO                 uint    =  2
 const FOUR                uint    =  4
-const MINUS_ONE_POINT_TWO float32 = -1.2
-const ONE_POINT_ZERO      float32 =  1.0
+const MINUS_ONE_POINT_TWO float64 = -1.2
+const ONE_POINT_ZERO      float64 =  1.0
 const MINUS_THREE         int     = -3
 const MINUS_ONE           int     = -1
-const ZERO_POINT_FIVE     float32 =  0.5
+const ZERO_POINT_FIVE     float64 =  0.5
 
 /**
  * The <code>Hooke</code> structure contains methods for solving a nonlinear
@@ -101,15 +101,15 @@ func (h Hooke) SetFunEvals(__funEvals uint) {
  *
  * @return The objective function value at a nearby.
  */
-func (h Hooke) BestNearby(delta    []float32,
-                          point    []float32,
-                          prevBest   float32,
+func (h Hooke) BestNearby(delta    []float64,
+                          point    []float64,
+                          prevBest   float64,
                           nVars      uint,
-                          woods      string) float32 {
+                          woods      string) float64 {
 
-    var minF       float32
-    var z    [VARS]float32
-    var fTmp       float32
+    var minF       float64
+    var z    [VARS]float64
+    var fTmp       float64
 
     var i uint
 
@@ -174,10 +174,10 @@ func (h Hooke) BestNearby(delta    []float32,
  * @return The number of iterations used to find the local minimum.
  */
 func (h Hooke) hooke(nVars     uint,
-                     startPt []float32,
-                     endPt   []float32,
-                     rho       float32,
-                     epsilon   float32,
+                     startPt []float64,
+                     endPt   []float64,
+                     rho       float64,
+                     epsilon   float64,
                      iterMax   uint,
                      woods     string) uint {
 
@@ -187,19 +187,19 @@ func (h Hooke) hooke(nVars     uint,
     var j     uint
     var keep  uint
 
-    var newX       [VARS]float32
-    var xBefore    [VARS]float32
-    var delta      [VARS]float32
-    var stepLength       float32
-    var fBefore          float32
-    var newF             float32
-    var tmp              float32
+    var newX       [VARS]float64
+    var xBefore    [VARS]float64
+    var delta      [VARS]float64
+    var stepLength       float64
+    var fBefore          float64
+    var newF             float64
+    var tmp              float64
 
     for i = 0; i < nVars; i++ {
         xBefore[i] = startPt[i]
         newX[i]    = xBefore[i]
 
-        delta[i] = float32(math.Abs(float64(startPt[i] * rho)))
+        delta[i] = math.Abs(startPt[i] * rho)
 
         if delta[i] == 0.0 {
             delta[i] = rho
@@ -248,9 +248,9 @@ func (h Hooke) hooke(nVars     uint,
             for i = 0; i < nVars; i++ {
                 // Firstly, arrange the sign of delta[].
                 if newX[i] <= xBefore[i] {
-                    delta[i] = float32(0.0 - math.Abs(float64(delta[i])))
+                    delta[i] = 0.0 - math.Abs(delta[i])
                 } else {
-                    delta[i] = float32(math.Abs(float64(delta[i])))
+                    delta[i] = math.Abs(delta[i])
                 }
 
                 // Now, move further in this direction.
@@ -278,8 +278,8 @@ func (h Hooke) hooke(nVars     uint,
             for i = 0; i < nVars; i++ {
                 keep = 1
 
-                if float32(math.Abs(float64(newX[i] - xBefore[i]))) >
-                    (ZERO_POINT_FIVE * float32(math.Abs(float64(delta[i])))) {
+                if math.Abs(newX[i] - xBefore[i]) >
+                    (ZERO_POINT_FIVE * math.Abs(delta[i])) {
 
                     break
                 } else {
@@ -322,10 +322,10 @@ func main() {
     var jj      uint
     var i       uint
 
-    var startPt [VARS]float32
-    var rho           float32
-    var epsilon       float32
-    var endPt   [VARS]float32
+    var startPt [VARS]float64
+    var rho           float64
+    var epsilon       float64
+    var endPt   [VARS]float64
 
     var argsLen uint = uint(len(os.Args) - 1)
 
@@ -344,10 +344,10 @@ func main() {
     } else {                                                   // #else
         // Starting guess test problem "Woods".
         nVars                = FOUR
-        startPt[INDEX_ZERO]  = float32(MINUS_THREE)
-        startPt[INDEX_ONE]   = float32(MINUS_ONE)
-        startPt[INDEX_TWO]   = float32(MINUS_THREE)
-        startPt[INDEX_THREE] = float32(MINUS_ONE)
+        startPt[INDEX_ZERO]  = float64(MINUS_THREE)
+        startPt[INDEX_ONE]   = float64(MINUS_ONE)
+        startPt[INDEX_TWO]   = float64(MINUS_THREE)
+        startPt[INDEX_THREE] = float64(MINUS_ONE)
         rho                  = RHO_WOODS
     }                                                          // #endif
 
