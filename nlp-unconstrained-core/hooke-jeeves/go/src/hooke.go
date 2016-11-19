@@ -119,8 +119,8 @@ func (h Hooke) BestNearby(delta    []float32,
         z[i] = point[i]
     }
 
-    r := new (Rosenbrock)
-    w := new (Woods)
+    r := new(Rosenbrock)
+    w := new(Woods)
 
     for i = 0; i < nVars; i++ {
         z[i] = point[i] + delta[i]
@@ -210,8 +210,8 @@ func (h Hooke) hooke(nVars     uint,
     stepLength = rho
     iters      = 0
 
-    r := new (Rosenbrock)
-    w := new (Woods)
+    r := new(Rosenbrock)
+    w := new(Woods)
 
     if woods != WOODS {                                        // #ifndef WOODS
         fBefore = r.F(newX[0:], nVars)
@@ -354,7 +354,7 @@ func main() {
     iterMax = IMAX
     epsilon = EPSMIN
 
-    h := new (Hooke)
+    h := new(Hooke)
 
     jj = h.hooke(nVars, startPt[0:], endPt[0:], rho, epsilon, iterMax, woods)
 
