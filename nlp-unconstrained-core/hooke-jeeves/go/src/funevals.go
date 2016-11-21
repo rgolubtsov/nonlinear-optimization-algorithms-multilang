@@ -33,7 +33,7 @@ type FunEvals struct {
  *
  * @return The number of function evaluations.
  */
-func (fe FunEvals) GetFunEvals() uint {
+func (fe *FunEvals) GetFunEvals() uint {
     return fe.funEvals
 }
 
@@ -42,7 +42,7 @@ func (fe FunEvals) GetFunEvals() uint {
  *
  * @param __funEvals The number of function evaluations.
  */
-func (fe FunEvals) SetFunEvals(__funEvals uint) {
+func (fe *FunEvals) SetFunEvals(__funEvals uint) {
     fe.funEvals = __funEvals
 }
 
