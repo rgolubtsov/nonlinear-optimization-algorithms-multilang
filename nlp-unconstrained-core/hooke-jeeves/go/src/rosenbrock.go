@@ -46,9 +46,9 @@ func (r Rosenbrock) F(x []float64, n uint) float64 {
     var b float64
     var c float64
 
-    h := new(Hooke)
+    fe := new(FunEvals)
 
-    h.SetFunEvals(h.GetFunEvals() + 1)
+    fe.SetFunEvals(fe.GetFunEvals() + 1)
 
     a = x[INDEX_ZERO]
     b = x[INDEX_ONE]

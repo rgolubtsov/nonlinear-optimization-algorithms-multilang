@@ -64,28 +64,7 @@ const ZERO_POINT_FIVE     float64 =  0.5
  * @see     Woods           (woods.go)
  * @since   hooke-jeeves 0.1
  */
-type Hooke struct {
-    /** The number of function evaluations. */
-    funEvals uint
-}
-
-/**
- * Getter for <code>funEvals</code>.
- *
- * @return The number of function evaluations.
- */
-func (h Hooke) GetFunEvals() uint {
-    return h.funEvals
-}
-
-/**
- * Setter for <code>funEvals</code>.
- *
- * @param __funEvals The number of function evaluations.
- */
-func (h Hooke) SetFunEvals(__funEvals uint) {
-    h.funEvals = __funEvals
-}
+type Hooke struct { }
 
 /**
  * Helper method.
@@ -223,12 +202,14 @@ func (h Hooke) hooke(nVars     uint,
 
     newF = fBefore
 
+    fe := new(FunEvals)
+
     for (iters < iterMax) && (stepLength > epsilon) {
         iters++
         iAdj++
 
         fmt.Printf(
-           "\nAfter %5d funevals, f(x) =  %.4e at\n", h.GetFunEvals(), fBefore)
+          "\nAfter %5d funevals, f(x) =  %.4e at\n", fe.GetFunEvals(), fBefore)
 
         for j = 0; j < nVars; j++ {
             fmt.Printf("   x[%2d] = %.4e\n", j, xBefore[j])

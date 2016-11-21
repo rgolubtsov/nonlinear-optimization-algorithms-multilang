@@ -54,9 +54,9 @@ func (w Woods) F(x []float64, n uint) float64 {
     var t4 float64
     var t5 float64
 
-    h := new(Hooke)
+    fe := new(FunEvals)
 
-    h.SetFunEvals(h.GetFunEvals() + 1)
+    fe.SetFunEvals(fe.GetFunEvals() + 1)
 
     s1 = x[INDEX_ONE]   - x[INDEX_ZERO] * x[INDEX_ZERO]
     s2 = 1              - x[INDEX_ZERO]
