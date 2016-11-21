@@ -16,7 +16,8 @@ EXEC    = hooke
 DEPS    = $(EXEC).o
 SRCS    = $(EXEC).go    \
           rosenbrock.go \
-          woods.go
+          woods.go      \
+          funevals.go
 BIN_DIR = ../bin
 OBJ_DIR = ../obj
 

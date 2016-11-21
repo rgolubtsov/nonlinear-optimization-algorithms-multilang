@@ -10,6 +10,7 @@
 * The Hooke and Jeeves :small_blue_diamond: Perl 5 (5.10+) implementation
 * The Hooke and Jeeves :small_blue_diamond: JavaScript (ECMA-262 5.1) implementation
 * The Hooke and Jeeves :small_blue_diamond: Java (Java SE 7) implementation
+* The Hooke and Jeeves :small_blue_diamond: Go (golang) implementation
 
 ---
 
@@ -59,6 +60,12 @@ The project has the following directory structure and logical parts and items.
 |   |   |       `-- Makefile
 |   |   |
 |   |   |-- f95                        <== ISO Fortran 95 impl. container
+|   |   |   |-- Makefile
+|   |   |   `-- src
+|   |   |       |-- < sources >
+|   |   |       `-- Makefile
+|   |   |
+|   |   |-- go                         <== Go (golang) impl. container
 |   |   |   |-- Makefile
 |   |   |   `-- src
 |   |   |       |-- < sources >

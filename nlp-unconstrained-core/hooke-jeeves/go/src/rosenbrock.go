@@ -36,19 +36,19 @@ type Rosenbrock struct { }
  * <br />Represents here the Rosenbrock's classic parabolic valley
  * (&quot;banana&quot;) function.
  *
- * @param x The point at which F(x) should be evaluated.
- * @param n The number of coordinates of <code>x</code>.
+ * @param x         The point at which F(x) should be evaluated.
+ * @param n         The number of coordinates of <code>x</code>.
+ * @param cFunEvals The number of function evaluations container
+ *                  (*FunEvals).
  *
  * @return The objective function value.
  */
-func (r Rosenbrock) F(x []float64, n uint) float64 {
+func (r Rosenbrock) F(x []float64, n uint, cFunEvals *FunEvals) float64 {
     var a float64
     var b float64
     var c float64
 
-    h := new(Hooke)
-
-    h.SetFunEvals(h.GetFunEvals() + 1)
+    cFunEvals.SetFunEvals(cFunEvals.GetFunEvals() + 1)
 
     a = x[INDEX_ZERO]
     b = x[INDEX_ONE]
