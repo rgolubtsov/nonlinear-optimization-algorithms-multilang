@@ -39,12 +39,14 @@ type Woods struct { }
  * <br />Woods &ndash; a la More, Garbow &amp; Hillstrom
  * (TOMS algorithm 566).
  *
- * @param x The point at which F(x) should be evaluated.
- * @param n The number of coordinates of <code>x</code>.
+ * @param x         The point at which F(x) should be evaluated.
+ * @param n         The number of coordinates of <code>x</code>.
+ * @param cFunEvals The number of function evaluations container
+ *                  (*FunEvals).
  *
  * @return The objective function value.
  */
-func (w Woods) F(x []float64, n uint) float64 {
+func (w Woods) F(x []float64, n uint, cFunEvals *FunEvals) float64 {
     var s1 float64
     var s2 float64
     var s3 float64
@@ -54,9 +56,7 @@ func (w Woods) F(x []float64, n uint) float64 {
     var t4 float64
     var t5 float64
 
-    fe := new(FunEvals)
-
-    fe.SetFunEvals(fe.GetFunEvals() + 1)
+    cFunEvals.SetFunEvals(cFunEvals.GetFunEvals() + 1)
 
     s1 = x[INDEX_ONE]   - x[INDEX_ZERO] * x[INDEX_ZERO]
     s2 = 1              - x[INDEX_ZERO]

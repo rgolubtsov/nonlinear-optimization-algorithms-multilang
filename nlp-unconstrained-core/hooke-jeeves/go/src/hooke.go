@@ -71,21 +71,24 @@ type Hooke struct { }
  * <br />
  * <br />Given a point, look for a better one nearby, one coord at a time.
  *
- * @param delta    The delta between <code>prevBest</code>
- *                 and <code>point</code>.
- * @param point    The coordinate from where to begin.
- * @param prevBest The previous best-valued coordinate.
- * @param nVars    The number of variables.
- * @param woods    The cmd-line arg to indicate,
- *                 which objective function to use.
+ * @param delta     The delta between <code>prevBest</code>
+ *                  and <code>point</code>.
+ * @param point     The coordinate from where to begin.
+ * @param prevBest  The previous best-valued coordinate.
+ * @param nVars     The number of variables.
+ * @param woods     The cmd-line arg to indicate,
+ *                  which objective function to use.
+ * @param cFunEvals The number of function evaluations container
+ *                  (*FunEvals).
  *
  * @return The objective function value at a nearby.
  */
-func (h Hooke) BestNearby(delta    []float64,
-                          point    []float64,
-                          prevBest   float64,
-                          nVars      uint,
-                          woods      string) float64 {
+func (h Hooke) BestNearby(delta     []float64,
+                          point     []float64,
+                          prevBest    float64,
+                          nVars       uint,
+                          woods       string,
+                          cFunEvals  *FunEvals) float64 {
 
     var minF       float64
     var z    [VARS]float64
@@ -99,6 +102,7 @@ func (h Hooke) BestNearby(delta    []float64,
         z[i] = point[i]
     }
 
+    // Instantiating Rosenbrock and Woods structures.
     r := new(Rosenbrock)
     w := new(Woods)
 
@@ -106,9 +110,9 @@ func (h Hooke) BestNearby(delta    []float64,
         z[i] = point[i] + delta[i]
 
         if woods != WOODS {                                    // #ifndef WOODS
-            fTmp = r.F(z[0:], nVars)
+            fTmp = r.F(z[0:], nVars, cFunEvals)
         } else {                                               // #else
-            fTmp = w.F(z[0:], nVars)
+            fTmp = w.F(z[0:], nVars, cFunEvals)
         }                                                      // #endif
 
         if fTmp < minF {
@@ -118,9 +122,9 @@ func (h Hooke) BestNearby(delta    []float64,
             z[i]     = point[i] + delta[i]
 
             if woods != WOODS {                                // #ifndef WOODS
-                fTmp = r.F(z[0:], nVars)
+                fTmp = r.F(z[0:], nVars, cFunEvals)
             } else {                                           // #else
-                fTmp = w.F(z[0:], nVars)
+                fTmp = w.F(z[0:], nVars, cFunEvals)
             }                                                  // #endif
 
             if fTmp < minF {
@@ -191,18 +195,18 @@ func (h Hooke) hooke(nVars     uint,
     stepLength = rho
     iters      = 0
 
-    r := new(Rosenbrock)
-    w := new(Woods)
+    // Instantiating FunEvals, Rosenbrock, and Woods structures.
+    fe := new(FunEvals)
+    r  := new(Rosenbrock)
+    w  := new(Woods)
 
     if woods != WOODS {                                        // #ifndef WOODS
-        fBefore = r.F(newX[0:], nVars)
+        fBefore = r.F(newX[0:], nVars, fe)
     } else {                                                   // #else
-        fBefore = w.F(newX[0:], nVars)
+        fBefore = w.F(newX[0:], nVars, fe)
     }                                                          // #endif
 
     newF = fBefore
-
-    fe := new(FunEvals)
 
     for (iters < iterMax) && (stepLength > epsilon) {
         iters++
@@ -220,7 +224,7 @@ func (h Hooke) hooke(nVars     uint,
             newX[i] = xBefore[i]
         }
 
-        newF = h.BestNearby(delta[0:], newX[0:], fBefore, nVars, woods)
+        newF = h.BestNearby(delta[0:], newX[0:], fBefore, nVars, woods, fe)
 
         // If we made some improvements, pursue that direction.
         keep = 1
@@ -244,7 +248,7 @@ func (h Hooke) hooke(nVars     uint,
 
             fBefore = newF
 
-            newF = h.BestNearby(delta[0:], newX[0:], fBefore, nVars, woods)
+            newF = h.BestNearby(delta[0:], newX[0:], fBefore, nVars, woods, fe)
 
             // If the further (optimistic) move was bad....
             if newF >= fBefore {
@@ -337,6 +341,7 @@ func main() {
     iterMax = IMAX
     epsilon = EPSMIN
 
+    // Instantiating the Hooke structure.
     h := new(Hooke)
 
     jj = h.hooke(nVars, startPt[0:], endPt[0:], rho, epsilon, iterMax, woods)
