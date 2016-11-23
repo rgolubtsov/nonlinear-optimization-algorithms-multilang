@@ -11,6 +11,7 @@
 * The Hooke and Jeeves :small_blue_diamond: JavaScript (ECMA-262 5.1) implementation
 * The Hooke and Jeeves :small_blue_diamond: Java (Java SE 7) implementation
 * The Hooke and Jeeves :small_blue_diamond: Go (golang) implementation
+* The Hooke and Jeeves :small_blue_diamond: Python 3 implementation
 
 ---
 
@@ -100,12 +101,19 @@ The project has the following directory structure and logical parts and items.
 |   |   |       |-- < sources >
 |   |   |       `-- Makefile
 |   |   |
-|   |   `-- perl                       <== Perl 5 (5.10+) impl. container
+|   |   |-- perl                       <== Perl 5 (5.10+) impl. container
+|   |   |    |-- Makefile
+|   |   |    `-- src
+|   |   |        |-- NLPUCCoreHooke
+|   |   |        |   `-- < sources >
+|   |   |        `-- < sources >
+|   |   |
+|   |   `-- python                     <== Python 3 impl. container
 |   |       |-- Makefile
 |   |       `-- src
-|   |           |-- NLPUCCoreHooke
-|   |           |   `-- < sources >
-|   |           `-- < sources >
+|   |           |-- < sources >
+|   |           `-- nlpuccorehooko
+|   |               `-- < sources >
 |   |
 |   `-- nelder-mead                    <== Nelder-Mead algorithm container
 |       |                                  (all implementations)
