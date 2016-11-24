@@ -11,7 +11,7 @@
 * The Hooke and Jeeves :small_blue_diamond: JavaScript (ECMA-262 5.1) implementation
 * The Hooke and Jeeves :small_blue_diamond: Java (Java SE 7) implementation
 * The Hooke and Jeeves :small_blue_diamond: Go (golang) implementation
-* The Hooke and Jeeves :small_blue_diamond: Python 3 implementation
+* The Hooke and Jeeves :small_blue_diamond: Python 2 &amp; 3 implementation
 
 ---
 
@@ -108,7 +108,7 @@ The project has the following directory structure and logical parts and items.
 |   |   |        |   `-- < sources >
 |   |   |        `-- < sources >
 |   |   |
-|   |   `-- python                     <== Python 3 impl. container
+|   |   `-- python                     <== Python 2 &amp; 3 impl. container
 |   |       |-- Makefile
 |   |       `-- src
 |   |           |-- < sources >
