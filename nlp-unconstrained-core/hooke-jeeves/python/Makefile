@@ -22,8 +22,8 @@ SCRIPT2S     = -woods
 SCRIPT2      = $(SCRIPT1)$(SCRIPT2S)
 
 # Specify flags and other vars here.
-PYTHON      = python
-PYTHONFLAGS = -m py_compile
+PYTHON      = python3
+PYTHONFLAGS = -m compileall
 
 CD           = cd
 GREP         = grep
@@ -46,7 +46,7 @@ RMFLAGS      = -vR
 # Startup scripts for Rosenbrock and Woods test problems like here documents.
 # Rosenbrock:
 define SCRIPT1_FULL
-#!/usr/bin/env python\n\
+#!/usr/bin/env python3\n\
 # -*- coding: utf-8 -*-\n\
 # =============================================================================\n\
 # nlp-unconstrained-core/hooke-jeeves/python/$(BIN_DIR)/$(SCRIPT1)\n\
@@ -71,7 +71,7 @@ endef
 
 # Woods:
 define SCRIPT2_FULL
-#!/usr/bin/env python\n\
+#!/usr/bin/env python3\n\
 # -*- coding: utf-8 -*-\n\
 # =============================================================================\n\
 # nlp-unconstrained-core/hooke-jeeves/python/$(BIN_DIR)/$(SCRIPT2)\n\
@@ -97,7 +97,7 @@ endef
 # Making the target.
 $(BIN_DIR) $(LIB_DIR):
 	$(CD) $(SRC_DIR); \
-	if [ -n "$$($(PYTHON) $(PYTHONFLAGS) $(BASE_MODULE).py 2>&1 | $(GREP) 'failed')" ]; then \
+	if [ -n "$$($(PYTHON) $(PYTHONFLAGS) . 2>&1 | $(GREP) 'line')" ]; then \
 		$(ECHO) "Error: Something gets wrong... Exiting..."; \
 		$(EXIT) $(EXIT_FAILURE); \
 	fi; \
