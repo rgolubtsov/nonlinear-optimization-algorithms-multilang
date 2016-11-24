@@ -1,7 +1,7 @@
 # Nonlinear Optimization Algorithms Multilang [![Build Status](https://travis-ci.org/rgolubtsov/nonlinear-optimization-algorithms-multilang.svg?branch=master)](https://travis-ci.org/rgolubtsov/nonlinear-optimization-algorithms-multilang)
 
 **Note:** The Travis CI build status badge above is applicable to the following packages ONLY (for the moment):
-* The (original) Hooke and Jeeves :small_blue_diamond: Traditional (K&R) C implementation
+* The (original) Hooke and Jeeves :small_blue_diamond: Traditional (K&amp;R) C implementation
 * The Hooke and Jeeves :small_blue_diamond: ISO C (C99/11) implementation
 * The Hooke and Jeeves :small_blue_diamond: ISO C++ (C++98/03/11/14) implementation
 * The Hooke and Jeeves :small_blue_diamond: Objective-C 2.0 implementation
@@ -108,7 +108,7 @@ The project has the following directory structure and logical parts and items.
 |   |   |        |   `-- < sources >
 |   |   |        `-- < sources >
 |   |   |
-|   |   `-- python                     <== Python 2 &amp; 3 impl. container
+|   |   `-- python                     <== Python 2 & 3 impl. container
 |   |       |-- Makefile
 |   |       `-- src
 |   |           |-- < sources >
