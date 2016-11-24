@@ -11,6 +11,8 @@
 # This is the Hooke and Jeeves nonlinear unconstrained minimization algorithm.
 # =============================================================================
 
+from nlpuccorehooko.funevals import FunEvals
+
 class Hooke:
     """The Hooke class contains methods for solving a nonlinear optimization
     problem using the algorithm of Hooke and Jeeves.
@@ -30,20 +32,19 @@ class Hooke:
     ## Constant. The maximum number of iterations.
     IMAX = 5000
 
-    ## The number of function evaluations.
-    funEvals = 0
-
-    def best_nearby(self, delta, point, prevbest, nvars, f):
+    def best_nearby(self, delta, point, prevbest, nvars, f, c_funevals):
         """Helper method.
 
         Given a point, look for a better one nearby, one coord at a time.
 
         Args:
-            delta:    The delta between prevbest and point.
-            point:    The coordinate from where to begin.
-            prevbest: The previous best-valued coordinate.
-            nvars:    The number of variables.
-            f:        The user-supplied objective function f(x,n).
+            delta:      The delta between prevbest and point.
+            point:      The coordinate from where to begin.
+            prevbest:   The previous best-valued coordinate.
+            nvars:      The number of variables.
+            f:          The user-supplied objective function f(x,n).
+            c_funevals: The number of function evaluations container
+                        (FunEvals).
 
         Returns:
             The objective function value at a nearby.
@@ -65,7 +66,7 @@ class Hooke:
         while (i < nvars):
             z[i] = point[i] + delta[i]
 
-            ftmp = f(z, nvars)
+            ftmp = f(z, nvars, c_funevals)
 
             if (ftmp < minf):
                 minf = ftmp
@@ -73,7 +74,7 @@ class Hooke:
                 delta[i] = 0.0 - delta[i]
                 z[i]     = point[i] + delta[i]
 
-                ftmp = f(z, nvars)
+                ftmp = f(z, nvars, c_funevals)
 
                 if (ftmp < minf):
                     minf = ftmp
@@ -130,7 +131,10 @@ class Hooke:
         steplength = rho
         iters      = 0
 
-        fbefore = f(newx, nvars)
+        # Instantiating the FunEvals class.
+        fe = FunEvals()
+
+        fbefore = f(newx, nvars, fe)
 
         newf = fbefore
 
@@ -139,7 +143,7 @@ class Hooke:
             iadj  += 1
 
             print("\nAfter {:5d} funevals, f(x) =  {:.4e} at"
-                .format(self.funEvals, fbefore))
+                .format(fe.get_funevals(), fbefore))
 
             j = 0
 
@@ -156,7 +160,7 @@ class Hooke:
 
                 i += 1
 
-            newf = self.best_nearby(delta, newx, fbefore, nvars, f)
+            newf = self.best_nearby(delta, newx, fbefore, nvars, f, fe)
 
             # If we made some improvements, pursue that direction.
             keep = 1
@@ -182,7 +186,7 @@ class Hooke:
 
                 fbefore = newf
 
-                newf = self.best_nearby(delta, newx, fbefore, nvars, f)
+                newf = self.best_nearby(delta, newx, fbefore, nvars, f, fe)
 
                 # If the further (optimistic) move was bad....
                 if (newf >= fbefore):

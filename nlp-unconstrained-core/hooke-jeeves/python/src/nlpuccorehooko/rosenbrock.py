@@ -30,21 +30,23 @@ class Rosenbrock:
     ## Constant. The stepsize geometric shrink.
     RHO_BEGIN = 0.5
 
-    def f(self, x, n):
+    def f(self, x, n, c_funevals):
         """The user-supplied objective function f(x,n).
 
         Represents here the Rosenbrock's classic parabolic valley
         ("banana") function.
 
         Args:
-            x: The point at which f(x) should be evaluated.
-            n: The number of coordinates of x.
+            x:          The point at which f(x) should be evaluated.
+            n:          The number of coordinates of x.
+            c_funevals: The number of function evaluations container
+                        (FunEvals).
 
         Returns:
             The objective function value.
         """
 
-        Hooke.funEvals += 1
+        c_funevals.set_funevals(c_funevals.get_funevals() + 1)
 
         a = x[Hooke.INDEX_ZERO]
         b = x[Hooke.INDEX_ONE]

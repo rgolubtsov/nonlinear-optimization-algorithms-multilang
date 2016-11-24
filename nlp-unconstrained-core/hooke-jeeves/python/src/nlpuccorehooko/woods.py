@@ -41,20 +41,22 @@ class Woods:
     #
     RHO_WOODS = 0.6
 
-    def f(self, x, n):
+    def f(self, x, n, c_funevals):
         """The user-supplied objective function f(x,n).
 
         Woods -- a la More, Garbow & Hillstrom (TOMS algorithm 566).
 
         Args:
-            x: The point at which f(x) should be evaluated.
-            n: The number of coordinates of x.
+            x:          The point at which f(x) should be evaluated.
+            n:          The number of coordinates of x.
+            c_funevals: The number of function evaluations container
+                        (FunEvals).
 
         Returns:
             The objective function value.
         """
 
-        Hooke.funEvals += 1
+        c_funevals.set_funevals(c_funevals.get_funevals() + 1)
 
         s1 = x[Hooke.INDEX_ONE]  - x[Hooke.INDEX_ZERO] * x[Hooke.INDEX_ZERO]
         s2 = 1                   - x[Hooke.INDEX_ZERO]
