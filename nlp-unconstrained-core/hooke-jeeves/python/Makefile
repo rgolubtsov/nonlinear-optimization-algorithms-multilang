@@ -13,10 +13,11 @@
 BIN_DIR      = bin
 LIB_DIR      = lib
 SRC_DIR      = src
+PYCACHE_DIR  = __pycache__
 BASE_PACKAGE = nlpuccorehooko
 BASE_MODULE  = nlpuccorehooke
 BASE_CLASS   = NLPUCCoreHooke
-CLASSES      = $(SRC_DIR)/$(BASE_MODULE).py $(SRC_DIR)/$(BASE_PACKAGE)
+CLASSES      = $(SRC_DIR)/$(BASE_MODULE).* $(SRC_DIR)/$(BASE_PACKAGE)
 SCRIPT1      = hooke
 SCRIPT2S     = -woods
 SCRIPT2      = $(SCRIPT1)$(SCRIPT2S)
@@ -113,6 +114,10 @@ $(BIN_DIR) $(LIB_DIR):
 		$(SED) $(SEDFLAGS) $(SEDREGEX) $(BIN_DIR)/*; \
 		$(CHMOD) $(CHMODFLAGS) $(CHMODMODE) $(BIN_DIR)/*; \
 		$(CP) $(CPFLAGS) $(CLASSES) $(LIB_DIR); \
+		if [ -d "$(SRC_DIR)/$(PYCACHE_DIR)" ]; then \
+			$(ECHO) "===> Copying base package's \"$(PYCACHE_DIR)\" directory into \"$(LIB_DIR)\" directory:"; \
+			$(CP) $(CPFLAGS) $(SRC_DIR)/$(PYCACHE_DIR) $(LIB_DIR); \
+		fi; \
 	fi
 
 .PHONY: all clean
@@ -120,7 +125,11 @@ $(BIN_DIR) $(LIB_DIR):
 all: $(BIN_DIR) $(LIB_DIR)
 
 clean:
-	$(RM) $(RMFLAGS) $(BIN_DIR) $(LIB_DIR)
+	$(RM) $(RMFLAGS) $(BIN_DIR) $(LIB_DIR) \
+	$(SRC_DIR)/*.pyc \
+	$(SRC_DIR)/$(PYCACHE_DIR) \
+	$(SRC_DIR)/$(BASE_PACKAGE)/*.pyc \
+	$(SRC_DIR)/$(BASE_PACKAGE)/$(PYCACHE_DIR)
 
 # =============================================================================
 # vim:set nu:et:ts=4:sw=4:
