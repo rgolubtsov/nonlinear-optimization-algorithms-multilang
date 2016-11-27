@@ -24,7 +24,7 @@ OBJ_DIR = ../obj
 # Specify flags and other vars here.
 GO            = go tool
 GO_COMP_FLAGS = compile -complete -o
-GO_LINK_FLAGS = link -o
+GO_LINK_FLAGS = link -s -w -o
 
 MV      = mv
 MVFLAGS = -v
