@@ -24,9 +24,9 @@ package optimization.nonlinear.unconstrained.core;
  * @author  Radislav (Radic) Golubtsov
  * @version 0.1
  * @see     optimization.nonlinear.unconstrained.core.Hooke
- * @since   hooke-jeeves 0.1
+ * @since   findMinimum-jeeves 0.1
  */
-public final class Woods {
+public final class Woods implements ObjectiveFunction {
     /**
      * Constant. The stepsize geometric shrink.
      * <br />
@@ -56,11 +56,10 @@ public final class Woods {
      * (TOMS algorithm 566).
      *
      * @param x The point at which f(x) should be evaluated.
-     * @param n The number of coordinates of <code>x</code>.
      *
      * @return The objective function value.
      */
-    public static double f(final double[] x, final int n) {
+    public double findValueForArguments(final double[] x) {
         double s1;
         double s2;
         double s3;
@@ -69,8 +68,6 @@ public final class Woods {
         double t3;
         double t4;
         double t5;
-
-        Hooke.setFunEvals(Hooke.getFunEvals() + 1);
 
         s1 = x[Hooke.INDEX_ONE] - x[Hooke.INDEX_ZERO] * x[Hooke.INDEX_ZERO];
         s2 = 1                  - x[Hooke.INDEX_ZERO];
@@ -96,13 +93,13 @@ public final class Woods {
     public static void main(final String[] args) {
         int nVars;
         int iterMax;
-        int jj;
+        int numberOfIterations;
         int i;
 
-        double[] startPt = new double[Hooke.VARS];
+        double[] startPt = new double[Hooke.MAXIMUM_NUMBER_OF_VARIABLES];
         double rho;
         double epsilon;
-        double[] endPt   = new double[Hooke.VARS];
+        double[] endPt   = new double[Hooke.MAXIMUM_NUMBER_OF_VARIABLES];
 
         // Starting guess test problem "Woods".
         nVars                     = FOUR;
@@ -110,19 +107,18 @@ public final class Woods {
         startPt[Hooke.INDEX_ONE]  = MINUS_ONE;
         startPt[INDEX_TWO]        = MINUS_THREE;
         startPt[INDEX_THREE]      = MINUS_ONE;
-        iterMax                   = Hooke.IMAX;
+        iterMax                   = Hooke.MAXIMUM_NUMBER_OF_ITERATIONS;
         rho                       = RHO_WOODS;
-        epsilon                   = Hooke.EPSMIN;
+        epsilon                   = Hooke.ENDING_VALUE_OF_STEPSIZE;
 
-        // Instantiating the Hooke class.
-        Hooke h = new Hooke();
+        Hooke hooke = new Hooke();
 
-        jj = h.hooke(
-            nVars, startPt, endPt, rho, epsilon, iterMax, Woods.class
+        numberOfIterations = hooke.findMinimum(
+                nVars, startPt, endPt, rho, epsilon, iterMax, new Woods()
         );
 
         System.out.println(
-            "\n\n\nHOOKE USED " + jj + " ITERATIONS, AND RETURNED"
+            "\n\n\nHOOKE USED " + numberOfIterations + " ITERATIONS, AND RETURNED"
         );
 
         for (i = 0; i < nVars; i++) {
@@ -131,11 +127,4 @@ public final class Woods {
 
         System.out.println("True answer: f(1, 1, 1, 1) = 0.");
     }
-
-    /** Default constructor. */
-    public Woods() {}
 }
-
-// ============================================================================
-// vim:set nu:et:ts=4:sw=4:
-// ============================================================================

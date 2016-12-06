@@ -24,9 +24,9 @@ package optimization.nonlinear.unconstrained.core;
  * @author  Radislav (Radic) Golubtsov
  * @version 0.1
  * @see     optimization.nonlinear.unconstrained.core.Hooke
- * @since   hooke-jeeves 0.1
+ * @since   findMinimum-jeeves 0.1
  */
-public final class Rosenbrock {
+public final class Rosenbrock implements ObjectiveFunction{
     /** Constant. The stepsize geometric shrink. */
     private static final double RHO_BEGIN = 0.5;
 
@@ -43,16 +43,13 @@ public final class Rosenbrock {
      * (&quot;banana&quot;) function.
      *
      * @param x The point at which f(x) should be evaluated.
-     * @param n The number of coordinates of <code>x</code>.
      *
      * @return The objective function value.
      */
-    public static double f(final double[] x, final int n) {
+    public double findValueForArguments(final double[] x) {
         double a;
         double b;
         double c;
-
-        Hooke.setFunEvals(Hooke.getFunEvals() + 1);
 
         a = x[Hooke.INDEX_ZERO];
         b = x[Hooke.INDEX_ONE];
@@ -70,31 +67,29 @@ public final class Rosenbrock {
     public static void main(final String[] args) {
         int nVars;
         int iterMax;
-        int jj;
+        int numberOfIterations;
         int i;
 
-        double[] startPt = new double[Hooke.VARS];
+        double[] startPt = new double[Hooke.MAXIMUM_NUMBER_OF_VARIABLES];
         double rho;
         double epsilon;
-        double[] endPt   = new double[Hooke.VARS];
+        double[] endPt   = new double[Hooke.MAXIMUM_NUMBER_OF_VARIABLES];
 
-        // Starting guess for Rosenbrock's test function.
         nVars                     = TWO;
         startPt[Hooke.INDEX_ZERO] = MINUS_ONE_POINT_TWO;
         startPt[Hooke.INDEX_ONE]  = ONE_POINT_ZERO;
-        iterMax                   = Hooke.IMAX;
+        iterMax                   = Hooke.MAXIMUM_NUMBER_OF_ITERATIONS;
         rho                       = RHO_BEGIN;
-        epsilon                   = Hooke.EPSMIN;
+        epsilon                   = Hooke.ENDING_VALUE_OF_STEPSIZE;
 
-        // Instantiating the Hooke class.
-        Hooke h = new Hooke();
+        Hooke hooke = new Hooke();
 
-        jj = h.hooke(
-            nVars, startPt, endPt, rho, epsilon, iterMax, Rosenbrock.class
+        numberOfIterations = hooke.findMinimum(
+                nVars, startPt, endPt, rho, epsilon, iterMax, new Rosenbrock()
         );
 
         System.out.println(
-            "\n\n\nHOOKE USED " + jj + " ITERATIONS, AND RETURNED"
+            "\n\n\nHOOKE USED " + numberOfIterations + " ITERATIONS, AND RETURNED"
         );
 
         for (i = 0; i < nVars; i++) {
@@ -102,10 +97,4 @@ public final class Rosenbrock {
         }
     }
 
-    /** Default constructor. */
-    public Rosenbrock() {}
 }
-
-// ============================================================================
-// vim:set nu:et:ts=4:sw=4:
-// ============================================================================
