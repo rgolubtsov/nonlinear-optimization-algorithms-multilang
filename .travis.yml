@@ -39,8 +39,8 @@ before_install:
     - sudo apt-get install gfortran
 
 script:
-    ## TODO: Building all the packages under unconstrained-core.
-    - cd nlp-unconstrained-core && ls -al
+    ## TODO: Building all the packages under unconstrained-cli.
+    - cd nlp-unconstrained-cli && ls -al
 
     ## TODO: Building all the packages for hooke-jeeves.
     - cd hooke-jeeves && ls -al

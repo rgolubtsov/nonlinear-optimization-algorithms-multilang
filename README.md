@@ -38,7 +38,7 @@ The project has the following directory structure and logical parts and items.
 
 ```
 .
-|-- nlp-unconstrained-core             <== Unconstrained methods impl. container
+|-- nlp-unconstrained-cli             <== Unconstrained methods impl. container
 |   |                                      (including test problems)
 |   |-- hooke-jeeves                   <== Hooke-Jeeves algorithm container
 |   |   |                                  (all implementations)
@@ -81,7 +81,7 @@ The project has the following directory structure and logical parts and items.
 |   |   |               `-- optimization
 |   |   |                   `-- nonlinear
 |   |   |                       `-- unconstrained
-|   |   |                           `-- core
+|   |   |                           `-- cli
 |   |   |                               `-- < sources >
 |   |   |
 |   |   |-- js                         <== JavaScript (ECMA-262 5.1) impl. container
@@ -104,7 +104,7 @@ The project has the following directory structure and logical parts and items.
 |   |   |-- perl                       <== Perl 5 (5.10+) impl. container
 |   |   |    |-- Makefile
 |   |   |    `-- src
-|   |   |        |-- NLPUCCoreHooke
+|   |   |        |-- NLPUCCLIHooke
 |   |   |        |   `-- < sources >
 |   |   |        `-- < sources >
 |   |   |
@@ -112,7 +112,7 @@ The project has the following directory structure and logical parts and items.
 |   |       |-- Makefile
 |   |       `-- src
 |   |           |-- < sources >
-|   |           `-- nlpuccorehooko
+|   |           `-- nlpucclihooko
 |   |               `-- < sources >
 |   |
 |   `-- nelder-mead                    <== Nelder-Mead algorithm container
@@ -131,10 +131,10 @@ The project has the following directory structure and logical parts and items.
 |
 |-- [ nlp-unconstrained-api ]          <== [TODO] Unconstrained methods impl. container
 |                                                 (API only)
-|-- [ nlp-constrained-core ]           <== [TODO] Constrained methods impl. container
+|-- [ nlp-constrained-cli ]           <== [TODO] Constrained methods impl. container
 |                                                 (including test problems)
 `-- [ nlp-constrained-api ]            <== [TODO] Constrained methods impl. container
                                                   (API only)
 ```
 
-As shown above, the directories that should contain ~~stuff for the Nelder-Mead algorithm implementations~~ as well as other three ones (`nlp-unconstrained-api`, `nlp-constrained-core`, and `nlp-constrained-api`) are not yet exist. But it's planned they have to be created and populated accordingly somewhen during development process.
+As shown above, the directories that should contain ~~stuff for the Nelder-Mead algorithm implementations~~ as well as other three ones (`nlp-unconstrained-api`, `nlp-constrained-cli`, and `nlp-constrained-api`) are not yet exist. But it's planned they have to be created and populated accordingly somewhen during development process.
