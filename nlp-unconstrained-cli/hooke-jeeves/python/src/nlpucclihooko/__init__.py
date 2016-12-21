@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # =============================================================================
-# nlp-unconstrained-core/hooke-jeeves/python/src/nlpuccorehooko/__init__.py
+# nlp-unconstrained-cli/hooke-jeeves/python/src/nlpucclihooko/__init__.py
 # =============================================================================
 # Nonlinear Optimization Algorithms Multilang. Version 0.1
 # =============================================================================

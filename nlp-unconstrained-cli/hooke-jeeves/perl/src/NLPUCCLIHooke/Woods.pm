@@ -1,5 +1,5 @@
 # =============================================================================
-# nlp-unconstrained-core/hooke-jeeves/perl/src/NLPUCCoreHooke/Woods.pm
+# nlp-unconstrained-cli/hooke-jeeves/perl/src/NLPUCCLIHooke/Woods.pm
 # =============================================================================
 # Nonlinear Optimization Algorithms Multilang. Version 0.1
 # =============================================================================
@@ -12,7 +12,7 @@
 
 =head1 NAME
 
-NLPUCCoreHooke::Woods - The Hooke-Jeeves nonlinear minimization algorithm
+NLPUCCLIHooke::Woods - The Hooke-Jeeves nonlinear minimization algorithm
 in application to the Woods test problem
 
 =head1 DESCRIPTION
@@ -24,13 +24,13 @@ The objective function in this case is the so-called I<Woods> function.
 
 =cut
 
-package NLPUCCoreHooke::Woods;
+package NLPUCCLIHooke::Woods;
 
 use strict;
 use warnings;
 use v5.10;
 
-use NLPUCCoreHooke::Hooke;
+use NLPUCCLIHooke::Hooke;
 
 ## Helper constants.
 use constant INDEX_TWO   =>  2;
@@ -85,7 +85,7 @@ sub f {
     my $t4;
     my $t5;
 
-    $NLPUCCoreHooke::Hooke::FUNEVALS++;
+    $NLPUCCLIHooke::Hooke::FUNEVALS++;
 
     $s1 = $x->[INDEX_ONE]   - $x->[INDEX_ZERO] * $x->[INDEX_ZERO];
     $s2 = 1                 - $x->[INDEX_ZERO];
@@ -136,7 +136,7 @@ sub main {
     $epsilon              = EPSMIN;
 
     # Instantiating the Hooke class.
-    my $h = NLPUCCoreHooke::Hooke->new();
+    my $h = NLPUCCLIHooke::Hooke->new();
 
     $jj = $h->hooke($nvars, \@startpt, \@endpt, $rho, $epsilon, $itermax, \&f);
 

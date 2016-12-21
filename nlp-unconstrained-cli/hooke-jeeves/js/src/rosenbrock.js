@@ -1,5 +1,5 @@
 /*
- * nlp-unconstrained-core/hooke-jeeves/js/src/rosenbrock.js
+ * nlp-unconstrained-cli/hooke-jeeves/js/src/rosenbrock.js
  * ============================================================================
  * Nonlinear Optimization Algorithms Multilang. Version 0.1
  * ============================================================================
@@ -14,12 +14,12 @@
 "use strict";
 
 /**
- * The <code>NLPUCCoreHooke</code> namespace is used as a container
+ * The <code>NLPUCCLIHooke</code> namespace is used as a container
  * for the <code>Rosenbrock</code> class.
  *
- * @namespace NLPUCCoreHooke
+ * @namespace NLPUCCLIHooke
  */
-var NLPUCCoreHooke = NLPUCCoreHooke || {};
+var NLPUCCLIHooke = NLPUCCLIHooke || {};
 
 /**
  * The <code>Rosenbrock</code> class is responsible for solving a nonlinear
@@ -29,10 +29,10 @@ var NLPUCCoreHooke = NLPUCCoreHooke || {};
  * is the Rosenbrock's parabolic valley function.
  *
  * @class    Rosenbrock
- * @memberof NLPUCCoreHooke
+ * @memberof NLPUCCLIHooke
  * @author   Radislav (Radic) Golubtsov
  * @version  0.1
- * @see      {@link https://raw.githubusercontent.com/rgolubtsov/nonlinear-optimization-algorithms-multilang/master/nlp-unconstrained-core/hooke-jeeves/js/src/hooke.js|NLPUCCoreHooke.Hooke}
+ * @see      {@link https://raw.githubusercontent.com/rgolubtsov/nonlinear-optimization-algorithms-multilang/master/nlp-unconstrained-cli/hooke-jeeves/js/src/hooke.js|NLPUCCLIHooke.Hooke}
  * @since    hooke-jeeves 0.1
  */
 var Rosenbrock = function() {
@@ -125,10 +125,10 @@ var Rosenbrock = function() {
 };
 
 // Instantiating the Rosenbrock class.
-NLPUCCoreHooke.Rosenbrock = new Rosenbrock();
+NLPUCCLIHooke.Rosenbrock = new Rosenbrock();
 
 // Firing up computations.
-NLPUCCoreHooke.Rosenbrock.main();
+NLPUCCLIHooke.Rosenbrock.main();
 
 // ============================================================================
 // vim:set nu:et:ts=4:sw=4:

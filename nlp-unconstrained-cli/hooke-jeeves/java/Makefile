@@ -1,5 +1,5 @@
 # =============================================================================
-# nlp-unconstrained-core/hooke-jeeves/java/Makefile
+# nlp-unconstrained-cli/hooke-jeeves/java/Makefile
 # =============================================================================
 # Nonlinear Optimization Algorithms Multilang. Version 0.1
 # =============================================================================
@@ -18,7 +18,7 @@ POM_PACKAGING   = jar
 POM_XML             = pom.xml
 PATH_TO_APP_JAR     = target
 PATH_TO_APP_CLASSES = $(PATH_TO_APP_JAR)/classes
-JAVA_PACKAGE_PATH   = optimization/nonlinear/unconstrained/core
+JAVA_PACKAGE_PATH   = optimization/nonlinear/unconstrained/cli
 JAR                 = $(POM_ARTIFACT_ID)-$(POM_VERSION).$(POM_PACKAGING)
 DEPS                = $(PATH_TO_APP_CLASSES)/$(JAVA_PACKAGE_PATH)/Rosenbrock.class \
                       $(PATH_TO_APP_CLASSES)/$(JAVA_PACKAGE_PATH)/Woods.class \
@@ -63,7 +63,7 @@ RMFLAGS      = -vR
 define SCRIPT1_FULL
 #!/usr/bin/env sh\n\
 # =============================================================================\n\
-# nlp-unconstrained-core/$(POM_ARTIFACT_ID)/$(JAVA)/$(BIN_DIR)/$(SCRIPT1)\n\
+# nlp-unconstrained-cli/$(POM_ARTIFACT_ID)/$(JAVA)/$(BIN_DIR)/$(SCRIPT1)\n\
 # =============================================================================\n\
 # Nonlinear Optimization Algorithms Multilang. Version 0.1\n\
 # =============================================================================\n\
@@ -93,7 +93,7 @@ endef
 define SCRIPT2_FULL
 #!/usr/bin/env sh\n\
 # =============================================================================\n\
-# nlp-unconstrained-core/$(POM_ARTIFACT_ID)/$(JAVA)/$(BIN_DIR)/$(SCRIPT2)\n\
+# nlp-unconstrained-cli/$(POM_ARTIFACT_ID)/$(JAVA)/$(BIN_DIR)/$(SCRIPT2)\n\
 # =============================================================================\n\
 # Nonlinear Optimization Algorithms Multilang. Version 0.1\n\
 # =============================================================================\n\
@@ -105,7 +105,7 @@ declare -r JAVA=$(JAVA)\n\
 declare -r JAVAFLAGS=$(JAVAFLAGS2)\n\
 declare -r LIB_DIR=$(LIB_DIR)\n\
 declare -r JAR=$(JAR)\n\
-declare -r WOODS_CLASS=optimization.nonlinear.unconstrained.core.Woods\n\
+declare -r WOODS_CLASS=optimization.nonlinear.unconstrained.cli.Woods\n\
 \n\
 $$'{JAVA}' $$'{JAVAFLAGS}' $$'{LIB_DIR}'/$$'{JAR}' $$'{WOODS_CLASS}'\n\
 \n\

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # =============================================================================
-# nlp-unconstrained-core/hooke-jeeves/python/src/nlpuccorehooke.py
+# nlp-unconstrained-cli/hooke-jeeves/python/src/nlpucclihooko/funevals.py
 # =============================================================================
 # Nonlinear Optimization Algorithms Multilang. Version 0.1
 # =============================================================================
@@ -11,35 +11,32 @@
 # This is the Hooke and Jeeves nonlinear unconstrained minimization algorithm.
 # =============================================================================
 
-from nlpuccorehooko.rosenbrock import Rosenbrock
-from nlpuccorehooko.woods      import Woods
-
-class NLPUCCoreHooke:
-    """The NLPUCCoreHooke class contains methods to start up computations
-    for solving a nonlinear optimization problem using the algorithm
-    of Hooke and Jeeves with respect to two test problems:
-    Rosenbrock and Woods.
+class FunEvals:
+    """The FunEvals class is a helper class. It holds the only property --
+    the number of objective function evaluations (and corresponding
+    accessor methods).
     """
 
-    def rosenbrock(self):
-        """Solves the Rosenbrock test problem."""
+    ## The number of function evaluations.
+    funevals = 0
 
-        # Instantiating the Rosenbrock class.
-        r = Rosenbrock()
+    def get_funevals(self):
+        """Getter for funevals.
 
-        # Firing up computations.
-        r.main()
+        Returns:
+            The number of function evaluations.
+        """
 
-        return None
+        return self.funevals
 
-    def woods(self):
-        """Solves the Woods test problem."""
+    def set_funevals(self, __funevals):
+        """Setter for funevals.
 
-        # Instantiating the Woods class.
-        w = Woods()
+        Args:
+            __funevals: The number of function evaluations.
+        """
 
-        # Firing up computations.
-        w.main()
+        self.funevals = __funevals
 
         return None
 

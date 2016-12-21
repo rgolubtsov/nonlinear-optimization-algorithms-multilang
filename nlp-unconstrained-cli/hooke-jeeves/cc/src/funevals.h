@@ -1,5 +1,5 @@
 /*
- * nlp-unconstrained-core/hooke-jeeves/cc/src/funevals.h
+ * nlp-unconstrained-cli/hooke-jeeves/cc/src/funevals.h
  * ============================================================================
  * Nonlinear Optimization Algorithms Multilang. Version 0.1
  * ============================================================================
@@ -15,10 +15,10 @@
 #define __CC__FUNEVALS_H
 
 /**
- * The <code>NLPUCCoreHooke</code> namespace is used as a container
+ * The <code>NLPUCCLIHooke</code> namespace is used as a container
  * for the <code>FunEvals</code> class.
  */
-namespace NLPUCCoreHooke {
+namespace NLPUCCLIHooke {
 
 /**
  * The <code>FunEvals</code> class is a helper class.
@@ -57,7 +57,7 @@ public:
     ~FunEvals();
 };
 
-} // namespace NLPUCCoreHooke
+} // namespace NLPUCCLIHooke
 
 #endif // __CC__FUNEVALS_H
 

@@ -1,5 +1,5 @@
 /*
- * nlp-unconstrained-core/nelder-mead/__orig/src/nelmin.txt.c
+ * nlp-unconstrained-cli/nelder-mead/__orig/src/nelmin.txt.c
  * ============================================================================
  * Nonlinear Optimization Algorithms Multilang. Version 0.1
  * ============================================================================

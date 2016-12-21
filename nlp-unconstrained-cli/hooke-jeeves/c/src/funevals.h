@@ -1,5 +1,5 @@
 /*
- * nlp-unconstrained-core/hooke-jeeves/c/src/funevals.h
+ * nlp-unconstrained-cli/hooke-jeeves/c/src/funevals.h
  * ============================================================================
  * Nonlinear Optimization Algorithms Multilang. Version 0.1
  * ============================================================================

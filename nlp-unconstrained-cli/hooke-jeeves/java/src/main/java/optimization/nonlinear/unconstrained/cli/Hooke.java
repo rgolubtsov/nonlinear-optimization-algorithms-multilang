@@ -1,6 +1,6 @@
 /*
- * nlp-unconstrained-core/hooke-jeeves/java/src/main/java/
- * optimization/nonlinear/unconstrained/core/Hooke.java
+ * nlp-unconstrained-cli/hooke-jeeves/java/src/main/java/
+ * optimization/nonlinear/unconstrained/cli/Hooke.java
  * ============================================================================
  * Nonlinear Optimization Algorithms Multilang. Version 0.1
  * ============================================================================
@@ -12,7 +12,7 @@
  * ============================================================================
  */
 
-package optimization.nonlinear.unconstrained.core;
+package optimization.nonlinear.unconstrained.cli;
 
 /**
  * The <code>Hooke</code> class contains methods for solving a nonlinear
@@ -20,8 +20,8 @@ package optimization.nonlinear.unconstrained.core;
  *
  * @author  Radislav (Radic) Golubtsov
  * @version 0.1
- * @see     optimization.nonlinear.unconstrained.core.Rosenbrock
- * @see     optimization.nonlinear.unconstrained.core.Woods
+ * @see     optimization.nonlinear.unconstrained.cli.Rosenbrock
+ * @see     optimization.nonlinear.unconstrained.cli.Woods
  * @since   hooke-jeeves 0.1
  */
 public class Hooke {

@@ -1,5 +1,5 @@
 # =============================================================================
-# nlp-unconstrained-core/hooke-jeeves/objc/Makefile
+# nlp-unconstrained-cli/hooke-jeeves/objc/Makefile
 # =============================================================================
 # Nonlinear Optimization Algorithms Multilang. Version 0.1
 # =============================================================================

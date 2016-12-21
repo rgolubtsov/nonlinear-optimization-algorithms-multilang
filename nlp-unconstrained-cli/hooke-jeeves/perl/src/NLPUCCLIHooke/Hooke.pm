@@ -1,5 +1,5 @@
 # =============================================================================
-# nlp-unconstrained-core/hooke-jeeves/perl/src/NLPUCCoreHooke/Hooke.pm
+# nlp-unconstrained-cli/hooke-jeeves/perl/src/NLPUCCLIHooke/Hooke.pm
 # =============================================================================
 # Nonlinear Optimization Algorithms Multilang. Version 0.1
 # =============================================================================
@@ -12,7 +12,7 @@
 
 =head1 NAME
 
-NLPUCCoreHooke::Hooke - The Hooke-Jeeves nonlinear minimization algorithm
+NLPUCCLIHooke::Hooke - The Hooke-Jeeves nonlinear minimization algorithm
 
 =head1 DESCRIPTION
 
@@ -21,7 +21,7 @@ problem using the algorithm of Hooke and Jeeves.
 
 =cut
 
-package NLPUCCoreHooke::Hooke;
+package NLPUCCLIHooke::Hooke;
 
 use strict;
 use warnings;

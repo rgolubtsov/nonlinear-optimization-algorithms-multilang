@@ -1,5 +1,5 @@
 ! =============================================================================
-! nlp-unconstrained-core/hooke-jeeves/f95/src/hooke.f95
+! nlp-unconstrained-cli/hooke-jeeves/f95/src/hooke.f95
 ! =============================================================================
 ! Nonlinear Optimization Algorithms Multilang. Version 0.1
 ! =============================================================================

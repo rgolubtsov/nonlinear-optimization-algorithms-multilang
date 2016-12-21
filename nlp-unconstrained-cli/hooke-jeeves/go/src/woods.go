@@ -1,5 +1,5 @@
 /*
- * nlp-unconstrained-core/hooke-jeeves/go/src/woods.go
+ * nlp-unconstrained-cli/hooke-jeeves/go/src/woods.go
  * ============================================================================
  * Nonlinear Optimization Algorithms Multilang. Version 0.1
  * ============================================================================

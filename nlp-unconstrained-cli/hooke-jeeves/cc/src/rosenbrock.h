@@ -1,5 +1,5 @@
 /*
- * nlp-unconstrained-core/hooke-jeeves/cc/src/rosenbrock.h
+ * nlp-unconstrained-cli/hooke-jeeves/cc/src/rosenbrock.h
  * ============================================================================
  * Nonlinear Optimization Algorithms Multilang. Version 0.1
  * ============================================================================
@@ -17,10 +17,10 @@
 #include "hooke.h"
 
 /**
- * The <code>NLPUCCoreHooke</code> namespace is used as a container
+ * The <code>NLPUCCLIHooke</code> namespace is used as a container
  * for the <code>Rosenbrock</code> class.
  */
-namespace NLPUCCoreHooke {
+namespace NLPUCCLIHooke {
 
 /** Helper constant. */
 extern const double ONE_HUNDRED_POINT_ZERO;
@@ -61,7 +61,7 @@ public:
     ~Rosenbrock();
 };
 
-} // namespace NLPUCCoreHooke
+} // namespace NLPUCCLIHooke
 
 #endif // __CC__ROSENBROCK_H
 

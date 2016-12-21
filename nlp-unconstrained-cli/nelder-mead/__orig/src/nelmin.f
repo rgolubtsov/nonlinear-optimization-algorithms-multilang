@@ -1,5 +1,5 @@
 C =============================================================================
-C NLP-UNCONSTRAINED-CORE/NELDER-MEAD/__ORIG/SRC/NELMIN.F
+C NLP-UNCONSTRAINED-CLI/NELDER-MEAD/__ORIG/SRC/NELMIN.F
 C =============================================================================
 C NONLINEAR OPTIMIZATION ALGORITHMS MULTILANG. VERSION 0.1
 C =============================================================================

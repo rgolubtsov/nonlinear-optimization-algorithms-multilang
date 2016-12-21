@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <!--
- * nlp-unconstrained-core/hooke-jeeves/java/pom.xml
+ * nlp-unconstrained-cli/hooke-jeeves/java/pom.xml
  * ============================================================================
  * Nonlinear Optimization Algorithms Multilang. Version 0.1
  * ============================================================================
@@ -20,13 +20,13 @@
         http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
-    <groupId>optimization.nonlinear.unconstrained.core</groupId>
+    <groupId>optimization.nonlinear.unconstrained.cli</groupId>
     <artifactId>hooke-jeeves</artifactId>
     <version>0.1</version>
     <packaging>jar</packaging>
     <name>hooke-jeeves</name>
     <description>The Hooke and Jeeves nonlinear unconstrained minimization algorithm (Java implementation).</description>
-    <url>https://github.com/rgolubtsov/nonlinear-optimization-algorithms-multilang/tree/master/nlp-unconstrained-core/hooke-jeeves/java</url>
+    <url>https://github.com/rgolubtsov/nonlinear-optimization-algorithms-multilang/tree/master/nlp-unconstrained-cli/hooke-jeeves/java</url>
     <inceptionYear>2015</inceptionYear>
     <build>
         <plugins>
@@ -46,7 +46,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>optimization.nonlinear.unconstrained.core.Rosenbrock</mainClass>
+                            <mainClass>optimization.nonlinear.unconstrained.cli.Rosenbrock</mainClass>
                         </manifest>
                     </archive>
                 </configuration>

@@ -1,5 +1,5 @@
 # =============================================================================
-# nlp-unconstrained-core/hooke-jeeves/python/Makefile
+# nlp-unconstrained-cli/hooke-jeeves/python/Makefile
 # =============================================================================
 # Nonlinear Optimization Algorithms Multilang. Version 0.1
 # =============================================================================
@@ -14,9 +14,9 @@ BIN_DIR      = bin
 LIB_DIR      = lib
 SRC_DIR      = src
 PYCACHE_DIR  = __pycache__
-BASE_PACKAGE = nlpuccorehooko
-BASE_MODULE  = nlpuccorehooke
-BASE_CLASS   = NLPUCCoreHooke
+BASE_PACKAGE = nlpucclihooko
+BASE_MODULE  = nlpucclihooke
+BASE_CLASS   = NLPUCCLIHooke
 CLASSES      = $(SRC_DIR)/$(BASE_MODULE).* $(SRC_DIR)/$(BASE_PACKAGE)
 SCRIPT1      = hooke
 SCRIPT2S     = -woods
@@ -50,7 +50,7 @@ define SCRIPT1_FULL
 #!/usr/bin/env python3\n\
 # -*- coding: utf-8 -*-\n\
 # =============================================================================\n\
-# nlp-unconstrained-core/hooke-jeeves/python/$(BIN_DIR)/$(SCRIPT1)\n\
+# nlp-unconstrained-cli/hooke-jeeves/python/$(BIN_DIR)/$(SCRIPT1)\n\
 # =============================================================================\n\
 # Nonlinear Optimization Algorithms Multilang. Version 0.1\n\
 # =============================================================================\n\
@@ -75,7 +75,7 @@ define SCRIPT2_FULL
 #!/usr/bin/env python3\n\
 # -*- coding: utf-8 -*-\n\
 # =============================================================================\n\
-# nlp-unconstrained-core/hooke-jeeves/python/$(BIN_DIR)/$(SCRIPT2)\n\
+# nlp-unconstrained-cli/hooke-jeeves/python/$(BIN_DIR)/$(SCRIPT2)\n\
 # =============================================================================\n\
 # Nonlinear Optimization Algorithms Multilang. Version 0.1\n\
 # =============================================================================\n\

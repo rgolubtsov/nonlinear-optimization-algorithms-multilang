@@ -1,5 +1,5 @@
 # =============================================================================
-# nlp-unconstrained-core/hooke-jeeves/js/Makefile
+# nlp-unconstrained-cli/hooke-jeeves/js/Makefile
 # =============================================================================
 # Nonlinear Optimization Algorithms Multilang. Version 0.1
 # =============================================================================
@@ -43,7 +43,7 @@ RMFLAGS    = -vR
 define SCRIPT1_FULL
 #!/usr/bin/env sh\n\
 # =============================================================================\n\
-# nlp-unconstrained-core/hooke-jeeves/js/$(BIN_DIR)/$(SCRIPT1)\n\
+# nlp-unconstrained-cli/hooke-jeeves/js/$(BIN_DIR)/$(SCRIPT1)\n\
 # =============================================================================\n\
 # Nonlinear Optimization Algorithms Multilang. Version 0.1\n\
 # =============================================================================\n\
@@ -72,7 +72,7 @@ endef
 define SCRIPT2_FULL
 #!/usr/bin/env sh\n\
 # =============================================================================\n\
-# nlp-unconstrained-core/hooke-jeeves/js/$(BIN_DIR)/$(SCRIPT2)\n\
+# nlp-unconstrained-cli/hooke-jeeves/js/$(BIN_DIR)/$(SCRIPT2)\n\
 # =============================================================================\n\
 # Nonlinear Optimization Algorithms Multilang. Version 0.1\n\
 # =============================================================================\n\

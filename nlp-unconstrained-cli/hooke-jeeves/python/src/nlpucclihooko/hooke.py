@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # =============================================================================
-# nlp-unconstrained-core/hooke-jeeves/python/src/nlpuccorehooko/hooke.py
+# nlp-unconstrained-cli/hooke-jeeves/python/src/nlpucclihooko/hooke.py
 # =============================================================================
 # Nonlinear Optimization Algorithms Multilang. Version 0.1
 # =============================================================================
@@ -11,7 +11,7 @@
 # This is the Hooke and Jeeves nonlinear unconstrained minimization algorithm.
 # =============================================================================
 
-from nlpuccorehooko.funevals import FunEvals
+from nlpucclihooko.funevals import FunEvals
 
 class Hooke:
     """The Hooke class contains methods for solving a nonlinear optimization

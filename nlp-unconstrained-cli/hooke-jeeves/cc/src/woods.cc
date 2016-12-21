@@ -1,5 +1,5 @@
 /*
- * nlp-unconstrained-core/hooke-jeeves/cc/src/woods.cc
+ * nlp-unconstrained-cli/hooke-jeeves/cc/src/woods.cc
  * ============================================================================
  * Nonlinear Optimization Algorithms Multilang. Version 0.1
  * ============================================================================
@@ -14,8 +14,8 @@
 #include "woods.h"
 #include "funevals.h"
 
-// The NLPUCCoreHooke namespace.
-namespace NLPUCCoreHooke {
+// The NLPUCCLIHooke namespace.
+namespace NLPUCCLIHooke {
 
 // Helper constants.
 const unsigned int ONE_HUNDRED = 100;
@@ -59,7 +59,7 @@ Woods::Woods() {}
 // Destructor.
 Woods::~Woods() {}
 
-} // namespace NLPUCCoreHooke
+} // namespace NLPUCCLIHooke
 
 // ============================================================================
 // vim:set nu:et:ts=4:sw=4:

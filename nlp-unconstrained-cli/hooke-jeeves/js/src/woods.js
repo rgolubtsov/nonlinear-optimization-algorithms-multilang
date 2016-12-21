@@ -1,5 +1,5 @@
 /*
- * nlp-unconstrained-core/hooke-jeeves/js/src/woods.js
+ * nlp-unconstrained-cli/hooke-jeeves/js/src/woods.js
  * ============================================================================
  * Nonlinear Optimization Algorithms Multilang. Version 0.1
  * ============================================================================
@@ -14,12 +14,12 @@
 "use strict";
 
 /**
- * The <code>NLPUCCoreHooke</code> namespace is used as a container
+ * The <code>NLPUCCLIHooke</code> namespace is used as a container
  * for the <code>Woods</code> class.
  *
- * @namespace NLPUCCoreHooke
+ * @namespace NLPUCCLIHooke
  */
-var NLPUCCoreHooke = NLPUCCoreHooke || {};
+var NLPUCCLIHooke = NLPUCCLIHooke || {};
 
 /**
  * The <code>Woods</code> class is responsible for solving a nonlinear
@@ -29,10 +29,10 @@ var NLPUCCoreHooke = NLPUCCoreHooke || {};
  * is the so-called &quot;Woods&quot; function.
  *
  * @class    Woods
- * @memberof NLPUCCoreHooke
+ * @memberof NLPUCCLIHooke
  * @author   Radislav (Radic) Golubtsov
  * @version  0.1
- * @see      {@link https://raw.githubusercontent.com/rgolubtsov/nonlinear-optimization-algorithms-multilang/master/nlp-unconstrained-core/hooke-jeeves/js/src/hooke.js|NLPUCCoreHooke.Hooke}
+ * @see      {@link https://raw.githubusercontent.com/rgolubtsov/nonlinear-optimization-algorithms-multilang/master/nlp-unconstrained-cli/hooke-jeeves/js/src/hooke.js|NLPUCCLIHooke.Hooke}
  * @since    hooke-jeeves 0.1
  */
 var Woods = function() {
@@ -153,10 +153,10 @@ var Woods = function() {
 };
 
 // Instantiating the Woods class.
-NLPUCCoreHooke.Woods = new Woods();
+NLPUCCLIHooke.Woods = new Woods();
 
 // Firing up computations.
-NLPUCCoreHooke.Woods.main();
+NLPUCCLIHooke.Woods.main();
 
 // ============================================================================
 // vim:set nu:et:ts=4:sw=4:

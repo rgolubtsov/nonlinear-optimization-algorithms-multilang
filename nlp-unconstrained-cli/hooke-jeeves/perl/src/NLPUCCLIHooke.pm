@@ -1,5 +1,5 @@
 # =============================================================================
-# nlp-unconstrained-core/hooke-jeeves/perl/src/NLPUCCoreHooke.pm
+# nlp-unconstrained-cli/hooke-jeeves/perl/src/NLPUCCLIHooke.pm
 # =============================================================================
 # Nonlinear Optimization Algorithms Multilang. Version 0.1
 # =============================================================================
@@ -12,7 +12,7 @@
 
 =head1 NAME
 
-NLPUCCoreHooke - The Hooke-Jeeves nonlinear minimization algorithm -
+NLPUCCLIHooke - The Hooke-Jeeves nonlinear minimization algorithm -
 main application class
 
 =head1 VERSION
@@ -21,22 +21,22 @@ Version 0.1
 
 =head1 DESCRIPTION
 
-The C<NLPUCCoreHooke> class contains methods to start up computations
+The C<NLPUCCLIHooke> class contains methods to start up computations
 for solving a nonlinear optimization problem using the algorithm
 of Hooke and Jeeves with respect to two test problems:
-Rosenbrock (see L<NLPUCCoreHooke::Rosenbrock>)
-and Woods (see L<NLPUCCoreHooke::Woods>).
+Rosenbrock (see L<NLPUCCLIHooke::Rosenbrock>)
+and Woods (see L<NLPUCCLIHooke::Woods>).
 
 =cut
 
-package NLPUCCoreHooke;
+package NLPUCCLIHooke;
 
 use strict;
 use warnings;
 use v5.10;
 
-use NLPUCCoreHooke::Rosenbrock;
-use NLPUCCoreHooke::Woods;
+use NLPUCCLIHooke::Rosenbrock;
+use NLPUCCLIHooke::Woods;
 
 ## The module version number.
 our $VERSION = "0.1";
@@ -56,7 +56,7 @@ sub rosenbrock {
     my ($args) = @_;
 
     # Instantiating the Rosenbrock class.
-    my $r = NLPUCCoreHooke::Rosenbrock->new();
+    my $r = NLPUCCLIHooke::Rosenbrock->new();
 
     # Firing up computations.
     $r->main($args);
@@ -77,7 +77,7 @@ sub woods {
     my ($args) = @_;
 
     # Instantiating the Woods class.
-    my $w = NLPUCCoreHooke::Woods->new();
+    my $w = NLPUCCLIHooke::Woods->new();
 
     # Firing up computations.
     $w->main($args);

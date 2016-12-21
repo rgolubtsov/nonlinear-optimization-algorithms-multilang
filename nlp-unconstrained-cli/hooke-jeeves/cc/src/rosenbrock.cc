@@ -1,5 +1,5 @@
 /*
- * nlp-unconstrained-core/hooke-jeeves/cc/src/rosenbrock.cc
+ * nlp-unconstrained-cli/hooke-jeeves/cc/src/rosenbrock.cc
  * ============================================================================
  * Nonlinear Optimization Algorithms Multilang. Version 0.1
  * ============================================================================
@@ -14,8 +14,8 @@
 #include "rosenbrock.h"
 #include "funevals.h"
 
-// The NLPUCCoreHooke namespace.
-namespace NLPUCCoreHooke {
+// The NLPUCCLIHooke namespace.
+namespace NLPUCCLIHooke {
 
 // Helper constant.
 const double ONE_HUNDRED_POINT_ZERO = 100.0;
@@ -46,7 +46,7 @@ Rosenbrock::Rosenbrock() {}
 // Destructor.
 Rosenbrock::~Rosenbrock() {}
 
-} // namespace NLPUCCoreHooke
+} // namespace NLPUCCLIHooke
 
 // ============================================================================
 // vim:set nu:et:ts=4:sw=4:

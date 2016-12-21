@@ -1,6 +1,6 @@
 /*
- * nlp-unconstrained-core/hooke-jeeves/java/src/main/java/
- * optimization/nonlinear/unconstrained/core/Woods.java
+ * nlp-unconstrained-cli/hooke-jeeves/java/src/main/java/
+ * optimization/nonlinear/unconstrained/cli/Woods.java
  * ============================================================================
  * Nonlinear Optimization Algorithms Multilang. Version 0.1
  * ============================================================================
@@ -12,7 +12,7 @@
  * ============================================================================
  */
 
-package optimization.nonlinear.unconstrained.core;
+package optimization.nonlinear.unconstrained.cli;
 
 /**
  * The <code>Woods</code> class is responsible for solving a nonlinear
@@ -23,7 +23,7 @@ package optimization.nonlinear.unconstrained.core;
  *
  * @author  Radislav (Radic) Golubtsov
  * @version 0.1
- * @see     optimization.nonlinear.unconstrained.core.Hooke
+ * @see     optimization.nonlinear.unconstrained.cli.Hooke
  * @since   hooke-jeeves 0.1
  */
 public final class Woods {

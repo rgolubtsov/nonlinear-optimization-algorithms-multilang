@@ -1,5 +1,5 @@
 /*
- * nlp-unconstrained-core/hooke-jeeves/js/src/hooke.js
+ * nlp-unconstrained-cli/hooke-jeeves/js/src/hooke.js
  * ============================================================================
  * Nonlinear Optimization Algorithms Multilang. Version 0.1
  * ============================================================================
@@ -14,23 +14,23 @@
 "use strict";
 
 /**
- * The <code>NLPUCCoreHooke</code> namespace is used as a container
+ * The <code>NLPUCCLIHooke</code> namespace is used as a container
  * for the <code>Hooke</code> class.
  *
- * @namespace NLPUCCoreHooke
+ * @namespace NLPUCCLIHooke
  */
-var NLPUCCoreHooke = NLPUCCoreHooke || {};
+var NLPUCCLIHooke = NLPUCCLIHooke || {};
 
 /**
  * The <code>Hooke</code> class contains methods for solving a nonlinear
  * optimization problem using the algorithm of Hooke and Jeeves.
  *
  * @class    Hooke
- * @memberof NLPUCCoreHooke
+ * @memberof NLPUCCLIHooke
  * @author   Radislav (Radic) Golubtsov
  * @version  0.1
- * @see      {@link https://raw.githubusercontent.com/rgolubtsov/nonlinear-optimization-algorithms-multilang/master/nlp-unconstrained-core/hooke-jeeves/js/src/rosenbrock.js|NLPUCCoreHooke.Rosenbrock}
- * @see      {@link https://raw.githubusercontent.com/rgolubtsov/nonlinear-optimization-algorithms-multilang/master/nlp-unconstrained-core/hooke-jeeves/js/src/woods.js|NLPUCCoreHooke.Woods}
+ * @see      {@link https://raw.githubusercontent.com/rgolubtsov/nonlinear-optimization-algorithms-multilang/master/nlp-unconstrained-cli/hooke-jeeves/js/src/rosenbrock.js|NLPUCCLIHooke.Rosenbrock}
+ * @see      {@link https://raw.githubusercontent.com/rgolubtsov/nonlinear-optimization-algorithms-multilang/master/nlp-unconstrained-cli/hooke-jeeves/js/src/woods.js|NLPUCCLIHooke.Woods}
  * @since    hooke-jeeves 0.1
  */
 var Hooke = function() {
@@ -275,7 +275,7 @@ var Hooke = function() {
 };
 
 // Instantiating the Hooke class.
-var h = NLPUCCoreHooke.Hooke = new Hooke();
+var h = NLPUCCLIHooke.Hooke = new Hooke();
 
 // Exposing out public props and methods.
 exports.INDEX_ZERO = h.INDEX_ZERO;

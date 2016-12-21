@@ -1,5 +1,5 @@
 /*
- * nlp-unconstrained-core/hooke-jeeves/objc/src/rosenbrock.h
+ * nlp-unconstrained-cli/hooke-jeeves/objc/src/rosenbrock.h
  * ============================================================================
  * Nonlinear Optimization Algorithms Multilang. Version 0.1
  * ============================================================================

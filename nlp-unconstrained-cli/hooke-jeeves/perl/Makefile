@@ -1,5 +1,5 @@
 # =============================================================================
-# nlp-unconstrained-core/hooke-jeeves/perl/Makefile
+# nlp-unconstrained-cli/hooke-jeeves/perl/Makefile
 # =============================================================================
 # Nonlinear Optimization Algorithms Multilang. Version 0.1
 # =============================================================================
@@ -13,7 +13,7 @@
 BIN_DIR      = bin
 LIB_DIR      = lib
 SRC_DIR      = src
-BASE_PACKAGE = NLPUCCoreHooke
+BASE_PACKAGE = NLPUCCLIHooke
 BASE_CLASS   = $(BASE_PACKAGE).pm
 CLASSES      = $(SRC_DIR)/$(BASE_CLASS) $(SRC_DIR)/$(BASE_PACKAGE)
 SCRIPT1      = hooke
@@ -47,7 +47,7 @@ RMFLAGS      = -vR
 define SCRIPT1_FULL
 #!/usr/bin/env perl\n\
 # =============================================================================\n\
-# nlp-unconstrained-core/hooke-jeeves/perl/$(BIN_DIR)/$(SCRIPT1)\n\
+# nlp-unconstrained-cli/hooke-jeeves/perl/$(BIN_DIR)/$(SCRIPT1)\n\
 # =============================================================================\n\
 # Nonlinear Optimization Algorithms Multilang. Version 0.1\n\
 # =============================================================================\n\
@@ -72,7 +72,7 @@ endef
 define SCRIPT2_FULL
 #!/usr/bin/env perl\n\
 # =============================================================================\n\
-# nlp-unconstrained-core/hooke-jeeves/perl/$(BIN_DIR)/$(SCRIPT2)\n\
+# nlp-unconstrained-cli/hooke-jeeves/perl/$(BIN_DIR)/$(SCRIPT2)\n\
 # =============================================================================\n\
 # Nonlinear Optimization Algorithms Multilang. Version 0.1\n\
 # =============================================================================\n\

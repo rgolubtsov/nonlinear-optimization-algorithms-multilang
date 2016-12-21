@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # =============================================================================
-# nlp-unconstrained-core/hooke-jeeves/python/src/nlpuccorehooko/woods.py
+# nlp-unconstrained-cli/hooke-jeeves/python/src/nlpucclihooko/woods.py
 # =============================================================================
 # Nonlinear Optimization Algorithms Multilang. Version 0.1
 # =============================================================================
@@ -11,7 +11,7 @@
 # This is the Hooke and Jeeves nonlinear unconstrained minimization algorithm.
 # =============================================================================
 
-from nlpuccorehooko.hooke import Hooke
+from nlpucclihooko.hooke import Hooke
 
 class Woods:
     """The Woods class is responsible for solving a nonlinear optimization

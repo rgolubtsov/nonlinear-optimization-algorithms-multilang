@@ -1,5 +1,5 @@
 /*
- * nlp-unconstrained-core/hooke-jeeves/go/src/hooke.go
+ * nlp-unconstrained-cli/hooke-jeeves/go/src/hooke.go
  * ============================================================================
  * Nonlinear Optimization Algorithms Multilang. Version 0.1
  * ============================================================================
@@ -297,11 +297,11 @@ func (h Hooke) hooke(nVars     uint,
  * It looks for the presence of the 'woods' cmd-line arg as the first arg,
  * and might be run without any args -- Rosenbrock test problem will be solved:
  *
- *     $ ./nlp-unconstrained-core/hooke-jeeves/go/bin/hooke
+ *     $ ./nlp-unconstrained-cli/hooke-jeeves/go/bin/hooke
  *
  * Or it might be run with the 'woods' arg --Woods test problem will be solved:
  *
- *     $ ./nlp-unconstrained-core/hooke-jeeves/go/bin/hooke woods
+ *     $ ./nlp-unconstrained-cli/hooke-jeeves/go/bin/hooke woods
  */
 func main() {
     var nVars   uint

@@ -1,5 +1,5 @@
 # =============================================================================
-# nlp-unconstrained-core/hooke-jeeves/perl/src/NLPUCCoreHooke/Rosenbrock.pm
+# nlp-unconstrained-cli/hooke-jeeves/perl/src/NLPUCCLIHooke/Rosenbrock.pm
 # =============================================================================
 # Nonlinear Optimization Algorithms Multilang. Version 0.1
 # =============================================================================
@@ -12,7 +12,7 @@
 
 =head1 NAME
 
-NLPUCCoreHooke::Rosenbrock - The Hooke-Jeeves nonlinear minimization algorithm
+NLPUCCLIHooke::Rosenbrock - The Hooke-Jeeves nonlinear minimization algorithm
 in application to the Rosenbrock test problem
 
 =head1 DESCRIPTION
@@ -25,13 +25,13 @@ function.
 
 =cut
 
-package NLPUCCoreHooke::Rosenbrock;
+package NLPUCCLIHooke::Rosenbrock;
 
 use strict;
 use warnings;
 use v5.10;
 
-use NLPUCCoreHooke::Hooke;
+use NLPUCCLIHooke::Hooke;
 
 ## Helper constants.
 use constant ONE_HUNDRED_POINT_ZERO =>  100.0;
@@ -71,7 +71,7 @@ sub f {
     my $b;
     my $c;
 
-    $NLPUCCoreHooke::Hooke::FUNEVALS++;
+    $NLPUCCLIHooke::Hooke::FUNEVALS++;
 
     $a = $x->[INDEX_ZERO];
     $b = $x->[INDEX_ONE];
@@ -112,7 +112,7 @@ sub main {
     $epsilon             = EPSMIN;
 
     # Instantiating the Hooke class.
-    my $h = NLPUCCoreHooke::Hooke->new();
+    my $h = NLPUCCLIHooke::Hooke->new();
 
     $jj = $h->hooke($nvars, \@startpt, \@endpt, $rho, $epsilon, $itermax, \&f);
 

@@ -1,5 +1,5 @@
 /*
- * nlp-unconstrained-core/hooke-jeeves/cc/src/woods.h
+ * nlp-unconstrained-cli/hooke-jeeves/cc/src/woods.h
  * ============================================================================
  * Nonlinear Optimization Algorithms Multilang. Version 0.1
  * ============================================================================
@@ -17,10 +17,10 @@
 #include "hooke.h"
 
 /**
- * The <code>NLPUCCoreHooke</code> namespace is used as a container
+ * The <code>NLPUCCLIHooke</code> namespace is used as a container
  * for the <code>Woods</code> class.
  */
-namespace NLPUCCoreHooke {
+namespace NLPUCCLIHooke {
 
 /** Helper constants. */
 extern const unsigned int ONE_HUNDRED;
@@ -64,7 +64,7 @@ public:
     ~Woods();
 };
 
-} // namespace NLPUCCoreHooke
+} // namespace NLPUCCLIHooke
 
 #endif // __CC__WOODS_H
 

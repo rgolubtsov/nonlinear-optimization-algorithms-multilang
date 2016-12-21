@@ -1,5 +1,5 @@
 /*
- * nlp-unconstrained-core/nelder-mead/c/src/rosenbrock.c
+ * nlp-unconstrained-cli/nelder-mead/c/src/rosenbrock.c
  * ============================================================================
  * Nonlinear Optimization Algorithms Multilang. Version 0.1
  * ============================================================================

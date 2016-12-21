@@ -1,5 +1,5 @@
 /*
- * nlp-unconstrained-core/nelder-mead/c/src/woods.c
+ * nlp-unconstrained-cli/nelder-mead/c/src/woods.c
  * ============================================================================
  * Nonlinear Optimization Algorithms Multilang. Version 0.1
  * ============================================================================

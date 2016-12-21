@@ -1,5 +1,5 @@
 /*
- * nlp-unconstrained-core/hooke-jeeves/cc/src/hooke.cc
+ * nlp-unconstrained-cli/hooke-jeeves/cc/src/hooke.cc
  * ============================================================================
  * Nonlinear Optimization Algorithms Multilang. Version 0.1
  * ============================================================================
@@ -19,8 +19,8 @@
     #include "woods.h"
 #endif
 
-// The NLPUCCoreHooke namespace.
-namespace NLPUCCoreHooke {
+// The NLPUCCLIHooke namespace.
+namespace NLPUCCLIHooke {
 
 // Constant. The maximum number of variables.
 const unsigned int VARS = 250;
@@ -257,9 +257,9 @@ Hooke::Hooke() {}
 // Destructor.
 Hooke::~Hooke() {}
 
-} // namespace NLPUCCoreHooke
+} // namespace NLPUCCLIHooke
 
-using namespace NLPUCCoreHooke;
+using namespace NLPUCCLIHooke;
 
 // Main program function main() :-).
 int main(void) {

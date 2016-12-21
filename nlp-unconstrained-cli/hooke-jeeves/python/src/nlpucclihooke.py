@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # =============================================================================
-# nlp-unconstrained-core/hooke-jeeves/python/src/nlpuccorehooko/funevals.py
+# nlp-unconstrained-cli/hooke-jeeves/python/src/nlpucclihooke.py
 # =============================================================================
 # Nonlinear Optimization Algorithms Multilang. Version 0.1
 # =============================================================================
@@ -11,32 +11,35 @@
 # This is the Hooke and Jeeves nonlinear unconstrained minimization algorithm.
 # =============================================================================
 
-class FunEvals:
-    """The FunEvals class is a helper class. It holds the only property --
-    the number of objective function evaluations (and corresponding
-    accessor methods).
+from nlpucclihooko.rosenbrock import Rosenbrock
+from nlpucclihooko.woods      import Woods
+
+class NLPUCCLIHooke:
+    """The NLPUCCLIHooke class contains methods to start up computations
+    for solving a nonlinear optimization problem using the algorithm
+    of Hooke and Jeeves with respect to two test problems:
+    Rosenbrock and Woods.
     """
 
-    ## The number of function evaluations.
-    funevals = 0
+    def rosenbrock(self):
+        """Solves the Rosenbrock test problem."""
 
-    def get_funevals(self):
-        """Getter for funevals.
+        # Instantiating the Rosenbrock class.
+        r = Rosenbrock()
 
-        Returns:
-            The number of function evaluations.
-        """
+        # Firing up computations.
+        r.main()
 
-        return self.funevals
+        return None
 
-    def set_funevals(self, __funevals):
-        """Setter for funevals.
+    def woods(self):
+        """Solves the Woods test problem."""
 
-        Args:
-            __funevals: The number of function evaluations.
-        """
+        # Instantiating the Woods class.
+        w = Woods()
 
-        self.funevals = __funevals
+        # Firing up computations.
+        w.main()
 
         return None
 

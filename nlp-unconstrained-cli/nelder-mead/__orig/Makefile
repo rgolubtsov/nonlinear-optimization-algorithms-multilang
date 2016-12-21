@@ -1,5 +1,5 @@
 # =============================================================================
-# nlp-unconstrained-core/nelder-mead/__orig/Makefile
+# nlp-unconstrained-cli/nelder-mead/__orig/Makefile
 # =============================================================================
 # Nonlinear Optimization Algorithms Multilang. Version 0.1
 # =============================================================================

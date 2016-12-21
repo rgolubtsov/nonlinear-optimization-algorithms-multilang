@@ -1,5 +1,5 @@
 /*
- * nlp-unconstrained-core/hooke-jeeves/cc/src/funevals.cc
+ * nlp-unconstrained-cli/hooke-jeeves/cc/src/funevals.cc
  * ============================================================================
  * Nonlinear Optimization Algorithms Multilang. Version 0.1
  * ============================================================================
@@ -13,8 +13,8 @@
 
 #include "funevals.h"
 
-// The NLPUCCoreHooke namespace.
-namespace NLPUCCoreHooke {
+// The NLPUCCLIHooke namespace.
+namespace NLPUCCLIHooke {
 
 // Getter for funEvals.
 unsigned int FunEvals::getFunEvals() {
@@ -32,7 +32,7 @@ FunEvals::FunEvals() {}
 // Destructor.
 FunEvals::~FunEvals() {}
 
-} // namespace NLPUCCoreHooke
+} // namespace NLPUCCLIHooke
 
 // ============================================================================
 // vim:set nu:et:ts=4:sw=4:
