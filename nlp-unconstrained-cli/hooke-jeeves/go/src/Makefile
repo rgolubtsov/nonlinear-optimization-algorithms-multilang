@@ -1,4 +1,4 @@
-# =============================================================================
+#
 # nlp-unconstrained-cli/hooke-jeeves/go/src/Makefile
 # =============================================================================
 # Nonlinear Optimization Algorithms Multilang. Version 0.1
@@ -11,6 +11,17 @@
 #
 # (See outer Makefile to understand how this one is processed.)
 # =============================================================================
+# Written by Radislav (Radicchio) Golubtsov, 2016
+#
+# This is free and unencumbered software released into the public domain.
+#
+# Anyone is free to copy, modify, publish, use, compile, sell, or
+# distribute this software, either in source code form or as a compiled
+# binary, for any purpose, commercial or non-commercial, and by any
+# means.
+#
+# (See the LICENSE file at the top of the source tree.)
+#
 
 EXEC    = hooke
 DEPS    = $(EXEC).o
@@ -45,6 +56,4 @@ all: $(EXEC)
 clean:
 	$(RM) $(EXEC) $(DEPS)
 
-# =============================================================================
 # vim:set nu:et:ts=4:sw=4:
-# =============================================================================

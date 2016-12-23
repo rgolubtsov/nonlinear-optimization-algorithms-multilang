@@ -1,4 +1,4 @@
-# =============================================================================
+#
 # nlp-unconstrained-cli/hooke-jeeves/f95/src/Makefile
 # =============================================================================
 # Nonlinear Optimization Algorithms Multilang. Version 0.1
@@ -9,6 +9,17 @@
 #
 # This is the Hooke and Jeeves nonlinear unconstrained minimization algorithm.
 # =============================================================================
+# Written by Radislav (Radicchio) Golubtsov, 2016
+#
+# This is free and unencumbered software released into the public domain.
+#
+# Anyone is free to copy, modify, publish, use, compile, sell, or
+# distribute this software, either in source code form or as a compiled
+# binary, for any purpose, commercial or non-commercial, and by any
+# means.
+#
+# (See the LICENSE file at the top of the source tree.)
+#
 
 EXEC1   = hooke
 EXEC2S  = -woods
@@ -53,6 +64,4 @@ all: rosenbrock woods
 clean:
 	$(RM) $(EXEC1) $(DEPS1) $(EXEC2) $(DEPS2) $(TMPS)
 
-# =============================================================================
 # vim:set nu:et:ts=4:sw=4:
-# =============================================================================
