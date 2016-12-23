@@ -19,7 +19,7 @@
  * <br />The objective function in this case
  * is the Rosenbrock's parabolic valley function.
  *
- * @author  Radislav (Radic) Golubtsov
+ * @author  Radislav (Radicchio) Golubtsov
  * @version 0.1
  * @since   nelder-mead 0.1
  */

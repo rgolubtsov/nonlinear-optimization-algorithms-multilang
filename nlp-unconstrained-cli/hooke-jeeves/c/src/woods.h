@@ -19,7 +19,7 @@
  * <br />The objective function in this case
  * is the so-called &quot;Woods&quot; function.
  *
- * @author  Radislav (Radic) Golubtsov
+ * @author  Radislav (Radicchio) Golubtsov
  * @version 0.1
  * @since   hooke-jeeves 0.1
  */

@@ -16,7 +16,7 @@
  * It declares the number of objective function evaluations variable,
  * wrapped by the C structure (and corresponding accessor methods).
  *
- * @author  Radislav (Radic) Golubtsov
+ * @author  Radislav (Radicchio) Golubtsov
  * @version 0.1
  * @since   hooke-jeeves 0.1
  */

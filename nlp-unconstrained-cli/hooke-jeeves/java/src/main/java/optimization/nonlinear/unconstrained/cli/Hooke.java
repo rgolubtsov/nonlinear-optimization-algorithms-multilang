@@ -18,7 +18,7 @@ package optimization.nonlinear.unconstrained.cli;
  * The <code>Hooke</code> class contains methods for solving a nonlinear
  * optimization problem using the algorithm of Hooke and Jeeves.
  *
- * @author  Radislav (Radic) Golubtsov
+ * @author  Radislav (Radicchio) Golubtsov
  * @version 0.1
  * @see     optimization.nonlinear.unconstrained.cli.Rosenbrock
  * @see     optimization.nonlinear.unconstrained.cli.Woods

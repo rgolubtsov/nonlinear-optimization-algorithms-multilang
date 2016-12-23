@@ -18,7 +18,7 @@ package main
  * It holds the only property &ndash; the number of objective function
  * evaluations (and corresponding accessor methods).
  *
- * @author  Radislav (Radic) Golubtsov
+ * @author  Radislav (Radicchio) Golubtsov
  * @version 0.1
  * @see     Hooke (hooke.go)
  * @since   hooke-jeeves 0.1

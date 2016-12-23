@@ -60,7 +60,7 @@ extern const CGFloat    ZERO_POINT_FIVE;
  * The <code>Hooke</code> class contains methods for solving a nonlinear
  * optimization problem using the algorithm of Hooke and Jeeves.
  *
- * @author  Radislav (Radic) Golubtsov
+ * @author  Radislav (Radicchio) Golubtsov
  * @version 0.1
  * @see     Rosenbrock
  * @see     Woods

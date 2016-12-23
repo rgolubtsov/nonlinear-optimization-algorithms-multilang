@@ -23,7 +23,7 @@ const ONE_HUNDRED_POINT_ZERO float64 = 100.0
  * <br />The objective function in this case
  * is the Rosenbrock's parabolic valley function.
  *
- * @author  Radislav (Radic) Golubtsov
+ * @author  Radislav (Radicchio) Golubtsov
  * @version 0.1
  * @see     Hooke (hooke.go)
  * @since   hooke-jeeves 0.1

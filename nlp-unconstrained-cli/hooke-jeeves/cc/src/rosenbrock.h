@@ -32,7 +32,7 @@ extern const double ONE_HUNDRED_POINT_ZERO;
  * <br />The objective function in this case
  * is the Rosenbrock's parabolic valley function.
  *
- * @author  Radislav (Radic) Golubtsov
+ * @author  Radislav (Radicchio) Golubtsov
  * @version 0.1
  * @see     Hooke
  * @since   hooke-jeeves 0.1

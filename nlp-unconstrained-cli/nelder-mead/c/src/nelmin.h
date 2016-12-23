@@ -16,7 +16,7 @@
  * for solving a nonlinear optimization problem using the algorithm
  * of Nelder and Mead (&quot;Downhill simplex method&quot;).
  *
- * @author  Radislav (Radic) Golubtsov
+ * @author  Radislav (Radicchio) Golubtsov
  * @version 0.1
  * @since   nelder-mead 0.1
  */

@@ -27,7 +27,7 @@ var NLPUCCLIHooke = NLPUCCLIHooke || {};
  *
  * @class    Hooke
  * @memberof NLPUCCLIHooke
- * @author   Radislav (Radic) Golubtsov
+ * @author   Radislav (Radicchio) Golubtsov
  * @version  0.1
  * @see      {@link https://raw.githubusercontent.com/rgolubtsov/nonlinear-optimization-algorithms-multilang/master/nlp-unconstrained-cli/hooke-jeeves/js/src/rosenbrock.js|NLPUCCLIHooke.Rosenbrock}
  * @see      {@link https://raw.githubusercontent.com/rgolubtsov/nonlinear-optimization-algorithms-multilang/master/nlp-unconstrained-cli/hooke-jeeves/js/src/woods.js|NLPUCCLIHooke.Woods}

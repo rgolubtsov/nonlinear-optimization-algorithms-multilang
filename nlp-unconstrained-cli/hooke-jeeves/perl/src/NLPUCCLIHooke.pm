@@ -89,7 +89,7 @@ sub woods {
 
 =head1 AUTHOR
 
-Radislav (Radic) Golubtsov,
+Radislav (Radicchio) Golubtsov,
 L<https://github.com/rgolubtsov|https://github.com/rgolubtsov>
 
 =head1 COPYRIGHT AND LICENSE

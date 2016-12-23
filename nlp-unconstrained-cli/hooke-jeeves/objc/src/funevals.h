@@ -18,7 +18,7 @@
  * It holds the only property &ndash; the number of objective function
  * evaluations (and corresponding generated accessor methods).
  *
- * @author  Radislav (Radic) Golubtsov
+ * @author  Radislav (Radicchio) Golubtsov
  * @version 0.1
  * @see     Hooke
  * @since   hooke-jeeves 0.1
