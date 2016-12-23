@@ -38,7 +38,7 @@ The project has the following directory structure and logical parts and items.
 
 ```
 .
-|-- nlp-unconstrained-cli             <== Unconstrained methods impl. container
+|-- nlp-unconstrained-cli              <== Unconstrained methods impl. container
 |   |                                      (including test problems)
 |   |-- hooke-jeeves                   <== Hooke-Jeeves algorithm container
 |   |   |                                  (all implementations)
@@ -131,7 +131,7 @@ The project has the following directory structure and logical parts and items.
 |
 |-- [ nlp-unconstrained-api ]          <== [TODO] Unconstrained methods impl. container
 |                                                 (API only)
-|-- [ nlp-constrained-cli ]           <== [TODO] Constrained methods impl. container
+|-- [ nlp-constrained-cli ]            <== [TODO] Constrained methods impl. container
 |                                                 (including test problems)
 `-- [ nlp-constrained-api ]            <== [TODO] Constrained methods impl. container
                                                   (API only)
