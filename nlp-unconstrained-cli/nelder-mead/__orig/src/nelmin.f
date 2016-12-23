@@ -1,4 +1,4 @@
-C =============================================================================
+C
 C NLP-UNCONSTRAINED-CLI/NELDER-MEAD/__ORIG/SRC/NELMIN.F
 C =============================================================================
 C NONLINEAR OPTIMIZATION ALGORITHMS MULTILANG. VERSION 0.1
@@ -9,6 +9,16 @@ C PROGRAMMING LANGUAGES.
 C
 C THIS IS THE NELDER-MEAD NONLINEAR UNCONSTRAINED MINIMIZATION ALGORITHM.
 C =============================================================================
+C WRITTEN BY RADISLAV (RADICCHIO) GOLUBTSOV, 2016
+C
+C THIS IS FREE AND UNENCUMBERED SOFTWARE RELEASED INTO THE PUBLIC DOMAIN.
+C
+C ANYONE IS FREE TO COPY, MODIFY, PUBLISH, USE, COMPILE, SELL, OR
+C DISTRIBUTE THIS SOFTWARE, EITHER IN SOURCE CODE FORM OR AS A COMPILED
+C BINARY, FOR ANY PURPOSE, COMMERCIAL OR NON-COMMERCIAL, AND BY ANY
+C MEANS.
+C
+C (SEE THE LICENSE FILE AT THE TOP OF THE SOURCE TREE.)
 
 C * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 C *                                                                           *
@@ -574,5 +584,3 @@ C         SHOULD THEY BE VARIED?
           PRINT 160, NUMRES
 160       FORMAT ( 2X, 'Number of restarts   =', 1X, I8)
       END
-
-C =============================================================================
