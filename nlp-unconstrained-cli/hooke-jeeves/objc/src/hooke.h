@@ -9,6 +9,16 @@
  *
  * This is the Hooke and Jeeves nonlinear unconstrained minimization algorithm.
  * ============================================================================
+ * Written by Radislav (Radicchio) Golubtsov, 2016
+ *
+ * This is free and unencumbered software released into the public domain.
+ *
+ * Anyone is free to copy, modify, publish, use, compile, sell, or
+ * distribute this software, either in source code form or as a compiled
+ * binary, for any purpose, commercial or non-commercial, and by any
+ * means.
+ *
+ * (See the LICENSE file at the top of the source tree.)
  */
 
 // (Not so dirty :-) hack: But we need double! Even on 32-bit systems.
@@ -110,6 +120,4 @@ extern const CGFloat    ZERO_POINT_FIVE;
 
 @end
 
-// ============================================================================
 // vim:set nu:et:ts=4:sw=4:
-// ============================================================================
