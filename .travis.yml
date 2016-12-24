@@ -1,4 +1,4 @@
-# =============================================================================
+#
 # .travis.yml
 # =============================================================================
 # Nonlinear Optimization Algorithms Multilang. Version 0.1
@@ -10,7 +10,7 @@
 # This is the configuration of the project characteristics
 # used by the Travis CI (continuous integration) service
 # to rebuild the project on every push and pull request.
-# =============================================================================
+#
 
 %YAML 1.1
 ---
@@ -239,6 +239,4 @@ script:
 
 ...
 
-# =============================================================================
 # vim:set nu:et:ts=4:sw=4:
-# =============================================================================

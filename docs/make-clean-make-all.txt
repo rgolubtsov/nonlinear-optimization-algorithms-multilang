@@ -1,0 +1,43 @@
+# === Cleaning implementations in a cascade flow ==============================
+$ cd nlp-unconstrained-cli &&                       \
+  cd hooke-jeeves          &&                       \
+  cd c                     && make clean && cd - && \
+  cd cc                    && make clean && cd - && \
+  cd f77                   && make clean && cd - && \
+  cd f95                   && make clean && cd - && \
+  cd go                    && make clean && cd - && \
+  cd java                  && make clean && cd - && \
+  cd js                    && make clean && cd - && \
+  cd objc                  && make clean && cd - && \
+  cd __orig                && make clean && cd - && \
+  cd perl                  && make clean && cd - && \
+  cd python                && make clean && cd - && \
+  cd ..                    &&                       \
+  cd nelder-mead           &&                       \
+  cd c                     && make clean && cd - && \
+  cd __orig                && make clean && cd - && \
+  cd ..                    &&                       \
+  cd ..
+
+# === Building implementations in a cascade flow ==============================
+$ cd nlp-unconstrained-cli &&                       \
+  cd hooke-jeeves          &&                       \
+  cd c                     && make all   && cd - && \
+  cd cc                    && make all   && cd - && \
+  cd f77                   && make all   && cd - && \
+  cd f95                   && make all   && cd - && \
+  cd go                    && make all   && cd - && \
+  cd java                  && make all   && cd - && \
+  cd js                    && make all   && cd - && \
+  cd objc                  && make all   && cd - && \
+  cd __orig                && make all   && cd - && \
+  cd perl                  && make all   && cd - && \
+  cd python                && make all   && cd - && \
+  cd ..                    &&                       \
+  cd nelder-mead           &&                       \
+  cd c                     && make all   && cd - && \
+  cd __orig                && make all   && cd - && \
+  cd ..                    &&                       \
+  cd ..
+
+# =============================================================================
