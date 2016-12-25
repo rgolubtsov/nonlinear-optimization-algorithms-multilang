@@ -1,0 +1,35 @@
+# === Running Rosenbrock test problem ('hooke' executable or script) ==========
+$                           ./nlp-unconstrained-cli/hooke-jeeves/c/bin/hooke
+$                          ./nlp-unconstrained-cli/hooke-jeeves/cc/bin/hooke
+$                         ./nlp-unconstrained-cli/hooke-jeeves/f77/bin/hooke
+$                         ./nlp-unconstrained-cli/hooke-jeeves/f95/bin/hooke
+$                          ./nlp-unconstrained-cli/hooke-jeeves/go/bin/hooke
+$                  cd nlp-unconstrained-cli/hooke-jeeves/java && ./bin/hooke && cd -
+$                  cd nlp-unconstrained-cli/hooke-jeeves/js   && ./bin/hooke && cd -
+$                        ./nlp-unconstrained-cli/hooke-jeeves/objc/bin/hooke
+$                      ./nlp-unconstrained-cli/hooke-jeeves/__orig/bin/hooke
+$       PERL5LIB=$PERL5LIB:nlp-unconstrained-cli/hooke-jeeves/perl/lib             \
+                         ./nlp-unconstrained-cli/hooke-jeeves/perl/bin/hooke
+$ PYTHONPATH=$PYTHONPATH:nlp-unconstrained-cli/hooke-jeeves/python/lib             \
+                       ./nlp-unconstrained-cli/hooke-jeeves/python/bin/hooke
+
+# === Running Woods test problem ('hooke-woods' executable or script) =========
+$                           ./nlp-unconstrained-cli/hooke-jeeves/c/bin/hooke-woods
+$                          ./nlp-unconstrained-cli/hooke-jeeves/cc/bin/hooke-woods
+$                         ./nlp-unconstrained-cli/hooke-jeeves/f77/bin/hooke-woods
+$                         ./nlp-unconstrained-cli/hooke-jeeves/f95/bin/hooke-woods
+$ `# Go: Notice a space instead of usual hyphen: this is the 'woods' arg, ya,`           \
+  `#     in Go implementation there is the only exec --> 'hooke'. ----------+`           \
+  `#                                                                        |`           \
+  `#                                                                        V`           \
+                           ./nlp-unconstrained-cli/hooke-jeeves/go/bin/hooke woods
+$                  cd nlp-unconstrained-cli/hooke-jeeves/java && ./bin/hooke-woods && cd -
+$                  cd nlp-unconstrained-cli/hooke-jeeves/js   && ./bin/hooke-woods && cd -
+$                        ./nlp-unconstrained-cli/hooke-jeeves/objc/bin/hooke-woods
+$                      ./nlp-unconstrained-cli/hooke-jeeves/__orig/bin/hooke-woods
+$       PERL5LIB=$PERL5LIB:nlp-unconstrained-cli/hooke-jeeves/perl/lib                   \
+                         ./nlp-unconstrained-cli/hooke-jeeves/perl/bin/hooke-woods
+$ PYTHONPATH=$PYTHONPATH:nlp-unconstrained-cli/hooke-jeeves/python/lib                   \
+                       ./nlp-unconstrained-cli/hooke-jeeves/python/bin/hooke-woods
+
+# =============================================================================

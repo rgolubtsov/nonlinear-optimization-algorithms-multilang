@@ -1,0 +1,9 @@
+# === Running Rosenbrock test problem ('nelmin' executable or script) =========
+$      ./nlp-unconstrained-cli/nelder-mead/c/bin/nelmin
+$ ./nlp-unconstrained-cli/nelder-mead/__orig/bin/nelmin
+
+# === Running Woods test problem ('nelmin-woods' executable or script) ========
+$      ./nlp-unconstrained-cli/nelder-mead/c/bin/nelmin-woods
+$ ./nlp-unconstrained-cli/nelder-mead/__orig/bin/nelmin-woods
+
+# =============================================================================
