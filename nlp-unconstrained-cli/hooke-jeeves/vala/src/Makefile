@@ -37,8 +37,7 @@ OBJ_DIR = ../obj
 
 # Specify flags and other vars here.
 VC      = valac
-#VCFLAGS = --pkg=posix
-VCFLAGS = -X -Wno-deprecated-declarations --pkg=posix
+VCFLAGS = --target-glib=2.40 --pkg=posix
 LDLIBS  = `pkg-config --libs glib-2.0`
 
 MV      = mv
