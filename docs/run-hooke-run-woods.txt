@@ -12,6 +12,7 @@ $       PERL5LIB=$PERL5LIB:nlp-unconstrained-cli/hooke-jeeves/perl/lib          
                          ./nlp-unconstrained-cli/hooke-jeeves/perl/bin/hooke
 $ PYTHONPATH=$PYTHONPATH:nlp-unconstrained-cli/hooke-jeeves/python/lib             \
                        ./nlp-unconstrained-cli/hooke-jeeves/python/bin/hooke
+$                        ./nlp-unconstrained-cli/hooke-jeeves/vala/bin/hooke
 
 # === Running Woods test problem ('hooke-woods' executable or script) =========
 $                           ./nlp-unconstrained-cli/hooke-jeeves/c/bin/hooke-woods
@@ -31,5 +32,6 @@ $       PERL5LIB=$PERL5LIB:nlp-unconstrained-cli/hooke-jeeves/perl/lib          
                          ./nlp-unconstrained-cli/hooke-jeeves/perl/bin/hooke-woods
 $ PYTHONPATH=$PYTHONPATH:nlp-unconstrained-cli/hooke-jeeves/python/lib                   \
                        ./nlp-unconstrained-cli/hooke-jeeves/python/bin/hooke-woods
+$                        ./nlp-unconstrained-cli/hooke-jeeves/vala/bin/hooke-woods
 
 # =============================================================================

@@ -12,6 +12,7 @@ $ cd nlp-unconstrained-cli &&                       \
   cd __orig                && make clean && cd - && \
   cd perl                  && make clean && cd - && \
   cd python                && make clean && cd - && \
+  cd vala                  && make clean && cd - && \
   cd ..                    &&                       \
   cd nelder-mead           &&                       \
   cd c                     && make clean && cd - && \
@@ -33,6 +34,7 @@ $ cd nlp-unconstrained-cli &&                       \
   cd __orig                && make all   && cd - && \
   cd perl                  && make all   && cd - && \
   cd python                && make all   && cd - && \
+  cd vala                  && make all   && cd - && \
   cd ..                    &&                       \
   cd nelder-mead           &&                       \
   cd c                     && make all   && cd - && \
