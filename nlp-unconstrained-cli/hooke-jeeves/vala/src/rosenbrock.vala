@@ -21,11 +21,40 @@
  * (See the LICENSE file at the top of the source tree.)
  */
 
-// The NLPUCCLIHooke namespace.
-namespace NLPUCCLIHooke {
+namespace CLIHooke {
 
-    // TODO: Add objective function for Rosenbrock test problem.
+// Helper constants.
+const uint   INDEX_ZERO             =   0;
+const uint   INDEX_ONE              =   1;
+const double ONE_HUNDRED_POINT_ZERO = 100.0;
+const double ONE_POINT_ZERO         =   1.0;
 
-} // namespace NLPUCCLIHooke
+/**
+ * The user-supplied objective function f(x,n).
+ * Represents here the Rosenbrock's classic parabolic valley
+ * (&quot;banana&quot;) function.
+ *
+ * @param x        The point at which f(x) should be evaluated.
+ * @param n        The number of coordinates of <code>x</code>.
+ * @param funevals The number of function evaluations.
+ *
+ * @return The objective function value.
+ */
+double f(double *x, uint n, uint funevals) {
+    double a;
+    double b;
+    double c;
+
+    funevals++;
+
+    a = x[INDEX_ZERO];
+    b = x[INDEX_ONE];
+
+    c = ONE_HUNDRED_POINT_ZERO * (b - (a * a)) * (b - (a * a));
+
+    return (c + ((ONE_POINT_ZERO - a) * (ONE_POINT_ZERO - a)));
+}
+
+} // namespace CLIHooke
 
 // vim:set nu:et:ts=4:sw=4:
