@@ -80,7 +80,8 @@ double best_nearby(double *delta,
                    uint    funevals) {
 
     double minf = 0;
-    double z[VARS];
+//    double z[VARS];
+    double z[250];
     double ftmp;
 
     uint i;
@@ -116,9 +117,12 @@ uint hooke(uint    nvars,
     uint j;
     uint keep;
 
-    double newx[VARS];
-    double xbefore[VARS];
-    double delta[VARS];
+//    double newx[VARS];
+    double newx[250];
+//    double xbefore[VARS];
+    double xbefore[250];
+//    double delta[VARS];
+    double delta[250];
     double steplength;
     double fbefore = 0;
     double newf;
@@ -139,10 +143,12 @@ public static int main(string[] args) {
     uint jj;
     uint i;
 
-    double startpt[CLIHooke.VARS];
+//    double startpt[CLIHooke.VARS];
+    double startpt[250];
     double rho;
     double epsilon;
-    double endpt[CLIHooke.VARS];
+//    double endpt[CLIHooke.VARS];
+    double endpt[250];
 
 #if !WOODS
     // Starting guess for Rosenbrock's test function.
