@@ -212,7 +212,7 @@ script:
               && make all
               && make all
               && ls -al
-              && ls -al bin obj src
+              && ls -al bin src
               && ls -al
 
     ## Returning to the previous working dir.
