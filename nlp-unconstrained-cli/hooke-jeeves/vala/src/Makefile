@@ -24,40 +24,34 @@
 #
 
 EXEC1   = hooke
-EXEC2S  = -woods
-EXEC2   = $(EXEC1)$(EXEC2S)
-DEPS1S  = rosenbrock
-DEPS1   = $(EXEC1).o $(DEPS1S).o
-DEPS2S  = woods
-DEPS2   = $(EXEC2).o $(DEPS2S)$(EXEC2S).o
-DEPSN1  = funevals
-DEPSN   = $(DEPSN1).o
+EXEC2   = $(EXEC1)-woods
+SRCS1   = $(EXEC1).vala   \
+          rosenbrock.vala \
+          $(SRCSN)
+SRCS2   = $(EXEC1).vala   \
+          woods.vala      \
+          $(SRCSN)
+SRCSN   = funevals.vala
 BIN_DIR = ../bin
 OBJ_DIR = ../obj
 
 # Specify flags and other vars here.
 VC      = valac
 VCFLAGS = --target-glib=2.40 --pkg=posix
-LDLIBS  = `pkg-config --libs glib-2.0`
+#LDLIBS  = `pkg-config --libs glib-2.0`
 
 MV      = mv
 MVFLAGS = -v
 
 # Making the first target (rosenbrock).
-$(DEPS1) $(DEPSN): VCFLAGS += -c -o
-$(DEPS1) $(DEPSN): %.o: %.vala
-	$(VC) $(VCFLAGS) $@ $<
-	$(MV) $(MVFLAGS) $*.vala.o $*.o
-
-$(EXEC1): $(DEPS1) $(DEPSN)
+$(EXEC1): VCFLAGS += -o
+$(EXEC1): $(SRCS1)
+	$(VC) $(VCFLAGS) $(EXEC1) $(SRCS1)
 
 # Making the second target (woods).
-$(DEPS2): VCFLAGS += -D WOODS -c -o
-$(DEPS2): %$(EXEC2S).o: %.vala
-	$(VC) $(VCFLAGS) $@ $<
-	$(MV) $(MVFLAGS) $*.vala.o $*$(EXEC2S).o
-
-$(EXEC2): $(DEPS2) $(DEPSN)
+$(EXEC2): VCFLAGS += -D WOODS -o
+$(EXEC2): $(SRCS2)
+	$(VC) $(VCFLAGS) $(EXEC2) $(SRCS2)
 
 .PHONY: rosenbrock woods all clean
 
@@ -66,10 +60,9 @@ rosenbrock: $(EXEC1)
 woods: $(EXEC2)
 
 all: rosenbrock woods
-	$(MV) $(MVFLAGS) $(EXEC1) $(EXEC2)          $(BIN_DIR)
-	$(MV) $(MVFLAGS) $(DEPS1) $(DEPS2) $(DEPSN) $(OBJ_DIR)
+	$(MV) $(MVFLAGS) $(EXEC1) $(EXEC2) $(BIN_DIR)
 
 clean:
-	$(RM) $(EXEC1) $(DEPS1) $(EXEC2) $(DEPS2) $(DEPSN)
+	$(RM) $(EXEC1) $(EXEC2)
 
 # vim:set nu:et:ts=4:sw=4:
