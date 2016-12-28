@@ -24,7 +24,7 @@
 namespace CLIHooke {
 
 /** The number of function evaluations. */
-//uint funevals = 0;
+uint funevals = 0;
 
 } // namespace CLIHooke
 

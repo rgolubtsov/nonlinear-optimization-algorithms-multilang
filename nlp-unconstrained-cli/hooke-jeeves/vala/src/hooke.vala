@@ -56,9 +56,7 @@ const double MINUS_ONE_POINT_TWO = -1.2;
 const double ONE_POINT_ZERO      =  1.0;
 const int    MINUS_THREE         = -3;
 const int    MINUS_ONE           = -1;
-
-/** The number of function evaluations. */
-uint funevals = 0;
+const double ZERO_POINT_FIVE     =  0.5;
 
 /**
  * Helper function.
@@ -79,14 +77,49 @@ double best_nearby(double *delta,
                    uint    nvars,
                    uint    funevals) {
 
-    double minf = 0;
-//    double z[VARS];
+    double minf;
+
+//==double z[VARS];
     double z[250];
+
     double ftmp;
 
     uint i;
 
-    // TODO: Fill the function body.
+    minf = prevbest;
+
+    for (i = 0; i < nvars; i++) {
+        z[i] = point[i];
+    }
+
+    for (i = 0; i < nvars; i++) {
+        z[i] = point[i] + delta[i];
+
+        // TODO: Call the objective function (first import it :-)).
+//======ftmp = f(z, nvars, funevals);
+        ftmp = 0;
+
+        if (ftmp < minf) {
+            minf = ftmp;
+        } else {
+            delta[i] = 0.0 - delta[i];
+            z[i]     = point[i] + delta[i];
+
+            // TODO: Call the objective function (again import it first :-)).
+//==========ftmp = f(z, nvars, funevals);
+            ftmp = 0;
+
+            if (ftmp < minf) {
+                minf = ftmp;
+            } else {
+                z[i] = point[i];
+            }
+        }
+    }
+
+    for (i = 0; i < nvars; i++) {
+        point[i] = z[i];
+    }
 
     return minf;
 }
@@ -113,23 +146,125 @@ uint hooke(uint    nvars,
 
     uint i;
     uint iadj;
-    uint iters = 0;
+    uint iters;
     uint j;
     uint keep;
 
-//    double newx[VARS];
+//==double newx[VARS];
     double newx[250];
-//    double xbefore[VARS];
+
+//==double xbefore[VARS];
     double xbefore[250];
-//    double delta[VARS];
+
+//==double delta[VARS];
     double delta[250];
+
     double steplength;
-    double fbefore = 0;
+    double fbefore;
     double newf;
     double tmp;
 
-    // TODO: Fill the function body.
-    newf = best_nearby(delta, newx, fbefore, nvars, funevals);
+    uint funevals = 0;
+
+    for (i = 0; i < nvars; i++) {
+        newx[i] = xbefore[i] = startpt[i];
+
+        delta[i] = Math.fabs(startpt[i] * rho);
+
+        if (delta[i] == 0.0) {
+            delta[i] = rho;
+        }
+    }
+
+    iadj       = 0;
+    steplength = rho;
+    iters      = 0;
+
+    // TODO: Call the objective function (first import it :-)).
+//==fbefore = f(newx, nvars, funevals);
+    fbefore = 0;
+
+    newf = fbefore;
+
+    while ((iters < itermax) && (steplength > epsilon)) {
+        iters++;
+        iadj++;
+
+        stdout.printf(
+            "\nAfter %5u funevals, f(x) =  %.4le at\n", funevals, fbefore);
+
+        for (j = 0; j < nvars; j++) {
+            stdout.printf("   x[%2u] = %.4le\n", j, xbefore[j]);
+        }
+
+        // Find best new point, one coord at a time.
+        for (i = 0; i < nvars; i++) {
+            newx[i] = xbefore[i];
+        }
+
+        newf = best_nearby(delta, newx, fbefore, nvars, funevals);
+
+        // If we made some improvements, pursue that direction.
+        keep = 1;
+
+        while ((newf < fbefore) && (keep == 1)) {
+            iadj = 0;
+
+            for (i = 0; i < nvars; i++) {
+                // Firstly, arrange the sign of delta[].
+                if (newx[i] <= xbefore[i]) {
+                    delta[i] = 0.0 - Math.fabs(delta[i]);
+                } else {
+                    delta[i] = Math.fabs(delta[i]);
+                }
+
+                // Now, move further in this direction.
+                tmp        = xbefore[i];
+                xbefore[i] = newx[i];
+                newx[i]    = newx[i] + newx[i] - tmp;
+            }
+
+            fbefore = newf;
+
+            newf = best_nearby(delta, newx, fbefore, nvars, funevals);
+
+            // If the further (optimistic) move was bad....
+            if (newf >= fbefore) {
+                break;
+            }
+
+            /*
+             * Make sure that the differences between the new and the old
+             * points are due to actual displacements; beware of roundoff
+             * errors that might cause newf < fbefore.
+             */
+            keep = 0;
+
+            for (i = 0; i < nvars; i++) {
+                keep = 1;
+
+                if (Math.fabs(newx[i] - xbefore[i])
+                    > (ZERO_POINT_FIVE * Math.fabs(delta[i]))) {
+
+                    break;
+                } else {
+                    keep = 0;
+                }
+            }
+        }
+
+        if ((steplength >= epsilon) && (newf >= fbefore)) {
+            steplength = steplength * rho;
+
+            for (i = 0; i < nvars; i++) {
+                delta[i] *= rho;
+            }
+        }
+    }
+
+    for (i = 0; i < nvars; i++) {
+        endpt[i] = xbefore[i];
+    }
 
     return iters;
 }
@@ -143,14 +278,16 @@ public static int main(string[] args) {
     uint jj;
     uint i;
 
-//    double startpt[CLIHooke.VARS];
+//==double startpt[CLIHooke.VARS];
     double startpt[250];
+
     double rho;
     double epsilon;
-//    double endpt[CLIHooke.VARS];
+
+//==double endpt[CLIHooke.VARS];
     double endpt[250];
 
-#if !WOODS
+#if (!WOODS)
     // Starting guess for Rosenbrock's test function.
     nvars                         = CLIHooke.TWO;
     startpt[CLIHooke.INDEX_ZERO]  = CLIHooke.MINUS_ONE_POINT_TWO;
@@ -177,7 +314,7 @@ public static int main(string[] args) {
         stdout.printf("x[%3u] = %15.7le \n", i, endpt[i]);
     }
 
-#if WOODS
+#if (WOODS)
     stdout.puts("True answer: f(1, 1, 1, 1) = 0.\n");
 #endif
 
