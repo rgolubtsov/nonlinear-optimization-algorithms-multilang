@@ -67,15 +67,15 @@ const double ZERO_POINT_FIVE     =  0.5;
  * @param point    The coordinate from where to begin.
  * @param prevbest The previous best-valued coordinate.
  * @param nvars    The number of variables.
- * @param funevals The number of function evaluations.
+ * @param funevals The number of function evaluations container (FunEvals).
  *
  * @return The objective function value at a nearby.
  */
-double best_nearby(double *delta,
-                   double *point,
-                   double  prevbest,
-                   uint    nvars,
-                   uint    funevals) {
+double best_nearby(double   *delta,
+                   double   *point,
+                   double    prevbest,
+                   uint      nvars,
+                   FunEvals  funevals) {
 
     double minf;
 
@@ -95,9 +95,7 @@ double best_nearby(double *delta,
     for (i = 0; i < nvars; i++) {
         z[i] = point[i] + delta[i];
 
-        // TODO: Call the objective function (first import it :-)).
-//======ftmp = f(z, nvars, funevals);
-        ftmp = 0;
+        ftmp = f(z, nvars, funevals);
 
         if (ftmp < minf) {
             minf = ftmp;
@@ -105,9 +103,7 @@ double best_nearby(double *delta,
             delta[i] = 0.0 - delta[i];
             z[i]     = point[i] + delta[i];
 
-            // TODO: Call the objective function (again import it first :-)).
-//==========ftmp = f(z, nvars, funevals);
-            ftmp = 0;
+            ftmp = f(z, nvars, funevals);
 
             if (ftmp < minf) {
                 minf = ftmp;
@@ -164,8 +160,6 @@ uint hooke(uint    nvars,
     double newf;
     double tmp;
 
-    uint funevals = 0;
-
     for (i = 0; i < nvars; i++) {
         newx[i] = xbefore[i] = startpt[i];
 
@@ -180,9 +174,9 @@ uint hooke(uint    nvars,
     steplength = rho;
     iters      = 0;
 
-    // TODO: Call the objective function (first import it :-)).
-//==fbefore = f(newx, nvars, funevals);
-    fbefore = 0;
+    FunEvals funevals = FunEvals();
+
+    fbefore = f(newx, nvars, funevals);
 
     newf = fbefore;
 
@@ -190,8 +184,8 @@ uint hooke(uint    nvars,
         iters++;
         iadj++;
 
-        stdout.printf(
-            "\nAfter %5u funevals, f(x) =  %.4le at\n", funevals, fbefore);
+        stdout.printf("\nAfter %5u funevals, f(x) =  %.4le at\n",
+            funevals.get_funevals(), fbefore);
 
         for (j = 0; j < nvars; j++) {
             stdout.printf("   x[%2u] = %.4le\n", j, xbefore[j]);
