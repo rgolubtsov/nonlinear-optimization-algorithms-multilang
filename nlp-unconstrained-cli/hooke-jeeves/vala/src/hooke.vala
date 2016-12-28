@@ -266,7 +266,7 @@ uint hooke(uint    nvars,
 } // namespace CLIHooke
 
 // Main program function main() :-).
-public static int main(string[] args) {
+public static int main() {
     uint nvars;
     uint itermax;
     uint jj;
