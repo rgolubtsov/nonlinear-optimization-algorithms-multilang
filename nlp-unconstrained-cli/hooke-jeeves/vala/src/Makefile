@@ -33,12 +33,10 @@ SRCS2   = $(EXEC1).vala   \
           $(SRCSN)
 SRCSN   = funevals.vala
 BIN_DIR = ../bin
-OBJ_DIR = ../obj
 
 # Specify flags and other vars here.
 VC      = valac
 VCFLAGS = --target-glib=2.40 --pkg=posix
-#LDLIBS  = `pkg-config --libs glib-2.0`
 
 MV      = mv
 MVFLAGS = -v
