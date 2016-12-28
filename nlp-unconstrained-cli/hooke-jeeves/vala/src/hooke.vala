@@ -79,8 +79,8 @@ double best_nearby(double *delta,
 
     double minf;
 
-//==double z[VARS];
-    double z[250];
+//==double z[VARS]; // <== Just to remember: Vala 0.22 failed on this,
+    double z[250];  // .oO <== but succeeded with this one.))
 
     double ftmp;
 
@@ -150,14 +150,14 @@ uint hooke(uint    nvars,
     uint j;
     uint keep;
 
-//==double newx[VARS];
-    double newx[250];
+//==double newx[VARS]; // <== Just to remember: Vala 0.22 failed on this,
+    double newx[250];  // .oO <== but succeeded with this one.))
 
-//==double xbefore[VARS];
-    double xbefore[250];
+//==double xbefore[VARS]; // <== Just to remember: Vala 0.22 failed on this,
+    double xbefore[250];  // .oO <== but succeeded with this one.))
 
-//==double delta[VARS];
-    double delta[250];
+//==double delta[VARS]; // <== Just to remember: Vala 0.22 failed on this,
+    double delta[250];  // .oO <== but succeeded with this one.))
 
     double steplength;
     double fbefore;
@@ -278,14 +278,14 @@ public static int main(string[] args) {
     uint jj;
     uint i;
 
-//==double startpt[CLIHooke.VARS];
-    double startpt[250];
+//==double startpt[CLIHooke.VARS]; // <==Just to rmmbr:Vala0.22 failed on this,
+    double startpt[250];           // .oO <== but succeeded with this one.))
 
     double rho;
     double epsilon;
 
-//==double endpt[CLIHooke.VARS];
-    double endpt[250];
+//==double endpt[CLIHooke.VARS]; // <==Just to rmmbr: Vala 0.22 failed on this,
+    double endpt[250];           // .oO <== but succeeded with this one.))
 
 #if (!WOODS)
     // Starting guess for Rosenbrock's test function.
