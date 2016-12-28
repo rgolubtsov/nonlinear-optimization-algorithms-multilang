@@ -21,11 +21,11 @@
  * (See the LICENSE file at the top of the source tree.)
  */
 
-// The NLPUCCLIHooke namespace.
-namespace NLPUCCLIHooke {
+namespace CLIHooke {
 
-    // TODO: Add funevals-related methods.
+/** The number of function evaluations. */
+//uint funevals = 0;
 
-} // namespace NLPUCCLIHooke
+} // namespace CLIHooke
 
 // vim:set nu:et:ts=4:sw=4:
