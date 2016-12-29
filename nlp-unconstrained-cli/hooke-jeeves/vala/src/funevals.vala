@@ -23,8 +23,33 @@
 
 namespace CLIHooke {
 
-/** The number of function evaluations. */
-//uint funevals = 0;
+/**
+ * The <code>FunEvals</code> structure is a helper structure.
+ * It holds the only property &ndash; the number of objective function
+ * evaluations (and corresponding accessor methods).
+ */
+struct FunEvals {
+    /** The number of function evaluations. */
+    uint funevals;
+
+    /**
+     * Getter for <code>funevals</code>.
+     *
+     * @return The number of function evaluations.
+     */
+    public uint get_funevals() {
+        return funevals;
+    }
+
+    /**
+     * Setter for <code>funevals</code>.
+     *
+     * @param __funevals The number of function evaluations.
+     */
+    public void set_funevals(uint __funevals) {
+        funevals = __funevals;
+    }
+}
 
 } // namespace CLIHooke
 

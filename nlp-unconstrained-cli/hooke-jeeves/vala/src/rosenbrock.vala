@@ -23,11 +23,8 @@
 
 namespace CLIHooke {
 
-// Helper constants.
-const uint   INDEX_ZERO             =   0;
-const uint   INDEX_ONE              =   1;
+// Helper constant.
 const double ONE_HUNDRED_POINT_ZERO = 100.0;
-const double ONE_POINT_ZERO         =   1.0;
 
 /**
  * The user-supplied objective function f(x,n).
@@ -36,16 +33,16 @@ const double ONE_POINT_ZERO         =   1.0;
  *
  * @param x        The point at which f(x) should be evaluated.
  * @param n        The number of coordinates of <code>x</code>.
- * @param funevals The number of function evaluations.
+ * @param funevals The number of function evaluations container (FunEvals).
  *
  * @return The objective function value.
  */
-double f(double *x, uint n, uint funevals) {
+double f(double *x, uint n, FunEvals funevals) {
     double a;
     double b;
     double c;
 
-    funevals++;
+    funevals.set_funevals(funevals.get_funevals() + 1);
 
     a = x[INDEX_ZERO];
     b = x[INDEX_ONE];
