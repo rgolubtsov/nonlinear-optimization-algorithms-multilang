@@ -12,6 +12,7 @@
 * The Hooke and Jeeves :small_blue_diamond: Java (Java SE 7) implementation
 * The Hooke and Jeeves :small_blue_diamond: Go (golang) implementation
 * The Hooke and Jeeves :small_blue_diamond: Python 2 &amp; 3 implementation
+* The Hooke and Jeeves :small_blue_diamond: Vala implementation
 
 ---
 
@@ -45,31 +46,31 @@ The project has the following directory structure and logical parts and items.
 |   |   |-- c                          <== ISO C (C99/11) impl. container
 |   |   |   |-- Makefile
 |   |   |   `-- src
-|   |   |       |-- < sources >
+|   |   |       |-- <sources>
 |   |   |       `-- Makefile
 |   |   |
 |   |   |-- cc                         <== ISO C++ (C++98/03/11/14) impl. container
 |   |   |   |-- Makefile
 |   |   |   `-- src
-|   |   |       |-- < sources >
+|   |   |       |-- <sources>
 |   |   |       `-- Makefile
 |   |   |
 |   |   |-- f77                        <== FORTRAN 77 (MIL-STD 1753) impl. container
 |   |   |   |-- Makefile
 |   |   |   `-- src
-|   |   |       |-- < sources >
+|   |   |       |-- <sources>
 |   |   |       `-- Makefile
 |   |   |
 |   |   |-- f95                        <== ISO Fortran 95 impl. container
 |   |   |   |-- Makefile
 |   |   |   `-- src
-|   |   |       |-- < sources >
+|   |   |       |-- <sources>
 |   |   |       `-- Makefile
 |   |   |
 |   |   |-- go                         <== Go (golang) impl. container
 |   |   |   |-- Makefile
 |   |   |   `-- src
-|   |   |       |-- < sources >
+|   |   |       |-- <sources>
 |   |   |       `-- Makefile
 |   |   |
 |   |   |-- java                       <== Java (Java SE 7) impl. container
@@ -82,51 +83,57 @@ The project has the following directory structure and logical parts and items.
 |   |   |                   `-- nonlinear
 |   |   |                       `-- unconstrained
 |   |   |                           `-- cli
-|   |   |                               `-- < sources >
+|   |   |                               `-- <sources>
 |   |   |
 |   |   |-- js                         <== JavaScript (ECMA-262 5.1) impl. container
 |   |   |   |-- Makefile
 |   |   |   `-- src
-|   |   |       `-- < sources >
+|   |   |       `-- <sources>
 |   |   |
 |   |   |-- objc                       <== Objective-C 2.0 impl. container
 |   |   |   |-- Makefile                   (using the GNUstep Base library)
 |   |   |   `-- src
-|   |   |       |-- < sources >
+|   |   |       |-- <sources>
 |   |   |       `-- Makefile
 |   |   |
 |   |   |-- __orig                     <== Traditional (K&R) C impl. container
 |   |   |   |-- Makefile                   (This is the original impl.)
 |   |   |   `-- src
-|   |   |       |-- < sources >
+|   |   |       |-- <sources>
 |   |   |       `-- Makefile
 |   |   |
 |   |   |-- perl                       <== Perl 5 (5.10+) impl. container
-|   |   |    |-- Makefile
-|   |   |    `-- src
-|   |   |        |-- NLPUCCLIHooke
-|   |   |        |   `-- < sources >
-|   |   |        `-- < sources >
+|   |   |   |-- Makefile
+|   |   |   `-- src
+|   |   |       |-- NLPUCCLIHooke
+|   |   |       |   `-- <sources>
+|   |   |       `-- <sources>
 |   |   |
-|   |   `-- python                     <== Python 2 & 3 impl. container
+|   |   |-- python                     <== Python 2 & 3 impl. container
+|   |   |   |-- Makefile
+|   |   |   `-- src
+|   |   |       |-- <sources>
+|   |   |       `-- nlpucclihooko
+|   |   |           `-- <sources>
+|   |   |
+|   |   `-- vala                       <== Vala impl. container
 |   |       |-- Makefile
 |   |       `-- src
-|   |           |-- < sources >
-|   |           `-- nlpucclihooko
-|   |               `-- < sources >
+|   |           |-- <sources>
+|   |           `-- Makefile
 |   |
 |   `-- nelder-mead                    <== Nelder-Mead algorithm container
 |       |                                  (all implementations)
 |       |-- c                          <== ISO C (C99/11) impl. container
 |       |   |-- Makefile
 |       |   `-- src
-|       |       |-- < sources >
+|       |       |-- <sources>
 |       |       `-- Makefile
 |       |
 |       `-- __orig                     <== FORTRAN 77 (MIL-STD 1753) impl. container
 |           |-- Makefile                   (This is the original impl.)
 |           `-- src
-|               |-- < sources >
+|               |-- <sources>
 |               `-- Makefile
 |
 |-- [ nlp-unconstrained-api ]          <== [TODO] Unconstrained methods impl. container
