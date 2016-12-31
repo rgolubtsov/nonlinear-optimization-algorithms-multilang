@@ -24,11 +24,11 @@
 namespace CLIHooke {
 
 /**
- * The <code>FunEvals</code> structure is a helper structure.
+ * The <code>FunEvals</code> class is a helper class.
  * It holds the only property &ndash; the number of objective function
  * evaluations (and corresponding accessor methods).
  */
-struct FunEvals {
+class FunEvals {
     /** The number of function evaluations. */
     uint funevals;
 
@@ -49,6 +49,9 @@ struct FunEvals {
     public void set_funevals(uint __funevals) {
         funevals = __funevals;
     }
+
+    /** Default constructor. */
+    public FunEvals() {}
 }
 
 } // namespace CLIHooke

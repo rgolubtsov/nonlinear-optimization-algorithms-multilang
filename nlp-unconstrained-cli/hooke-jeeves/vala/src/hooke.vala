@@ -67,7 +67,7 @@ const double ZERO_POINT_FIVE     =  0.5;
  * @param point    The coordinate from where to begin.
  * @param prevbest The previous best-valued coordinate.
  * @param nvars    The number of variables.
- * @param funevals The number of function evaluations container (FunEvals).
+ * @param funevals The number of function evaluations container (FunEvals *).
  *
  * @return The objective function value at a nearby.
  */
@@ -75,7 +75,7 @@ double best_nearby(double   *delta,
                    double   *point,
                    double    prevbest,
                    uint      nvars,
-                   FunEvals  funevals) {
+                   FunEvals *funevals) {
 
     double minf;
 
@@ -174,7 +174,8 @@ uint hooke(uint    nvars,
     steplength = rho;
     iters      = 0;
 
-    FunEvals funevals = FunEvals();
+    // Instantiating the FunEvals class.
+    FunEvals *funevals = new FunEvals();
 
     fbefore = f(newx, nvars, funevals);
 
@@ -185,7 +186,7 @@ uint hooke(uint    nvars,
         iadj++;
 
         stdout.printf("\nAfter %5u funevals, f(x) =  %.4le at\n",
-            funevals.get_funevals(), fbefore);
+            funevals->get_funevals(), fbefore);
 
         for (j = 0; j < nvars; j++) {
             stdout.printf("   x[%2u] = %.4le\n", j, xbefore[j]);
@@ -259,6 +260,9 @@ uint hooke(uint    nvars,
     for (i = 0; i < nvars; i++) {
         endpt[i] = xbefore[i];
     }
+
+    // Destroying the FunEvals class instance.
+    delete funevals;
 
     return iters;
 }

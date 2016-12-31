@@ -33,16 +33,16 @@ const double ONE_HUNDRED_POINT_ZERO = 100.0;
  *
  * @param x        The point at which f(x) should be evaluated.
  * @param n        The number of coordinates of <code>x</code>.
- * @param funevals The number of function evaluations container (FunEvals).
+ * @param funevals The number of function evaluations container (FunEvals *).
  *
  * @return The objective function value.
  */
-double f(double *x, uint n, FunEvals funevals) {
+double f(double *x, uint n, FunEvals *funevals) {
     double a;
     double b;
     double c;
 
-    funevals.set_funevals(funevals.get_funevals() + 1);
+    funevals->set_funevals(funevals->get_funevals() + 1);
 
     a = x[INDEX_ZERO];
     b = x[INDEX_ONE];
