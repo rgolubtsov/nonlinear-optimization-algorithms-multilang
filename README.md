@@ -145,3 +145,7 @@ The project has the following directory structure and logical parts and items.
 ```
 
 As shown above, the directories that should contain ~~stuff for the Nelder-Mead algorithm implementations~~ as well as other three ones (`nlp-unconstrained-api`, `nlp-constrained-cli`, and `nlp-constrained-api`) are not yet exist. But it's planned they have to be created and populated accordingly somewhen during development process.
+
+---
+
+**TODO:** Extend the **Overview** section and provide other related sections (design, building, running, etc.) just like in [this readme doc](https://github.com/rgolubtsov/virtblkiosim/blob/master/README.md "VIRTual BLocK IO SIMulating (virtblkiosim)") or whatsoever.
