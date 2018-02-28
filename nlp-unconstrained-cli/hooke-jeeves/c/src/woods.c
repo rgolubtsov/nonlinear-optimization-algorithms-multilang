@@ -51,4 +51,4 @@ double f(const double *x, const unsigned int n, void *__fun_evals) {
                   + TEN * (t4 * t4) + t5 * t5 / TEN_POINT);
 }
 
-/* vim:set nu:et:ts=4:sw=4: */
+/* vim:set nu et ts=4 sw=4: */

@@ -140,4 +140,4 @@ NLPUCCLIHooke.Rosenbrock = new Rosenbrock();
 // Firing up computations.
 NLPUCCLIHooke.Rosenbrock.main();
 
-// vim:set nu:et:ts=4:sw=4:
+// vim:set nu et ts=4 sw=4:

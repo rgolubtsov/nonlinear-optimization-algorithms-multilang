@@ -168,4 +168,4 @@ NLPUCCLIHooke.Woods = new Woods();
 // Firing up computations.
 NLPUCCLIHooke.Woods.main();
 
-// vim:set nu:et:ts=4:sw=4:
+// vim:set nu et ts=4 sw=4:

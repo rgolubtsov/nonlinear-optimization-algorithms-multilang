@@ -129,4 +129,4 @@ extern struct optimum *nelmin(const unsigned int,
 
 #endif /* __C__NELMIN_H */
 
-/* vim:set nu:et:ts=4:sw=4: */
+/* vim:set nu et ts=4 sw=4: */

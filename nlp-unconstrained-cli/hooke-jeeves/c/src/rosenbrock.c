@@ -40,4 +40,4 @@ double f(const double *x, const unsigned int n, void *__fun_evals) {
     return (c + ((ONE_POINT_ZERO - a) * (ONE_POINT_ZERO - a)));
 }
 
-/* vim:set nu:et:ts=4:sw=4: */
+/* vim:set nu et ts=4 sw=4: */

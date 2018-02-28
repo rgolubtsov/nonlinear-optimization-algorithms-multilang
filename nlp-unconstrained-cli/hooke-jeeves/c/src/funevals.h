@@ -61,4 +61,4 @@ extern void set_funevals(struct fun_evals *, const unsigned int);
 
 #endif /* __C__FUNEVALS_H */
 
-/* vim:set nu:et:ts=4:sw=4: */
+/* vim:set nu et ts=4 sw=4: */

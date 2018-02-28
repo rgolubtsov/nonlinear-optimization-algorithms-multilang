@@ -84,4 +84,4 @@ func (w Woods) F(x []float64, n uint, cFunEvals *FunEvals) float64 {
                     float64(TEN) * (t4 * t4) + t5 * t5 / TEN_POINT)
 }
 
-// vim:set nu:et:ts=4:sw=4:
+// vim:set nu et ts=4 sw=4:

@@ -70,4 +70,4 @@ const CGFloat    TEN_POINT   = 10.;
 
 @end
 
-// vim:set nu:et:ts=4:sw=4:
+// vim:set nu et ts=4 sw=4:

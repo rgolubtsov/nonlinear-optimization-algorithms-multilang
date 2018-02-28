@@ -50,4 +50,4 @@ double f(const double *x) {
           + DCOEFF * pow(t4, SQUARE) + pow(t5, SQUARE) / DCOEFF);
 }
 
-/* vim:set nu:et:ts=4:sw=4: */
+/* vim:set nu et ts=4 sw=4: */

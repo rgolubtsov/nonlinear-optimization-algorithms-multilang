@@ -56,4 +56,4 @@ func (fe *FunEvals) SetFunEvals(__funEvals uint) {
     fe.funEvals = __funEvals
 }
 
-// vim:set nu:et:ts=4:sw=4:
+// vim:set nu et ts=4 sw=4:
