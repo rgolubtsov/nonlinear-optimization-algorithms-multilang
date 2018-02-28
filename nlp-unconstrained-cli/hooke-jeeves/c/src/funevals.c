@@ -35,4 +35,4 @@ void set_funevals(struct fun_evals *__fun_evals,
     __fun_evals->funevals = __funevals;
 }
 
-/* vim:set nu:et:ts=4:sw=4: */
+/* vim:set nu et ts=4 sw=4: */

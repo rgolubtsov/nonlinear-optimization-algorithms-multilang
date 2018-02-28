@@ -63,4 +63,4 @@ all: rosenbrock woods
 clean:
 	$(RM) $(EXEC1) $(EXEC2)
 
-# vim:set nu:et:ts=4:sw=4:
+# vim:set nu et ts=4 sw=4:

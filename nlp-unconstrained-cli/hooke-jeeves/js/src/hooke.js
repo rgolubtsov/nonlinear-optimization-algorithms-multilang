@@ -296,4 +296,4 @@ exports.IMAX       = h.IMAX;
 exports.funEvals   = h.funEvals;
 exports.hooke      = h.hooke;
 
-// vim:set nu:et:ts=4:sw=4:
+// vim:set nu et ts=4 sw=4:

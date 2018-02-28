@@ -54,4 +54,4 @@ double f(double *x, uint n, FunEvals *funevals) {
 
 } // namespace CLIHooke
 
-// vim:set nu:et:ts=4:sw=4:
+// vim:set nu et ts=4 sw=4:

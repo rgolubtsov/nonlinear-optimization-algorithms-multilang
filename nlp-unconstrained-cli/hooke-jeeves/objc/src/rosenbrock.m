@@ -54,4 +54,4 @@ const CGFloat ONE_HUNDRED_POINT_ZERO = 100.0;
 
 @end
 
-// vim:set nu:et:ts=4:sw=4:
+// vim:set nu et ts=4 sw=4:

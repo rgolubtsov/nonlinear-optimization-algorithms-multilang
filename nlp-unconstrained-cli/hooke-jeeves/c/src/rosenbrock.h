@@ -58,4 +58,4 @@ extern double f(const double *, const unsigned int, void *);
 
 #endif /* __C__ROSENBROCK_H */
 
-/* vim:set nu:et:ts=4:sw=4: */
+/* vim:set nu et ts=4 sw=4: */

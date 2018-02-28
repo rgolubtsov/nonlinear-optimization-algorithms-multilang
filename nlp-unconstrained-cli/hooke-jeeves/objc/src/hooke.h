@@ -120,4 +120,4 @@ extern const CGFloat    ZERO_POINT_FIVE;
 
 @end
 
-// vim:set nu:et:ts=4:sw=4:
+// vim:set nu et ts=4 sw=4:

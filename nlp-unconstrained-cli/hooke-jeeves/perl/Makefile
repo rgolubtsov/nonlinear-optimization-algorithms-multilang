@@ -75,7 +75,7 @@ use $(BASE_PACKAGE);\n\
 $(BASE_PACKAGE)->rosenbrock();\n\
 \n\
 # =============================================================================\n\
-# vim:set nu:et:ts=4:sw=4:\n\
+# vim:set nu et ts=4 sw=4:\n\
 # =============================================================================
 endef
 
@@ -100,7 +100,7 @@ use $(BASE_PACKAGE);\n\
 $(BASE_PACKAGE)->woods();\n\
 \n\
 # =============================================================================\n\
-# vim:set nu:et:ts=4:sw=4:\n\
+# vim:set nu et ts=4 sw=4:\n\
 # =============================================================================
 endef
 
@@ -132,4 +132,4 @@ all: $(BIN_DIR) $(LIB_DIR)
 clean:
 	$(RM) $(RMFLAGS) $(BIN_DIR) $(LIB_DIR)
 
-# vim:set nu:et:ts=4:sw=4:
+# vim:set nu et ts=4 sw=4:
