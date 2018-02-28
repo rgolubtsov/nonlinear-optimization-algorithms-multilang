@@ -142,4 +142,4 @@ clean:
 	$(SRC_DIR)/$(BASE_PACKAGE)/*.pyc \
 	$(SRC_DIR)/$(BASE_PACKAGE)/$(PYCACHE_DIR)
 
-# vim:set nu et ts=4 sw=4:
+# vim:set nu ts=4 sw=4:

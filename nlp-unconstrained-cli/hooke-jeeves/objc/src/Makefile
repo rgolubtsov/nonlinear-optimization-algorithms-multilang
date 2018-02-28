@@ -68,4 +68,4 @@ all: rosenbrock woods
 clean:
 	$(RM) $(EXEC1) $(DEPS1) $(EXEC2) $(DEPS2) $(DEPSN) $(TMPS)
 
-# vim:set nu et ts=4 sw=4:
+# vim:set nu ts=4 sw=4:

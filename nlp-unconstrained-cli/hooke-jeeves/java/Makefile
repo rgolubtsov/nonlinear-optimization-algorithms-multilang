@@ -171,4 +171,4 @@ clean:
 
 	$(RM) $(RMFLAGS) $(DEPS) $(BIN_DIR) $(LIB_DIR)
 
-# vim:set nu et ts=4 sw=4:
+# vim:set nu ts=4 sw=4:
