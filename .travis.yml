@@ -15,15 +15,11 @@
 %YAML 1.1
 ---
 
-language: c
-
-compiler:
-    - gcc
-#    - clang
+language: generic
 
 sudo: required
 
-dist: trusty
+dist: xenial
 
 before_install:
     - sudo apt-get update
@@ -64,7 +60,7 @@ script:
     ## Returning to the previous working dir.
     - cd - && ls -al
 
-    ## Building the Hooke and Jeeves alg as the ISO C (C99/11) impl.
+    ## Building the Hooke and Jeeves alg as the ISO C (C99) impl.
     - cd c && ls -al
            && make clean
            && make clean
@@ -78,7 +74,7 @@ script:
     ## Returning to the previous working dir.
     - cd - && ls -al
 
-    ## Building the Hooke and Jeeves alg as the ISO C++ (C++98/03/11/14) impl.
+    ## Building the Hooke and Jeeves alg as the ISO C++ (C++98) impl.
     - cd cc && ls -al
             && make clean
             && make clean
@@ -176,7 +172,7 @@ script:
     ## Returning to the previous working dir.
     - cd - && ls -al
 
-    ## Building the Hooke and Jeeves alg as the Go (golang) impl.
+    ## Building the Hooke and Jeeves alg as the Go impl.
     - cd go && ls -al
             && make clean
             && make clean
@@ -240,7 +236,7 @@ script:
     ## Returning to the previous working dir.
     - cd - && ls -al
 
-    ## Building the Nelder-Mead alg as the ISO C (C99/11) impl.
+    ## Building the Nelder-Mead alg as the ISO C (C99) impl.
     - cd c && ls -al
            && make clean
            && make clean
