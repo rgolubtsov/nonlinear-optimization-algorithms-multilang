@@ -1,23 +1,24 @@
 # Nonlinear Optimization Algorithms Multilang [![Build Status](https://travis-ci.org/rgolubtsov/nonlinear-optimization-algorithms-multilang.svg?branch=master)](https://travis-ci.org/rgolubtsov/nonlinear-optimization-algorithms-multilang)
 
-**Note:** The Travis CI build status badge above is applicable to the following packages ONLY (for the moment):
-* The (original) Hooke and Jeeves :small_blue_diamond: Traditional (K&amp;R) C implementation
-* The Hooke and Jeeves :small_blue_diamond: ISO C (C99/11) implementation
-* The Hooke and Jeeves :small_blue_diamond: ISO C++ (C++98/03/11/14) implementation
-* The Hooke and Jeeves :small_blue_diamond: Objective-C 2.0 implementation
-* The Hooke and Jeeves :small_blue_diamond: FORTRAN 77 (MIL-STD 1753) implementation
-* The Hooke and Jeeves :small_blue_diamond: ISO Fortran 95 implementation
-* The Hooke and Jeeves :small_blue_diamond: Perl 5 (5.10+) implementation
-* The Hooke and Jeeves :small_blue_diamond: JavaScript (ECMA-262 5.1) implementation
-* The Hooke and Jeeves :small_blue_diamond: Java (Java SE 7) implementation
-* The Hooke and Jeeves :small_blue_diamond: Go (golang) implementation
-* The Hooke and Jeeves :small_blue_diamond: Python 2 &amp; 3 implementation
-* The Hooke and Jeeves :small_blue_diamond: Vala implementation
+The following implementations are on the workbench (:small_blue_diamond: &ndash; complete, :small_orange_diamond: &ndash; planned/postponed, :cd: &ndash; in progress):
+
+* The (original) Hooke and Jeeves :small_blue_diamond: **Traditional (K&amp;R) C**: `nlp-unconstrained-cli/hooke-jeeves/__orig/`
+* The Hooke and Jeeves :small_blue_diamond: **ISO C (C99)**: `nlp-unconstrained-cli/hooke-jeeves/c/`
+* The Hooke and Jeeves :small_blue_diamond: **ISO C++ (C++98)**: `nlp-unconstrained-cli/hooke-jeeves/cc/`
+* The Hooke and Jeeves :small_blue_diamond: **Objective-C 2.0**: `nlp-unconstrained-cli/hooke-jeeves/objc/`
+* The Hooke and Jeeves :small_blue_diamond: **FORTRAN 77 (MIL-STD 1753)**: `nlp-unconstrained-cli/hooke-jeeves/f77/`
+* The Hooke and Jeeves :small_blue_diamond: **ISO Fortran 95**: `nlp-unconstrained-cli/hooke-jeeves/f95/`
+* The Hooke and Jeeves :small_blue_diamond: **Perl 5 (5.10+)**: `nlp-unconstrained-cli/hooke-jeeves/perl/`
+* The Hooke and Jeeves :small_blue_diamond: **JavaScript (ECMA-262 5.1)**: `nlp-unconstrained-cli/hooke-jeeves/js/`
+* The Hooke and Jeeves :small_blue_diamond: **Java (Java SE 7)**: `nlp-unconstrained-cli/hooke-jeeves/java/`
+* The Hooke and Jeeves :small_blue_diamond: **Go**: `nlp-unconstrained-cli/hooke-jeeves/go/`
+* The Hooke and Jeeves :small_blue_diamond: **Python 2 &amp; 3**: `nlp-unconstrained-cli/hooke-jeeves/python/`
+* The Hooke and Jeeves :small_blue_diamond: **Vala**: `nlp-unconstrained-cli/hooke-jeeves/vala/`
 
 ---
 
-* The (original) Nelder-Mead :small_blue_diamond: FORTRAN 77 (MIL-STD 1753) implementation
-* The Nelder-Mead :small_blue_diamond: ISO C (C99/11) implementation
+* The (original) Nelder-Mead :small_blue_diamond: **FORTRAN 77 (MIL-STD 1753)**: `nlp-unconstrained-cli/nelder-mead/__orig/`
+* The Nelder-Mead :small_blue_diamond: **ISO C (C99)**: `nlp-unconstrained-cli/nelder-mead/c/`
 
 ---
 
@@ -149,3 +150,7 @@ As shown above, the directories that should contain ~~stuff for the Nelder-Mead 
 ---
 
 **TODO:** Extend the **Overview** section and provide other related sections (design, building, running, etc.) just like in [this readme doc](https://github.com/rgolubtsov/virtblkiosim/blob/master/README.md "VIRTual BLocK IO SIMulating (virtblkiosim)") or whatsoever.
+
+---
+
+:cd:
