@@ -9,7 +9,7 @@
  *
  * This is the Hooke and Jeeves nonlinear unconstrained minimization algorithm.
  * ============================================================================
- * (Re-)Written by Radislav (Radicchio) Golubtsov, 2015-2017
+ * (Re-)Written by Radislav (Radicchio) Golubtsov, 2015-2019
  *
  * This is free and unencumbered software released into the public domain.
  *
