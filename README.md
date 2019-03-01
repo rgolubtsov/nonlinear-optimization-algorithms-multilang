@@ -14,7 +14,9 @@ The following implementations are on the workbench (:small_blue_diamond: &ndash;
 * The Hooke and Jeeves :small_blue_diamond: **Go**: `nlp-unconstrained-cli/hooke-jeeves/go/`
 * The Hooke and Jeeves :small_blue_diamond: **Python 2 &amp; 3**: `nlp-unconstrained-cli/hooke-jeeves/python/`
 * The Hooke and Jeeves :small_blue_diamond: **Vala**: `nlp-unconstrained-cli/hooke-jeeves/vala/`
+
 <br />
+
 * The Nelder-Mead (original) :small_blue_diamond: **FORTRAN 77 (MIL-STD 1753)**: `nlp-unconstrained-cli/nelder-mead/__orig/`
 * The Nelder-Mead :small_blue_diamond: **ISO C (C99)**: `nlp-unconstrained-cli/nelder-mead/c/`
 
