@@ -2,7 +2,7 @@
 
 The following implementations are on the workbench (:small_blue_diamond: &ndash; complete, :small_orange_diamond: &ndash; planned/postponed, :cd: &ndash; in progress):
 
-* The (original) Hooke and Jeeves :small_blue_diamond: **Traditional (K&amp;R) C**: `nlp-unconstrained-cli/hooke-jeeves/__orig/`
+* The Hooke and Jeeves (original) :small_blue_diamond: **Traditional (K&amp;R) C**: `nlp-unconstrained-cli/hooke-jeeves/__orig/`
 * The Hooke and Jeeves :small_blue_diamond: **ISO C (C99)**: `nlp-unconstrained-cli/hooke-jeeves/c/`
 * The Hooke and Jeeves :small_blue_diamond: **ISO C++ (C++98)**: `nlp-unconstrained-cli/hooke-jeeves/cc/`
 * The Hooke and Jeeves :small_blue_diamond: **Objective-C 2.0**: `nlp-unconstrained-cli/hooke-jeeves/objc/`
@@ -15,9 +15,7 @@ The following implementations are on the workbench (:small_blue_diamond: &ndash;
 * The Hooke and Jeeves :small_blue_diamond: **Python 2 &amp; 3**: `nlp-unconstrained-cli/hooke-jeeves/python/`
 * The Hooke and Jeeves :small_blue_diamond: **Vala**: `nlp-unconstrained-cli/hooke-jeeves/vala/`
 
----
-
-* The (original) Nelder-Mead :small_blue_diamond: **FORTRAN 77 (MIL-STD 1753)**: `nlp-unconstrained-cli/nelder-mead/__orig/`
+* The Nelder-Mead (original) :small_blue_diamond: **FORTRAN 77 (MIL-STD 1753)**: `nlp-unconstrained-cli/nelder-mead/__orig/`
 * The Nelder-Mead :small_blue_diamond: **ISO C (C99)**: `nlp-unconstrained-cli/nelder-mead/c/`
 
 ---
@@ -149,8 +147,4 @@ As shown above, the directories that should contain ~~stuff for the Nelder-Mead 
 
 ---
 
-**TODO:** Extend the **Overview** section and provide other related sections (design, building, running, etc.) just like in [this readme doc](https://github.com/rgolubtsov/virtblkiosim/blob/master/README.md "VIRTual BLocK IO SIMulating (virtblkiosim)") or whatsoever.
-
----
-
-:cd:
+**TODO:** Extend the **Overview** section and provide other related sections (design, building, running, etc.) just like in [this readme doc](https://github.com/rgolubtsov/virtblkiosim/blob/master/README.md "VIRTual BLocK IO SIMulating (virtblkiosim)") or whatsoever. :cd:
