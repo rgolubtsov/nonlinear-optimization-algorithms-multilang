@@ -9,7 +9,7 @@
 #
 # This is a dummy initialization module to support Python package hierarchy.
 # =============================================================================
-# Written by Radislav (Radicchio) Golubtsov, 2015-2019
+# Written by Radislav (Radicchio) Golubtsov, 2015-2020
 #
 # This is free and unencumbered software released into the public domain.
 #
