@@ -11,7 +11,7 @@
 #
 # (See inner Makefile to find out actual build rules.)
 # =============================================================================
-# Written by Radislav (Radicchio) Golubtsov, 2015-2020
+# Written by Radislav (Radicchio) Golubtsov, 2015-2023
 #
 # This is free and unencumbered software released into the public domain.
 #
