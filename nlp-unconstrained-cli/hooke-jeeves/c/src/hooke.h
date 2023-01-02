@@ -1,7 +1,7 @@
 /*
  * nlp-unconstrained-cli/hooke-jeeves/c/src/hooke.h
  * ============================================================================
- * Nonlinear Optimization Algorithms Multilang. Version 0.1
+ * Nonlinear Optimization Algorithms Multilang. Version 0.1.1
  * ============================================================================
  * Nonlinear programming algorithms as the (un-)constrained minimization
  * problems with the focus on their numerical expression using various
@@ -27,7 +27,7 @@
  * of Hooke and Jeeves.
  *
  * @author  Radislav (Radicchio) Golubtsov
- * @version 0.1
+ * @version 0.1.1
  * @since   hooke-jeeves 0.1
  */
 

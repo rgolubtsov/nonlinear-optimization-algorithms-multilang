@@ -1,7 +1,7 @@
 /*
  * nlp-unconstrained-cli/hooke-jeeves/js/src/rosenbrock.js
  * ============================================================================
- * Nonlinear Optimization Algorithms Multilang. Version 0.1
+ * Nonlinear Optimization Algorithms Multilang. Version 0.1.1
  * ============================================================================
  * Nonlinear programming algorithms as the (un-)constrained minimization
  * problems with the focus on their numerical expression using various

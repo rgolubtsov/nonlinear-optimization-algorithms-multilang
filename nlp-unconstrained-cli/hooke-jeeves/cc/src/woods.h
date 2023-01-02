@@ -1,7 +1,7 @@
 /*
  * nlp-unconstrained-cli/hooke-jeeves/cc/src/woods.h
  * ============================================================================
- * Nonlinear Optimization Algorithms Multilang. Version 0.1
+ * Nonlinear Optimization Algorithms Multilang. Version 0.1.1
  * ============================================================================
  * Nonlinear programming algorithms as the (un-)constrained minimization
  * problems with the focus on their numerical expression using various
@@ -46,7 +46,7 @@ extern const double       TEN_POINT;
  * is the so-called &quot;Woods&quot; function.
  *
  * @author  Radislav (Radicchio) Golubtsov
- * @version 0.1
+ * @version 0.1.1
  * @see     Hooke
  * @since   hooke-jeeves 0.1
  */

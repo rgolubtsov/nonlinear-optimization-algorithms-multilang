@@ -1,7 +1,7 @@
 /*
  * nlp-unconstrained-cli/hooke-jeeves/go/src/hooke.go
  * ============================================================================
- * Nonlinear Optimization Algorithms Multilang. Version 0.1
+ * Nonlinear Optimization Algorithms Multilang. Version 0.1.1
  * ============================================================================
  * Nonlinear programming algorithms as the (un-)constrained minimization
  * problems with the focus on their numerical expression using various
@@ -69,7 +69,7 @@ const ZERO_POINT_FIVE     float64 =  0.5
  * optimization problem using the algorithm of Hooke and Jeeves.
  *
  * @author  Radislav (Radicchio) Golubtsov
- * @version 0.1
+ * @version 0.1.1
  * @see     Rosenbrock (rosenbrock.go)
  * @see     Woods           (woods.go)
  * @since   hooke-jeeves 0.1

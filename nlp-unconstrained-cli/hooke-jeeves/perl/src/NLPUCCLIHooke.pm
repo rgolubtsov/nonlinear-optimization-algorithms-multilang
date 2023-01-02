@@ -1,7 +1,7 @@
 #
 # nlp-unconstrained-cli/hooke-jeeves/perl/src/NLPUCCLIHooke.pm
 # =============================================================================
-# Nonlinear Optimization Algorithms Multilang. Version 0.1
+# Nonlinear Optimization Algorithms Multilang. Version 0.1.1
 # =============================================================================
 # Nonlinear programming algorithms as the (un-)constrained minimization
 # problems with the focus on their numerical expression using various
@@ -28,7 +28,7 @@ main application class
 
 =head1 VERSION
 
-Version 0.1
+Version 0.1.1
 
 =head1 DESCRIPTION
 

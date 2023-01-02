@@ -2,7 +2,7 @@
  * nlp-unconstrained-cli/hooke-jeeves/java/src/main/java/
  * optimization/nonlinear/unconstrained/cli/Hooke.java
  * ============================================================================
- * Nonlinear Optimization Algorithms Multilang. Version 0.1
+ * Nonlinear Optimization Algorithms Multilang. Version 0.1.1
  * ============================================================================
  * Nonlinear programming algorithms as the (un-)constrained minimization
  * problems with the focus on their numerical expression using various
@@ -29,7 +29,7 @@ package optimization.nonlinear.unconstrained.cli;
  * optimization problem using the algorithm of Hooke and Jeeves.
  *
  * @author  Radislav (Radicchio) Golubtsov
- * @version 0.1
+ * @version 0.1.1
  * @see     optimization.nonlinear.unconstrained.cli.Rosenbrock
  * @see     optimization.nonlinear.unconstrained.cli.Woods
  * @since   hooke-jeeves 0.1

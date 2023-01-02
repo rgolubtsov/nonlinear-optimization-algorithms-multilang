@@ -1,7 +1,7 @@
 #
 # nlp-unconstrained-cli/hooke-jeeves/java/Makefile
 # =============================================================================
-# Nonlinear Optimization Algorithms Multilang. Version 0.1
+# Nonlinear Optimization Algorithms Multilang. Version 0.1.1
 # =============================================================================
 # Nonlinear programming algorithms as the (un-)constrained minimization
 # problems with the focus on their numerical expression using various
@@ -76,7 +76,7 @@ define SCRIPT1_FULL
 # =============================================================================\n\
 # nlp-unconstrained-cli/$(POM_ARTIFACT_ID)/$(JAVA)/$(BIN_DIR)/$(SCRIPT1)\n\
 # =============================================================================\n\
-# Nonlinear Optimization Algorithms Multilang. Version 0.1\n\
+# Nonlinear Optimization Algorithms Multilang. Version 0.1.1\n\
 # =============================================================================\n\
 \n\
 declare -r EXIT_FAILURE=1 # Failing exit status.\n\
@@ -106,7 +106,7 @@ define SCRIPT2_FULL
 # =============================================================================\n\
 # nlp-unconstrained-cli/$(POM_ARTIFACT_ID)/$(JAVA)/$(BIN_DIR)/$(SCRIPT2)\n\
 # =============================================================================\n\
-# Nonlinear Optimization Algorithms Multilang. Version 0.1\n\
+# Nonlinear Optimization Algorithms Multilang. Version 0.1.1\n\
 # =============================================================================\n\
 \n\
 declare -r EXIT_FAILURE=1 # Failing exit status.\n\

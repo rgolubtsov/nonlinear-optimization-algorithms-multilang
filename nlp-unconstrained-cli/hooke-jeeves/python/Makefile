@@ -1,7 +1,7 @@
 #
 # nlp-unconstrained-cli/hooke-jeeves/python/Makefile
 # =============================================================================
-# Nonlinear Optimization Algorithms Multilang. Version 0.1
+# Nonlinear Optimization Algorithms Multilang. Version 0.1.1
 # =============================================================================
 # Nonlinear programming algorithms as the (un-)constrained minimization
 # problems with the focus on their numerical expression using various
@@ -63,7 +63,7 @@ define SCRIPT1_FULL
 # =============================================================================\n\
 # nlp-unconstrained-cli/hooke-jeeves/python/$(BIN_DIR)/$(SCRIPT1)\n\
 # =============================================================================\n\
-# Nonlinear Optimization Algorithms Multilang. Version 0.1\n\
+# Nonlinear Optimization Algorithms Multilang. Version 0.1.1\n\
 # =============================================================================\n\
 \n\
 from $(BASE_MODULE) import $(BASE_CLASS)\n\
@@ -88,7 +88,7 @@ define SCRIPT2_FULL
 # =============================================================================\n\
 # nlp-unconstrained-cli/hooke-jeeves/python/$(BIN_DIR)/$(SCRIPT2)\n\
 # =============================================================================\n\
-# Nonlinear Optimization Algorithms Multilang. Version 0.1\n\
+# Nonlinear Optimization Algorithms Multilang. Version 0.1.1\n\
 # =============================================================================\n\
 \n\
 from $(BASE_MODULE) import $(BASE_CLASS)\n\

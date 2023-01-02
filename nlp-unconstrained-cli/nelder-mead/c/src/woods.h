@@ -1,7 +1,7 @@
 /*
  * nlp-unconstrained-cli/nelder-mead/c/src/woods.h
  * ============================================================================
- * Nonlinear Optimization Algorithms Multilang. Version 0.1
+ * Nonlinear Optimization Algorithms Multilang. Version 0.1.1
  * ============================================================================
  * Nonlinear programming algorithms as the (un-)constrained minimization
  * problems with the focus on their numerical expression using various
@@ -30,7 +30,7 @@
  * is the so-called &quot;Woods&quot; function.
  *
  * @author  Radislav (Radicchio) Golubtsov
- * @version 0.1
+ * @version 0.1.1
  * @since   nelder-mead 0.1
  */
 

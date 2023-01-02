@@ -1,7 +1,7 @@
 /*
  * nlp-unconstrained-cli/hooke-jeeves/go/src/rosenbrock.go
  * ============================================================================
- * Nonlinear Optimization Algorithms Multilang. Version 0.1
+ * Nonlinear Optimization Algorithms Multilang. Version 0.1.1
  * ============================================================================
  * Nonlinear programming algorithms as the (un-)constrained minimization
  * problems with the focus on their numerical expression using various
@@ -34,7 +34,7 @@ const ONE_HUNDRED_POINT_ZERO float64 = 100.0
  * is the Rosenbrock's parabolic valley function.
  *
  * @author  Radislav (Radicchio) Golubtsov
- * @version 0.1
+ * @version 0.1.1
  * @see     Hooke (hooke.go)
  * @since   hooke-jeeves 0.1
  */

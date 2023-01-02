@@ -2,7 +2,7 @@
  * nlp-unconstrained-cli/hooke-jeeves/java/src/main/java/
  * optimization/nonlinear/unconstrained/cli/Rosenbrock.java
  * ============================================================================
- * Nonlinear Optimization Algorithms Multilang. Version 0.1
+ * Nonlinear Optimization Algorithms Multilang. Version 0.1.1
  * ============================================================================
  * Nonlinear programming algorithms as the (un-)constrained minimization
  * problems with the focus on their numerical expression using various
@@ -32,7 +32,7 @@ package optimization.nonlinear.unconstrained.cli;
  * is the Rosenbrock's parabolic valley function.
  *
  * @author  Radislav (Radicchio) Golubtsov
- * @version 0.1
+ * @version 0.1.1
  * @see     optimization.nonlinear.unconstrained.cli.Hooke
  * @since   hooke-jeeves 0.1
  */
