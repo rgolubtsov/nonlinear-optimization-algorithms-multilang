@@ -9,7 +9,7 @@
  *
  * This is the Nelder-Mead nonlinear unconstrained minimization algorithm.
  * ============================================================================
- * (Re-)Written by Radislav (Radicchio) Golubtsov, 2015-2023
+ * (Re-)Written by Radislav (Radicchio) Golubtsov, 2015-2024
  *
  * This is free and unencumbered software released into the public domain.
  *
