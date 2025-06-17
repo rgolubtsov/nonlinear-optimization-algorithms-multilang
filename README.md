@@ -1,6 +1,6 @@
-# Nonlinear Optimization Algorithms Multilang [![Build Status](https://travis-ci.org/rgolubtsov/nonlinear-optimization-algorithms-multilang.svg?branch=master)](https://travis-ci.org/rgolubtsov/nonlinear-optimization-algorithms-multilang)
+# Nonlinear Optimization Algorithms Multilang
 
-The following implementations are on the workbench (:small_blue_diamond: &ndash; complete, :small_orange_diamond: &ndash; planned/postponed, :cd: &ndash; in progress):
+The following implementations are on the workbench:
 
 * The Hooke and Jeeves (original) :small_blue_diamond: **Traditional (K&amp;R) C**: `nlp-unconstrained-cli/hooke-jeeves/__orig/`
 * The Hooke and Jeeves :small_blue_diamond: **ISO C (C99)**: `nlp-unconstrained-cli/hooke-jeeves/c/`
@@ -30,7 +30,7 @@ All of these algorithms should be coded in a series of programming languages. No
 
 *Consider this project as a somewhat __educational__ approach to the subject of implementing math algorithms in programming languages rather than it might be considered otherwise as bringing something important to scientific applications and investigations.*
 
-Why NLP-algorithms, exactly? &ndash; The answer is why not? Indeed, NLP optimization methods and techniques are widely used everywhere. Their complexity ranges are quite different. They are suitable and fit the most optimization models more precisely and accurately than their linear optimization counterparts. &ndash; That's why.
+Why NLP-algorithms, exactly? &mdash; The answer is why not? Indeed, NLP optimization methods and techniques are widely used everywhere. Their complexity ranges are quite different. They are suitable and fit the most optimization models more precisely and accurately than their linear optimization counterparts. &mdash; That's why.
 
 There are two main conventional groups of NLP optimization methods: constrained and unconstrained. In this project it is considered to be implemented first two unconstrained minimization methods: (1) The algorithm of **Hooke and Jeeves** and (2) The **Nelder-Mead** algorithm.
 
@@ -149,4 +149,4 @@ As shown above, the directories that should contain ~~stuff for the Nelder-Mead 
 
 ---
 
-**TODO:** Extend the **Overview** section and provide other related sections (design, building, running, etc.) just like in [this readme doc](https://github.com/rgolubtsov/virtblkiosim/blob/master/README.md "VIRTual BLocK IO SIMulating (virtblkiosim)") or whatsoever. :cd:
+:floppy_disk:
